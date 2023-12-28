@@ -1,1 +1,0 @@
-import{j as r,G as t}from"./index-Wq-t1_Ee.js";import e from"./Search-7fAn6tt9.js";import"./withStyles-HvvE4ccs.js";import"./Transition-IharF86n.js";function m(){return r.jsx("div",{children:r.jsx(t,{title:"Search",children:r.jsx(e,{})})})}export{m as default};

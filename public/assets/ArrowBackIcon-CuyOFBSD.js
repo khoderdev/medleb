@@ -1,0 +1,1 @@
+import o from"@material-ui/icons/ArrowBack";import{w as r}from"./index-jd3Q_PaV.js";const t=c=>({arrowBack:{color:"blue",transition:"color 0.3s","&:hover":{color:"red"}}}),a=r(t)(o);export{a as default};

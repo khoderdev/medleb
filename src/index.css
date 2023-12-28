@@ -149,7 +149,7 @@ button:hover {
   align-items: flex-end;
 }
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 0;
 }
 
 /* Track */

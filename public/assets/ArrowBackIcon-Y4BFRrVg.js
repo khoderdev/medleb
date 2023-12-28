@@ -1,1 +1,0 @@
-import o from"@material-ui/icons/ArrowBack";import{w as r}from"./withStyles-HvvE4ccs.js";import"./index-Wq-t1_Ee.js";const t=c=>({arrowBack:{color:"blue",transition:"color 0.3s","&:hover":{color:"red"}}}),l=r(t)(o);export{l as default};
