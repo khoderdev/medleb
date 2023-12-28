@@ -34,7 +34,7 @@ const style = {
 
   sidebarContainer: "flex h-[100svh] shadow-black",
 
-  OffCanvasSidebar: "flex md:hidden h-[100svh] shadow-black z-10",
+  OffCanvasSidebar: "flex md:hidden z-50",
 
   sidebarContainerLeft: "hidden flex h-[100svh] md:block shadow-black z-10",
 

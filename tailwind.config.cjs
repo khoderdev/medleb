@@ -93,11 +93,13 @@ module.exports = {
 
         white: {
           bg: "#fbfcf8",
-          contents: "#F5F5F5",
+          contents: "#e0e0e0",
+          fg: "#e5e7eb",
           text: "#F5F5F5",
         },
         black: {
           bg: "#0E0E0E",
+          fg: "#292929",
           contents: "#393939",
           text: "#0E0E0E",
         },

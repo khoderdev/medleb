@@ -84,7 +84,7 @@ const NavBottom = () => {
   ];
 
   return (
-    <div className="NavBottom flex justify-between items-center bg-white-bg dark:bg-black-bg shadow-md p-4">
+    <div className="NavBottom flex justify-between items-center bg-white-contents dark:bg-black-fg dark:shadow-md p-5">
       {navigation.map((nav) => (
         <NavLink
           key={nav.name}

@@ -40,12 +40,12 @@ export const SidebarOffCanvas = () => {
             <motion.div
               {...framerSidebarBackground}
               aria-hidden="true"
-              className="fixed inset-0 z-40 backdrop-blur-sm dark:backdrop-blur-sm"
+              className="fixed inset-0 z-50 backdrop-blur-sm dark:backdrop-blur-sm"
             ></motion.div>
             <motion.div
               {...framerSidebarPanel}
               // eslint-disable-next-line tailwindcss/no-custom-classname
-              className="custom-scrollbar  fixed inset-y-0 left-0 z-50 h-[100svh] w-[18em] overflow-x-hidden bg-[#e0e0e0] dark:bg-black sm:w-[20em]  "
+              className="custom-scrollbar  fixed inset-y-0 left-0 z-50 h-[100svh] w-[18em] overflow-x-hidden bg-white-contents dark:bg-black-fg sm:w-[20em]  "
               ref={ref}
               aria-label="Sidebar"
             >

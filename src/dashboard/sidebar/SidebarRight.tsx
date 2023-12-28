@@ -66,7 +66,7 @@ const handleIconClick = () => {
       className=""
     >
       <div
-        className={`z-1000  h-[100svh] dark:bg-black shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)]  ${
+        className={`z-1000  h-[100svh] bg-white-contents dark:bg-black-fg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)]  ${
           isCollapsed ? "w-50" : "w-250"
         }px text-lightgray font-averta-regular h-[1078px] shrink-0 overflow-hidden text-left text-xl transition-all duration-300 ease-in-out`}
         style={{ right: isCollapsed ? 0 : "auto" }}

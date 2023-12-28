@@ -162,20 +162,6 @@ const dummyResultData = [
   { name: "Gastrazole", filterClass: "A-to-Z", class: "ClassG" },
   { name: "Lexotanile", filterClass: "OTC", class: "ClassL" },
   { name: "Panadol", filterClass: "ATC", class: "ClassP" },
-  { name: "Biafine", filterClass: "A-to-Z", class: "ClassB" },
-  { name: "Caltrade", filterClass: "ATC", class: "ClassC" },
-  { name: "Daktacort", filterClass: "OTC", class: "ClassD" },
-  { name: "Eprima", filterClass: "ATC", class: "ClassE" },
-  { name: "Gastrazole", filterClass: "A-to-Z", class: "ClassG" },
-  { name: "Lexotanile", filterClass: "OTC", class: "ClassL" },
-  { name: "Panadol", filterClass: "ATC", class: "ClassP" },
-  { name: "Biafine", filterClass: "A-to-Z", class: "ClassB" },
-  { name: "Caltrade", filterClass: "ATC", class: "ClassC" },
-  { name: "Daktacort", filterClass: "OTC", class: "ClassD" },
-  { name: "Eprima", filterClass: "ATC", class: "ClassE" },
-  { name: "Gastrazole", filterClass: "A-to-Z", class: "ClassG" },
-  { name: "Lexotanile", filterClass: "OTC", class: "ClassL" },
-  { name: "Panadol", filterClass: "ATC", class: "ClassP" },
 ];
 
 const SearchComponent = (props) => {
@@ -192,7 +178,7 @@ const SearchComponent = (props) => {
   const [isRowView, setIsRowView] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
 
-  const backgroundColorClass = isDarkMode ? "#595959" : "#e5e7eb";
+  const backgroundColorClass = isDarkMode ? "#696969" : "#fbfcf8";
   const textColorClass = isDarkMode ? "#fff" : "#000";
 
   useEffect(() => {
@@ -338,7 +324,7 @@ const SearchComponent = (props) => {
           </div>
 
           {/* Grid/List View Toggle Icon */}
-          <div className="mt-4 flex justify-end">
+          <div className="mt-2 flex justify-end">
             <IconButton
               className={classes.iconButton}
               onClick={handleToggleView}
@@ -530,37 +516,39 @@ const SearchComponent = (props) => {
       {/* ////////////////////////////////////////////////////////////////////////////////////// */}
 
       {/* Display Search Results */}
-      <div
-        className={`${
-          isRowView ? "flex flex-col" : "grid"
-        } gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
-      >
-        {selectedFilters.length > 0 || activeGroups.length > 0 ? (
-          searchResults.length > 0 ? (
-            searchResults.map((result) => (
-              <div
-                key={result.name}
-                className={`${
-                  isRowView
-                    ? "bg-gray-200 p-4 shadow-md rounded-xl mb-4"
-                    : "bg-white p-4 shadow-md rounded-xl"
-                }`}
-              >
-                <p className="text-lg font-semibold">{result.name}</p>
-                <p className="text-sm text-gray-500 mb-2">
-                  {result.filterClass}
-                </p>
-                <p className="text-sm text-gray-500">{result.class}</p>
-              </div>
-            ))
+      <div className="flex flex-col mt-6">
+        <div
+          className={`${
+            isRowView ? "flex flex-col" : "grid"
+          } gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
+        >
+          {selectedFilters.length > 0 || activeGroups.length > 0 ? (
+            searchResults.length > 0 ? (
+              searchResults.map((result) => (
+                <div
+                  key={result.name}
+                  className={`${
+                    isRowView
+                      ? "bg-white-bg dark:bg-black-fg p-4 dark:border-[#0000000e] border shadow-md rounded-xl mt-4"
+                      : "bg-white-bg dark:bg-black-fg p-4 dark:border-[#0000000e] border shadow-md rounded-xl mt-4"
+                  }`}
+                >
+                  <p className="text-xl mb-2 font-normal">{result.name}</p>
+                  <p className="text-sm text-gray-400 mb-2">
+                    {result.filterClass}
+                  </p>
+                  <p className="text-sm text-gray-400">{result.class}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500 text-center">No results found.</p>
+            )
           ) : (
-            <p className="text-gray-500 text-center">No results found.</p>
-          )
-        ) : (
-          <p className="text-gray-500 text-center">
-            Search or select filters or groups to show results.
-          </p>
-        )}
+            <p className="text-gray-500 text-center">
+              Search or select filters or groups to show results.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

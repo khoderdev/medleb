@@ -4,7 +4,7 @@ import Search from "../../pages/search/Search";
 
 const RightColumn = () => {
   return (
-    <div className="flex flex-col justify-around items-center w-full h-screen p-2 pb-20 sm:pb-2 gap-4 dark:bg-black-bg">
+    <div className="flex flex-col justify-around bg-white-bg items-center w-full h-screen p-2 pb-20 sm:pb-2 gap-4 dark:bg-black-bg">
       <div className="w-full h-[65%] rounded-xl p-2 py-6 bg-white-contents dark:bg-black-contents overflow-auto">
         <Search />
       </div>
