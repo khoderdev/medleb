@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @font-face {
+    font-family: 'BebasNeueProRegular';
+    src: url(BebasNeueProRegular.otf) format('embedded-opentype');
+}
+*{
+font-family: 'BebasNeueProRegular'}; */
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.css-yz9k0d-MuiInputBase-input:focus {
+  outline: 0;
+  --tw-ring-color: transparent !important;
+}
