@@ -14,6 +14,15 @@ OffWhite: F6E3C2
 
  */
 
+#AppHeader {
+  background-color: red;
+  transition: transform 0.5s ease-in-out; /* Add smooth transition effect */
+}
+
+.header-hidden {
+  transform: translateY(-100%);
+}
+
 body.light-mode .your-container-class .your-paper-class .search-field {
   background-color: red;
   color: red; /* Light mode text color */

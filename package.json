@@ -52,6 +52,7 @@
     "react-images-uploading": "^3.1.7",
     "react-modal": "^3.16.1",
     "react-pro-sidebar": "1.0.0-alpha.7",
+    "react-pwa-install-prompt": "^1.0.5",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.13.0",
     "react-select": "^5.8.0",
@@ -91,7 +92,8 @@
     "prettier": "^2.8.8",
     "tailwindcss": "^3.3.6",
     "vite": "^5.0.10",
-    "vite-plugin-pages": "^0.31.0"
+    "vite-plugin-pages": "^0.31.0",
+    "workbox-webpack-plugin": "^7.0.0"
   },
   "browserslist": {
     "production": [

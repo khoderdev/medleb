@@ -1,1 +1,0 @@
-import{j as t}from"./index-jd3Q_PaV.js";function a({imageUrl:e}){return t.jsxs("div",{children:[t.jsx("h2",{children:"Uploaded Image"}),e&&t.jsx("img",{src:`http://localhost:3500/${e}`,alt:"Uploaded",style:{maxWidth:"100%"}})]})}export{a as default};

@@ -141,10 +141,9 @@
 
 // export default App;
 
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import routes from "~react-pages";
 import { useRoutes, Route, Routes } from "react-router-dom";
-// import { DarkModeProvider } from "../src/DarkModeContext";
 import { DrugProvider } from "./pages/drugs/DrugContext";
 import EditDrug from "./pages/drugs/EditDrug";
 import ViewDrug from "./pages/drugs/ViewDrug";
@@ -173,6 +172,12 @@ const App = () => {
 
   return (
     <DrugProvider>
+      {/* <PWAPromptBtn /> */}
+      {/* <PWAPrompt
+        promptOnVisit={1}
+        timesToShow={3}
+        permanentlyHideOnDismiss={false}
+      /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/brandform" element={<BrandForm />} />
@@ -189,7 +194,6 @@ const App = () => {
         <Route path="/Distribution/" element={<Distribution />} />
         <Route path="/tracking/" element={<TrackRecords />} />
         <Route path="/newuser/" element={<CreateUserForm />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/add" element={<AddDrug />} />
         <Route path="/list" element={<List />} />

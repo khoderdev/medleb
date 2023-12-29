@@ -45,7 +45,7 @@ export const SidebarOffCanvas = () => {
             <motion.div
               {...framerSidebarPanel}
               // eslint-disable-next-line tailwindcss/no-custom-classname
-              className="custom-scrollbar  fixed inset-y-0 left-0 z-50 h-[100svh] w-[18em] overflow-x-hidden bg-white-contents dark:bg-black-fg sm:w-[20em]  "
+              className="custom-scrollbar  fixed inset-y-0 left-0 z-50 h-[100svh] w-[18em] overflow-x-hidden bg-white-contents dark:bg-[#292929] sm:w-[20em]  "
               ref={ref}
               aria-label="Sidebar"
             >
