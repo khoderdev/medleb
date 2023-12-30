@@ -1,8 +1,18 @@
-.MuiPaper-root .MuiPaper-elevation .MuiPaper-rounded .MuiPaper-elevation3 .stepper-paper .css-vuzb25 {
-box-shadow: none;
+.MuiPaper-root
+  .MuiPaper-elevation
+  .MuiPaper-rounded
+  .MuiPaper-elevation3
+  .stepper-paper
+  .css-vuzb25 {
+  box-shadow: none;
 }
 
 .vl {
   border-left: 1px solid #259f8359;
   height: 70px;
+}
+
+.ol {
+  border-bottom: 1px solid #259f8359;
+  width: 50px;
 }

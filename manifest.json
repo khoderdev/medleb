@@ -4,8 +4,8 @@
   "description": "MedLeb - Pharmacy Service",
   "start_url": "./",
   "display": "fullscreen",
-  "background_color": "#FFF",
-  "theme_color": "#FFF",
+  "background_color": "#259F83",
+  "theme_color": "#259F83",
   "icons": [
     {
       "src": "/Logo.png",
