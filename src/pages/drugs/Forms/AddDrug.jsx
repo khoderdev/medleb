@@ -360,7 +360,7 @@ function AddDrug(props) {
         </div>
 
         {/* Content Container Start */}
-        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl p-6 text-center bg-white-contents dark:bg-[#292929]">
+        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl p-6 text-center bg-white-contents dark:bg-[#272727]">
           <Paper elevation={3} className={classes.stepperPaper}>
             <CustomStepper currentStep={currentStep} steps={steps} />
           </Paper>

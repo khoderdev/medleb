@@ -25,10 +25,15 @@ module.exports = {
           text: "#F5F5F5",
         },
         black: {
-          bg: "#0E0E0E",
+          bg: "#0f0f0f",
           fg: "#292929",
-          contents: "#393939",
-          text: "#0E0E0E",
+          // fg: "#292929",
+          // contents: "#393939",
+          contents: "#282828",
+          // contents: "#282828; 212121",
+          text: "#f1f1f1",
+          input: "#ffffff1a",
+          border: "#f1f1f1",
         },
       },
     },
@@ -41,3 +46,16 @@ module.exports = {
     }),
   ],
 };
+
+//   -searchbox-border-color: #8886;
+//   -searchbox-legacy-border-color: #303030;
+//   -searchbox-legacy-border-shadow-color: #0000;
+//   -searchbox-legacy-button-color: #ffffff14;
+//   -searchbox-legacy-button-border-color: #303030;
+//   -searchbox-legacy-button-focus-color: #ffffff14;
+//   -searchbox-legacy-button-hover-color: #ffffff14;
+//   -searchbox-legacy-button-hover-border-color: #303030;
+//   -searchbox-legacy-button-icon-color: #ffffff80;
+//   -searchbox-background: #121212;
+//   -searchbox-text-color: #ffffffe0;
+//   -button-chip-background-hover: #fff3  #ffffff1a
