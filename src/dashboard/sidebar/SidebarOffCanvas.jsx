@@ -75,14 +75,17 @@ export const SidebarOffCanvas = () => {
             <motion.div
               {...framerSidebarPanel}
               // eslint-disable-next-line tailwindcss/no-custom-classname
-              className="custom-scrollbar  fixed inset-y-0 left-0 z-50 h-[100svh] w-[18em] overflow-x-hidden bg-white-contents dark:bg-[#292929] sm:w-[20em]  "
+              className="custom-scrollbar  fixed inset-y-0 left-0 z-50 h-[100svh] w-[18em] overflow-y-hidden overflow-x-hidden bg-white-contents dark:bg-[#292929] sm:w-[20em]  "
               ref={ref}
               aria-label="Sidebar"
             >
               <div className="flex  items-center justify-between  border-[#259f8373] p-5 text-gray-900 dark:text-[#ffffffaf] ">
                 <MedLebLogo />
                 <div className="flex items-center justify-between">
-                  <FullscreenButton />
+                  <div className="p-4">
+                    <FullscreenButton />
+                  </div>
+
                   <button
                     onClick={toggleSidebar}
                     className="mr-[-15px] rounded-xl border border-[#259f83e1] p-3"
@@ -93,9 +96,9 @@ export const SidebarOffCanvas = () => {
                 </div>
               </div>
 
-              <ul className="items flex h-full max-h-[calc(100vh-72px)] flex-col justify-start overflow-y-auto pt-4">
+              <ul className="items flex h-full max-h-[calc(100vh-72px)] overflow-y-scroll flex-col justify-start pt-4">
                 {sections.map((section) => (
-                  <div key={section.title} className="ml-5">
+                  <div key={section.title} className="ml-5 ">
                     <h2 className="mb- text-lg font-semibold text-gray-700 dark:text-[#ffffffaf]">
                       {section.title}
                     </h2>
