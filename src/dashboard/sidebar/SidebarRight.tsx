@@ -1,31 +1,23 @@
-/* eslint-disable tailwindcss/no-contradicting-classname */
-/* eslint-disable tailwindcss/no-custom-classname */
 import { useState, useEffect, useRef } from "react";
-import ProfileIcon from "./icons/ProfileIcon";
-import NotificationsIcon from "./icons/NotificationIcon";
 import { Link } from "react-router-dom";
-import ThemeToggle from './ThemeToggle';
+import ThemeToggle from "./ThemeToggle";
 import React from "react";
 import { RiUserLine } from "react-icons/ri";
-import { SlBell } from "react-icons/sl";
 import { FaRegBell } from "react-icons/fa";
-
+import FullscreenButton from "../../components/FullscreenButton";
 
 const SidebarRight = () => {
-const [isActive, setIsActive] = useState(false);
-// const [isBellActive, setIsBellActive] = useState(false);
-// const [isUserActive, setIsUserActive] = useState(false);
-const [activeIcon, setActiveIcon] = useState(null);
+  const [isActive, setIsActive] = useState(false);
+  const [activeIcon, setActiveIcon] = useState(null);
+  const handleIconsClick = (iconName) => {
+    // Toggle the active state
+    setActiveIcon((prevIcon) => (prevIcon === iconName ? null : iconName));
+  };
 
- const handleIconsClick = (iconName) => {
-   // Toggle the active state
-   setActiveIcon((prevIcon) => (prevIcon === iconName ? null : iconName));
- };
-
-const handleIconClick = () => {
-  // Toggle the active state on icon click
-  setIsActive(!isActive);
-};
+  const handleIconClick = () => {
+    // Toggle the active state on icon click
+    setIsActive(!isActive);
+  };
   const [isCollapsed, setCollapsed] = useState(false);
   const sidebarRef = useRef(null);
 
@@ -36,7 +28,6 @@ const handleIconClick = () => {
       }
     };
 
-
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -44,31 +35,16 @@ const handleIconClick = () => {
     };
   }, [sidebarRef]);
 
-
   const toggleCollapse = () => {
     setCollapsed(!isCollapsed);
   };
 
-
-//  const handleBellClick = () => {
-//    // Toggle the active state on bell icon click
-//    setIsBellActive(!isBellActive);
-//  };
-
-//  const handleUserClick = () => {
-//    // Toggle the active state on user icon click
-//    setIsUserActive(!isUserActive);
-//  };
-
   return (
-    <div
-      ref={sidebarRef}
-      className=""
-    >
+    <div ref={sidebarRef} className="">
       <div
-        className={`z-1000  h-[100svh] bg-white-contents dark:bg-black-fg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)]  ${
+        className={`z-50  h-[100svh] bg-white-contents flex flex-col justify-between dark:bg-black-fg shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)]  ${
           isCollapsed ? "w-50" : "w-250"
-        }px text-lightgray font-averta-regular h-[1078px] shrink-0 overflow-hidden text-left text-xl transition-all duration-300 ease-in-out`}
+        }px text-lightgray font-averta-regular h-[100svh] shrink-0 overflow-hidden text-left text-xl transition-all duration-300 ease-in-out`}
         style={{ right: isCollapsed ? 0 : "auto" }}
       >
         {isCollapsed ? (
@@ -105,13 +81,11 @@ const handleIconClick = () => {
                   Notifications
                 </span>
               </Link>
-
-              <ThemeToggle />
             </div>
           </div>
         ) : (
           // Show icons without text when collapsed, stacked
-          <div className="flex flex-col items-center gap-5 p-2 pt-14 text-gray-900 dark:text-gray-100">
+          <div className="flex flex-col items-center gap-5 p-2 pt-14 text-green-pri dark:text-gray-100">
             <Link to="/profile" onClick={() => handleIconClick()}>
               <RiUserLine
                 className={`text-[33px] ${
@@ -128,18 +102,38 @@ const handleIconClick = () => {
                 onClick={() => handleIconsClick("bell")}
               />
             </Link>
-            <ThemeToggle />
           </div>
         )}
+        <div className="flex flex-col items-center justify-center gap-4 border-t">
+          {isCollapsed ? (
+            // When expanded, buttons are in a row
+            <div className="flex justify-between w-full py-2 px-4">
+              <div>
+                <ThemeToggle />
+              </div>
+              <div>
+                <FullscreenButton />
+              </div>
+            </div>
+          ) : (
+            // When collapsed, buttons are stacked
+            <div className="flex flex-col items-center justify-between py-4">
+              <div>
+                <ThemeToggle />
+              </div>
+              <div className="mt-4">
+                <FullscreenButton />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-      profile
       <div
         className="absolute top-0 flex cursor-pointer items-center justify-start  p-2"
         onClick={toggleCollapse}
       >
-        {/* Show expand/collapse arrow */}
         <svg
-          className="h-6 w-6  rotate-90 text-gray-900 transition-transform duration-300 ease-in-out dark:text-white"
+          className="h-6 w-6  rotate-90 text-green-pri transition-transform duration-300 ease-in-out dark:text-white"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -172,4 +166,3 @@ export default SidebarRight;
 function setIsActive(arg0: boolean) {
   throw new Error("Function not implemented.");
 }
-

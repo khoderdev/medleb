@@ -62,13 +62,13 @@ const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
 
   return (
     <>
-      <div className="col-span-1 flex w-full  sm:w-[80em] flex-col sm:col-span-1 text-gray-700 dark:text-white-text">
+      <div className="col-span-1 flex w-full flex-col text-gray-700 dark:text-white-text">
         <div className="image-uploader-cont flex flex-col justify-items-center"></div>
         <h1 className="pb-2 pt-4 text-center text-xl sm:py-10 sm:text-2xl ">
           1 - Drug Registry Informations
         </h1>
         <div className=" flex h-full w-full flex-col">
-          <form className="grid grid-cols-1 items-center gap-10  sm:grid-cols-2 sm:justify-items-center md:grid-cols-2 lg:grid-cols-3">
+          <form className="grid grid-cols-1 items-center gap-10 sm:grid-cols-2 sm:justify-items-center md:grid-cols-2 lg:grid-cols-3">
             <div className="input-container relative">
               <label htmlFor="type" className="labels text-md block text-left">
                 Type

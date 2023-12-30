@@ -141,7 +141,7 @@
 
 // export default App;
 
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useRef } from "react";
 import routes from "~react-pages";
 import { useRoutes, Route, Routes } from "react-router-dom";
 import { DrugProvider } from "./pages/drugs/DrugContext";
@@ -152,7 +152,7 @@ import List from "./pages/drugs/list/List";
 import CreateUserForm from "./components/CreateUserForm";
 import Login from "./components/Login";
 import Home from "./pages/Home/";
-import Dashboard from "./pages/admin/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Import from "./pages/drugs/Importation/Import";
 import Inspection from "./pages/drugs/Inspection/";
 import Distribution from "./pages/drugs/Distribution/distribution";
@@ -169,39 +169,46 @@ import BrandForm from "./pages/drugs/Forms/Separated/BrandForm";
 
 const App = () => {
   const routeElement = useRoutes(routes);
+  const appContainerRef = useRef(null);
+
+  const enterFullscreen = () => {
+    const appContainer = appContainerRef.current;
+
+    if (appContainer && appContainer.requestFullscreen) {
+      appContainer.requestFullscreen();
+    }
+  };
 
   return (
-    <DrugProvider>
-      {/* <PWAPromptBtn /> */}
-      {/* <PWAPrompt
-        promptOnVisit={1}
-        timesToShow={3}
-        permanentlyHideOnDismiss={false}
-      /> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/brandform" element={<BrandForm />} />
-        <Route path="/atccodesform" element={<ATCCodesForm />} />
-        <Route path="/countryform" element={<CountryForm />} />
-        <Route path="/atcform" element={<ATCForm />} />
-        <Route path="/drugform" element={<DrugForm />} />
-        <Route path="/loginform" element={<LoginForm />} />
-        <Route path="/route/" element={<RouteForm />} />
-        <Route path="/viewdrugimage/" element={<ViewDrugPage />} />
-        <Route path="/Dashboard/" element={<Dashboard />} />
-        <Route path="/import/" element={<Import />} />
-        <Route path="/inspection/" element={<Inspection />} />
-        <Route path="/Distribution/" element={<Distribution />} />
-        <Route path="/tracking/" element={<TrackRecords />} />
-        <Route path="/newuser/" element={<CreateUserForm />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/add" element={<AddDrug />} />
-        <Route path="/list" element={<List />} />
-        <Route path="/editdrug/:id" element={<EditDrug />} />
-        <Route path="/viewdrug/:id" element={<ViewDrug />} />
-      </Routes>
-      <Suspense fallback={<p>Loading...</p>}>{routeElement}</Suspense>
-    </DrugProvider>
+    <div className="app-container" ref={appContainerRef}>
+      
+
+      <DrugProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/brandform" element={<BrandForm />} />
+          <Route path="/atccodesform" element={<ATCCodesForm />} />
+          <Route path="/countryform" element={<CountryForm />} />
+          <Route path="/atcform" element={<ATCForm />} />
+          <Route path="/drugform" element={<DrugForm />} />
+          <Route path="/loginform" element={<LoginForm />} />
+          <Route path="/route/" element={<RouteForm />} />
+          <Route path="/viewdrugimage/" element={<ViewDrugPage />} />
+          <Route path="/Dashboard/" element={<Dashboard />} />
+          <Route path="/import/" element={<Import />} />
+          <Route path="/inspection/" element={<Inspection />} />
+          <Route path="/Distribution/" element={<Distribution />} />
+          <Route path="/tracking/" element={<TrackRecords />} />
+          <Route path="/newuser/" element={<CreateUserForm />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/add" element={<AddDrug />} />
+          <Route path="/list" element={<List />} />
+          <Route path="/editdrug/:id" element={<EditDrug />} />
+          <Route path="/viewdrug/:id" element={<ViewDrug />} />
+        </Routes>
+        <Suspense fallback={<p>Loading...</p>}>{routeElement}</Suspense>
+      </DrugProvider>
+    </div>
   );
 };
 

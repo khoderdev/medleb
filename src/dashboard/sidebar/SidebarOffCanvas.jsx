@@ -4,18 +4,18 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { AiOutlineRollback } from "react-icons/ai";
-import { MedLebLogo } from "../icons/MedLebLogo";
+import { MedLebLogo } from "./icons/MedLebLogo";
 import { Link } from "react-router-dom";
-import "../../sidebar/SideBar.css";
-
-import HomeGrayIcon from "../icons/HomeGrayIcon.jsx";
-import { SearchGrayIcon } from "../icons/SearchGrayIcon";
-import { DashboardGrayIcon } from "../icons/DashboardGrayIcon";
-import { AddIcon } from "../icons/AddIcon.jsx";
-import { ImportIcon } from "../icons/ImportIcon";
-import { DistributionIcon } from "../icons/DistributionIcon";
-import { InspectionIcon } from "../icons/InspectionIcon";
-import { TrackRecordsIcon } from "../icons/TrackRecordsIcon";
+import "../sidebar/SideBar.css";
+import FullscreenButton from "../../components/FullscreenButton.jsx";
+import HomeGrayIcon from "./icons/HomeGrayIcon.jsx";
+import { SearchGrayIcon } from "./icons/SearchGrayIcon.jsx";
+import { DashboardGrayIcon } from "./icons/DashboardGrayIcon.jsx";
+import { AddIcon } from "./icons/AddIcon.jsx";
+import { ImportIcon } from "./icons/ImportIcon.jsx";
+import { DistributionIcon } from "./icons/DistributionIcon.jsx";
+import { InspectionIcon } from "./icons/InspectionIcon.jsx";
+import { TrackRecordsIcon } from "./icons/TrackRecordsIcon.jsx";
 import React from "react";
 
 export const SidebarOffCanvas = () => {
@@ -23,6 +23,36 @@ export const SidebarOffCanvas = () => {
   const ref = useRef(null);
   useClickAway(ref, () => setOpen(false));
   const toggleSidebar = () => setOpen((prev) => !prev);
+
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    const element = document.documentElement;
+
+    if (!isFullscreen) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+
+    setIsFullscreen(!isFullscreen);
+  };
 
   return (
     <>
@@ -50,11 +80,9 @@ export const SidebarOffCanvas = () => {
               aria-label="Sidebar"
             >
               <div className="flex  items-center justify-between  border-[#259f8373] p-5 text-gray-900 dark:text-[#ffffffaf] ">
-                {/* <span className="text-2xl ">MedLeb</span> */}
                 <MedLebLogo />
                 <div className="flex items-center justify-between">
-                  {/* <ThemeToggle /> */}
-
+                  <FullscreenButton />
                   <button
                     onClick={toggleSidebar}
                     className="mr-[-15px] rounded-xl border border-[#259f83e1] p-3"
@@ -64,6 +92,7 @@ export const SidebarOffCanvas = () => {
                   </button>
                 </div>
               </div>
+
               <ul className="items flex h-full max-h-[calc(100vh-72px)] flex-col justify-start overflow-y-auto pt-4">
                 {sections.map((section) => (
                   <div key={section.title} className="ml-5">

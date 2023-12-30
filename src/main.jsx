@@ -37,3 +37,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 serviceWorkerRegistration.register();
+document.body.style.height = "100vh";
+document.getElementById("root").style.height = "100vh";

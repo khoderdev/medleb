@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import React from "react";
 import { RiUserLine } from "react-icons/ri";
-
 import { FaRegBell } from "react-icons/fa";
 
 const SidebarLeft = () => {
@@ -46,9 +45,9 @@ const SidebarLeft = () => {
   return (
     <div ref={sidebarRef} className="">
       <div
-        className={`z-1000 h-[100vh] bg-white-contents dark:bg-black-contents shadow-[0px_4px_4px_rgba(0,_0,_0,_0.15)]  ${
+        className={`z-50 h-[100svh] bg-white-contents dark:bg-black-contents shadow-[0px_4px_4px_rgba(0,_0,_0,_0.15)]  ${
           isCollapsed ? "w-50" : "w-250"
-        }px text-gray-700 dark:text-white-text h-[1078px] shrink-0 overflow-hidden text-left text-xl transition-all duration-150 ease-in-out`}
+        }px text-gray-700 dark:text-white-text [100svh] shrink-0 overflow-hidden text-left text-xl transition-all duration-150 ease-in-out`}
         style={{ right: isCollapsed ? 0 : "auto" }}
       >
         {isCollapsed ? (
@@ -131,8 +130,6 @@ const SidebarLeft = () => {
                   Notifications
                 </span>
               </Link>
-
-              <ThemeToggle />
             </div>
           </div>
         ) : (
@@ -154,7 +151,6 @@ const SidebarLeft = () => {
                 onClick={() => handleIconsClick("bell")}
               />
             </Link>
-            <ThemeToggle />
           </div>
         )}
       </div>

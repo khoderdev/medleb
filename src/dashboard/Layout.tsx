@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect } from "react";
 
-import { SidebarOffCanvas } from "./sidebar/sidebar2/SidebarOffCanvas";
+import { SidebarOffCanvas } from "./sidebar/SidebarOffCanvas";
 import SidebarRight from "./sidebar/SidebarRight";
 import SidebarLeft from "./sidebar/SidebarLeft";
 import { DashboardProvider } from "./Provider";
@@ -26,20 +26,20 @@ interface LayoutProps {
 // };
 
 const style = {
-  container: "bg-[#e5e7eb] dark:bg-[#1e1e1e] flex w-full ",
+  container: "bg-[#e5e7eb] dark:bg-[#fff] flex w-full [100svh]",
 
-  mainContainer: "flex flex-col h-[100svh] w-full ",
+  mainContainer: "flex flex-col [100svh] w-full ",
 
-  main: "h-[100svh] w-full overflow-auto ",
+  main: "[100svh] w-full overflow-auto ",
 
   sidebarContainer: "flex h-[100svh] shadow-black",
 
   OffCanvasSidebar: "flex md:hidden z-50",
 
-  sidebarContainerLeft: "hidden flex h-[100svh] md:block shadow-black z-10",
+  sidebarContainerLeft: "hidden flex [100svh] md:block shadow-black z-50",
 
   sidebarContainerRight:
-    "hidden md:flex h-screen shadow-black z-10",
+    "hidden md:flex h-screen shadow-black z-50",
 };
 
 export function DashboardLayout(props: LayoutProps) {
