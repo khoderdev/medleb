@@ -12,8 +12,6 @@ import { ImportIcon } from "./icons/ImportIcon.jsx";
 import { DistributionIcon } from "./icons/DistributionIcon.jsx";
 import { InspectionIcon } from "./icons/InspectionIcon.jsx";
 import { TrackRecordsIcon } from "./icons/TrackRecordsIcon.jsx";
-import { RiUserLine } from "react-icons/ri";
-import { FaRegBell } from "react-icons/fa";
 
 const SidebarLeft = () => {
   const [isCollapsed, setCollapsed] = useState(false);
@@ -47,7 +45,7 @@ const SidebarLeft = () => {
                 <div
                   className="collapse-icon absolute bg-[#259f83b7] mt-1 rounded-[8px] z-50 top-0 flex cursor-pointer items-center justify-end w-fit "
                   onClick={toggleCollapse}
-                  >
+                >
                   <svg
                     className={`h-5 w-5 text-white-bg transition-transform duration-300 ease-in-out dark:text-white ${
                       isCollapsed ? "rotate-90" : "rotate-90"
@@ -83,7 +81,7 @@ const SidebarLeft = () => {
                 onClick={toggleCollapse}
               >
                 <svg
-                  className={`h-5 w-5 text-white-bg transition-transform duration-300 ease-in-out dark:text-white ${
+                  className={`h-5 w-5 text-white-bg transition-transform duration-300 ease-in-out dark:text-white-text ${
                     isCollapsed ? "hidden ml-6" : "rotate-90"
                   }`}
                   fill="none"
@@ -115,7 +113,7 @@ const SidebarLeft = () => {
           )}
 
           {isCollapsed ? (
-            <div className="w-[250px] p-2 pt-0 text-gray-900 dark:text-gray-100">
+            <div className="w-[250px] p-2 pt-20 bg text-gray-900 dark:text-gray-100">
               <ul className="items flex h-full max-h-[calc(100vh-72px)] overflow-y-scroll overflow-x-hidden flex-col justify-start pt-2 pb-6">
                 {sections.map((section) => (
                   <div key={section.title} className="ml-5">

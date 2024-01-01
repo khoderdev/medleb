@@ -7,19 +7,19 @@
   src: url("./fonts/BebasNeueProRegular.otf") format("opentype");
 }
 
-body.light-mode .your-container-class .your-paper-class .search-field {
+/* body.light-mode .your-container-class .your-paper-class .search-field {
   background-color: red;
-  color: red; /* Light mode text color */
+  color: red;
 }
 
 body.dark-mode .your-container-class .your-paper-class .search-field {
   background-color: #333;
-  color: #0e0e0e; /* Dark mode text color */
-}
+  color: #0e0e0e;
+} */
 
 body {
-  min-height: 100vh;
-  background-color: #72bbaad3;
+  min-height: 100svh;
+  /* background-color: #00000000; */
   height: 100svh;
   -webkit-tap-highlight-color: transparent;
 }
@@ -42,24 +42,23 @@ a:visited {
   color: #fff;
 } */
 
-.instructions {
+/* .instructions {
   font-size: 1rem;
   border-radius: 0.5rem;
   background: #333;
   color: #ffffffe0;
   padding: 0.25rem;
   position: relative;
-  /* bottom: -10px; */
-}
+} */
 
-.instructions > svg {
+/* .instructions > svg {
   margin-right: 0.25rem;
-}
+} */
 
-.offscreen {
+/* .offscreen {
   position: absolute;
   left: -9999px;
-}
+} */
 
 .hide {
   display: none;

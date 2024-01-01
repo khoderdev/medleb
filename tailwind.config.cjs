@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     screens: {
       xs: "366px",
-      // sm: "640px",
+      sm: "640px",
       md: "768px",
       lg: "1024px",
       xl: "1280px",
@@ -12,10 +12,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        // Add your custom color palette here
         green: {
-          sec: "#5cd3b7",
           pri: "#259F83",
+          sec: "#5cd3b7",
         },
 
         white: {
@@ -23,21 +22,29 @@ module.exports = {
           contents: "#e0e0e0",
           fg: "#e5e7eb",
           text: "#F5F5F5",
+          input: "#bcbcbc",
         },
+
         black: {
           bg: "#0f0f0f",
-          fg: "#292929",
-          // fg: "#292929",
-          // contents: "#393939",
-          contents: "#282828",
-          // contents: "#282828; 212121",
-          text: "#f1f1f1",
+          fg: "#393939",
+          contents: "#292929",
+          text: "#292929",
           input: "#ffffff1a",
           border: "#f1f1f1",
+          test1: "#292929",
+          test2: "#393939",
+          test3: "#282828",
+          test4: "#212121",
         },
       },
     },
   },
+  // input: "#3a3c3d"
+  // input: "#259f8300"
+  // fg: "#292929",
+  // contents: "#393939",
+  // contents: "#282828; 212121"
   variants: {},
   plugins: [
     require("tailwindcss-animate"),

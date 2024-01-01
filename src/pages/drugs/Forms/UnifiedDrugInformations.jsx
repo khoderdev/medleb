@@ -143,25 +143,25 @@ function UnifiedDrugInformations(props) {
   };
 
   return (
-    <div className="flex flex-col w-full  sm:w-[80em] justify-items-center items-center text-gray-700 dark:text-white-text">
+    <div className="flex flex-col w-full sm:w-[80em] justify-items-center items-center text-gray-700 dark:text-white-text">
       <h1 className="pb-2 pt-4 text-center text-xl sm:py-10 sm:text-2xl ">
         4- Unified Drug Informations
       </h1>
-      <table className="whole-table-main-row mt-4 flex w-full flex-col overflow-x-hidden border">
+      <table className="whole-table-main-row flex w-full flex-col overflow-x-hidden ">
         {/* TABLE HEADER START */}
-        <tr className="flex flex-row justify-center border-b bg-gray-300">
-          <div className="AGENT-MAIN-COL flex-1 border border-gray-400 bg-gray-300 p-2 text-center text-lg font-bold text-gray-800">
+        <tr className="flex flex-row justify-center">
+          <div className="AGENT-MAIN-COL flex-1 border-r border-white-contents dark:border-[#3a3c3d] bg-white-input p-2 text-center text-lg font-bold text-gray-800">
             By the Agent
           </div>
-          <div className="IED-MAIN-COL flex-1 border border-gray-400 bg-gray-300 p-2 text-center text-lg font-bold text-gray-800">
+          <div className="IED-MAIN-COL flex-1 border-l border-white-contents dark:border-[#3a3c3d] bg-white-input p-2 text-center text-lg font-bold text-gray-800">
             By the IED
           </div>
         </tr>
         {/* TABLE HEADER END */}
 
-        <div className="flex flex-row border-gray-400">
+        <div className="flex flex-row border border-white-input dark:border-[#3a3c3d]">
           {/* AGENT COLOMUN START */}
-          <div className="agent-col flex-1 border-r border-gray-400 p-2">
+          <div className="agent-col flex-1 border-r border-white-input dark:border-[#3a3c3d] p-2">
             <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="input-container relative">
                 <label
@@ -173,7 +173,7 @@ function UnifiedDrugInformations(props) {
                 <select
                   disabled
                   value={type}
-                  className="mt-1 w-full cursor-pointer appearance-none rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-bg px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 >
                   <option value="" disabled>
                     select a type
@@ -202,7 +202,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("registrationNumber", e.target.value)
                   }
-                  className="mt-1 w-full cursor-pointer appearance-none rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-bg px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="reg #"
                 />
@@ -220,7 +220,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("drugName", e.target.value)
                   }
-                  className="mt-1 w-full cursor-pointer appearance-none rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-bg px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="name"
                 />
@@ -241,7 +241,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("atcRelatedIngredients", e.target.value)
                   }
-                  className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="enter a value"
                 />
@@ -254,7 +254,7 @@ function UnifiedDrugInformations(props) {
                   disabled
                   value={formDataStep3.atc}
                   onChange={(e) => handleInputChange("atc", e.target.value)}
-                  className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="enter a value"
                 />
@@ -271,7 +271,7 @@ function UnifiedDrugInformations(props) {
               <input
                 disabled
                 value={formDataStep3.ingredientsAndstrength}
-                className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="enter a value"
               />
@@ -285,7 +285,7 @@ function UnifiedDrugInformations(props) {
                 disabled
                 value={formDataStep3.form}
                 onChange={(e) => handleInputChange("form", e.target.value)}
-                className="w-full  rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="drug form"
               />
@@ -304,7 +304,7 @@ function UnifiedDrugInformations(props) {
                 onChange={(e) =>
                   handleInputChange("primaryContainerPackage", e.target.value)
                 }
-                className="w-full  rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="container / package"
               />
@@ -315,7 +315,7 @@ function UnifiedDrugInformations(props) {
           {/* ******************************** COLUMN 2 CONTENTS AND LAYOUTS *********************************************************  */}
 
           {/* IED COLOMUN START */}
-          <div className="ied-col flex-1 border-r border-gray-400 p-2">
+          <div className="ied-col flex-1  border-white-contents dark:border-[#3a3c3d] p-2">
             <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="input-container relative">
                 <label
@@ -326,7 +326,7 @@ function UnifiedDrugInformations(props) {
                 </label>
                 <select
                   value={type}
-                  className="mt-1 w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 p-2 px-4 pr-8 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   onChange={(e) => setType(e.target.value)}
                 >
                   <option value="" disabled>
@@ -355,7 +355,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("registrationNumber", e.target.value)
                   }
-                  className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="reg #"
                 />
@@ -372,7 +372,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("drugName", e.target.value)
                   }
-                  className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="name"
                 />
@@ -392,7 +392,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("atcRelatedIngredients", e.target.value)
                   }
-                  className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="enter a value"
                 />
@@ -405,7 +405,7 @@ function UnifiedDrugInformations(props) {
                 <input
                   value={formDataStep3.atc}
                   onChange={(e) => handleInputChange("atc", e.target.value)}
-                  className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="enter a value"
                 />
@@ -431,7 +431,7 @@ function UnifiedDrugInformations(props) {
                     type="number"
                     name="dosageValueN"
                     id="dosageValueN"
-                    className="w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                    className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                     placeholder="0"
                     value={formDataStep3.dosageValueN}
                     onChange={(e) =>
@@ -442,7 +442,7 @@ function UnifiedDrugInformations(props) {
                     <select
                       id="dosageUnitN"
                       name="dosageUnitN"
-                      className="w-16 cursor-pointer appearance-none rounded-r-full border border-[#259f8359] bg-white p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-28 "
+                      className="w-16 cursor-pointer appearance-none rounded-r-full border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-28"
                       value={formDataStep3.dosageUnitN}
                       onChange={(e) =>
                         handleInputChange("dosageUnitN", e.target.value)
@@ -485,7 +485,7 @@ function UnifiedDrugInformations(props) {
                     type="text"
                     name="dosageValueD"
                     id="dosageValueD"
-                    className="w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                    className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                     placeholder="0"
                     value={formDataStep3?.dosageValueD}
                     onChange={(e) =>
@@ -496,7 +496,7 @@ function UnifiedDrugInformations(props) {
                     <select
                       id="dosageUnitD"
                       name="dosageUnitD"
-                      className="w-16 cursor-pointer appearance-none rounded-r-full border border-[#259f8359] bg-white p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-28 "
+                      className="w-16 cursor-pointer appearance-none rounded-r-full border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-28"
                       onChange={(e) =>
                         handleInputChange("dosageUnitD", e.target.value)
                       }
@@ -554,7 +554,7 @@ function UnifiedDrugInformations(props) {
                   <select
                     id="doseForm"
                     name="doseForm"
-                    className="w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 pr-8 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                    className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                     value={formDataStep3.doseForm}
                     onChange={(e) =>
                       handleInputChange("doseForm", e.target.value)
@@ -614,7 +614,7 @@ function UnifiedDrugInformations(props) {
                   <select
                     id="route"
                     name="route"
-                    className="w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 pr-8 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                    className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                     value={formDataStep3.route}
                     onChange={(e) => handleInputChange("route", e.target.value)}
                   >
@@ -660,7 +660,7 @@ function UnifiedDrugInformations(props) {
                     type="text"
                     name="presentationContentQty"
                     id="presentationContentQty"
-                    className="w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 pr-8 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                    className="w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                     placeholder=""
                     value={formDataStep3?.presentationContentQty}
                     onChange={(e) =>
@@ -674,7 +674,7 @@ function UnifiedDrugInformations(props) {
                     <select
                       id="contentUnitType"
                       name="contentUnitType"
-                      className="w-16 cursor-pointer appearance-none rounded-r-full border border-[#259f8359] bg-white p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-28 "
+                      className="w-16 cursor-pointer appearance-none rounded-r-full border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-28"
                       value={formDataStep3.contentUnitType}
                       onChange={(e) =>
                         handleInputChange("contentUnitType", e.target.value)
@@ -723,7 +723,7 @@ function UnifiedDrugInformations(props) {
                     type="text"
                     name="presentationContainerQty"
                     id="presentationContainerQty"
-                    className="w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 pr-8 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                    className="w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                     placeholder=""
                     value={formDataStep3?.presentationContainerQty}
                     onChange={(e) =>
@@ -737,7 +737,7 @@ function UnifiedDrugInformations(props) {
                     <select
                       id="containerUnitType"
                       name="containerUnitType"
-                      className="w-16 cursor-pointer appearance-none rounded-r-full border border-[#259f8359] bg-white p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-28 "
+                      className="w-16 cursor-pointer appearance-none rounded-r-full border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-28"
                       value={formDataStep3.containerUnitType}
                       onChange={(e) =>
                         handleInputChange("containerUnitType", e.target.value)
@@ -773,7 +773,7 @@ function UnifiedDrugInformations(props) {
                     )
                   }
                   value={formDataStep3.prescriptionAndDispensingCondition}
-                  className="mt-1 w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 p-2 px-4 pr-8 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 >
                   <option value="" disabled>
                     select a condition

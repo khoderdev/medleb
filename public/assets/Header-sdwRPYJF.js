@@ -1,0 +1,1 @@
+import{j as e}from"./index-CN91mxqc.js";const s=()=>e.jsxs("div",{className:"bg-red-200 absolute h-20 w-full flex justify-between",children:[e.jsx("p",{children:"Header Start"}),e.jsx("p",{children:"Header End"})]});export{s as default};

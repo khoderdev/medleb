@@ -1,0 +1,1 @@
+import{j as i,G as t}from"./index-CN91mxqc.js";import o from"./Notifications-ZYUF3sfn.js";function r(){return i.jsx("div",{children:i.jsx(t,{title:"Notifications",children:i.jsx(o,{})})})}export{r as default};

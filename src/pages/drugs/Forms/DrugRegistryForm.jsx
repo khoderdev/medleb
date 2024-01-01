@@ -281,7 +281,7 @@ const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
               </label>
               <input
                 disabled
-                className="converted-price-usd mt-1 w-full rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-bg px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d]"
+                className="converted-price-usd mt-1 w-full rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-contents px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d]"
                 value={" " + convertToUSD()}
               />
             </div>
@@ -291,7 +291,7 @@ const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
               </label>
               <input
                 disabled
-                className="converted-price-lbp mt-1 w-full rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-bg px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d] "
+                className="converted-price-lbp mt-1 w-full rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-contents px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d] "
                 value={
                   " " +
                   parseFloat(convertToLBP().replace(".", "")).toLocaleString(
@@ -313,7 +313,7 @@ const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
                 onChange={(e) =>
                   handleInputChange("registrationNumber", e.target.value)
                 }
-                className="mt-1 w-full  rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-bg px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d] "
+                className="mt-1 w-full  rounded-full border border-[#259f8359] dark:border-[#3a3c3d] bg-white-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-black-input"
                 type="text"
                 placeholder="reg #"
               />

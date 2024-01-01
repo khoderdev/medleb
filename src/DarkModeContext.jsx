@@ -1,49 +1,23 @@
-// import { createContext, useContext, useState, useEffect } from "react";
-
-// const DarkModeContext = createContext();
-
-// export const DarkModeProvider = ({ children }) => {
-//   const [isDarkMode, setIsDarkMode] = useState(false);
-
-//   const toggleDarkMode = () => {
-//     setIsDarkMode((prevMode) => !prevMode);
-//   };
-
-//   useEffect(() => {
-//     if (isDarkMode) {
-//       document.body.classList.add("dark");
-//     } else {
-//       document.body.classList.remove("dark");
-//     }
-//   }, [isDarkMode]);
-
-//   return (
-//     <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
-//       {children}
-//     </DarkModeContext.Provider>
-//   );
-// };
-
-// export const useDarkMode = () => {
-//   return useContext(DarkModeContext);
-// };
-// DarkModeContext.js
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const DarkModeContext = createContext();
 
 export const DarkModeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // Check localStorage for user's preferred dark mode setting
+  const storedDarkMode = localStorage.getItem("darkMode");
+  const initialDarkMode = storedDarkMode ? JSON.parse(storedDarkMode) : false;
+
+  const [isDarkMode, setIsDarkMode] = useState(initialDarkMode);
 
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
 
   useEffect(() => {
-    // Apply your dark mode logic here, e.g., toggle CSS classes, update styles, etc.
+    // Save the dark mode state to localStorage
+    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
 
-    // For example, you can add or remove a 'dark' class from the body:
+    // Apply dark mode to the body
     if (isDarkMode) {
       document.body.classList.add("dark");
     } else {

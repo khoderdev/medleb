@@ -194,12 +194,20 @@ function AddDrug(props) {
   });
 
   const [formDataStep4, setFormDataStep4] = useState({
-    // priceForeign: "",
-    // currencyForeign: "USD",
+    priceForeign: "",
+    currencyForeign: "USD",
+    convertToUSD: "",
+    convertToLBP: "",
   });
 
   const [formDataStep5, setFormDataStep5] = useState({
-    responsibleParty: "",
+    responsibleParty: "Leo Pharma",
+    responsiblePartyCountry: "Sweden",
+    responsiblePartyID: "213",
+    manufacturer: "Astellas Pharma Europe BV",
+    manufacturerID: "121",
+    manufacturerCountry: "Europe",
+    agent: "Omnipharma",
   });
 
   // const handleInputChangeStep1 = (name, value) => {
@@ -360,7 +368,7 @@ function AddDrug(props) {
         </div>
 
         {/* Content Container Start */}
-        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl p-6 text-center bg-white-contents dark:bg-[#272727]">
+        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl p-6 text-center bg-white-contents dark:bg-black-contents">
           <Paper elevation={3} className={classes.stepperPaper}>
             <CustomStepper currentStep={currentStep} steps={steps} />
           </Paper>
@@ -370,7 +378,7 @@ function AddDrug(props) {
         {/* Content Container End */}
 
         {/* Footer Container Start */}
-        <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-[#292929] sm:pb-0">
+        <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-black-contents sm:pb-0">
           <div className="flex items-center justify-center space-x-20 pt-0">
             {currentStep > 0 ? (
               <Button

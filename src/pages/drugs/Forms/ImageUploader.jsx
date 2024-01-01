@@ -97,7 +97,7 @@ const ImageUploader = (props) => {
                 handleInputChange={handleInputChange}
               >
                 {({ onImageUpload, isDragging, dragProps, onImageRemove }) => (
-                  <div className="uploader-container h-32 w-32 gap-10 rounded-xl border-2 border-dotted p-2 pt-4 text-lg text-gray-900 dark:border-[#4b4d4e] dark:text-gray-400 sm:h-40 sm:w-40 flex items-center justify-center">
+                  <div className="uploader-container h-32 w-32 gap-10 rounded-xl border-2 border-dotted p-2 pt-4 text-lg text-gray-900 border-[#727272c4] dark:border-[#474747] dark:text-gray-400 sm:h-40 sm:w-40 flex items-center justify-center">
                     {drugImages.length === 0 ? (
                       <div className="flex h-full flex-col items-center justify-center">
                         <button

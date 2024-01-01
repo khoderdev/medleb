@@ -1,10 +1,6 @@
 /* eslint-disable tailwindcss/no-custom-classname */
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import "./styles.css";
-import ImageUploader from "./ImageUploader";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Button from "@mui/material/Button";
-import { BsCalendar } from "react-icons/bs";
 
 const exchangeRates = {
   USD: 1,
@@ -123,7 +119,7 @@ function PricingInformations(props) {
                   type="number"
                   name="priceForeign"
                   id="price"
-                  className="w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-11 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-10 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   placeholder="0.00"
                   value={formDataStep4?.priceForeign}
                   onChange={(e) =>
@@ -137,7 +133,7 @@ function PricingInformations(props) {
                   <select
                     id="currency"
                     name="currencyForeign"
-                    className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-20"
+                    className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] sm:w-20"
                     onChange={(e) =>
                       handleInputChange(e.target.name, e.target.value)
                     }
@@ -159,7 +155,7 @@ function PricingInformations(props) {
               </label>
               <input
                 disabled
-                className="converted-price mt-1 w-full appearance-none rounded-full border border-[#4d4d4d59] bg-white/10 px-4 py-2 text-[#259f83] shadow-md outline-none dark:bg-[#1e1e1e] "
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 value={" " + convertToUSD()}
               />
             </div>
@@ -169,7 +165,7 @@ function PricingInformations(props) {
               </label>
               <input
                 disabled
-                className="converted-price-lbp mt-1 w-full appearance-none rounded-full border border-[#4d4d4d59] bg-white/10 px-4 py-2 text-[#259f83] shadow-md outline-none dark:bg-[#1e1e1e] "
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 value={
                   " " +
                   parseFloat(convertToLBP().replace(".", "")).toLocaleString(
@@ -190,7 +186,7 @@ function PricingInformations(props) {
                 disabled
                 value={formDataStep4.stratum}
                 onChange={(e) => handleInputChange("stratum", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="E1"
               />
@@ -206,7 +202,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("cargoShippingTerms", e.target.value)
                 }
-                className="mt-1 w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a term
@@ -229,7 +225,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("cargoShipping", e.target.value)
                 }
-                className="mt-1 w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a term
@@ -249,7 +245,7 @@ function PricingInformations(props) {
               <select
                 value={formDataStep4.douanes}
                 onChange={(e) => handleInputChange("douanes", e.target.value)}
-                className="mt-1 w-full cursor-pointer appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a value
@@ -269,7 +265,7 @@ function PricingInformations(props) {
               <select
                 id="subsidizationLabel"
                 name="subsidizationLabel"
-                className="mt-1 w-full cursor-pointer appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 onChange={(e) => e.target.value}
                 value={formDataStep4.subsidizationLabel}
               >
@@ -296,7 +292,7 @@ function PricingInformations(props) {
               <select
                 id="subsidizationLabel"
                 name="subsidizationLabel"
-                className="mt-1 w-full cursor-pointer appearance-none rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 onChange={(e) => e.target.value}
                 value={formDataStep4.subsidizationPercentage}
               >
@@ -329,7 +325,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("agentProfitMargin", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />
@@ -348,7 +344,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("pharmacistProfitMargin", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />
@@ -365,13 +361,13 @@ function PricingInformations(props) {
                 disabled
                 value={formDataStep4.drugName}
                 onChange={(e) => handleInputChange("drugName", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="name"
               />
             </div>
 
-            <div className="input-container relative">
+            {/* <div className="input-container relative">
               <label
                 htmlFor="price"
                 className="labels text-md mb-2 block text-left"
@@ -439,10 +435,10 @@ function PricingInformations(props) {
                   " " +
                   parseFloat(convertToLBP().replace(".", "")).toLocaleString(
                     "en-LB"
-                  ) /* Add thousands separator */
+                  )
                 }
               />
-            </div>
+            </div> */}
 
             <div className="input-container relative">
               <label
@@ -457,7 +453,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("hospitalPriceLBP", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />

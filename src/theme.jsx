@@ -91,7 +91,6 @@ export const tokens = (mode) => ({
           300: "#2e7c67",
           400: "#3da58a",
           500: "#4cceac",
-
         },
         redAccent: {
           100: "#2c100f",
@@ -119,113 +118,81 @@ export const tokens = (mode) => ({
 });
 
 // mui theme settings
-export const themeSettings = (mode) => {
-  const colors = tokens(mode);
-  return {
-    palette: {
-      mode: mode,
-      ...(mode === "dark"
-        ? {
-            // palette values for dark mode
-            primary: {
-              main: colors.primary[500],
-            },
-            secondary: {
-              main: colors.greenAccent[500],
-            },
-            neutral: {
-              dark: colors.grey[700],
-              main: colors.grey[500],
-              light: colors.grey[100],
-            },
-            background: {
-              default: colors.primary[500],
-            },
-          }
-        : {
-            // palette values for light mode
-            primary: {
-              main: colors.primary[100],
-            },
-            secondary: {
-              main: colors.greenAccent[500],
-            },
-            neutral: {
-              dark: colors.grey[700],
-              main: colors.grey[500],
-              light: colors.grey[100],
-            },
-            background: {
-              default: "#fcfcfc",
-            },
-          }),
-    },
-    typography: {
-      fontFamily: ["BebasNeue", "sans-serif"].join(","),
-      fontSize: 12,
-      h1: {
-        fontFamily: ["BebasNeue", "sans-serif"].join(","),
-        fontSize: 40,
-      },
-      h2: {
-        fontFamily: ["BebasNeue", "sans-serif"].join(","),
-        fontSize: 32,
-      },
-      h3: {
-        fontFamily: ["BebasNeue", "sans-serif"].join(","),
-        fontSize: 24,
-      },
-      h4: {
-        fontFamily: ["BebasNeue", "sans-serif"].join(","),
-        fontSize: 20,
-      },
-      h5: {
-        fontFamily: ["BebasNeue", "sans-serif"].join(","),
-        fontSize: 16,
-      },
-      h6: {
-        fontFamily: ["BebasNeue", "sans-serif"].join(","),
-        fontSize: 14,
-      },
-    },
-    overrides: {
-      MuiTextField: {
-        root: {
-          borderRadius: "60px", // Set the default border radius here
-        },
-      },
-      // Add other overrides as needed
-    },
-  };
-};
-
-
-const theme = createTheme(themeSettings("light"));
-
-const colorMode = {
-  toggleColorMode: () => {
-    const newPaletteType = theme.palette.mode === "light" ? "dark" : "light";
-    theme.palette.mode = newPaletteType;
-    // Optionally, save the new palette type to localStorage or a state management solution
-  },
-};
-
-export { theme, colorMode };
-
-// Context for color mode
-export const ColorModeContext = createContext({
-  toggleColorMode: () => {},
-});
-
-export const useMode = (initialMode = "dark") => {
-  const [mode, setMode] = useState(initialMode);
-
-  const toggleColorMode = () => {
-    setMode((prevMode) => (prevMode === "dark" ? "light" : "dark"));
-  };
-
-  // Use useMemo to avoid creating a new object on each render
-  const colorMode = useMemo(() => ({ toggleColorMode }), [toggleColorMode]);
-
-  return [mode, colorMode];
-};
+// export const themeSettings = (mode) => {
+//   const colors = tokens(mode);
+//   return {
+//     palette: {
+//       mode: mode,
+//       ...(mode === "dark"
+//         ? {
+//             // palette values for dark mode
+//             primary: {
+//               main: colors.primary[500],
+//             },
+//             secondary: {
+//               main: colors.greenAccent[500],
+//             },
+//             neutral: {
+//               dark: colors.grey[700],
+//               main: colors.grey[500],
+//               light: colors.grey[100],
+//             },
+//             background: {
+//               default: colors.primary[500],
+//             },
+//           }
+//         : {
+//             // palette values for light mode
+//             primary: {
+//               main: colors.primary[100],
+//             },
+//             secondary: {
+//               main: colors.greenAccent[500],
+//             },
+//             neutral: {
+//               dark: colors.grey[700],
+//               main: colors.grey[500],
+//               light: colors.grey[100],
+//             },
+//             background: {
+//               default: "#fcfcfc",
+//             },
+//           }),
+//     },
+//     typography: {
+//       fontFamily: ["BebasNeue", "sans-serif"].join(","),
+//       fontSize: 12,
+//       h1: {
+//         fontFamily: ["BebasNeue", "sans-serif"].join(","),
+//         fontSize: 40,
+//       },
+//       h2: {
+//         fontFamily: ["BebasNeue", "sans-serif"].join(","),
+//         fontSize: 32,
+//       },
+//       h3: {
+//         fontFamily: ["BebasNeue", "sans-serif"].join(","),
+//         fontSize: 24,
+//       },
+//       h4: {
+//         fontFamily: ["BebasNeue", "sans-serif"].join(","),
+//         fontSize: 20,
+//       },
+//       h5: {
+//         fontFamily: ["BebasNeue", "sans-serif"].join(","),
+//         fontSize: 16,
+//       },
+//       h6: {
+//         fontFamily: ["BebasNeue", "sans-serif"].join(","),
+//         fontSize: 14,
+//       },
+//     },
+//     overrides: {
+//       MuiTextField: {
+//         root: {
+//           borderRadius: "60px",
+//         },
+//       },
+//     },
+//   };
+// };

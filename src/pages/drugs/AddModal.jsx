@@ -21,7 +21,7 @@ const AddModal = ({ closeModal, title, onAdd, onCancel }) => {
 
   return (
     <div className="overlay fixed inset-0 flex items-center justify-center overflow-x-hidden overflow-y-auto z-50 dark:text-white ">
-      <div className="relative bg-white dark:bg-[#1e1e1e] border border-[#259f8359] w-72 sm:w-96 rounded-xl p-4 shadow-lg dark:shadow-[#259f8338]">
+      <div className="relative bg-white-contents dark:bg-black-contents border border-[#259f8300] w-72 sm:w-96 rounded-xl p-4 shadow-lg dark:shadow-[#00000059]">
         <label htmlFor="modalInput" className="mb-2 block text-lg">
           {title}
         </label>
@@ -31,7 +31,7 @@ const AddModal = ({ closeModal, title, onAdd, onCancel }) => {
           onClick={handleInputClick}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          className="w-full rounded-full border border-[#259f8359] bg-white/10 px-4 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-black"
+          className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
         />
         <div className="mt-4 flex justify-end">
           <button

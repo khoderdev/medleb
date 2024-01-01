@@ -55,6 +55,7 @@
     "react-pwa-install-prompt": "^1.0.5",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.13.0",
+    "react-search-field": "^2.0.1",
     "react-select": "^5.8.0",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.3",

@@ -26,20 +26,21 @@ interface LayoutProps {
 // };
 
 const style = {
-  container: "bg-[#e5e7eb] dark:bg-[#fff] flex w-full [100svh]",
+  container: "flex w-full h-[100svh] bg-white-bg dark:bg-black-bg",
 
-  mainContainer: "flex flex-col [100svh] w-full ",
+  mainContainer: "w-full sm:px-16 absolute",
 
-  main: "[100svh] w-full overflow-auto ",
+  main: "h-[100svh] w-full overflow-auto  ",
 
-  sidebarContainer: "flex h-[100svh] shadow-black",
+  NavBottomContainer: "flex sm:hidden shadow-black",
 
-  OffCanvasSidebar: "flex md:hidden z-50",
+  OffCanvasSidebar: "flex sm:hidden h-screen z-50",
 
-  sidebarContainerLeft: "hidden flex [100svh] md:block shadow-black z-50",
+  sidebarContainerLeft:
+    "hidden absolute h-[100svh] sm:block shadow-black z-50 w-auto",
 
   sidebarContainerRight:
-    "hidden md:flex h-screen shadow-black z-50",
+    "hidden absolute h-[100svh] sm:block shadow-black z-50 w-auto right-0 ",
 };
 
 export function DashboardLayout(props: LayoutProps) {
@@ -54,7 +55,7 @@ export function DashboardLayout(props: LayoutProps) {
           <SidebarOffCanvas mobileOrientation="end" />
         </div>
 
-        <div className={style.sidebarContainer}>
+        <div className={style.NavBottomContainer}>
           <NavBottom />
         </div>
 
