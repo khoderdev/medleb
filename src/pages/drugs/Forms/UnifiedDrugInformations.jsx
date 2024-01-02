@@ -102,13 +102,13 @@ const prescriptionAndDispensingConditionOptions = {
 function UnifiedDrugInformations(props) {
   const { formDataStep3, formDataStep2, handleInputChange } = props;
   const [isModalOpen, setModalOpen] = useState(false);
-  const [type, setType] = useState();
-  const [registrationNumber, setRgistrationNumber] = useState();
-  const [drugName, setDrugName] = useState();
-  const [atcRelatedIngredients, setAtcRelatedIngredients] = useState();
-  const [atc, setAtc] = useState();
-  const [ingredientsAndstrength, setIngredientsAndstrength] = useState();
-  const [primaryContainerPackage, setPrimaryContainerPackage] = useState();
+  // const [type, setType] = useState();
+  // const [registrationNumber, setRgistrationNumber] = useState();
+  // const [drugName, setDrugName] = useState();
+  // const [atcRelatedIngredients, setAtcRelatedIngredients] = useState();
+  // const [atc, setAtc] = useState();
+  // const [ingredientsAndstrength, setIngredientsAndstrength] = useState();
+  // const [primaryContainerPackage, setPrimaryContainerPackage] = useState();
   // const [dosageValueN, setDosageValueN] = useState();
   // const [dosageUnitN, setDosageUnitN] = useState();
   // const [dosageValueD, setDosageValueD] = useState();
@@ -116,12 +116,12 @@ function UnifiedDrugInformations(props) {
   // const [dosageOptions, setDosageOptions] = useState({});
   // const [dosageUnit, setDosageUnit] = useState();
   // const [scoreCheckbox, setScoreCheckbox] = useState();
-  const [doseForm, setDoseForm] = useState();
+  // const [doseForm, setDoseForm] = useState();
   // const [dosageFormOptions, setDosageFormOptions] = useState({});
-  const [parentaralCheckbox, setParentaralCheckbox] = useState();
-  const [route, setRoute] = useState();
-  const [presentationContentQty, setPresentationContentQty] = useState();
-  const [contentUnitType, setContentUnitType] = useState();
+  // const [parentaralCheckbox, setParentaralCheckbox] = useState();
+  // const [route, setRoute] = useState();
+  // const [presentationContentQty, setPresentationContentQty] = useState();
+  // const [contentUnitType, setContentUnitType] = useState();
 
   const openModal = (e) => {
     e.preventDefault();
@@ -170,23 +170,12 @@ function UnifiedDrugInformations(props) {
                 >
                   Type
                 </label>
-                <select
+                <input
                   disabled
-                  value={type}
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
-                >
-                  <option value="" disabled>
-                    select a type
-                  </option>
-                  <option value="Brand">Brand</option>
-                  <option value="Generic">Generic</option>
-                  <option value="Biological Bio-Human">
-                    Biological: Bio - Human
-                  </option>
-                  <option value="Biological Bio-Similar">
-                    Biological: Bio - Similar
-                  </option>
-                </select>
+                  value={formDataStep3.type}
+                  onChange={(e) => handleInputChange("type", e.target.value)}
+                  className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                />
               </div>
 
               <div className="input-container relative">
@@ -202,7 +191,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("registrationNumber", e.target.value)
                   }
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="reg #"
                 />
@@ -220,7 +209,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("drugName", e.target.value)
                   }
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="name"
                 />
@@ -241,7 +230,7 @@ function UnifiedDrugInformations(props) {
                   onChange={(e) =>
                     handleInputChange("atcRelatedIngredients", e.target.value)
                   }
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="enter a value"
                 />
@@ -252,9 +241,9 @@ function UnifiedDrugInformations(props) {
                 </label>
                 <input
                   disabled
-                  value={formDataStep3.atc}
+                  value={formDataStep3.atcCode}
                   onChange={(e) => handleInputChange("atc", e.target.value)}
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="enter a value"
                 />
@@ -271,7 +260,7 @@ function UnifiedDrugInformations(props) {
               <input
                 disabled
                 value={formDataStep3.ingredientsAndstrength}
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="enter a value"
               />
@@ -285,7 +274,7 @@ function UnifiedDrugInformations(props) {
                 disabled
                 value={formDataStep3.form}
                 onChange={(e) => handleInputChange("form", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="drug form"
               />
@@ -304,7 +293,7 @@ function UnifiedDrugInformations(props) {
                 onChange={(e) =>
                   handleInputChange("primaryContainerPackage", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="container / package"
               />
@@ -325,9 +314,9 @@ function UnifiedDrugInformations(props) {
                   Type
                 </label>
                 <select
-                  value={type}
+                  value={formDataStep3.type}
+                  onChange={(e) => handleInputChange("type", e.target.value)}
                   className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
-                  onChange={(e) => setType(e.target.value)}
                 >
                   <option value="" disabled>
                     select a type

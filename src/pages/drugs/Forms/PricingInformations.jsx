@@ -63,8 +63,6 @@ const subsidizationPercentageOptions = {
 
 function PricingInformations(props) {
   const { formDataStep4, handleInputChange } = props;
-  const registrationDateInputRef = useRef(null);
-  const reviewDateInputRef = useRef(null);
 
   function convertToUSD() {
     if (
@@ -133,7 +131,7 @@ function PricingInformations(props) {
                   <select
                     id="currency"
                     name="currencyForeign"
-                    className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] sm:w-20"
+                    className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-fg dark:bg-black-input px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] sm:w-20"
                     onChange={(e) =>
                       handleInputChange(e.target.name, e.target.value)
                     }
@@ -155,7 +153,7 @@ function PricingInformations(props) {
               </label>
               <input
                 disabled
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 value={" " + convertToUSD()}
               />
             </div>
@@ -165,7 +163,7 @@ function PricingInformations(props) {
               </label>
               <input
                 disabled
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 value={
                   " " +
                   parseFloat(convertToLBP().replace(".", "")).toLocaleString(
@@ -186,7 +184,7 @@ function PricingInformations(props) {
                 disabled
                 value={formDataStep4.stratum}
                 onChange={(e) => handleInputChange("stratum", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="E1"
               />
@@ -196,20 +194,15 @@ function PricingInformations(props) {
               <label htmlFor="type" className="labels text-md block text-left">
                 Cargo & Shipping Terms
               </label>
-              <select
+              <input
                 disabled
                 value={formDataStep4.cargoShippingTerms}
                 onChange={(e) =>
                   handleInputChange("cargoShippingTerms", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
-              >
-                <option selected disabled value="">
-                  select a term
-                </option>
-                <option value="CIF"> CIF </option>
-                <option value="FOB"> FOB </option>
-              </select>
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+              />
+           
             </div>
 
             <div className="input-container relative">
@@ -219,20 +212,15 @@ function PricingInformations(props) {
               >
                 Cargo & Shipping
               </label>
-              <select
+              <input
                 disabled
                 value={formDataStep4.cargoShipping}
                 onChange={(e) =>
                   handleInputChange("cargoShipping", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
-              >
-                <option selected disabled value="">
-                  select a term
-                </option>
-                <option value="CIF"> CIF </option>
-                <option value="FOB"> FOB </option>
-              </select>
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+              />
+               
             </div>
 
             <div className="input-container relative">
@@ -325,7 +313,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("agentProfitMargin", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />
@@ -344,7 +332,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("pharmacistProfitMargin", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />
@@ -361,84 +349,11 @@ function PricingInformations(props) {
                 disabled
                 value={formDataStep4.drugName}
                 onChange={(e) => handleInputChange("drugName", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="name"
               />
             </div>
-
-            {/* <div className="input-container relative">
-              <label
-                htmlFor="price"
-                className="labels text-md mb-2 block text-left"
-              >
-                Foreign Price
-              </label>
-              <div className="relative" style={{ borderColor: "transparent" }}>
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 font-bold">
-                  <span className="text-[#259F83]">
-                    {currencySymbols[formDataStep4.currencyForeign]}
-                  </span>
-                </div>
-                <input
-                  type="number"
-                  name="priceForeign"
-                  id="price"
-                  className="w-full appearance-none rounded-full border border-[#259f8359] bg-white/10 px-11 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
-                  placeholder="0.00"
-                  value={formDataStep4?.priceForeign}
-                  onChange={(e) =>
-                    handleInputChange(e.target.name, e.target.value)
-                  }
-                />
-                <div className="absolute inset-y-0 right-0 flex items-center">
-                  <label htmlFor="currencyForeign" className="sr-only ">
-                    Foreign Currency
-                  </label>
-                  <select
-                    id="currency"
-                    name="currencyForeign"
-                    className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] sm:w-20"
-                    onChange={(e) =>
-                      handleInputChange(e.target.name, e.target.value)
-                    }
-                    value={formDataStep4.currencyForeign}
-                  >
-                    {Object.keys(exchangeRates).map((currencyForeign) => (
-                      <option key={currencyForeign} value={currencyForeign}>
-                        {currencyForeign}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div className="input-container relative">
-              <label className="labels text-md block text-left">
-                Foreign Price in USD
-              </label>
-              <input
-                disabled
-                className="converted-price mt-1 w-full appearance-none rounded-full border border-[#4d4d4d59] bg-white/10 px-4 py-2 text-[#259f83] shadow-md outline-none dark:bg-[#1e1e1e] "
-                value={" " + convertToUSD()}
-              />
-            </div>
-            <div className="input-container relative">
-              <label className="labels text-md block text-left">
-                Foreign Price in LBP
-              </label>
-              <input
-                disabled
-                className="converted-price-lbp mt-1 w-full appearance-none rounded-full border border-[#4d4d4d59] bg-white/10 px-4 py-2 text-[#259f83] shadow-md outline-none dark:bg-[#1e1e1e] "
-                value={
-                  " " +
-                  parseFloat(convertToLBP().replace(".", "")).toLocaleString(
-                    "en-LB"
-                  )
-                }
-              />
-            </div> */}
 
             <div className="input-container relative">
               <label
@@ -453,7 +368,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("hospitalPriceLBP", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-input dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />

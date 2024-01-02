@@ -30,7 +30,7 @@ module.exports = {
           fg: "#393939",
           contents: "#292929",
           text: "#292929",
-          input: "#ffffff1a",
+          input: "#212121",
           border: "#f1f1f1",
           test1: "#292929",
           test2: "#393939",

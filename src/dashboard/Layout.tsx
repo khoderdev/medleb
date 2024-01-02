@@ -28,7 +28,7 @@ interface LayoutProps {
 const style = {
   container: "flex w-full h-[100svh] bg-white-bg dark:bg-black-bg",
 
-  mainContainer: "w-full sm:px-16 absolute",
+  mainContainer: "w-full sm:pl-[4em] sm:pr-[2.5em] absolute",
 
   main: "h-[100svh] w-full overflow-auto  ",
 

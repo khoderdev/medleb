@@ -85,25 +85,6 @@ function AddDrug(props) {
     LBP: "ل.ل",
   };
 
-  const [formDataStep1, setFormDataStep1] = useState({
-    drugImages: "",
-    drugName: "",
-    type: "",
-    responsibleParty: "",
-    responsiblePartyCountry: "",
-    manufacturer: "",
-    manufacturingCountry: "",
-    cargoShippingTerms: "",
-    priceForeign: "",
-    currencyForeign: "USD",
-    convertToUSD: "",
-    convertToLBP: "",
-    registrationNumber: "",
-    registrationDate: "",
-    reviewDate: "",
-    mohCode: "",
-  });
-
   function convertToUSD() {
     if (
       formDataStep1 &&
@@ -149,41 +130,67 @@ function AddDrug(props) {
         convertToUSD: convertedUSD,
         convertToLBP: convertedLBP,
       }));
-
-      // console.log("Converted Price in USD:", convertedUSD);
-      // console.log(
-      //   "Converted Price in LBP:",
-      //   parseFloat(convertedLBP.replace(".", "")).toLocaleString("en-LB")
-      // );
     }
   };
 
-  // ...
+  // Changed handleInputChange to update both formDataStep1 and formDataStep5
+  const handleInputChange = (name, value) => {
+    setFormDataStep1((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
 
-  // Log the values when the component mounts
-  // useEffect(() => {
-  //   console.log("Converted Price in USD:", convertToUSD());
-  //   console.log(
-  //     "Converted Price in LBP:",
-  //     parseFloat(convertToLBP().replace(".", "")).toLocaleString("en-LB")
-  //   );
-  // }, []);
+    // Add similar logic for formDataStep2
+    setFormDataStep2((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
 
-  const [formDataStep2, setFormDataStep2] = useState({
-    // priceForeign: "",
-    // currencyForeign: "USD",
-    ingredientsAndstrength: "",
-    // form: "",
-    // primaryContainerPackage: "",
-    // manufacturer: "",
-    // manufacturingCountry: "",
-    // agent: "",
+    setFormDataStep3((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+
+    setFormDataStep4((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+
+    // Auto-add the value to Component 2
+    setFormDataStep5((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const [formDataStep1, setFormDataStep1] = useState({
+    drugName: "",
+    type: "",
+    responsibleParty: "",
+    responsiblePartyCountry: "",
+    manufacturer: "",
+    manufacturingCountry: "",
+    cargoShippingTerms: "",
+    priceForeign: "",
+    currencyForeign: "USD",
+    convertToUSD: "",
+    convertToLBP: "",
+    registrationNumber: "",
+    registrationDate: "",
+    reviewDate: "",
+    mohCode: "",
   });
 
-  // const UnifiedDrugInformations = ({ formDataStep3, handleInputChange }) => {
-  //   // Ensure 'type' is defined somewhere in this component
-  //   // ...
-  // };
+  const [formDataStep2, setFormDataStep2] = useState({
+    ingredientsAndstrength: "",
+    form: "",
+    primaryContainerPackage: "",
+    manufacturer: "",
+    manufacturingCountry: "",
+    agent: "",
+    atcCode: "",
+    atcRelatedIngredients: "Paracetamol",
+  });
 
   const [formDataStep3, setFormDataStep3] = useState({
     registrationNumber: "",
@@ -194,57 +201,52 @@ function AddDrug(props) {
   });
 
   const [formDataStep4, setFormDataStep4] = useState({
-    priceForeign: "",
-    currencyForeign: "USD",
-    convertToUSD: "",
-    convertToLBP: "",
+    stratum: "E1",
+    cargoShipping: "FOB",
+    douanes: "",
+    subsidizationLabel: "",
+    agentProfitMargin: "8",
+    pharmacistProfitMargin: "8.5",
+    hospitalPriceLBP: "900,000",
   });
 
   const [formDataStep5, setFormDataStep5] = useState({
-    responsibleParty: "Leo Pharma",
-    responsiblePartyCountry: "Sweden",
-    responsiblePartyID: "213",
-    manufacturer: "Astellas Pharma Europe BV",
-    manufacturerID: "121",
-    manufacturerCountry: "Europe",
-    agent: "Omnipharma",
+    responsibleParty: "",
+    responsiblePartyCountry: "",
+    responsiblePartyID: "123321",
+    manufacturer: "",
+    manufacturerID: "321123",
+    manufacturerCountry: "",
+    agent: "",
   });
 
-  // const handleInputChangeStep1 = (name, value) => {
-  //   setFormDataStep1((prevFormData) => ({
+  // const handleInputChangeStep2 = (name, value) => {
+  //   setFormDataStep2((prevFormData) => ({
   //     ...prevFormData,
   //     [name]: value,
   //   }));
-  //   console.log(formDataStep1);
   // };
 
-  const handleInputChangeStep2 = (name, value) => {
-    setFormDataStep2((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+  // const handleInputChangeStep3 = (name, value) => {
+  //   setFormDataStep3((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const handleInputChangeStep3 = (name, value) => {
-    setFormDataStep3((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+  // const handleInputChangeStep4 = (name, value) => {
+  //   setFormDataStep4((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const handleInputChangeStep4 = (name, value) => {
-    setFormDataStep4((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleInputChangeStep5 = (name, value) => {
-    setFormDataStep5((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+  // const handleInputChangeStep5 = (name, value) => {
+  //   setFormDataStep5((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: value,
+  //   }));
+  // };
 
   const logFormData = () => {
     const finalFormData = {
@@ -292,11 +294,22 @@ function AddDrug(props) {
     setUploadedImages(newUploadedImages);
   };
 
+  const handleChildArrowButtonClick = () => {
+    if (isLastStep) {
+      logFormData();
+    } else {
+      handleNext();
+    }
+  };
+
   const forms = [
     <div className="flex justify-center ">
       <DrugRegistryForm
-        handleInputChange={handleInputChangeStep1}
+        handleInputChange={handleInputChange} // Make sure this prop is correctly passed
         formDataStep1={formDataStep1}
+        // handleInputChange={handleInputChangeStep1}
+        // formDataStep1={formDataStep1}
+        handleChildArrowButtonClick={handleChildArrowButtonClick}
       />
     </div>,
     <div className="flex justify-center">
@@ -310,25 +323,25 @@ function AddDrug(props) {
     </div>,
     <div className="flex justify-center">
       <DrugSubstanceInformationsForm
-        handleInputChange={handleInputChangeStep2}
+        handleInputChange={handleInputChange}
         formDataStep2={formDataStep2}
       />
     </div>,
     <div className="flex justify-center">
       <UnifiedDrugInformations
-        handleInputChange={handleInputChangeStep3}
+        handleInputChange={handleInputChange}
         formDataStep3={formDataStep3}
       />
     </div>,
     <div className="flex justify-center">
       <PricingInformations
-        handleInputChange={handleInputChangeStep4}
+        handleInputChange={handleInputChange}
         formDataStep4={formDataStep4}
       />
     </div>,
     <div className="flex justify-center">
       <ManufacturingAndImportingInfo
-        handleInputChange={handleInputChangeStep5}
+        handleInputChange={handleInputChange}
         formDataStep5={formDataStep5}
       />
     </div>,
