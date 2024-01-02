@@ -388,12 +388,12 @@ function UnifiedDrugInformations(props) {
               </div>
 
               <div className="input-container mt-4 w-full">
-                <label htmlFor="atc" className="labels text-md block text-left">
+                <label htmlFor="atcCode" className="labels text-md block text-left">
                   ATC Code
                 </label>
                 <input
-                  value={formDataStep3.atc}
-                  onChange={(e) => handleInputChange("atc", e.target.value)}
+                  value={formDataStep3.atcCode}
+                  onChange={(e) => handleInputChange("atcCode", e.target.value)}
                   className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   type="text"
                   placeholder="enter a value"

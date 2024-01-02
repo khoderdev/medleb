@@ -1,5 +1,5 @@
 // /* eslint-disable tailwindcss/no-custom-classname */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DrugProvider } from "../DrugContext";
 import { useNavigate, Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -50,6 +50,7 @@ function AddDrug(props) {
   const [currentStep, setCurrentStep] = useState(0);
   const navigate = useNavigate();
   const isLastStep = currentStep === 5;
+  const [isFieldModified, setIsFieldModified] = useState(false);
 
   const steps = [
     "Drug Registry",
@@ -72,53 +73,22 @@ function AddDrug(props) {
     LBP: 900,
   };
 
-  function convertToUSD() {
-    if (
-      formDataStep1 &&
-      formDataStep1.priceForeign &&
-      formDataStep1.currencyForeign
-    ) {
-      const convertedPrice =
-        formDataStep1.priceForeign /
-        exchangeRates[formDataStep1.currencyForeign];
-      return convertedPrice.toFixed(2); // Display with 2 decimal places
+  function convertToUSD(priceForeign, currencyForeign) {
+    if (priceForeign && currencyForeign) {
+      const convertedPrice = priceForeign / exchangeRates[currencyForeign];
+      return convertedPrice.toFixed(2);
     }
     return "";
   }
 
-  function convertToLBP() {
-    if (
-      formDataStep1 &&
-      formDataStep1.priceForeign &&
-      formDataStep1.currencyForeign
-    ) {
-      const priceInUSD = convertToUSD();
-      const convertedPrice =
-        (priceInUSD / exchangeRates.USD) * exchangeRates.LBP;
-      return convertedPrice.toFixed(2); // Display with 2 decimal places
+  function convertToLBP(priceForeign, currencyForeign) {
+    if (priceForeign && currencyForeign) {
+      const priceInUSD = convertToUSD(priceForeign, currencyForeign);
+      const convertedPrice = priceInUSD * exchangeRates.LBP;
+      return convertedPrice.toFixed(2);
     }
     return "";
   }
-
-  const handleInputChangeStep1 = (name, value) => {
-    setFormDataStep1((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-
-    // Handle other state updates
-    if (name === "priceForeign" || name === "currencyForeign") {
-      // Handle the currency conversion logic here and update convertToUSD and convertToLBP
-      const convertedUSD = convertToUSD(value, formDataStep1.currencyForeign);
-      const convertedLBP = convertToLBP(value, formDataStep1.currencyForeign);
-
-      setFormDataStep1((prevFormData) => ({
-        ...prevFormData,
-        convertToUSD: convertedUSD,
-        convertToLBP: convertedLBP,
-      }));
-    }
-  };
 
   // Changed handleInputChange to update both formDataStep1 and formDataStep5
   const handleInputChange = (name, value) => {
@@ -126,24 +96,28 @@ function AddDrug(props) {
       ...prevFormData,
       [name]: value,
     }));
+    // Set isFieldModified to true when the user modifies the field
+    setIsFieldModified(true);
 
-    // Add similar logic for formDataStep2
+    // similar logic for formDataStep2
     setFormDataStep2((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
 
+    // similar logic for formDataStep2
     setFormDataStep3((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
 
+    // similar logic for formDataStep2
     setFormDataStep4((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
 
-    // Auto-add the value to Component 2
+    // similar logic for formDataStep2
     setFormDataStep5((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -168,6 +142,28 @@ function AddDrug(props) {
     mohCode: "",
   });
 
+  const handleInputChangeStep1 = (name, value) => {
+    if (name === "priceForeign" || name === "currencyForeign") {
+      const convertedUSD = convertToUSD(value, formDataStep1.currencyForeign);
+      const convertedLBP = convertToLBP(value, formDataStep1.currencyForeign);
+
+      setFormDataStep1((prevFormData) => ({
+        ...prevFormData,
+        convertToUSD: convertedUSD,
+        convertToLBP: convertedLBP,
+      }));
+
+      // Log the values directly after the state update
+      console.log("convertToUSD:", convertedUSD);
+      console.log("convertToLBP:", convertedLBP);
+    }
+
+    setFormDataStep1((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
   const [formDataStep2, setFormDataStep2] = useState({
     ingredientsAndstrength: "",
     form: "",
@@ -180,14 +176,19 @@ function AddDrug(props) {
   });
 
   const [formDataStep3, setFormDataStep3] = useState({
-    registrationNumber: "",
-    registrationDate: "",
-    reviewDate: "",
-    mohCode: "",
-    type: "",
+    atcRelatedIngredients: "Paracetamol",
+    // registrationNumber: "",
+    // registrationDate: "",
+    // reviewDate: "",
+    // mohCode: "",
+    // type: "",
   });
 
   const [formDataStep4, setFormDataStep4] = useState({
+    priceForeign: "",
+    currencyForeign: "USD",
+    convertToUSD: "",
+    convertToLBP: "",
     stratum: "E1",
     cargoShipping: "FOB",
     douanes: "",
@@ -203,7 +204,7 @@ function AddDrug(props) {
     responsiblePartyID: "123321",
     manufacturer: "",
     manufacturerID: "321123",
-    manufacturerCountry: "",
+    manufacturingCountry: "",
     agent: "",
   });
 
@@ -220,12 +221,11 @@ function AddDrug(props) {
 
     // Perform submission or redirection here
     navigate("/list");
-    FetchData(finalFormData);
+    // FetchData(finalFormData);
   };
 
   const handleNext = () => {
     if (currentStep === 2) {
-      // Perform any logic you need before moving to the next step
     }
 
     setCurrentStep(currentStep + 1);
@@ -245,9 +245,7 @@ function AddDrug(props) {
 
   const [uploadedImages, setUploadedImages] = useState([]);
 
-  const updateImageState = (index, newImageState) => {
-    // Update image state if needed
-  };
+  const updateImageState = (index, newImageState) => {};
 
   const handleImageUpload = (newUploadedImages) => {
     setUploadedImages(newUploadedImages);
@@ -264,10 +262,8 @@ function AddDrug(props) {
   const forms = [
     <div className="flex justify-center ">
       <DrugRegistryForm
-        handleInputChange={handleInputChange} // Make sure this prop is correctly passed
+        handleInputChange={handleInputChange}
         formDataStep1={formDataStep1}
-        // handleInputChange={handleInputChangeStep1}
-        // formDataStep1={formDataStep1}
         handleChildArrowButtonClick={handleChildArrowButtonClick}
       />
     </div>,
@@ -296,6 +292,18 @@ function AddDrug(props) {
       <PricingInformations
         handleInputChange={handleInputChange}
         formDataStep4={formDataStep4}
+        // convertToUSD={convertToUSD()}
+        setFormDataStep1={setFormDataStep1}
+        formDataStep1={formDataStep1}
+        convertToUSD={convertToUSD(
+          formDataStep1.priceForeign,
+          formDataStep1.currencyForeign
+        )}
+        convertToLBP={convertToLBP(
+          formDataStep1.priceForeign,
+          formDataStep1.currencyForeign
+        )}
+        isAutoInserted={!isFieldModified}
       />
     </div>,
     <div className="flex justify-center">

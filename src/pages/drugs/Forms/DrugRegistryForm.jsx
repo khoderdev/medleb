@@ -272,8 +272,9 @@ const DrugRegistryForm = ({
               </label>
               <input
                 disabled
-                className="converted-price-usd mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d]"
-                value={" " + convertToUSD()}
+                className="converted-price-usd mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                // value={" " + convertToUSD()}
+                value={convertToUSD()}
               />
             </div>
             <div className="input-container relative">
@@ -282,13 +283,16 @@ const DrugRegistryForm = ({
               </label>
               <input
                 disabled
-                className="converted-price-lbp mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] dark:bg-[#3a3c3d] "
-                value={
-                  " " +
-                  parseFloat(convertToLBP().replace(".", "")).toLocaleString(
-                    "en-LB"
-                  ) /* Add thousands separator */
-                }
+                className="converted-price-lbp mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                // value={
+                //   " " +
+                //   parseFloat(convertToLBP().replace(".", "")).toLocaleString(
+                //     "en-LB"
+                //   )
+                // }
+                value={parseFloat(
+                  convertToLBP().replace(".", "")
+                ).toLocaleString("en-LB")}
               />
             </div>
 
