@@ -1,12 +1,11 @@
 // /* eslint-disable tailwindcss/no-custom-classname */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DrugProvider } from "../DrugContext";
 import { useNavigate, Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Button from "@mui/material/Button";
 import DrugRegistryForm from "./DrugRegistryForm";
-import MarketingApprovalForm from "./MarketingApprovalForm";
 import DrugSubstanceInformationsForm from "./DrugSubstanceInformationsForm";
 import UnifiedDrugInformations from "./UnifiedDrugInformations";
 import PricingInformations from "./PricingInformations";
@@ -71,18 +70,6 @@ function AddDrug(props) {
     SAR: 0.27,
     JOD: 1.41,
     LBP: 900,
-  };
-
-  const currencySymbols = {
-    USD: "$",
-    CAD: "C$",
-    EUR: "€",
-    CHF: "CHF",
-    DKK: "kr",
-    GBP: "£",
-    SAR: "﷼",
-    JOD: "JD",
-    LBP: "ل.ل",
   };
 
   function convertToUSD() {
@@ -219,34 +206,6 @@ function AddDrug(props) {
     manufacturerCountry: "",
     agent: "",
   });
-
-  // const handleInputChangeStep2 = (name, value) => {
-  //   setFormDataStep2((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleInputChangeStep3 = (name, value) => {
-  //   setFormDataStep3((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleInputChangeStep4 = (name, value) => {
-  //   setFormDataStep4((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleInputChangeStep5 = (name, value) => {
-  //   setFormDataStep5((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  // };
 
   const logFormData = () => {
     const finalFormData = {

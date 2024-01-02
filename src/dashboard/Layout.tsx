@@ -11,36 +11,21 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-// const style = {
-//   container: "containerr bg-[#e5e7eb] dark:bg-[#1e1e1e]", // Adjusted container style
-
-//   mainContainer: "mainContainer", // Adjusted mainContainer style
-
-//   main: "w-full h-screen dark:bg-[#1e1e1e] overflow-y-scroll scrollbar-hide",
-
-//   sidebarContainer: "sidebarContainer flex shadow-black",
-
-//   OffCanvasSidebar: "OffCanvasSidebar Add your styles for OffCanvasSidebar here ",
-
-//   sidebarContainerRight: "sidebarContainerRight absolute bg-white dark:bg-black dark:shadow-md top-0 right-0 hidden md:flex shadow-black z-10", // Adjusted style
-// };
-
 const style = {
   container: "flex w-full h-[100svh] bg-white-bg dark:bg-black-bg",
 
-  mainContainer: "w-full sm:pl-[4em] sm:pr-[2.5em] absolute",
+  mainContainer: "w-full sm:pl-[4em] sm:pr-[3em] absolute",
 
   main: "h-[100svh] w-full overflow-auto  ",
 
-  NavBottomContainer: "flex sm:hidden shadow-black",
+  NavBottomContainer: "flex sm:hidden",
 
   OffCanvasSidebar: "flex sm:hidden h-screen z-50",
 
-  sidebarContainerLeft:
-    "hidden absolute h-[100svh] sm:block shadow-black z-50 w-auto",
+  sidebarContainerLeft: "hidden absolute h-[100svh] sm:block z-50 w-auto",
 
   sidebarContainerRight:
-    "hidden absolute h-[100svh] sm:block shadow-black z-50 w-auto right-0 ",
+    "hidden absolute h-[100svh] sm:block z-50 w-auto right-0 ",
 };
 
 export function DashboardLayout(props: LayoutProps) {
