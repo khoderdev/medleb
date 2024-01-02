@@ -206,7 +206,7 @@ function Import(props) {
   return (
     /* Page Title Header Container (Outside the Box) Start */
     <DrugProvider>
-      <div className="main-page items-center w-full h-[100svh] flex flex-col sm:pt-4 pb-[4.5em] sm:pb-4 px-2 sm:px-6 dark:text-gray-100">
+      <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col sm:pt-4 pb-[4.5em] sm:pb-4 px-2 sm:px-6 dark:text-white-500">
         <div className="title py-4 pl-4 flex w-full justify-center items-center">
           <h1 className="text-3xl font-semibold text-center text-[#259f83]">Importation</h1>
         </div>
@@ -219,7 +219,7 @@ function Import(props) {
         </div>
 
         {/* Content Container Start */}
-        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl bg-white p-6 text-center dark:bg-black">
+        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl p-6 text-center bg-white-contents dark:bg-black-contents">
           <Paper elevation={3} className={classes.stepperPaper}>
             <CustomStepper currentStep={currentStep} steps={steps} />
           </Paper>
@@ -229,7 +229,7 @@ function Import(props) {
         {/* Content Container End */}
 
         {/* Footer Container Start */}
-        <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl bg-white py-0 text-center text-2xl dark:bg-black sm:pb-0">
+        <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-black-contents sm:pb-0">
           <div className="flex items-center justify-center space-x-20 pt-0">
             {currentStep > 0 ? (
               <Button

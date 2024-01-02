@@ -173,7 +173,7 @@ export function TrackRecordsIcon() {
         height="60"
         rx="21"
         stroke="#259F83"
-        strokeWidth="1.5"
+        strokeWidth="3"
       />
     </svg>
   );

@@ -40,7 +40,7 @@ export function ImportIcon() {
         height="60"
         rx="21"
         stroke="#259F83"
-        strokeWidth="1.5"
+        strokeWidth="2"
       />
 
       <path

@@ -4,7 +4,7 @@ import "../styles.css";
 const RequestForImporationForm = ({ handleInputChange, formDataStep1 }) => {
   return (
     <>
-      <div className="col-span-1 flex w-full sm:w-[70em] flex-col sm:col-span-1">
+      <div className="col-span-1 flex w-full sm:w-[70em] flex-col">
         <div className="image-uploader-cont flex flex-col justify-items-center"></div>
         <h1 className="pb-2 pt-4 text-center text-xl sm:py-10 sm:text-2xl ">
           1 - Request For Importation Form

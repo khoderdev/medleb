@@ -1,8 +1,8 @@
 export function MedLebLogo() {
   return (
     <svg
-      width="170"
-      height="80"
+      width="120"
+      height="45"
       viewBox="0 0 220 90"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

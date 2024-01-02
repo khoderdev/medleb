@@ -33,7 +33,7 @@ export function AddIcon() {
         height="60"
         rx="21"
         stroke="#259F83"
-        strokeWidth="1.5"
+        strokeWidth="3"
         fill={
           activeState === "active"
             ? "#259F83" // Active color

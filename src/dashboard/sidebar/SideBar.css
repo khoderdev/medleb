@@ -25,13 +25,11 @@
 #SideBar .pro-sidebar {
   width: 100%;
   min-width: 100%;
-  
 }
 
 /* On Hover */
 #SideBar:hover .pro-sidebar.collapsed {
-  width: 180px; 
-
+  width: 180px;
 }
 
 /* On Hover */
@@ -39,7 +37,6 @@
   padding: 15px;
   padding-bottom: 0;
   width: 100px;
-  
 }
 
 /* On Hover */
@@ -74,7 +71,7 @@
 }
 
 #SideBar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
-  color: #9CA5BF;
+  color: #9ca5bf;
   margin: 10px 0px;
   font-weight: bold;
 }
@@ -85,13 +82,18 @@
   font-weight: bold;
 }
 
-#SideBar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper .pro-item-content {
+#SideBar
+  .pro-sidebar-inner
+  .pro-sidebar-layout
+  ul
+  .pro-inner-item
+  .pro-icon-wrapper
+  .pro-item-content {
   color: #000;
 }
 
 #SideBar .logo {
   padding: 20px;
-  
 }
 
 @media only screen and (max-width: 720px) {
@@ -108,7 +110,6 @@
   position: absolute;
   width: 220px;
   right: 0;
-  
 }
 
 #SideBarRight .pro-sidebar {
@@ -163,7 +164,7 @@
 }
 
 #SideBar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
-  color: #9CA5BF;
+  color: #9ca5bf;
   margin: 10px 0px;
   font-weight: bold;
 }
@@ -174,24 +175,24 @@
   font-weight: bold;
 }
 
-#SideBarRight .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper .pro-item-content {
+#SideBarRight
+  .pro-sidebar-inner
+  .pro-sidebar-layout
+  ul
+  .pro-inner-item
+  .pro-icon-wrapper
+  .pro-item-content {
   color: #000;
 }
 
 #SideBarRight .logo {
   padding: 20px;
-  
 }
 
 @media only screen and (max-width: 720px) {
   html {
     overflow: hidden;
   }
-}
-
-/* Your existing styles for the non-expanded logo */
-.logo {
-  /* Add styles for the non-expanded logo */
 }
 
 /* Styles for the expanded logo */
@@ -210,21 +211,18 @@
   min-width: 80px;
 }
 
+/* Add this style to hide scrollbar track */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0; /* Adjust the width of the scrollbar if needed */
+}
 
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #259f83; /* Adjust the color of the scrollbar thumb */
+  border-radius: 6px; /* Adjust the border radius of the scrollbar thumb */
+  width: 0;
+}
 
- 
-    /* Add this style to hide scrollbar track */
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 0; /* Adjust the width of the scrollbar if needed */
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background-color: #259f83; /* Adjust the color of the scrollbar thumb */
-      border-radius: 6px; /* Adjust the border radius of the scrollbar thumb */
-      width: 0;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-track {
-width: 0; 
-      background-color: transparent; /* Set the scrollbar track background to transparent */
-    }
+.custom-scrollbar::-webkit-scrollbar-track {
+  width: 0;
+  background-color: transparent; /* Set the scrollbar track background to transparent */
+}

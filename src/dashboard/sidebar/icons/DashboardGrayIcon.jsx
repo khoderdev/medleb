@@ -17,8 +17,8 @@ export function DashboardGrayIcon() {
 
   return (
     <svg
-      width="30"
-      height="30"
+      width="38"
+      height="38"
       viewBox="0 0 55 60"
       // fill="none"
       fill={
