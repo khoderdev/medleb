@@ -140,9 +140,10 @@ const PricingInformations = ({
                 Foreign Price in USD
               </label>
               <input
-                disabled={isAutoInserted}
+                // disabled={isAutoInserted}
                 className="converted-price-usd mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
-                value={convertToUSD}
+                value={formDataStep1?.convertToUSD}
+                // value={convertToUSD}
               />
             </div>
             <div className="input-container relative">
@@ -150,9 +151,10 @@ const PricingInformations = ({
                 Foreign Price in LBP
               </label>
               <input
-                disabled={isAutoInserted}
+                // disabled={isAutoInserted}
                 className="converted-price-lbp mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
-                value={convertedPriceLBP}
+                value={formDataStep1?.convertToLBP}
+                // value={convertedPriceLBP}
               />
             </div>
 
@@ -209,7 +211,7 @@ const PricingInformations = ({
                 Douanes
               </label>
               <select
-                value={formDataStep1.douanes}
+                value={formDataStep4.douanes}
                 onChange={(e) => handleInputChange("douanes", e.target.value)}
                 className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >

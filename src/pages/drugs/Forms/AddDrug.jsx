@@ -190,7 +190,7 @@ function AddDrug(props) {
     convertToUSD: "",
     convertToLBP: "",
     stratum: "E1",
-    cargoShipping: "FOB",
+    cargoShipping: "8%",
     douanes: "",
     subsidizationLabel: "",
     agentProfitMargin: "8",
@@ -292,18 +292,17 @@ function AddDrug(props) {
       <PricingInformations
         handleInputChange={handleInputChange}
         formDataStep4={formDataStep4}
-        // convertToUSD={convertToUSD()}
         setFormDataStep1={setFormDataStep1}
         formDataStep1={formDataStep1}
-        convertToUSD={convertToUSD(
-          formDataStep1.priceForeign,
-          formDataStep1.currencyForeign
-        )}
-        convertToLBP={convertToLBP(
-          formDataStep1.priceForeign,
-          formDataStep1.currencyForeign
-        )}
-        isAutoInserted={!isFieldModified}
+        // convertToUSD={convertToUSD(
+        //   formDataStep1.priceForeign,
+        //   formDataStep1.currencyForeign
+        // )}
+        // convertToLBP={convertToLBP(
+        //   formDataStep1.priceForeign,
+        //   formDataStep1.currencyForeign
+        // )}
+        // isAutoInserted={!isFieldModified}
       />
     </div>,
     <div className="flex justify-center">
