@@ -6,7 +6,7 @@ const RequestForImporationForm = ({ handleInputChange, formDataStep1 }) => {
     <>
       <div className="col-span-1 flex w-full sm:w-[70em] flex-col">
         <div className="image-uploader-cont flex flex-col justify-items-center"></div>
-        <h1 className="pb-2 pt-4 text-center text-xl sm:py-10 sm:text-2xl ">
+        <h1 className="pb-2 pt-4 text-center dark:text-white-contents text-xl sm:py-10 sm:text-2xl ">
           1 - Request For Importation Form
         </h1>
         <div className=" flex h-full w-full flex-col">
@@ -23,7 +23,7 @@ const RequestForImporationForm = ({ handleInputChange, formDataStep1 }) => {
                 onChange={(e) =>
                   handleInputChange("RequestedDrug", e.target.value)
                 }
-                className="mt-1 w-full  rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                className="mt-1 w-full  rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="drug name"
               />
@@ -41,20 +41,17 @@ const RequestForImporationForm = ({ handleInputChange, formDataStep1 }) => {
                 onChange={(e) =>
                   handleInputChange("quantityRequested", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8359] bg-white/10 px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e] "
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="qty"
               />
             </div>
 
             <div className="input-container relative">
-              <label
-                htmlFor="notes"
-                className="labels text-lg block text-left"
-              >
+              <label htmlFor="notes" className="labels text-lg block text-left">
                 Offer
               </label>
-              <div className="offer-container mt-1 h-24 w-full flex justify-center items-center gap-4 xl:gap-10 sm:px-6 rounded-full border border-[#259f8359] dark:bg-[#1e1e1e] shadow-md">
+              <div className="offer-container mt-1 h-24 w-full flex justify-center items-center gap-4 xl:gap-10 sm:px-6 rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]">
                 <div className="col-1 flex flex-col w-[6em] xs:w-[14em] border-b-2 border-[#259f8359] hover:border-[#5cd3b7]">
                   {/* <div className="offerType-col flex flex-col border-red-500 border"> */}
                   <label htmlFor="offerType" className="labels text-md block">
@@ -65,7 +62,7 @@ const RequestForImporationForm = ({ handleInputChange, formDataStep1 }) => {
                     onChange={(e) =>
                       handleInputChange("offerType", e.target.value)
                     }
-                    className="cursor-pointer border-none focus:ring-transparent outline-none p-2 dark:bg-[#1e1e1e] rounded-full"
+                    className="cursor-pointer border-none focus:ring-transparent outline-none p-2 dark:bg-black-input rounded-full"
                     type="text"
                     placeholder=""
                   >
@@ -93,7 +90,7 @@ const RequestForImporationForm = ({ handleInputChange, formDataStep1 }) => {
                     onChange={(e) =>
                       handleInputChange("offerPercentage", e.target.value)
                     }
-                    className=" cursor-pointer border-none focus:ring-transparent outline-none p-2 dark:bg-[#1e1e1e] rounded-full"
+                    className=" cursor-pointer border-none focus:ring-transparent outline-none p-2 dark:bg-black-input rounded-full"
                     type="text"
                     placeholder="%"
                   >
@@ -115,7 +112,7 @@ const RequestForImporationForm = ({ handleInputChange, formDataStep1 }) => {
               <textarea
                 value={formDataStep1.notes}
                 onChange={(e) => handleInputChange("notes", e.target.value)}
-                className="mt-1 w-full h-24 rounded-full border border-[#259f8359] bg-white/10 px-6 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:bg-[#1e1e1e]"
+                className="mt-1 w-full h-24 rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder=""
               />
