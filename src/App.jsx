@@ -145,8 +145,8 @@ import React, { Suspense, useEffect, useState, useRef } from "react";
 import routes from "~react-pages";
 import { useRoutes, Route, Routes } from "react-router-dom";
 import { DrugProvider } from "./pages/drugs/DrugContext";
-import EditDrug from "./pages/drugs/EditDrug";
-import ViewDrug from "./pages/drugs/ViewDrug";
+import EditDrug from "./pages/drugs/list/EditDrug";
+import ViewDrug from "./pages/drugs/list/ViewDrug";
 import AddDrug from "./pages/drugs/Forms/AddDrug";
 import List from "./pages/drugs/list/List";
 import CreateUserForm from "./components/CreateUserForm";
@@ -157,8 +157,7 @@ import Import from "./pages/drugs/Importation/Import";
 import Inspection from "./pages/drugs/Inspection/";
 import Distribution from "./pages/drugs/Distribution/distribution";
 import TrackRecords from "./pages/drugs/Tracking/";
-import ImageGallery from "./pages/drugs/ImageGallery";
-import ViewDrugPage from "./pages/ViewDrug/index";
+import Substitute from "./pages/drugs/Substitutes/";
 import RouteForm from "./pages/drugs/Forms/Separated/RouteForm";
 import LoginForm from "./pages/drugs/Forms/Separated/LoginForm";
 import DrugForm from "./pages/drugs/Forms/Separated/DrugForm";
@@ -193,7 +192,7 @@ const App = () => {
           <Route path="/drugform" element={<DrugForm />} />
           <Route path="/loginform" element={<LoginForm />} />
           <Route path="/route/" element={<RouteForm />} />
-          <Route path="/viewdrugimage/" element={<ViewDrugPage />} />
+          <Route path="/substitute/" element={<Substitute />} />
           <Route path="/Dashboard/" element={<Dashboard />} />
           <Route path="/import/" element={<Import />} />
           <Route path="/inspection/" element={<Inspection />} />

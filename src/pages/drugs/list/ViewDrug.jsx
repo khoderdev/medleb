@@ -159,15 +159,14 @@
 
 // export default Drugs;
 
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Modal from "react-modal";
 import { Magnifier } from "react-image-magnifiers";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import panadol from "../../images/panadol.png";
-import "./ModalStyles.css";
+import panadol from "../../../images/panadol.png";
+import "../ModalStyles.css";
 
 Modal.setAppElement("#root");
 
@@ -197,10 +196,7 @@ function Drugs() {
           to={`/list`}
           className="mb-4 inline-block self-start p-3 text-lg text-teal-600"
         >
-          <ArrowBackIosIcon
-            fontSize="medium"
-            className="inline align-middle"
-          />
+          <ArrowBackIosIcon fontSize="medium" className="inline align-middle" />
           Back
         </Link>
 
@@ -265,9 +261,11 @@ function Drugs() {
                     </span>
                   </div>
                 </div>
-                <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
-                  Substitute
-                </button>
+                <Link to="/Substitute">
+                  <button className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
+                    Substitute
+                  </button>
+                </Link>
               </div>
             </div>
 

@@ -47,13 +47,13 @@ function List() {
     <div className="container mx-auto flex flex-col px-6 pb-20 pt-16 ">
       {drugs.length === 0 ? (
         <p className="mb-4 text-2xl text-gray-600">
-          No Drugs Data Available. Click{" "}
+          No Drugs Data Available. Click
           <Link
             to="/add"
             className="font-semibold text-teal-600 hover:underline"
           >
             Add
-          </Link>{" "}
+          </Link>
           to add a new drug.
         </p>
       ) : (
@@ -96,7 +96,6 @@ function List() {
                   </div>
 
                   <div className="w-3/5 p-4 text-left">
-                    {" "}
                     {/* Adjust the width here */}
                     <h2 className="mb-2 text-2xl font-semibold">
                       {data.drugName}
@@ -132,7 +131,7 @@ function List() {
                   </div>
                 </div>
               </Link>
-              <div className="flex items-center justify-between bg-gray-100 p-2">
+              <div className="flex items-center justify-between bg-white-contents rounded-md p-2">
                 <div className="m-0">
                   <Link
                     to={`/editdrug/${data.id}`}
@@ -150,7 +149,14 @@ function List() {
                   </button>
                 </div>
                 <div className="flex w-[65%] items-center justify-around">
-                  <img src={subs2} className="w-[110px]" alt=""></img>
+                  <Link to="/Substitute">
+                    <img
+                      src={subs2}
+                      className="w-[110px] cursor-pointer"
+                      alt=""
+                    ></img>
+                  </Link>
+
                   <div className="flex w-[25%] items-center justify-between">
                     <p className=" text-xs dark:text-black ">Made in Lebanon</p>
                     <img

@@ -277,7 +277,7 @@ const DrugRegistryForm = ({
                   <select
                     id="currency"
                     name="currencyForeign"
-                    className="w-20 cursor-pointer appearance-none rounded-r-full  border border-[#259f8300] dark:border-black-border bg-white-fg dark:bg-black-fg  py-2 font-normal shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm:w-20"
+                    className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-fg dark:bg-black-fg  py-2 font-normal shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm:w-20"
                     onChange={(e) =>
                       handleInputChange(e.target.name, e.target.value)
                     }

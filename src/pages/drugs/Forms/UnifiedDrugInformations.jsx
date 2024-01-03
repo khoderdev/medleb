@@ -420,7 +420,7 @@ function UnifiedDrugInformations(props) {
                     <select
                       id="dosageUnitN"
                       name="dosageUnitN"
-                      className="w-16 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7]  sm:w-28"
+                      className="w-16 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-fg p-2 pr-8 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7]  sm:w-28"
                       value={formDataStep3.dosageUnitN}
                       onChange={(e) =>
                         handleInputChange("dosageUnitN", e.target.value)
@@ -474,7 +474,7 @@ function UnifiedDrugInformations(props) {
                     <select
                       id="dosageUnitD"
                       name="dosageUnitD"
-                      className="w-16 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm:w-28"
+                      className="w-16 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-fg px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm:w-28"
                       onChange={(e) =>
                         handleInputChange("dosageUnitD", e.target.value)
                       }
@@ -652,7 +652,7 @@ function UnifiedDrugInformations(props) {
                     <select
                       id="contentUnitType"
                       name="contentUnitType"
-                      className="mt-1 w-full cursor-pointer rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                      className="mt-1 w-full cursor-pointer rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-fg px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7]"
                       value={formDataStep3.contentUnitType}
                       onChange={(e) =>
                         handleInputChange("contentUnitType", e.target.value)
@@ -715,7 +715,7 @@ function UnifiedDrugInformations(props) {
                     <select
                       id="containerUnitType"
                       name="containerUnitType"
-                      className="mt-1 w-full cursor-pointer rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] sm-28"
+                      className="mt-1 w-full cursor-pointer rounded-r-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-fg px-4 py-2 font-normal  outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm-28"
                       value={formDataStep3.containerUnitType}
                       onChange={(e) =>
                         handleInputChange("containerUnitType", e.target.value)
