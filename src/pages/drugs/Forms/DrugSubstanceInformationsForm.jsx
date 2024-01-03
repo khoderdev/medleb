@@ -30,7 +30,7 @@ function DrugSubstanceInformationsForm({
                 onChange={(e) =>
                   handleInputChange("ingredientsAndstrength", e.target.value)
                 }
-                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="enter a value"
               />
@@ -48,7 +48,7 @@ function DrugSubstanceInformationsForm({
               <input
                 value={formDataStep2.form}
                 onChange={(e) => handleInputChange("form", e.target.value)}
-                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="drug form"
               />
@@ -66,7 +66,7 @@ function DrugSubstanceInformationsForm({
                 onChange={(e) =>
                   handleInputChange("primaryContainerPackage", e.target.value)
                 }
-                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="container / package"
               />
@@ -85,7 +85,7 @@ function DrugSubstanceInformationsForm({
                 // onChange={(e) =>
                 //   handleInputChange("manufacturer", e.target.value)
                 // }
-                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="manufacturer"
               />
@@ -142,7 +142,7 @@ function DrugSubstanceInformationsForm({
               <input
                 value={formDataStep2.atcCode}
                 onChange={(e) => handleInputChange("atcCode", e.target.value)}
-                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="enter a value"
               />

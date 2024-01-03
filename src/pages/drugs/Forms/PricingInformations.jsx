@@ -1,4 +1,3 @@
-/* eslint-disable tailwindcss/no-custom-classname */
 import React, { useRef } from "react";
 import "./styles.css";
 
@@ -118,7 +117,7 @@ function PricingInformations(props) {
                   type="number"
                   name="priceForeign"
                   id="price"
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-11 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   placeholder="0.00"
                   value={formDataStep4?.priceForeign}
                   onChange={(e) =>
@@ -133,7 +132,7 @@ function PricingInformations(props) {
                     disabled
                     id="currency"
                     name="currencyForeign"
-                    className="w-20 appearance-none rounded-r-full  border border-[#259f8300] dark:border-black-border bg-white-fg dark:bg-black-fg  py-2 font-normal shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm:w-20"
+                    className="w-20 appearance-none rounded-r-full  border border-[#259f8300] dark:border-black-border bg-white-fg dark:bg-black-shadow  py-2 font-normal shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm:w-20"
                     onChange={(e) =>
                       handleInputChange(e.target.name, e.target.value)
                     }
