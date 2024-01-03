@@ -1,6 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./styles.css";
 import { FaArrowRightLong } from "react-icons/fa6";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const exchangeRates = {
   USD: 1,
@@ -31,6 +33,26 @@ const DrugRegistryForm = ({
   formDataStep1,
   handleChildArrowButtonClick,
 }) => {
+  // const [localFormDataStep1, setLocalFormDataStep1] = useState({
+  //   registrationDate: new Date(),
+  // });
+
+  // const handleDateChange = (name, value) => {
+  //   // Convert the input value to a Date object
+  //   const date = value ? new Date(value) : new Date();
+
+  //   setLocalFormDataStep1({
+  //     ...localFormDataStep1,
+  //     registrationDate: date,
+  //   });
+
+  //   // Call your input change handler
+  //   handleInputChange(name, date);
+  // };
+  const handleDateChange = (e) => {
+    handleInputChange("registrationDate", e.target.value);
+  };
+
   function convertToUSD() {
     if (formDataStep1?.priceForeign && formDataStep1?.currencyForeign) {
       const convertedPrice =
@@ -50,6 +72,11 @@ const DrugRegistryForm = ({
     }
     return "";
   }
+  // const [selectedDate, setSelectedDate] = useState(null);
+  // const handleDateChange = (date) => {
+  //   handleInputChange("registrationDate", date);
+  //   handleInputChange("reviewDate", date);
+  // };
 
   return (
     <>
@@ -67,7 +94,7 @@ const DrugRegistryForm = ({
               <select
                 value={formDataStep1.type}
                 onChange={(e) => handleInputChange("type", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a type
@@ -95,7 +122,7 @@ const DrugRegistryForm = ({
                 onChange={(e) =>
                   handleInputChange("responsibleParty", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full cursor-pointer rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a party
@@ -119,7 +146,7 @@ const DrugRegistryForm = ({
                 onChange={(e) =>
                   handleInputChange("responsiblePartyCountry", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full cursor-pointer rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a country
@@ -144,7 +171,7 @@ const DrugRegistryForm = ({
                 onChange={(e) =>
                   handleInputChange("manufacturer", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full cursor-pointer rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a manufacturer
@@ -168,7 +195,7 @@ const DrugRegistryForm = ({
                 onChange={(e) =>
                   handleInputChange("manufacturingCountry", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full cursor-pointer rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a country
@@ -193,7 +220,7 @@ const DrugRegistryForm = ({
                 onChange={(e) =>
                   handleInputChange("cargoShippingTerms", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full cursor-pointer rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a term
@@ -213,7 +240,7 @@ const DrugRegistryForm = ({
               <input
                 value={formDataStep1.drugName}
                 onChange={(e) => handleInputChange("drugName", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="name"
               />
@@ -236,7 +263,7 @@ const DrugRegistryForm = ({
                   type="number"
                   name="priceForeign"
                   id="price"
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-11 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-11 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   placeholder="0.00"
                   value={formDataStep1?.priceForeign}
                   onChange={(e) =>
@@ -250,7 +277,7 @@ const DrugRegistryForm = ({
                   <select
                     id="currency"
                     name="currencyForeign"
-                    className="w-20 cursor-pointer appearance-none rounded-r-full  border border-[#259f8300] dark:border-[#3a3c3d] bg-white-fg dark:bg-black-input px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] sm:w-20"
+                    className="w-20 cursor-pointer appearance-none rounded-r-full  border border-[#259f8300] dark:border-black-border bg-white-fg dark:bg-black-fg  py-2 font-normal shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm:w-20"
                     onChange={(e) =>
                       handleInputChange(e.target.name, e.target.value)
                     }
@@ -271,13 +298,9 @@ const DrugRegistryForm = ({
                 Foreign Price in USD
               </label>
               <input
-                // disabled
-                className="converted-price-usd mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
-                // value={" " + convertToUSD()}
-                onChange={(e) =>
-                  handleInputChange(e.target.name, e.target.value)
-                }
-                value={convertToUSD()}
+                disabled
+                className="converted-price-usd mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                value={" " + convertToUSD()}
               />
             </div>
             <div className="input-container relative">
@@ -285,20 +308,14 @@ const DrugRegistryForm = ({
                 Foreign Price in LBP
               </label>
               <input
-                // disabled
-                className="converted-price-lbp mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
-                // value={
-                //   " " +
-                //   parseFloat(convertToLBP().replace(".", "")).toLocaleString(
-                //     "en-LB"
-                //   )
-                // }
-                onChange={(e) =>
-                  handleInputChange(e.target.name, e.target.value)
+                disabled
+                className="converted-price-usd mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                value={
+                  " " +
+                  parseFloat(convertToLBP().replace(".", "")).toLocaleString(
+                    "en-LB"
+                  ) /* Add thousands separator */
                 }
-                value={parseFloat(
-                  convertToLBP().replace(".", "")
-                ).toLocaleString("en-LB")}
               />
             </div>
 
@@ -314,7 +331,7 @@ const DrugRegistryForm = ({
                 onChange={(e) =>
                   handleInputChange("registrationNumber", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="reg #"
               />
@@ -331,7 +348,7 @@ const DrugRegistryForm = ({
               <input
                 value={formDataStep1.mohCode}
                 onChange={(e) => handleInputChange("mohCode", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="code"
               />
@@ -339,6 +356,26 @@ const DrugRegistryForm = ({
 
             {/* Date Input 1 */}
             <div className="input-container relative">
+              <label
+                htmlFor="registrationDate"
+                className="labels text-md block text-left"
+              >
+                Registration Date
+                <div className="relative mt-1">
+                  <input
+                    value={formDataStep1.registrationDate}
+                    onChange={(e) =>
+                      handleInputChange("registrationDate", e.target.value)
+                    }
+                    type="date"
+                    id="registrationDate"
+                    name="registrationDate"
+                    className="dateInput mt-1 w-full cursor-pointer rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  />
+                </div>
+              </label>
+            </div>
+            {/* <div className="input-container relative">
               <label
                 htmlFor="registrationDate"
                 className="labels text-md block text-left"
@@ -352,12 +389,12 @@ const DrugRegistryForm = ({
                     handleInputChange("registrationDate", e.target.value)
                   }
                   type="date"
-                  id="registrationDate"
-                  name="registrationDate"
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  id="reviewDate"
+                  name="reviewDate"
+                  className="mt-1 w-full cursor-pointer rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Date Input 2 */}
             <div className="input-container relative">
@@ -376,7 +413,7 @@ const DrugRegistryForm = ({
                   type="date"
                   id="reviewDate"
                   name="reviewDate"
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  className="dateInput mt-1 w-full cursor-pointer rounded-full border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 />
               </div>
             </div>

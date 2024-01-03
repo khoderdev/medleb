@@ -4,6 +4,7 @@ import React from "react";
 function DrugSubstanceInformationsForm({
   formDataStep3,
   formDataStep2,
+  formDataStep1,
   handleInputChange,
 }) {
   // const { formDataStep2, handleInputChange } = props;
@@ -81,9 +82,9 @@ function DrugSubstanceInformationsForm({
               <input
                 disabled
                 value={formDataStep2.manufacturer}
-                onChange={(e) =>
-                  handleInputChange("manufacturer", e.target.value)
-                }
+                // onChange={(e) =>
+                //   handleInputChange("manufacturer", e.target.value)
+                // }
                 className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="manufacturer"
@@ -100,9 +101,9 @@ function DrugSubstanceInformationsForm({
               <input
                 disabled
                 value={formDataStep2.manufacturingCountry}
-                onChange={(e) =>
-                  handleInputChange("manufacturingCountry", e.target.value)
-                }
+                // onChange={(e) =>
+                //   handleInputChange("manufacturingCountry", e.target.value)
+                // }
                 className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="Country"

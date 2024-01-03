@@ -62,15 +62,14 @@ function List() {
             <div
               key={index}
               // eslint-disable-next-line tailwindcss/no-contradicting-classname
-              className="card w-full overflow-hidden rounded-3xl border-2 border-[#259F83]  p-5 shadow-xl transition duration-300 hover:scale-105 hover:shadow-2xl dark:text-white dark:shadow-lg  dark:shadow-[#24382ab0]" // Adjust the width here
+              className="card w-full overflow-hidden bg-white-fg dark:bg-black-input rounded-3xl border-2 border-[#259F83] p-5 shadow-xl transition duration-300 hover:scale-105 hover:shadow-2xl dark:text-white-text dark:shadow-lg dark:shadow-[#24382ab0]" // Adjust the width here
             >
               <Link
                 to={`/viewdrug/${data.id}`}
-                className="text-gray-900 no-underline dark:bg-black-bg dark:text-white"
+                className="text-black-text no-underline bg-white-bg dark:bg-black-bg dark:text-white-text"
               >
                 <div className="flex">
                   <div className="flex w-2/5 flex-col">
-                    {" "}
                     {/* Adjust the width here */}
                     <div className=" w-full">
                       <img
@@ -81,12 +80,12 @@ function List() {
                     </div>
                     <div className="w-full pr-8 sm:pr-12 md:pr-[70px] lg:pr-5 xl:pr-[72px]">
                       <p className="text-md text-right text-[#259F83]">
-                        {data.priceLB} LBP
+                        {data.convertToLBP} LBP
                       </p>
                     </div>
                     <div className="w-full pr-8 sm:pr-12  md:pr-[70px] lg:pr-5 xl:pr-[72px]">
                       <p className="text-md text-right text-[#259F83]">
-                        {data.priceUSD} USD
+                        {data.convertToUSD} USD
                       </p>
                     </div>
                     <div className="w-full pr-8 sm:pr-12  md:pr-[70px] lg:pr-5 xl:pr-[72px]">
@@ -100,29 +99,34 @@ function List() {
                     {" "}
                     {/* Adjust the width here */}
                     <h2 className="mb-2 text-2xl font-semibold">
-                      {data.drugname}
+                      {data.drugName}
                     </h2>
                     <p className="mb-2 text-sm italic text-gray-600 dark:text-gray-400">
-                      {data.ingredients}
+                      {data.ingredientsAndstrength}
+                      <span className="ml-1">
+                        <span className="mr-1">{data.dosageValueN}</span>
+                        <span className="">{data.dosageUnitN}</span>
+                      </span>
                     </p>
                     <p className="font-bold">
-                      <span className="font-normal">Dose:</span>
-                      {data.dosage}
+                      <span className="font-normal mr-1">Dose:</span>
+                      <span className="mr-1">{data.dosageValueN}</span>
+                      <span className="">{data.dosageUnitN}</span>
                     </p>
                     <p className="font-bold">
-                      <span className="font-normal">Presentation: </span>
-                      {data.presentation}
+                      <span className="font-normal mr-1">Presentation: </span>
+                      {data.presentationContentQty}
                     </p>
                     <p className="font-bold">
-                      <span className="font-normal">Form: </span>
+                      <span className="font-normal mr-1">Form: </span>
                       {data.form}
                     </p>
                     <p className="font-bold">
-                      <span className="font-normal">Route: </span>
+                      <span className="font-normal mr-1">Route: </span>
                       {data.route}
                     </p>
                     <p className="font-bold">
-                      <span className="font-normal">Type: </span>
+                      <span className="font-normal mr-1">Type: </span>
                       {data.type}
                     </p>
                   </div>

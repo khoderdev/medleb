@@ -20,7 +20,7 @@ module.exports = {
         white: {
           bg: "#fbfcf8",
           contents: "#e0e0e0",
-          fg: "#e5e7eb",
+          fg: "#f2f2f2",
           text: "#F5F5F5",
           input: "#bcbcbc",
         },
@@ -30,12 +30,15 @@ module.exports = {
           fg: "#393939",
           contents: "#292929",
           text: "#292929",
-          input: "#212121",
-          border: "#f1f1f1",
-          test1: "#292929",
+          input: "#303134",
+          border: "#dfe1e500", //#5f6368
+          shadow: "#171717", //0 1px 6px 0 #171717
           test2: "#393939",
           test3: "#282828",
           test4: "#212121",
+        },
+        shadow: {
+          black: "0 1px 6px 0 #171717",
         },
       },
     },

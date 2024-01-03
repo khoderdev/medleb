@@ -1,9 +1,59 @@
 /* styles.css */
 
-/* .css-vuzb25 {
+.css-vuzb25 {
   background-color: transparent;
   box-shadow: unset;
-} */
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .dateInput::-webkit-calendar-picker-indicator {
+    padding-left: 180px;
+    cursor: pointer;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .dateInput::-webkit-calendar-picker-indicator {
+    padding-left: 75px;
+    cursor: pointer;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .dateInput::-webkit-calendar-picker-indicator {
+    padding-left: 120px;
+    cursor: pointer;
+  }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .dateInput::-webkit-calendar-picker-indicator {
+    padding-left: 150px;
+    cursor: pointer;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .dateInput::-webkit-calendar-picker-indicator {
+    padding-left: 100px;
+    cursor: pointer;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1440px and up) */
+@media only screen and (min-width: 1440px) {
+  .dateInput::-webkit-calendar-picker-indicator {
+    padding-left: 270px;
+    cursor: pointer;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1980px and up) */
+@media only screen and (min-width: 1980px) {
+  .dateInput::-webkit-calendar-picker-indicator {
+    padding-left: 700px;
+    cursor: pointer;
+  }
+}
 
 @keyframes slideRightLeft {
   0%,
