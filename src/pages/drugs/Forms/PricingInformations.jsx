@@ -118,7 +118,7 @@ function PricingInformations(props) {
                   type="number"
                   name="priceForeign"
                   id="price"
-                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-10 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                  className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                   placeholder="0.00"
                   value={formDataStep4?.priceForeign}
                   onChange={(e) =>
@@ -133,7 +133,7 @@ function PricingInformations(props) {
                     disabled
                     id="currency"
                     name="currencyForeign"
-                    className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-fg dark:bg-black-input px-4 py-2 font-normal outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7] sm:w-20"
+                    className="w-20 appearance-none rounded-r-full  border border-[#259f8300] dark:border-black-border bg-white-fg dark:bg-black-fg  py-2 font-normal shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-1 focus:ring-[#5cd3b7] dark:focus:ring-1 dark:focus:ring-[#5cd3b7] sm:w-20"
                     onChange={(e) =>
                       handleInputChange(e.target.name, e.target.value)
                     }
@@ -155,7 +155,7 @@ function PricingInformations(props) {
               </label>
               <input
                 disabled
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="converted-price-usd mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 value={" " + convertToUSD()}
               />
             </div>
@@ -165,7 +165,7 @@ function PricingInformations(props) {
               </label>
               <input
                 disabled
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="converted-price-usd mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 value={
                   " " +
                   parseFloat(convertToLBP().replace(".", "")).toLocaleString(
@@ -186,7 +186,7 @@ function PricingInformations(props) {
                 disabled
                 value={formDataStep4.stratum}
                 onChange={(e) => handleInputChange("stratum", e.target.value)}
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="E1"
               />
@@ -202,7 +202,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("cargoShippingTerms", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               />
             </div>
 
@@ -219,7 +219,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("cargoShipping", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               />
             </div>
 
@@ -233,7 +233,7 @@ function PricingInformations(props) {
               <select
                 value={formDataStep4.douanes}
                 onChange={(e) => handleInputChange("douanes", e.target.value)}
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
               >
                 <option selected disabled value="">
                   select a value
@@ -253,9 +253,11 @@ function PricingInformations(props) {
               <select
                 id="subsidizationLabel"
                 name="subsidizationLabel"
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 // onChange={(e) => e.target.value}
-                onChange={(e) => handleInputChange("subsidizationLabel", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("subsidizationLabel", e.target.value)
+                }
                 value={formDataStep4.subsidizationLabel}
               >
                 <option selected disabled value="">
@@ -281,7 +283,7 @@ function PricingInformations(props) {
               <select
                 id="subsidizationLabel"
                 name="subsidizationLabel"
-                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-[#3a3c3d] bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full cursor-pointer border border-[#259f8300] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 onChange={(e) => e.target.value}
                 value={formDataStep4.subsidizationPercentage}
               >
@@ -314,7 +316,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("agentProfitMargin", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />
@@ -333,7 +335,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("pharmacistProfitMargin", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />
@@ -350,7 +352,7 @@ function PricingInformations(props) {
                 disabled
                 value={formDataStep4.drugName}
                 onChange={(e) => handleInputChange("drugName", e.target.value)}
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="name"
               />
@@ -369,7 +371,7 @@ function PricingInformations(props) {
                 onChange={(e) =>
                   handleInputChange("hospitalPriceLBP", e.target.value)
                 }
-                className="mt-1 w-full rounded-full border-[3px] border-black-bg dark:border-black-bg bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
+                className="mt-1 w-full rounded-full border border-[#259f8300] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-[#5cd3b7] focus:outline-none focus:ring-2 focus:ring-[#5cd3b7] dark:focus:ring-2 dark:focus:ring-[#5cd3b7]"
                 type="text"
                 placeholder="0"
               />
