@@ -6,7 +6,7 @@ function ImageViewer({ imageUrl }) {
       <h2>Uploaded Image</h2>
       {imageUrl && (
         <img
-          src={`http://localhost:3500/${imageUrl}`}
+          src={`http://192.168.43.138:3500/${imageUrl}`}
           alt="Uploaded"
           style={{ maxWidth: "100%" }}
         />

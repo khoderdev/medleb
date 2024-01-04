@@ -67,7 +67,7 @@ const ImageUploader = (props) => {
       });
 
       // await axios.post("https://e6ca-85-112-70-8.ngrok-free.app/upload", formData);
-      await axios.post("http://localhost:3030/api/images/v1.0", formData);
+      await axios.post("http://192.168.43.138:3030/api/images/v1.0", formData);
 
       setSuccess(true);
       handleImageUpload(newUploadedImages); // Notify the parent component about the uploaded images
@@ -216,7 +216,7 @@ export default ImageUploader;
 //         formData.append("images", image);
 //       });
 
-//       await axios.post("http://localhost:3030/api/images/v1.0", formData, {
+//       await axios.post("http://192.168.43.138:3030/api/images/v1.0", formData, {
 //         headers: {
 //           "Content-Type": "multipart/form-data",
 //         },

@@ -56,7 +56,7 @@ const ATCCodesForm = () => {
       const newGuid = uuidv4();
 
       const response = await axios.post(
-        "http://localhost:3030/api/atccodes/v1.0",
+        "http://192.168.43.138:3030/api/atccodes/v1.0",
         { ...formData, guid: newGuid }
       );
 

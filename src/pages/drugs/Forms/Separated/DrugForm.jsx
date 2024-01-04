@@ -79,7 +79,7 @@ const DrugForm = () => {
       // Make a POST request to the server endpoint
       console.log("Drug Data:", drugData);
       const response = await axios.post(
-        "http://localhost:3030/api/drugs/v1.0",
+        "http://192.168.43.138:3030/api/drugs/v1.0",
         drugData,
         { withCredentials: true }
       );

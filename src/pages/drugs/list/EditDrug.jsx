@@ -9,88 +9,150 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Button } from "@mui/material";
 
+// function EditDrug() {
+//   const { id } = useParams();
+//   const [drug, setDrug] = useState({});
+
+//   useEffect(() => {
+//     // Fetch drug data based on the id from the URL
+//     axios.get(`http://192.168.43.138:3500/drugs/${id}`).then((res) => {
+//       setDrug(res.data); // Set the entire data object as the drug state
+//     });
+//   }, [id]);
+
+//   // const [id, setId] = useState("");
+//   const [drugImage, setDrugImage] = useState("");
+//   const [drugName, setDrugName] = useState("");
+//   const [ingredients, setIngredients] = useState("");
+//   const [priceLB, setPrice] = useState("");
+//   const [dosageValueN, setDosageValueN] = useState("");
+//   const [presentation, setPresentation] = useState("");
+//   const [form, setForm] = useState("");
+//   const [route, setRoute] = useState("");
+//   const [type, setType] = useState("");
+//   const [country, setCountry] = useState("");
+//   const [agent, setAgent] = useState("");
+//   const [manufacturer, setManufacturer] = useState("");
+//   const [manufacturingCountry, setManufacturingCountry] = useState("");
+//   const [subsidyPercentage, setSubsidyPercentage] = useState("");
+//   const [stratum, setStratum] = useState("");
+//   const [atc, setAtc] = useState("");
+//   const [code, setCode] = useState("");
+//   const [registrationNumber, setRegistrationNumber] = useState("");
+//   const [showSuccessPopup, setShowSuccessPopup] = useState(true);
+//   // const { id } = useParams();
+
+//   // useEffect(() => {
+//   //   console.log("Fetching data for ID:", id);
+//   //   axios
+//   //     .get(`"http://192.168.43.138:3500/drugs"/${id}`)
+//   //     .then((res) => {
+//   //       console.log("Fetched data:", res.data);
+//   //       setDrug(res.data);
+//   //       setDrugName(res.data.drugName);
+//   //       setIngredients(res.data.ingredients);
+//   //       setPrice(res.data.priceLB);
+//   //     })
+//   //     .catch((error) => {
+//   //       console.error("Error fetching data:", error);getters
+//   //     });
+//   // }, [id]);
+
+//   const navigate = useNavigate();
+
+//   const data = {
+//     drugImage: drugImage,
+//     drugName: drugName,
+//     ingredients: ingredients,
+//     priceLB: priceLB,
+//     dosageValueN: dosageValueN,
+//     presentation: presentation,
+//     form: form,
+//     route: route,
+//     type: type,
+//     country: country,
+//     agent: agent,
+//     manufacturer: manufacturer,
+//     manufacturingCountry: manufacturingCountry,
+//     subsidyPercentage: subsidyPercentage,
+//     stratum: stratum,
+//     atc: atc,
+//     code: code,
+//     registrationNumber: registrationNumber,
+//   };
+
+//   function Update(e) {
+//     e.preventDefault();
+//     axios
+//       .put(`http://192.168.43.138:3500/drugs/${id}`, drug) // Use the drug state as the data
+//       .then(() => navigate("/list"))
+//       .catch((error) => {
+//         console.error("Update failed:", error);
+//         // Handle the error, such as displaying an error message to the user
+//       });
+//   }
+
 function EditDrug() {
-  const { id } = useParams();
-  const [drug, setDrug] = useState({});
-
-  useEffect(() => {
-    // Fetch drug data based on the id from the URL
-    axios.get(`http://localhost:3500/drugs/${id}`).then((res) => {
-      setDrug(res.data); // Set the entire data object as the drug state
-    });
-  }, [id]);
-
-  // const [id, setId] = useState("");
-  const [drugImage, setDrugImage] = useState("");
-  const [drugName, setDrugName] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [priceLB, setPrice] = useState("");
-  const [dosageValueN, setDosageValueN] = useState("");
-  const [presentation, setPresentation] = useState("");
-  const [form, setForm] = useState("");
-  const [route, setRoute] = useState("");
-  const [type, setType] = useState("");
-  const [country, setCountry] = useState("");
-  const [agent, setAgent] = useState("");
-  const [manufacturer, setManufacturer] = useState("");
-  const [manufacturingCountry, setManufacturingCountry] = useState("");
-  const [subsidyPercentage, setSubsidyPercentage] = useState("");
-  const [stratum, setStratum] = useState("");
-  const [atc, setAtc] = useState("");
-  const [code, setCode] = useState("");
-  const [registrationNumber, setRegistrationNumber] = useState("");
-  const [showSuccessPopup, setShowSuccessPopup] = useState(true);
-  // const { id } = useParams();
-
-  // useEffect(() => {
-  //   console.log("Fetching data for ID:", id);
-  //   axios
-  //     .get(`"http://localhost:3500/drugs"/${id}`)
-  //     .then((res) => {
-  //       console.log("Fetched data:", res.data);
-  //       setDrug(res.data);
-  //       setDrugName(res.data.drugName);
-  //       setIngredients(res.data.ingredients);
-  //       setPrice(res.data.priceLB);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);getters
-  //     });
-  // }, [id]);
-
+  const { drugId } = useParams();
   const navigate = useNavigate();
 
-  const data = {
-    drugImage: drugImage,
-    drugName: drugName,
-    ingredients: ingredients,
-    priceLB: priceLB,
-    dosageValueN: dosageValueN,
-    presentation: presentation,
-    form: form,
-    route: route,
-    type: type,
-    country: country,
-    agent: agent,
-    manufacturer: manufacturer,
-    manufacturingCountry: manufacturingCountry,
-    subsidyPercentage: subsidyPercentage,
-    stratum: stratum,
-    atc: atc,
-    code: code,
-    registrationNumber: registrationNumber,
+  const [drug, setDrug] = useState({
+    drugImage: "",
+    drugName: "",
+    ingredients: "",
+    priceLB: "",
+    dosageValueN: "",
+    presentation: "",
+    form: "",
+    route: "",
+    type: "",
+    country: "",
+    agent: "",
+    manufacturer: "",
+    manufacturingCountry: "",
+    subsidyPercentage: "",
+    stratum: "",
+    atc: "",
+    code: "",
+    registrationNumber: "",
+  });
+
+  useEffect(() => {
+    // Check if drugId is truthy before making the GET request
+    if (drugId) {
+      axios
+        .get(`http://192.168.43.138:3500/drugs/${drugId}`)
+        .then((res) => {
+          setDrug(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching drug data:", error);
+          // Handle the error, such as redirecting to an error page
+        });
+    }
+  }, [drugId]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setDrug((prevDrug) => ({
+      ...prevDrug,
+      [name]: value,
+    }));
   };
 
-  function Update(e) {
+  const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3500/drugs/${id}`, drug) // Use the drug state as the data
-      .then(() => navigate("/list"))
+      .put(`http://192.168.43.138:3500/drugs/${drugId}`, drug)
+      .then(() => {
+        console.log("Update successful");
+        navigate("/list");
+      })
       .catch((error) => {
         console.error("Update failed:", error);
         // Handle the error, such as displaying an error message to the user
       });
-  }
+  };
 
   return (
     <div className="flex h-auto w-full flex-col items-center justify-center pb-14">
@@ -102,8 +164,19 @@ function EditDrug() {
         Back
       </Link>
       <h1 className="text-3xl font-bold">Drug Details</h1>
-      <form className="mt-2 flex h-full w-[50%] flex-col">
-        <label
+      <form
+        className="mt-2 flex h-full w-[50%] flex-col"
+        onSubmit={handleUpdate}
+      >
+        <input
+          value={drug.drugName}
+          onChange={handleInputChange}
+          className="mt-2 rounded-2xl border border-zinc-400 bg-white/10 py-4 pl-6 font-normal outline-none"
+          type="text"
+          name="drugName" // Add the name attribute
+          placeholder="brand name"
+        />
+        {/* <label
           htmlFor="drugImage"
           className="labels mt-4 text-left text-lg font-bold"
         >
@@ -336,9 +409,10 @@ function EditDrug() {
           className="mt-2 rounded-2xl border border-zinc-400 bg-white/10 py-4 pl-6 font-normal outline-none"
           type="text"
           placeholder="Registration Number"
-        />
+        /> */}
 
         <Button
+          type="submit"
           className="mt-10 w-fit self-center hover:bg-[#259F83]"
           sx={{
             backgroundColor: "#259F83",
@@ -349,7 +423,7 @@ function EditDrug() {
             border: "2px solid #259F83",
             transition: "border 0.3s ease-in-out, color 0.3s ease-in-out", // Add transition for color change
           }}
-          onClick={Update}
+          // onClick={Update}
           onMouseOver={(e) => {
             e.currentTarget.style.border = "2px solid #259F83";
             e.currentTarget.style.color = "#fff"; // Change text color on hover

@@ -44,7 +44,7 @@ const ATCForm = () => {
 
       const newGuid = uuidv4();
 
-      const response = await axios.post("http://localhost:3030/api/atc/v1.0", {
+      const response = await axios.post("http://192.168.43.138:3030/api/atc/v1.0", {
         guid: newGuid,
         updatedDate: currentDate,
         createdBy: "Tonai",

@@ -8,7 +8,7 @@ const ImageGallery = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get("http://localhost:3500/fetch-images");
+        const response = await axios.get("http://192.168.43.138:3500/fetch-images");
         setImageUrls(response.data.imageUrls);
         setSelectedImage(response.data.imageUrls[0]); // Set the first image as selected by default
       } catch (error) {

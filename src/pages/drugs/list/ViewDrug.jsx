@@ -17,7 +17,7 @@
 //   const [drug, setDrug] = useState([]);
 
 //   useEffect(() => {
-//     axios.get(`http://localhost:3500/drugs/${id}`).then((res) => {
+//     axios.get(`http://192.168.43.138:3500/drugs/${id}`).then((res) => {
 //       setDrug(res.data);
 //     });
 //   }, [id]);
@@ -171,15 +171,28 @@ import "../ModalStyles.css";
 Modal.setAppElement("#root");
 
 function Drugs() {
-  const { id } = useParams();
+  const { drugId } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [drug, setDrug] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3500/drugs/${id}`).then((res) => {
-      setDrug(res.data);
-    });
-  }, [id]);
+    console.log("Drug ID:", drugId);
+    if (!drugId) {
+      console.error("Drug ID is undefined");
+      // Handle the case where drugId is undefined
+      return;
+    }
+
+    axios
+      .get(`http://192.168.43.138:3500/drugs/${drugId}`)
+      .then((res) => {
+        setDrug(res.data);
+      })
+      .catch((error) => {
+        console.error(`Error fetching drug with ID ${drugId}:`, error);
+        // Handle the error (e.g., set an error state, show a message to the user)
+      });
+  }, [drugId]);
 
   const openModal = () => {
     setModalIsOpen(true);

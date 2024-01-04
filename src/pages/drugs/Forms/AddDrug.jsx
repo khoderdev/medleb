@@ -329,7 +329,7 @@ function AddDrug(props) {
   const FetchData = async (finalFormData) => {
     try {
       // Send form data to the server
-      await axios.post("http://localhost:3500/drugs", finalFormData);
+      await axios.post("http://192.168.43.138:3500/drugs", finalFormData);
       console.log("Form data submitted successfully");
 
       // Log to check if this block is executed

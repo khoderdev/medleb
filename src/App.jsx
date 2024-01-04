@@ -202,8 +202,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/add" element={<AddDrug />} />
           <Route path="/list" element={<List />} />
-          <Route path="/editdrug/:id" element={<EditDrug />} />
-          <Route path="/viewdrug/:id" element={<ViewDrug />} />
+          <Route path="/editdrug/:drugId" element={<EditDrug />} />
+          <Route path="/viewdrug/:drugId" element={<ViewDrug />} />
         </Routes>
         <Suspense fallback={<p>Loading...</p>}>{routeElement}</Suspense>
       </DrugProvider>
