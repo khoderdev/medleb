@@ -70,7 +70,6 @@ const DrugImages = (props) => {
         formData
       );
 
-
       if (response.data) {
         setSuccess(true);
         setUploadSuccess(true); // Set the state to indicate successful upload
@@ -87,10 +86,10 @@ const DrugImages = (props) => {
   return (
     <>
       <div className="image-uploader-cont w-full flex flex-col justify-items-center items-center text-gray-700 dark:text-white-text">
-        <h1 className="py-6 text-center text-lg sm:py-10 sm:text-xl font-medium">
+        <h1 className="py-6 text-center text-xl sm:py-10 pb-10 font-medium">
           3- Medicine Images
         </h1>
-        <div className="grid w-full lg:w-[50em] grid-cols-2 justify-items-center gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3">
+        <div className="grid w-full lg:w-[50em] grid-cols-2 justify-items-center gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 rounded-2xl border-2 border-dashed dark:border-[#474747] p-10">
           {drugImagesList.map((drugImages, index) => (
             <div key={index} className="flex flex-col gap-4 items-center">
               <ImageUploading
@@ -190,7 +189,7 @@ const DrugImages = (props) => {
               ? "Uploading... please wait"
               : uploadSuccess
               ? "Done ✔"
-              : "Upload All"}
+              : "Upload Images"}
           </button>
         </div>
       </div>

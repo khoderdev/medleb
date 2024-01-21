@@ -43,7 +43,7 @@ const RFDeclerationForm = ({
   return (
     <div className="grid grid-cols-1 w-full md:w-3/4 gap-10 text-black-text dark:text-white-text">
       {/* RESULT SECTION */}
-      <h1 className="pt-4 text-center dark:text-white-contents text-lg sm:pt-10 sm:text-xl ">
+      <h1 className="pt-6 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
         2 - Request For Decleration
       </h1>
       <div className="flex flex-col">

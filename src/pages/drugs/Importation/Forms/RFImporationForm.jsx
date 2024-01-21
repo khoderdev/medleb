@@ -4,9 +4,9 @@ import "../styles.css";
 const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
   return (
     <>
-      <div className="col-span-1 flex w-full sm:w-[70em] flex-col sm:col-span-1">
-        <div className="image-uploader-cont flex flex-col justify-items-center">
-          <h1 className="pt-4 text-center dark:text-white-contents text-lg sm:pt-10 sm:text-xl ">
+      <div className="col-span-1 flex w-full sm:w-[70em] flex-col sm:col-span-1 text-black-text dark:text-white-text">
+        <div className="flex flex-col justify-items-center">
+          <h1 className="pt-6 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
             1 - Request For importation
           </h1>
         </div>
@@ -51,7 +51,6 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
                 Offer
               </label>
               <div className="offer-container mt-1 h-24 w-full flex justify-center items-center gap-4 xl:gap-10 sm:px-6 rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">
-
                 <div className="col-1 flex flex-col w-[6em] xs:w-[14em] border-b-2 border-[#00a65159] hover:border-green-pri">
                   {/* <div className="offerType-col flex flex-col border-red-500 border"> */}
                   <label htmlFor="offerType" className="labels text-md block">

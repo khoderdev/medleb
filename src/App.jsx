@@ -29,6 +29,7 @@ import AuthContainer from "./components/AuthContainer";
 import CreateUserForm from "./components/CreateUserForm";
 import UserFormContainer from "./components/UserFormContainer";
 import Table from "./Table";
+import ScrollBreakComponent from "./ScrollBreakComponent";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -65,6 +66,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<AuthContainer />} />
+            <Route path="/scroll" element={<ScrollBreakComponent />} />
             <Route path="/table" element={<Table />} />
             <Route path="/newuser" element={<CreateUserForm />} />
             <Route path="/dynaform" element={<UserFormContainer />} />

@@ -6,21 +6,19 @@
 // });
 
 // api.js
-import axios from 'axios';
+import axios from "axios";
 
 export default axios.create({
   // baseURL: 'https://medleb-api.onrender.com',
   // baseURL: 'http://85.112.70.8:3010/api/users/v1.0/authenticate',
-  baseURL: 'http://1.1.1.252:3500',
+  baseURL: "http://1.1.1.252:3500",
+  // baseURL: "http://192.168.10.88:3010",
   withCredentials: true,
 });
 
 // export default api;
 
-
 // ///////////////////////////////////////////
-
-
 
 // import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // import { setCredentials } from "../../features/auth/authSlice";

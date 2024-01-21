@@ -93,8 +93,8 @@ function PricingInformations(props) {
 
   return (
     <>
-      <div className="col-span-1 flex w-full  sm:w-[80em] flex-col sm:col-span-1 text-black-text dark:text-white-text">
-        <h1 className="pb-4 pt-4 text-center text-lg sm:py-10 sm:text-xl font-medium">
+      <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
+      <h1 className="pb-4 pt-2 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
           6 - Pricing Informations
         </h1>
         <div className=" flex h-full w-full flex-col">

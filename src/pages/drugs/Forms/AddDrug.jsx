@@ -14,6 +14,7 @@ import PricingInformations from "./PricingInformations";
 import ManufacturingAndImportingInfo from "./ManufacturingAndImportingInfo";
 import axios from "axios";
 import DrugImages from "./DrugImages";
+import DrugDocuments from "./DrugDocuments";
 import { Step, Stepper, StepLabel } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import CloseIcon from "@mui/icons-material/Close";
@@ -52,6 +53,9 @@ function AddDrug(props) {
   const classes = useStyles();
   const [drugImagesList, setImagesList] = useState(
     Array.from({ length: 6 }, () => [])
+  );
+  const [drugDocumentsList, setDrugDocumentsList] = useState(
+    Array.from({ length: 15 }, () => [])
   );
   const [currentStep, setCurrentStep] = useState(0);
   const navigate = useNavigate();
@@ -151,6 +155,7 @@ function AddDrug(props) {
     presentationContainerQty: "100",
     containerUnitType: "Box",
     prescriptionAndDispensingCondition: "",
+    drugName: "Panadol",
     mohCode: "",
     type: "Brand",
     atcCode: "AB001",
@@ -221,6 +226,16 @@ function AddDrug(props) {
         convertToLBP: convertedLBP,
       }));
     }
+  };
+
+  const handleInputChangeStep12 = (name, value) => {
+    setFormDataStep12((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+
+    // Dispatch the action to update Redux store
+    dispatch(updateFormStep1({ [name]: value }));
   };
 
   useEffect(() => {
@@ -372,11 +387,12 @@ function AddDrug(props) {
   };
 
   const [newUploadedImages, setNewUploadedImages] = useState([]);
+  const [newUploadedDocuments, setNewUploadedDocuments] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
+  const [uploadedDocuments, setUploadedDocuments] = useState([]);
 
-  const updateImageState = (index, newImageState) => {
-    // Update image state if needed
-  };
+  const updateImageState = (index, newImageState) => {};
+  const updateDocumentState = (index, newDocumentState) => {};
 
   const handleImageUpload = (newUploadedImages) => {
     setUploadedImages(newUploadedImages);
@@ -386,6 +402,17 @@ function AddDrug(props) {
       ...prevFormDataStep12,
       drugImages: newUploadedImages.map((image) => ({
         imageUrl: image.imageUrl,
+      })),
+    }));
+  };
+  const handleDocumentUpload = (newUploadedDocuments) => {
+    setUploadedDocuments(newUploadedDocuments);
+
+    // Assuming formDataStep2 is the form data object for step 2
+    setFormDataStep12((prevFormDataStep12) => ({
+      ...prevFormDataStep12,
+      drugDocuments: newUploadedDocuments.map((image) => ({
+        documentUrl: image.imageUrl,
       })),
     }));
   };
@@ -406,18 +433,30 @@ function AddDrug(props) {
       />
     </div>,
 
-    <div className="flex justify-center">
+    <div className="flex flex-col justify-center h-full pb-16 gap-3">
       {currentStep === 2 && (
-        <DrugImages
-          drugImagesList={drugImagesList}
-          setImagesList={setImagesList}
-          formDataStep12={formDataStep12}
-          handleInputChangeStep1={handleInputChangeStep1}
-          updateImageState={updateImageState}
-          uploadedImages={uploadedImages}
-          newUploadedImages={newUploadedImages}
-          handleImageUpload={handleImageUpload}
-        />
+        <>
+          <DrugImages
+            drugImagesList={drugImagesList}
+            setImagesList={setImagesList}
+            formDataStep12={formDataStep12}
+            handleInputChangeStep1={handleInputChangeStep1}
+            updateImageState={updateImageState}
+            uploadedImages={uploadedImages}
+            newUploadedImages={newUploadedImages}
+            handleImageUpload={handleImageUpload}
+          />
+          <DrugDocuments
+            drugDocumentsList={drugDocumentsList}
+            setDrugDocumentsList={setDrugDocumentsList}
+            formDataStep12={formDataStep12}
+            handleInputChangeStep1={handleInputChangeStep1}
+            updateDocumentState={updateDocumentState}
+            uploadedDocuments={uploadedDocuments}
+            newUploadedDocuments={newUploadedDocuments}
+            handleDocumentUpload={handleDocumentUpload}
+          />
+        </>
       )}
     </div>,
 
@@ -453,8 +492,8 @@ function AddDrug(props) {
   return (
     /* Page Title Header Container (Outside the Box) Start */
     <DrugProvider>
-      <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-4 px-2 sm:px-6 dark:text-white-500">
-        <div className="title py-4 pb-0 pl-0 flex w-full justify-center items-center">
+      <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-2 px-2 sm:px-6 dark:text-white-500">
+        <div className="title py-4 pb-0 lg:mb-[-1rem] 2xl:mb-0 pl-0 flex w-full justify-center items-center">
           <h1 className="text-3xl font-semibold text-center text-[#00a651]">
             Registration
           </h1>
@@ -468,7 +507,7 @@ function AddDrug(props) {
         </div>
 
         {/* Content Container Start */}
-        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl p-6 text-center bg-white-contents dark:bg-black-contents">
+        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl py-6 pb-0 text-center bg-white-contents dark:bg-black-contents">
           <Paper elevation={3} className={classes.stepperPaper}>
             <FormStepper currentStep={currentStep} steps={steps} />
           </Paper>

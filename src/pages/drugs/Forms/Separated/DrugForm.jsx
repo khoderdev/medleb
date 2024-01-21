@@ -10,8 +10,8 @@ const DrugForm = () => {
 
   const [drugData, setDrugData] = useState({
     Guid: uuidv4(),
-    ATCGuid: "",
-    DosageGuid: "",
+    ATCGuid: uuidv4(),
+    DosageGuid: uuidv4(),
     ATCGuid: uuidv4(),
     DosageGuid: uuidv4(),
     PresentationGuid: uuidv4(),
@@ -25,7 +25,7 @@ const DrugForm = () => {
     CountryGuid: uuidv4(),
     ResponsiblePartyGuid: uuidv4(),
     DrugLabelGuid: uuidv4(), 
-    Code: "123", // Assuming this should be a unique identifier
+    Code: "123",
     RegistrationNumber: "123",
     REP_date: currentDate,
     IsDouanes: true,
@@ -89,11 +89,11 @@ const DrugForm = () => {
         },
       };
 
-      console.log("testttttttttttttt");
+      // console.log("testttttttttttttt");
 
       const response = await axios.post(
         // `https://85.112.70.8:3010/api/drugs/v1.0/${newGuid}`,
-        "http://85.112.70.8:3010/api/drugs/v1.0",
+        "http://1.1.1.252:3500/api/drugs/v1.0",
         drugData,
         config
       );

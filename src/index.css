@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700;800;900&display=swap");
-/*  */
 * {
   font-family: "Roboto Condensed", sans-serif;
 }
@@ -31,6 +29,17 @@
   src: url("./fonts/BebasNeueProRegular.otf") format("opentype");
 } */
 /* Disable zooming for the entire page */
+
+/* styles.css (or your preferred stylesheet) */
+.scroll-break {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #ff00b3; /* Adjust the background color as needed */
+  /* Add any other styling you want for the fixed element */
+}
+/*  */
+
 html,
 body {
   font-family: "Roboto Condensed", sans-serif;

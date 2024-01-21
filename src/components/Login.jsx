@@ -34,7 +34,7 @@ const Login = ({ switchToRegister }) => {
 
     try {
       const response = await axios.post(
-        "http://1.1.1.252:3500/api/users/v1.0/authenticate",
+        "http://192.168.10.88:3010/api/users/v1.0/authenticate",
         { username, password },
         {
           withCredentials: true,
