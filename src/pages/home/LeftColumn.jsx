@@ -117,7 +117,7 @@ const LeftColumn = () => {
           @media (min-width: 1321px) {
             .bg-img {
               background-position: 10%;
-              background-size: 480px
+              background-size: 370px
               
             }
 
