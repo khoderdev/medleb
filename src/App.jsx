@@ -11,10 +11,6 @@ import Register from "./components/Register";
 import Home from "./pages/Home/";
 import Dashboards from "./pages/dashboards/";
 import ImportDrug from "./pages/drugs/Importation/Import";
-import ImportedDrug from "./pages/drugs/Importation/";
-import Step1 from "./pages/drugs/Importation/Forms/Step1";
-import Step2 from "./pages/drugs/Importation/Forms/Step2";
-import Step3 from "./pages/drugs/Importation/Forms/Step3";
 import Inspection from "./pages/drugs/Inspection/Inspection";
 import Distribution from "./pages/drugs/Distribution/index";
 import Tracking from "./pages/drugs/Tracking/";
@@ -75,10 +71,6 @@ const App = () => {
             <Route path="/substitute/" element={<Substitute />} />
             <Route path="/dashboard/" element={<Dashboards />} />
             <Route path="/import/" element={<ImportDrug />} />
-            <Route path="/imported-drugs/" element={<ImportedDrug />} />
-            <Route path="/Step1/" element={<Step1 />} />
-            <Route path="/Step2/" element={<Step2 />} />
-            <Route path="/Step3/" element={<Step3 />} />
             <Route path="/inspection/" element={<Inspection />} />
             <Route path="/distribution/" element={<Distribution />} />
             <Route path="/tracking/" element={<Tracking />} />
