@@ -1,0 +1,1 @@
+import{j as t}from"./index-F2Xh-x03.js";const n=()=>{const e={backgroundImage:"url('/src/images/EB-Quote.png')",backgroundSize:"contain",backgroundPosition:"center",backgroundAttachment:"fixed",backgroundRepeat:"no-repeat"};return t.jsx("div",{className:"bg-red-500",style:e})};export{n as default};

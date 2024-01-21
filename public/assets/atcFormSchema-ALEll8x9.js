@@ -1,0 +1,1 @@
+var a=(t,r)=>()=>(r||t((r={exports:{}}).exports,r),r.exports);var u=a((s,i)=>{const e=require("yup"),d=e.object().shape({guid:e.string().uuid().required(),code:e.string().max(255).required(),levelName:e.string().required(),levelNameAr:e.string().required(),atcrelatedLabel:e.string().required(),enabled:e.boolean().required()});i.exports=d});export default u();

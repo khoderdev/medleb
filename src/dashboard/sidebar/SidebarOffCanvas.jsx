@@ -1,0 +1,199 @@
+/* eslint-disable tailwindcss/no-custom-classname */
+import { useRef, useState } from "react";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import { useClickAway } from "react-use";
+import { MedLebLogo } from "./icons/MedLebLogo";
+import { Link } from "react-router-dom";
+import "../sidebar/SideBar.css";
+import FullscreenButton from "../../components/FullscreenButton.jsx";
+import HomeGrayIcon from "./icons/HomeGrayIcon.jsx";
+import { SearchGrayIcon } from "./icons/SearchGrayIcon.jsx";
+import { DashboardGrayIcon } from "./icons/DashboardGrayIcon.jsx";
+import { AddIcon } from "./icons/AddIcon.jsx";
+import { ImportIcon } from "./icons/ImportIcon.jsx";
+import { DistributionIcon } from "./icons/DistributionIcon.jsx";
+import { InspectionIcon } from "./icons/InspectionIcon.jsx";
+import { TrackRecordsIcon } from "./icons/TrackRecordsIcon.jsx";
+import React from "react";
+import { Pivot as Hamburger } from "hamburger-react";
+
+export const SidebarOffCanvas = () => {
+  // const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useClickAway(ref, () => setOpen(false));
+  const toggleSidebar = () => setOpen((prev) => !prev);
+  const [open, setOpen] = useState(false);
+  const controls = useAnimation();
+  // const [isFullscreen, setIsFullscreen] = useState(false);
+  // const toggleFullscreen = () => {
+  //   const element = document.documentElement;
+
+  //   if (!isFullscreen) {
+  //     if (element.requestFullscreen) {
+  //       element.requestFullscreen();
+  //     } else if (element.mozRequestFullScreen) {
+  //       element.mozRequestFullScreen();
+  //     } else if (element.webkitRequestFullscreen) {
+  //       element.webkitRequestFullscreen();
+  //     } else if (element.msRequestFullscreen) {
+  //       element.msRequestFullscreen();
+  //     }
+  //   } else {
+  //     if (document.exitFullscreen) {
+  //       document.exitFullscreen();
+  //     } else if (document.mozCancelFullScreen) {
+  //       document.mozCancelFullScreen();
+  //     } else if (document.webkitExitFullscreen) {
+  //       document.webkitExitFullscreen();
+  //     } else if (document.msExitFullscreen) {
+  //       document.msExitFullscreen();
+  //     }
+  //   }
+  //   setIsFullscreen(!isFullscreen);
+  // };
+
+  return (
+    <>
+      <div className="absolute top-2 left-2 ">
+        <Hamburger
+          toggled={open}
+          size={30}
+          color={"#00a651"}
+          toggle={setOpen}
+        />
+      </div>
+
+      <AnimatePresence mode="wait" initial={false}>
+        {open && (
+          <>
+            <motion.div
+              {...framerSidebarBackground}
+              aria-hidden="true"
+              className="fixed inset-0 z-50 backdrop-blur-sm dark:backdrop-blur-sm"
+            ></motion.div>
+            <motion.div
+              {...framerSidebarPanel}
+              // eslint-disable-next-line tailwindcss/no-custom-classname
+              className="custom-scrollbar  fixed inset-y-0 left-0 z-50 h-[100dvh] w-[18em] overflow-y-hidden overflow-x-hidden bg-white-contents dark:bg-[#292929] sm:w-[20em]"
+              ref={ref}
+              aria-label="Sidebar"
+            >
+              <div className="flex items-center justify-between border-[#00a65173] px-5 pr-0 py-2 pb-0 text-gray-900 dark:text-[#ffffffaf]">
+                <div className="flex">
+                  <MedLebLogo />
+                </div>
+                <div className="">
+                  <div className="p-6">
+                    <FullscreenButton />
+                  </div>
+                </div>
+              </div>
+
+              <div className="items flex h-full max-h-[calc(100vh-72px)] overflow-y-scroll flex-col justify-start pt-2">
+                <ul className="">
+                  {sections.map((section) => (
+                    <div key={section.title} className="ml-5 ">
+                      <h2 className="mb- text-lg font-semibold text-gray-700 dark:text-[#ffffffaf]">
+                        {section.title}
+                      </h2>
+                      {section.items.map((item, idx) => (
+                        <li
+                          key={item.title}
+                          className="mt-[-15px] flex flex-col"
+                        >
+                          {" "}
+                          {/* Adjust mt value */}
+                          <Link
+                            onClick={toggleSidebar}
+                            to={item.to}
+                            className="flex items-center gap-3 p-5 pl-10 text-gray-900 transition-all hover:text-[#00a651] dark:text-[#ffffffaf] dark:hover:bg-black"
+                          >
+                            <motion.div {...framerIcon}>
+                              <item.Icon className="text-3xl" />
+                            </motion.div>
+                            <motion.span
+                              {...framerText(idx)}
+                              className={item.title === "Home" ? "mt-3" : ""}
+                            >
+                              {item.title}
+                            </motion.span>
+                          </Link>
+                          {/* Conditionally render a divider after "Dashboard" icon */}
+                          {item.title === "Dashboard" && (
+                            <div className="divider my-6 ml-[-25px] h-px w-[80%] self-center bg-[#00a651e1] dark:bg-[#ffffffaf]"></div>
+                          )}
+                        </li>
+                      ))}
+                    </div>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+const sections = [
+  {
+    title: "Menu",
+    items: [
+      { title: "Home", Icon: HomeGrayIcon, to: "/" },
+      { title: "Search", Icon: SearchGrayIcon, to: "/search" },
+      { title: "Dashboard", Icon: DashboardGrayIcon, to: "/dashboard" },
+    ],
+  },
+  {
+    title: "Drug",
+    items: [
+      { title: "Add", Icon: AddIcon, to: "/add" },
+      { title: "Import", Icon: ImportIcon, to: "/import" },
+      { title: "Inspection", Icon: InspectionIcon, to: "/inspection" },
+      {
+        title: "Distribution",
+        Icon: DistributionIcon,
+        to: "/distribution",
+      },
+
+      { title: "Track Records", Icon: TrackRecordsIcon, to: "/tracking" },
+    ],
+  },
+  // Add more sections as needed
+];
+
+const framerSidebarBackground = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0, transition: { delay: 0.2 } },
+  transition: { duration: 0.3 },
+};
+
+const framerSidebarPanel = {
+  initial: { x: "-100%", zIndex: 1000 },
+  animate: { x: 0, boxShadow: "0 0 20px rgba(0, 0, 0, 0.2)" },
+  exit: { x: "-100%" },
+  transition: { duration: 0.3 },
+};
+
+const framerText = (delay) => {
+  return {
+    initial: { opacity: 0, x: -50 },
+    animate: { opacity: 1, x: 0 },
+    transition: {
+      delay: 0.2 + delay / 10,
+    },
+  };
+};
+
+const framerIcon = {
+  initial: { scale: 0 },
+  animate: { scale: 1 },
+  transition: {
+    type: "spring",
+    stiffness: 260,
+    damping: 20,
+    delay: 0.6,
+  },
+};
