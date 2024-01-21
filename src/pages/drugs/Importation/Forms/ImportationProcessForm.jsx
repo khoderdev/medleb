@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const RFDeclerationForm = ({
+const ImportationProcessForm = ({
   handleInputChange,
   formDataStep2,
   formDataStep3,
@@ -44,17 +44,18 @@ const RFDeclerationForm = ({
     <div className="grid grid-cols-1 w-full md:w-3/4 gap-10 text-black-text dark:text-white-text">
       {/* RESULT SECTION */}
       <h1 className="pt-6 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
-        2 - Request For Decleration
+      2 - Importation Process
+
       </h1>
       <div className="flex flex-col">
         <label
           htmlFor="PFInumber"
           className="labels text-lg font-bold pl-6 mb-4 text-left"
         >
-          RESULT
+          Result
         </label>
         <div className=" dark:text-white-text rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-bg sm:px-6 py-4 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">
-          <div className="grid grid-cols-2 gap-10 md:gap-32 px-4 sm:px-10 items-center">
+          <div className="grid grid-cols-3 gap-10 md:gap-32 px-4 sm:px-10 items-center">
             {/* Column 1 */}
             <div className="mb-4 text-center border-b border-black-fg">
               <p className=" text-white text-lg pb-2">Status</p>
@@ -64,6 +65,10 @@ const RFDeclerationForm = ({
             {/* Column 2 */}
             <div className=" mb-4 text-center border-b border-black-fg">
               <p className="text-white text-lg pb-2">QTY Approved</p>
+              <p className="text-green-pri font-bold">100</p>
+            </div>
+            <div className=" mb-4 text-center border-b border-black-fg">
+              <p className="text-white text-lg pb-2">Offer</p>
               <p className="text-green-pri font-bold">100</p>
             </div>
           </div>
@@ -140,17 +145,17 @@ const RFDeclerationForm = ({
             </div>
 
             {/* Column 4 */}
-            <div className="mx-auto">
+            <div className="mx-auto ">
               {uploadedPFI ? (
-                <div
-                  className="med-btn text-[#4edab9] font-bold border-2 border-green-sec hover:border-green-pri px-6 py-2 rounded-full cursor-pointer"
+                <button
+                  className="med-btn text-[#4edab9] font-bold border-2 border-green-sec  hover:border-green-pri px-6 py-2 rounded-full cursor-pointer"
                   onClick={() => setUploadedPFI(false)}
                 >
                   <span className="px-8">Uploaded ✔</span>
-                </div>
+                </button>
               ) : (
                 <label className="med-btn border-2 border-green-pri px-6 py-3 text-[#00a651] font-bold p-2 dark:bg-black-input rounded-full cursor-pointer">
-                  <span className="text-[#00a651] px-8">Attach</span>
+                  <span className="text-[#00a651] hover:text-white-text px-8">Attach</span>
                   <input
                     type="file"
                     id="attach"
@@ -264,4 +269,4 @@ const RFDeclerationForm = ({
   );
 };
 
-export default RFDeclerationForm;
+export default ImportationProcessForm;

@@ -15,7 +15,7 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
             <div className="input-container relative">
               <label
                 htmlFor="RequestedDrug"
-                className="labels text-lg block text-left"
+                className="labels text-lg block text-left font-medium"
               >
                 Select Requested Drug
               </label>
@@ -32,7 +32,7 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
             <div className="input-container relative">
               <label
                 htmlFor="quantityRequested"
-                className="labels text-lg block text-left"
+                className="labels text-lg block text-left font-medium"
               >
                 Quantity Requested
               </label>
@@ -47,7 +47,7 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
               />
             </div>
             <div className="input-container relative">
-              <label htmlFor="notes" className="labels text-lg block text-left">
+              <label htmlFor="notes" className="labels text-lg block text-left font-bold">
                 Offer
               </label>
               <div className="offer-container mt-1 h-24 w-full flex justify-center items-center gap-4 xl:gap-10 sm:px-6 rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">

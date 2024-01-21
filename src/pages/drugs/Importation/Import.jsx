@@ -9,7 +9,7 @@ import { Step, Stepper, StepLabel } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import "./styles.css";
 import RFImporationForm from "./Forms/RFImporationForm";
-import RFDeclerationForm from "./Forms/RFDeclerationForm";
+import ImportationProcessForm from "./Forms/ImportationProcessForm";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   stepperPaper: {
@@ -97,13 +97,6 @@ function ImportDrug(props) {
     }));
   };
 
-  const handleInputChangeStep3 = (name, value) => {
-    setFormDataStep3((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
   const logFormData = () => {
     const finalFormData = {
       ...formDataStep1,
@@ -116,11 +109,7 @@ function ImportDrug(props) {
     navigate("/import");
   };
 
-  // const handleNextStep = () => {
-  //   if (currentStep < steps.length - 1) {
-  //     setCurrentStep(currentStep + 1);
-  //   }
-  // };
+
 
   const handleNextStep = () => {
     if (currentStep === 2) {
@@ -149,7 +138,7 @@ function ImportDrug(props) {
       />
     </div>,
     <div className="flex justify-center">
-      <RFDeclerationForm
+      <ImportationProcessForm
         handleInputChange={handleInputChangeStep2}
         formDataStep2={formDataStep2}
       />
