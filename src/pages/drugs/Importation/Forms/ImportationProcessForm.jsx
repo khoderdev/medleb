@@ -10,32 +10,6 @@ const ImportationProcessForm = ({
   const [uploadedPFI, setUploadedPFI] = useState(false);
   const [uploadedSwift, setUploadedSwift] = useState(false);
 
-  const handlePFIUpload = (e) => {
-    const selectedPFI = e.target.files[0];
-    setUploadedPFI(selectedPFI ? true : false);
-  };
-
-  const handleSwiftUpload = (e) => {
-    const selectedSwift = e.target.files[0];
-    setUploadedSwift(selectedSwift ? true : false);
-  };
-
-  const handlePFIClick = () => {
-    if (uploadedPFI) {
-      setUploadedPFI(false);
-    } else {
-      document.getElementById("attachPFI").click();
-    }
-  };
-
-  const handleSwiftClick = () => {
-    if (uploadedSwift) {
-      setUploadedSwift(false);
-    } else {
-      document.getElementById("attachSwift").click();
-    }
-  };
-
   const handlePFIDocChange = (e) => {
     const selectedFile = e.target.files[0];
 
@@ -44,10 +18,6 @@ const ImportationProcessForm = ({
     setUploadedPFI(!!selectedFile);
   };
 
-  // const handlePFISubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Submitting data:", importProcessPFIData);
-  // };
   const handlePFISubmit = (e) => {
     e.preventDefault();
 
@@ -70,11 +40,6 @@ const ImportationProcessForm = ({
 
     setUploadedSwift(!!selectedFile);
   };
-
-  // const handleSWIFTSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Submitting data:", importProcessSWIFTData);
-  // };
 
   useEffect(() => {
     console.log("isFormSubmitted for ImportationProcessForm:", isFormSubmitted);

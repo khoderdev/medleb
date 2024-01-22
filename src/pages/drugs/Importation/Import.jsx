@@ -337,6 +337,8 @@ function ImportDrug(props) {
   const isLastStep = currentStep === 1;
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isRFISubmitted, setIsRFISubmitted] = useState(false);
+  // const [isRFISubmitted, setIsRFISubmitted] = useState(false);
   const [rfiFormData, setRfiFormData] = useState({
     RequestedDrug: "",
     quantityRequested: "",
@@ -390,16 +392,6 @@ function ImportDrug(props) {
     setIsNextButtonDisabled(!isCurrentFormValid);
   };
 
-  // const handleNextStep = () => {
-  //   if (currentStep === 2) {
-  //   }
-
-  //   setCurrentStep(currentStep + 1);
-  // };
-
-  // const handleBack = () => {
-  //   setCurrentStep(currentStep - 1);
-  // };
   const handleBack = () => {
     if (currentStep === 1) {
       setIsFormSubmitted(false);
@@ -409,18 +401,14 @@ function ImportDrug(props) {
   };
 
   // RFI form submission function (logging to console)
-  const submitRFIForm = (rfiFormData) => {
+  const submitRFIForm = async () => {
     try {
-      // Log the values of the submitted data to the console
-      console.log("Submitted RFI Form Data Values:");
-      Object.entries(rfiFormData).forEach(([key, value]) => {
-        console.log(`${key}: ${value}`);
-      });
+      if (rfiFormData) {
+        const formDataEntries = Object.entries(rfiFormData || {});
+      }
 
-      // Handle the result, e.g., show success message
       console.log("RFI Form submitted successfully");
     } catch (error) {
-      // Handle errors, e.g., show error message to the user
       console.error("Error submitting RFI form:", error.message);
       throw error;
     }
@@ -429,23 +417,25 @@ function ImportDrug(props) {
   const handleArrowButtonClick = async () => {
     if (currentStep === 0) {
       // Handle submit logic for the first step
-      const isRFIFormValid = validateCurrentForm(
-        0,
-        rfiFormData,
-        importProcessPFIData,
-        importProcessSWIFTData
-      );
+      if (!isRFISubmitted) {
+        const isRFIFormValid = validateCurrentForm(
+          0,
+          rfiFormData,
+          importProcessPFIData,
+          importProcessSWIFTData
+        );
 
-      if (isRFIFormValid) {
-        // Submit the RFI form with the current form data
-        submitRFIForm(rfiFormData); // Passing rfiFormData here
-        setIsFormSubmitted(true);
-      } else {
-        return;
+        if (isRFIFormValid) {
+          // Submit the RFI form
+          await submitRFIForm();
+          setIsRFISubmitted(true);
+        } else {
+          return;
+        }
       }
+    } else if (currentStep === 1) {
+      // Handle other steps if needed
     }
-    // else if (currentStep === 1) {
-    // }
 
     // Move to the next step
     setCurrentStep(currentStep + 1);
