@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "./components/Modals/TableCreateModal";
-import { BsPencil, BsTrash } from "react-icons/bs"; // Import icons from react-icons
 
-// Update API_URL
-const API_URL = "http://1.1.1.252:3500/api/importations";
+const API_URL = "https://jsonplaceholder.typicode.com/users";
 
 const Table = () => {
   const [data, setData] = useState([]);
@@ -47,37 +45,23 @@ const Table = () => {
 
   const handleEdit = (id) => {
     setEditingId(id);
-    const itemToEdit = data.find((item) => item._id === id);
-
-    // Check if itemToEdit is not undefined before accessing its properties
-    if (itemToEdit) {
-      setDrugName(itemToEdit.drugName);
-      setIngredients(itemToEdit.ingredients);
-      setAgent(itemToEdit.agent);
-      setCreateModalOpen(true);
-    } else {
-      console.error(`Item with id ${id} not found.`);
-    }
+    const itemToEdit = data.find((item) => item.id === id);
+    setDrugName(itemToEdit.drugName);
+    setIngredients(itemToEdit.ingredients);
+    setAgent(itemToEdit.agent);
+    setCreateModalOpen(true);
   };
 
   const handleUpdate = async () => {
     try {
-      // Ensure editingId is a valid value
-      if (editingId === null || editingId === undefined) {
-        console.error("Invalid editingId");
-        return;
-      }
-
       const response = await axios.put(`${API_URL}/${editingId}`, {
         drugName,
         ingredients,
         agent,
       });
-
       setData(
-        data.map((item) => (item._id === editingId ? response.data : item))
+        data.map((item) => (item.id === editingId ? response.data : item))
       );
-
       setEditingId(null);
       setCreateModalOpen(false);
       setDrugName("");
@@ -98,7 +82,7 @@ const Table = () => {
   };
 
   return (
-    <div className=" mt-8 p-4 bg-gray-100">
+    <div className="container mx-auto mt-8 p-4 bg-gray-100">
       <div className="flex justify-end mb-4">
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2"
@@ -123,43 +107,43 @@ const Table = () => {
         <tbody>
           {data.map((item) => (
             <tr
-              key={item._id}
+              key={item.id}
               className={editingId === item.id ? "bg-yellow-200" : "bg-white"}
             >
               <td className="border p-2">{item.drugName}</td>
               <td className="border p-2">{item.ingredients}</td>
               <td className="border p-2">{item.agent}</td>
-              <td className="border p-2 w-16">
+              <td className="border p-2 w-32">
                 {editingId === item.id ? (
                   <>
                     <button
-                      className="rounded-xl bg-green-pri hover:bg-green-sec text-white font-bold py-1 px-2 mr-2"
+                      className="bg-green-pri hover:bg-green-sec text-white font-bold py-1 px-2 mr-2"
                       onClick={handleUpdate}
                     >
                       Save
                     </button>
                     <button
-                      className="rounded-xl bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-2"
+                      className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-2"
                       onClick={() => setEditingId(null)}
                     >
                       Cancel
                     </button>
                   </>
                 ) : (
-                  <div className="flex gap-4">
+                  <>
                     <button
-                      // className="rounded-xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 mr-2"
-                      onClick={() => handleEdit(item._id)}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 mr-2"
+                      onClick={() => handleEdit(item.id)}
                     >
-                      <BsPencil style={{ color: 'green' }} /> {/* Edit icon */}
+                      Edit
                     </button>
                     <button
-                      // className="rounded-xl bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2"
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2"
                       onClick={() => handleDelete(item.id)}
                     >
-                      <BsTrash style={{ color: 'red' }} /> {/* Delete icon */}
+                      Delete
                     </button>
-                  </div>
+                  </>
                 )}
               </td>
             </tr>

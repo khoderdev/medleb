@@ -196,6 +196,31 @@ const ImportationProcessForm = ({
             {/* Column 1 */}
             <div className="mb-4 text-center border-b border-[#00a651] text-white">
               <label
+                htmlFor="bankName"
+                className="labels text-lg block text-center"
+              >
+                Bank
+              </label>
+              <select
+                id="bankName"
+                name="bankName"
+                value={importProcessSWIFTData?.bankName}
+                onChange={(e) => handleInputChange("bankName", e.target.value)}
+                className=" w-3/4 sm:w-full input-field border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full autofill:bg-transparent"
+                type="text"
+                autoComplete="off"
+              >
+                <option value="" disabled>
+                  select
+                </option>
+                <option>Bank bemo</option>
+                <option>Byblos bank</option>
+                <option>Audi bank</option>
+              </select>
+            </div>
+
+            <div className="mb-4 text-center border-b border-[#00a651] text-white">
+              <label
                 htmlFor="swiftNumber"
                 className="labels text-lg block text-center"
               >
@@ -254,30 +279,6 @@ const ImportationProcessForm = ({
               />
             </div>
             {/* Column 4 */}
-            <div className="mb-4 text-center border-b border-[#00a651] text-white">
-              <label
-                htmlFor="bankName"
-                className="labels text-lg block text-center"
-              >
-                Bank
-              </label>
-              <select
-                id="bankName"
-                name="bankName"
-                value={importProcessSWIFTData?.bankName}
-                onChange={(e) => handleInputChange("bankName", e.target.value)}
-                className=" w-3/4 sm:w-full input-field border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full autofill:bg-transparent"
-                type="text"
-                autoComplete="off"
-              >
-                <option value="" disabled>
-                  select
-                </option>
-                <option>Bank bemo</option>
-                <option>Byblos bank</option>
-                <option>Audi bank</option>
-              </select>
-            </div>
 
             {/* Column 5 */}
             {/* <div className="mx-auto gap-4 ml-12 lg:ml-[-1.2rem] flex col-span-1 justify-evenly"> */}
