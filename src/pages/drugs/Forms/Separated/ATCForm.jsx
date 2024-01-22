@@ -190,7 +190,7 @@ const ATCForm = () => {
           />
         </label>
         <div className="btn-cont flex w-full justify-end">
-          <button type="submit" className="med-btn mt-4 ">
+          <button type="submit" className="med-btn-pri mt-4 ">
             Submit
           </button>
         </div>

@@ -45,12 +45,12 @@ const AddModal = ({ closeModal, title, onAdd, onCancel, initialValue }) => {
         <div className="flex justify-end pt-6 gap-4">
           <button
             onClick={handleAction}
-            className="med-btn bg-green-pri dark:bg-green-pri hover:bg-transparent  dark:hover:bg-transparent text-white-text dark:text-white-text hover:text-green-sec font-bold border-2 border-green-sec hover:border-green-sec px-6 py-2 rounded-full cursor-pointer"
+            className="med-btn-pri bg-green-pri dark:bg-green-pri hover:bg-transparent  dark:hover:bg-transparent text-white-text dark:text-white-text hover:text-green-sec font-bold border-2 border-green-sec hover:border-green-sec px-6 py-2 rounded-full cursor-pointer"
           >
             {initialValue ? "Edit" : "Add"}
           </button>
           <button
-            className="med-btn text-[#4edab9] font-bold border-2 border-green-sec hover:border-green-pri px-6 py-2 rounded-full cursor-pointer"
+            className="med-btn-pri text-[#4edab9] font-bold border-2 border-green-sec hover:border-green-pri px-6 py-2 rounded-full cursor-pointer"
             onClick={handleCancel}
           >
             <span>Cancel</span>

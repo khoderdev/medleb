@@ -106,7 +106,7 @@ const Login = ({ switchToRegister }) => {
           />
 
           <div className="flex justify-end w-full mt-4">
-            <button className="med-btn w-fit py-2 px-7 my-2 hover:text-slate-50 hover:bg-green-pri">
+            <button className="med-btn-pri w-fit py-2 px-7 my-2 hover:text-slate-50 hover:bg-green-pri">
               Log In
             </button>
           </div>

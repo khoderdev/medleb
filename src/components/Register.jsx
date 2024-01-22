@@ -307,14 +307,14 @@ const Register = ({ switchToLogin }) => {
                 Already a user?
                 <button
                   onClick={switchToLogin}
-                  className="med-btn py-2  px-7 my-2 hover:text-slate-50 hover:bg-green-pri"
+                  className="med-btn-pri py-2  px-7 my-2 hover:text-slate-50 hover:bg-green-pri"
                 >
                   Login
                 </button>
               </div>
 
               <button
-                className="med-btn w-fit cursor-pointer self-center py-2 px-7 mt-10 hover:text-slate-50 hover:bg-green-pri border-2 hover:border-2 hover:border-white-text"
+                className="med-btn-pri w-fit cursor-pointer self-center py-2 px-7 mt-10 hover:text-slate-50 hover:bg-green-pri border-2 hover:border-2 hover:border-white-text"
                 disabled={!validName || !validPassword || !validMatch}
               >
                 Register

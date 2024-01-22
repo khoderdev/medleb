@@ -77,7 +77,7 @@ function SingleDrug({ className, customNavigation }) {
           </div>
           <div className="flex justify-center sm:justify-start sm:pl-3">
             <Link to="/substitute">
-              <button className="med-btn bg-green-pri hover:text-green-pri hover:shadow hover:shadow-green-pri transition-all text-white-text px-4 py-2 my-6 border border-green-pri rounded-md hover:bg-transparent hover:border hover:border-green-pri">
+              <button className="med-btn-pri bg-green-pri hover:text-green-pri hover:shadow hover:shadow-green-pri transition-all text-white-text px-4 py-2 my-6 border border-green-pri rounded-md hover:bg-transparent hover:border hover:border-green-pri">
                 Substitute
               </button>
             </Link>

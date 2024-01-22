@@ -46,7 +46,7 @@ const ImportationProcessForm = ({
   }, [isFormSubmitted]);
 
   return (
-    <div className="grid grid-cols-1 w-full md:w-3/4 gap-10 text-black-text dark:text-white-text">
+    <div className="grid grid-cols-1 w-full  gap-10 text-black-text dark:text-white-text">
       {/* RESULT SECTION */}
       <h1 className="pt-6 text-center text-[1.375rem] xs:text-xl sm:pt-8 font-medium">
         2 - Importation Process
@@ -90,7 +90,7 @@ const ImportationProcessForm = ({
           Proforma Invoice
         </label>
         <div className=" dark:text-white-text rounded-[5em] sm:rounded-[6em] border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-4 font-normal shadow-md dark:shadow-black-shadow">
-          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-10 px-4 sm:px-10 items-center">
+          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-10 px-4  items-center">
             {/* Column 1 */}
             <div className="mb-4 text-center border-b border-[#00a651] text-white">
               <label
@@ -150,16 +150,17 @@ const ImportationProcessForm = ({
             </div>
 
             {/* Column 4 */}
-            <div className="mx-auto gap-4 flex">
+            <div className="mx-auto gap-4 flex flex-col sn:flex-row">
               {uploadedPFI ? (
-                <button
-                  className="med-btn hover:text-white-text font-bold border-2 border-green-sec  hover:border-green-pri px-6 py-4 rounded-full cursor-pointer"
+                <div
+                  className="med-btn-pri hover:text-white-text font-bold border-2 border-green-sec  hover:border-green-pri px-6 py-4 rounded-full cursor-pointer"
                   onClick={() => setUploadedPFI(false)}
                 >
-                  <span className="px-8">Uploaded ✔</span>
-                </button>
+                  Uploaded
+                  <span className="ml-1">✔</span>
+                </div>
               ) : (
-                <label className="med-btn border-2 border-green-pri py-3 text-[#00a651] font-bold dark:bg-black-input rounded-full cursor-pointer">
+                <label className="med-btn-pri border-2 border-green-pri py-3 text-[#00a651] font-bold dark:bg-black-input rounded-full cursor-pointer">
                   <span className=" hover:text-white-text w-full py-4">
                     Attach
                   </span>
@@ -167,14 +168,11 @@ const ImportationProcessForm = ({
                     type="file"
                     id="attach"
                     className="hidden"
-                    onChange={handlePFIDocChange} // Attach the handlePFIDocChange function
+                    onChange={handlePFIDocChange}
                   />
                 </label>
               )}
-              <button
-                className="med-btn border-2 border-green-pri hover:text-white-text font-bold dark:bg-black-input px-6 py-4 rounded-full cursor-pointer"
-                onClick={handlePFISubmit}
-              >
+              <button className="med-btn-sec" onClick={handlePFISubmit}>
                 Submit
               </button>
             </div>
@@ -193,8 +191,8 @@ const ImportationProcessForm = ({
           Swift
         </label>
 
-        <div className=" dark:text-white-text rounded-[5em] sm:rounded-[6em] border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input pr-4 lg:px-4 py-4 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">
-          <div className="w-full grid grid-cols-2 lg:grid-cols-5 gap-6 px-4 lg:pr-20 items-center">
+        <div className=" dark:text-white-text rounded-[5em] sm:rounded-[6em] border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 lg:px-4 py-4 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">
+          <div className="w-full grid grid-cols-2 lg:grid-cols-5 gap-6 px-4 items-center">
             {/* Column 1 */}
             <div className="mb-4 text-center border-b border-[#00a651] text-white">
               <label
@@ -282,16 +280,18 @@ const ImportationProcessForm = ({
             </div>
 
             {/* Column 5 */}
-            <div className="mx-auto gap-4 flex">
+            {/* <div className="mx-auto gap-4 ml-12 lg:ml-[-1.2rem] flex col-span-1 justify-evenly"> */}
+            <div className="mx-auto gap-4 flex col-span-full lg:col-span-1 justify-evenly">
               {uploadedSwift ? (
                 <div
-                  className="med-btn text-[#4edab9] font-bold border-2 border-green-sec hover:border-green-pri px-6 py-2 rounded-full cursor-pointer"
+                  className="med-btn-pri text-[#4edab9] font-bold border-2 border-green-sec hover:border-green-pri px-6 py-2 rounded-full cursor-pointer"
                   onClick={() => setUploadedSwift(false)}
                 >
-                  <span className="">Uploaded ✔</span>
+                  Uploaded
+                  <span className="ml-1">✔</span>
                 </div>
               ) : (
-                <label className="med-btn border-2 border-green-pri px-6 py-3 text-[#00a651] font-bold p-2 dark:bg-black-input rounded-full cursor-pointer">
+                <label className="med-btn-pri border-2 border-green-pri px-6 py-3 text-[#00a651] font-bold p-2 dark:bg-black-input rounded-full cursor-pointer">
                   <span className=" hover:text-white-text w-full py-4">
                     Attach
                   </span>
@@ -299,14 +299,11 @@ const ImportationProcessForm = ({
                     type="file"
                     id="attachSwift"
                     className="attachSwift hidden"
-                    onChange={handleSWIFTDocChange} // Attach the handleSWIFTDocChange function
+                    onChange={handleSWIFTDocChange}
                   />
                 </label>
               )}
-              <button
-                className="med-btn border-2 border-green-pri hover:text-white-text font-bold dark:bg-black-input px-6 py-4 rounded-full cursor-pointer"
-                onClick={handleSWIFTSubmit}
-              >
+              <button className="med-btn-sec" onClick={handleSWIFTSubmit}>
                 Submit
               </button>
             </div>

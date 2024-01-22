@@ -57,7 +57,7 @@ const RFImportationForm = ({ handleInputChange, rfiFormData }) => {
             </div>
 
             <div className="flex flex-col mt-6">
-              <div className="checkbox-container flex items-center gap-2 w-fit text-left mb-2 ">
+              <div className="checkbox-container flex items-center gap-2 w-fit text-left mb-1 pl-2">
                 <input
                   type="checkbox"
                   id="enableInputs"
