@@ -1,7 +1,276 @@
+// import React, { useState, useEffect } from "react";
+// import { useNavigate, Link } from "react-router-dom";
+// import CloseIcon from "@mui/icons-material/Close";
+// import Button from "@mui/material/Button";
+// import axios from "axios";
+// import { Step, Stepper, StepLabel } from "@mui/material";
+// import Paper from "@mui/material/Paper";
+// import "./styles.css";
+// import RFImporationForm from "./Forms/RFImporationForm";
+// import ImportationProcessForm from "./Forms/ImportationProcessForm";
+// import { makeStyles } from "@mui/styles";
+
+// const useStyles = makeStyles((theme) => ({
+//   stepperPaper: {
+//     boxShadow: "none",
+//     backgroundColor: "transparent",
+//   },
+// }));
+
+// function ImportFormStepper({ currentStep, steps }) {
+//   const classes = useStyles();
+//   const getDotClassName = (index) =>
+//     `dot ${currentStep === index ? "active" : ""}`;
+//   return (
+//     <Stepper
+//       activeStep={currentStep}
+//       alternativeLabel
+//       style={{ background: "transparent", boxShadow: "none" }}
+//     >
+//       {steps.map((label, index) => (
+//         <Step key={label}>
+//           <StepLabel className={getDotClassName(index)} />
+//         </Step>
+//       ))}
+//     </Stepper>
+//   );
+// }
+
+// const validateCurrentForm = (
+//   currentStep,
+//   rfiFormData,
+//   importProcessPFIData,
+//   importProcessSWIFTData
+// ) => {
+//   if (currentStep === 0) {
+//     // Validate the first form (RFI form)
+//     return rfiFormData.RequestedDrug !== "" && true;
+//   } else if (currentStep === 1) {
+//     // Validate the second form (Importation Process form)
+//     return (
+//       importProcessPFIData.PFInumber !== "" &&
+//       importProcessSWIFTData.swiftNumber !== "" &&
+//       true
+//     );
+//   }
+
+//   // Default to true if no specific validation is required
+//   return true;
+// };
+
+// const steps = ["Fill Request for Importation (RFI)", "Importation Process"];
+
+// function ImportDrug(props) {
+//   const classes = useStyles();
+//   const [currentStep, setCurrentStep] = useState(0);
+//   const navigate = useNavigate();
+//   const isLastStep = currentStep === 1;
+//   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
+//   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+//   const [rfiFormData, setRfiFormData] = useState({
+//     RequestedDrug: "",
+//     quantityRequested: "",
+//     offerType: "",
+//     offerPercentage: "",
+//     notes: "",
+//   });
+
+//   const [importProcessPFIData, setImportProcessPFIData] = useState({
+//     PFInumber: "",
+//     PFIdate: "",
+//     PFIamount: "",
+//     PFIdoc: "",
+//   });
+
+//   const [importProcessSWIFTData, setImportProcessSWIFTData] = useState({
+//     swiftNumber: "",
+//     swiftDate: "",
+//     swiftAmount: "",
+//     bankName: "",
+//     SWIFTdoc: "",
+//   });
+
+//   const handleInputChange = (name, value) => {
+//     // Update the state for the current form
+//     if (currentStep === 0) {
+//       setRfiFormData((prevData) => ({ ...prevData, [name]: value }));
+//     } else if (currentStep === 1) {
+//       setImportProcessPFIData((prevData) => ({ ...prevData, [name]: value }));
+//       setImportProcessSWIFTData((prevData) => ({ ...prevData, [name]: value }));
+//     }
+
+//     // Check form validity and update the state
+//     const isCurrentFormValid = validateCurrentForm(
+//       currentStep,
+//       rfiFormData,
+//       importProcessPFIData,
+//       importProcessSWIFTData
+//     );
+//     setIsNextButtonDisabled(!isCurrentFormValid);
+//   };
+
+//   const logFormData = () => {
+//     if (currentStep === 0) {
+//       // Submit the data for the first form
+//       console.log("RFI Form Data:", rfiFormData);
+//     } else if (currentStep === 1) {
+//       // Submit the data for the second form
+//       const finalFormData = {
+//         ...importProcessPFIData,
+//         ...importProcessSWIFTData,
+//       };
+//       console.log("Import Process Form Data:", finalFormData);
+//       navigate("/import");
+//     }
+
+//     // Move to the next step
+//     handleNextStep();
+//   };
+
+//   const handleNextStep = () => {
+//     if (currentStep === 2) {
+//     }
+
+//     setCurrentStep(currentStep + 1);
+//   };
+
+//   const handleBack = () => {
+//     setCurrentStep(currentStep - 1);
+//   };
+
+//   const handleArrowButtonClick = async () => {
+//     if (!isLastStep) {
+//       // Not the last step, move to the next step
+//       setCurrentStep(currentStep + 1);
+//     } else if (currentStep === 0 && !isFormSubmitted) {
+//       // Handle submit logic for the first step
+//       const isRFIFormValid = validateCurrentForm(
+//         0,
+//         rfiFormData,
+//         importProcessPFIData,
+//         importProcessSWIFTData
+//       );
+
+//       if (isRFIFormValid) {
+//         // Submit the RFI form
+//         await submitRFIForm();
+//         setIsFormSubmitted(true);
+//         setCurrentStep(currentStep + 1);
+//       } else {
+//         // RFI form is not valid, do not proceed
+//         // You can also show an error message to the user
+//       }
+//     }
+//   };
+
+//   const submitRFIForm = async () => {
+//     // Implement your logic to submit the RFI form
+//     console.log("Submitting RFI form:", rfiFormData);
+//     // Example: Call an API or perform any async operation
+//   };
+
+//   const forms = [
+//     <div className="flex justify-center">
+//       {currentStep === 0 && !isFormSubmitted && (
+//         <RFImporationForm
+//           handleInputChange={handleInputChange}
+//           rfiFormData={rfiFormData}
+//         />
+//       )}
+//     </div>,
+
+//     <div className="flex justify-center">
+//       {currentStep === 1 && (
+//         <div className="flex justify-center">
+//           <ImportationProcessForm
+//             handleInputChange={handleInputChange}
+//             importProcessPFIData={importProcessPFIData}
+//             importProcessSWIFTData={importProcessSWIFTData}
+//             isFormSubmitted={isFormSubmitted} // Make sure to pass the state
+//           />
+//         </div>
+//       )}
+//     </div>,
+//   ];
+
+//   return (
+//     <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-2 px-2 sm:px-6 dark:text-white-500">
+//       <div className="title py-4 pb-0 lg:mb-[-1rem] 2xl:mb-0 pl-0 flex w-full justify-center items-center">
+//         <h1 className="text-3xl font-semibold text-center text-[#00a651]">
+//           Importation
+//         </h1>
+//       </div>
+
+//       <div className="flex w-full justify-end pr-2">
+//         <Link to={`/list`} className="text-md  text-[#00a651]">
+//           Close
+//           <CloseIcon fontSize="small" />
+//         </Link>
+//       </div>
+
+//       {/* Content Container Start */}
+//       <div className="content w-full sm:h-full overflow-auto rounded-t-3xl px-2 py-6 text-center bg-white-contents dark:bg-black-contents">
+//         <Paper elevation={3} className={classes.stepperPaper}>
+//           <ImportFormStepper currentStep={currentStep} steps={steps} />
+//         </Paper>
+//         <form className="flex w-full flex-col">{forms[currentStep]}</form>
+//       </div>
+
+//       {/* Content Container End */}
+
+//       {/* Footer Container Start */}
+//       <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-black-contents sm:pb-0">
+//         <div className="flex items-center justify-center space-x-20 pt-0">
+//           {currentStep > 0 && (
+//             <div className="flex items-center justify-center space-x-20 pt-0">
+//               <Button
+//                 style={{
+//                   textTransform: "none",
+//                   fontSize: "21px",
+//                   fontFamily: "Roboto Condensed",
+//                   color: "#00a651",
+//                   backgroundColor: "transparent",
+//                   borderRadius: "13px",
+//                   cursor: "pointer",
+//                 }}
+//                 onClick={handleBack}
+//                 type="button"
+//               >
+//                 Previous
+//               </Button>
+//             </div>
+//           )}
+
+//           {!isLastStep && (
+//             <Button
+//               disabled={isNextButtonDisabled}
+//               style={{
+//                 textTransform: "none",
+//                 fontSize: "21px",
+//                 fontFamily: "Roboto Condensed",
+//                 color: "#00a651",
+//                 backgroundColor: "transparent",
+//                 borderRadius: "13px",
+//                 cursor: isNextButtonDisabled ? "not-allowed" : "pointer",
+//               }}
+//               onClick={handleArrowButtonClick}
+//               type="button"
+//             >
+//               {currentStep === 0 ? "Next" : null}
+//             </Button>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default ImportDrug;
+
+// ////////////////////////////////////////
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { FaArrowLeftLong } from "react-icons/fa6";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -11,16 +280,18 @@ import "./styles.css";
 import RFImporationForm from "./Forms/RFImporationForm";
 import ImportationProcessForm from "./Forms/ImportationProcessForm";
 import { makeStyles } from "@mui/styles";
+
 const useStyles = makeStyles((theme) => ({
   stepperPaper: {
-    boxShadow: "none", // Remove box-shadow
-    backgroundColor: "transparent", // Set background-color to transparent
+    boxShadow: "none",
+    backgroundColor: "transparent",
   },
 }));
 
-function FormStepper({ currentStep, steps }) {
+function ImportFormStepper({ currentStep, steps }) {
   const classes = useStyles();
-
+  const getDotClassName = (index) =>
+    `dot ${currentStep === index ? "active" : ""}`;
   return (
     <Stepper
       activeStep={currentStep}
@@ -29,126 +300,180 @@ function FormStepper({ currentStep, steps }) {
     >
       {steps.map((label, index) => (
         <Step key={label}>
-          <StepLabel
-            className={`dot  ${currentStep === index ? "active" : ""}`}
-          />
+          <StepLabel className={getDotClassName(index)} />
         </Step>
       ))}
     </Stepper>
   );
 }
 
+const validateCurrentForm = (
+  currentStep,
+  rfiFormData,
+  importProcessPFIData,
+  importProcessSWIFTData
+) => {
+  if (currentStep === 0) {
+    // Validate the first form (RFI form)
+    return rfiFormData.RequestedDrug !== "" && true;
+  } else if (currentStep === 1) {
+    // Validate the second form (Importation Process form)
+    return (
+      importProcessPFIData.PFInumber !== "" &&
+      importProcessSWIFTData.swiftNumber !== "" &&
+      true
+    );
+  }
+  // Default to true if no specific validation is required
+  return true;
+};
+
+const steps = ["Fill Request for Importation (RFI)", "Importation Process"];
+
 function ImportDrug(props) {
   const classes = useStyles();
   const [currentStep, setCurrentStep] = useState(0);
   const navigate = useNavigate();
   const isLastStep = currentStep === 1;
-
-  const steps = [
-    "Fill Request for Importation (RFI)",
-    "IED Permit Decision",
-    // "Submit Proforma Invoice (PI)",
-    // "IED Approval on PI",
-    // "Attach Swift and Review",
-  ];
-
-  const [formDataStep1, setFormDataStep1] = useState({
-    drugName: "",
+  const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [rfiFormData, setRfiFormData] = useState({
+    RequestedDrug: "",
     quantityRequested: "",
     offerType: "",
     offerPercentage: "",
     notes: "",
   });
 
-  const [formDataStep2, setFormDataStep2] = useState({
-    status: "Approved",
-    qtyApproved: "50",
-    PInumber: "123",
-    PIdate: "15-12-2023",
-    PIamount: "USD 15,000,000",
-    proformaInvoice: "1145/78",
+  const [importProcessPFIData, setImportProcessPFIData] = useState({
+    PFInumber: "",
+    PFIdate: "",
+    PFIamount: "",
+    PFIdoc: "",
   });
 
-  const [formDataStep3, setFormDataStep3] = useState({
-    swiftNumber: "8794",
-    swiftAmount: "USD 15,000,000",
-    swiftDate: "15-12-2023",
-    bankName: "Bemo",
-    swift: "",
+  const [importProcessSWIFTData, setImportProcessSWIFTData] = useState({
+    swiftNumber: "",
+    swiftDate: "",
+    swiftAmount: "",
+    bankName: "",
+    SWIFTdoc: "",
   });
 
   const handleInputChange = (name, value) => {
-    handleInputChange((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-  const handleInputChangeStep1 = (name, value) => {
-    setFormDataStep1((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleInputChangeStep2 = (name, value) => {
-    setFormDataStep2((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const logFormData = () => {
-    const finalFormData = {
-      ...formDataStep1,
-      ...formDataStep2,
-      ...formDataStep3,
-    };
-
-    console.log("Final Form Data:", finalFormData);
-
-    navigate("/import");
-  };
-
-
-
-  const handleNextStep = () => {
-    if (currentStep === 2) {
+    // Update the state for the current form
+    if (currentStep === 0) {
+      setRfiFormData((prevData) => ({ ...prevData, [name]: value }));
+    } else if (currentStep === 1) {
+      if (
+        name === "PFIdoc" ||
+        name === "PFInumber" ||
+        name === "PFIdate" ||
+        name === "PFIamount"
+      ) {
+        setImportProcessPFIData((prevData) => ({ ...prevData, [name]: value }));
+      } else {
+        setImportProcessSWIFTData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      }
     }
 
+    // Check form validity and update the state
+    const isCurrentFormValid = validateCurrentForm(
+      currentStep,
+      rfiFormData,
+      importProcessPFIData,
+      importProcessSWIFTData
+    );
+    setIsNextButtonDisabled(!isCurrentFormValid);
+  };
+
+  // const handleNextStep = () => {
+  //   if (currentStep === 2) {
+  //   }
+
+  //   setCurrentStep(currentStep + 1);
+  // };
+
+  // const handleBack = () => {
+  //   setCurrentStep(currentStep - 1);
+  // };
+  const handleBack = () => {
+    if (currentStep === 1) {
+      setIsFormSubmitted(false);
+    }
+
+    setCurrentStep((prevStep) => Math.max(prevStep - 1, 0));
+  };
+
+  // RFI form submission function (logging to console)
+  const submitRFIForm = (rfiFormData) => {
+    try {
+      // Log the values of the submitted data to the console
+      console.log("Submitted RFI Form Data Values:");
+      Object.entries(rfiFormData).forEach(([key, value]) => {
+        console.log(`${key}: ${value}`);
+      });
+
+      // Handle the result, e.g., show success message
+      console.log("RFI Form submitted successfully");
+    } catch (error) {
+      // Handle errors, e.g., show error message to the user
+      console.error("Error submitting RFI form:", error.message);
+      throw error;
+    }
+  };
+
+  const handleArrowButtonClick = async () => {
+    if (currentStep === 0) {
+      // Handle submit logic for the first step
+      const isRFIFormValid = validateCurrentForm(
+        0,
+        rfiFormData,
+        importProcessPFIData,
+        importProcessSWIFTData
+      );
+
+      if (isRFIFormValid) {
+        // Submit the RFI form with the current form data
+        submitRFIForm(rfiFormData); // Passing rfiFormData here
+        setIsFormSubmitted(true);
+      } else {
+        return;
+      }
+    }
+    // else if (currentStep === 1) {
+    // }
+
+    // Move to the next step
     setCurrentStep(currentStep + 1);
   };
 
-  const handleBack = () => {
-    setCurrentStep(currentStep - 1);
-  };
-
-  const handleArrowButtonClick = () => {
-    if (isLastStep) {
-      logFormData();
-    } else {
-      handleNextStep();
-    }
-  };
-
   const forms = [
-    <div className="flex justify-center ">
-      <RFImporationForm
-        handleInputChange={handleInputChangeStep1}
-        formDataStep1={formDataStep1}
-      />
-    </div>,
     <div className="flex justify-center">
-      <ImportationProcessForm
-        handleInputChange={handleInputChangeStep2}
-        formDataStep2={formDataStep2}
-      />
+      {currentStep === 0 && !isFormSubmitted && (
+        <RFImporationForm
+          handleInputChange={handleInputChange}
+          rfiFormData={rfiFormData}
+          handleBack={handleBack}
+        />
+      )}
     </div>,
 
     <div className="flex justify-center">
-      {/* <DrugSubstanceInformationsForm
-        handleInputChange={handleInputChangeStep3}
-        formDataStep3={formDataStep3}
-      /> */}
+      {currentStep === 1 && (
+        <div className="flex justify-center">
+          <ImportationProcessForm
+            currentStep={currentStep}
+            handleInputChange={handleInputChange}
+            importProcessPFIData={importProcessPFIData}
+            importProcessSWIFTData={importProcessSWIFTData}
+            isFormSubmitted={isFormSubmitted}
+          />
+        </div>
+      )}
     </div>,
   ];
 
@@ -168,9 +493,9 @@ function ImportDrug(props) {
       </div>
 
       {/* Content Container Start */}
-      <div className="content w-full sm:h-full overflow-auto rounded-t-3xl p-6 text-center bg-white-contents dark:bg-black-contents">
+      <div className="content w-full sm:h-full overflow-auto rounded-t-3xl px-2 py-6 text-center bg-white-contents dark:bg-black-contents">
         <Paper elevation={3} className={classes.stepperPaper}>
-          <FormStepper currentStep={currentStep} steps={steps} />
+          <ImportFormStepper currentStep={currentStep} steps={steps} />
         </Paper>
         <form className="flex w-full flex-col">{forms[currentStep]}</form>
       </div>
@@ -180,8 +505,29 @@ function ImportDrug(props) {
       {/* Footer Container Start */}
       <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-black-contents sm:pb-0">
         <div className="flex items-center justify-center space-x-20 pt-0">
-          {currentStep > 0 ? (
+          {currentStep > 0 && (
+            <div className="flex items-center justify-center space-x-20 pt-0">
+              <Button
+                style={{
+                  textTransform: "none",
+                  fontSize: "21px",
+                  fontFamily: "Roboto Condensed",
+                  color: "#00a651",
+                  backgroundColor: "transparent",
+                  borderRadius: "13px",
+                  cursor: "pointer",
+                }}
+                onClick={handleBack}
+                type="button"
+              >
+                Previous
+              </Button>
+            </div>
+          )}
+
+          {!isLastStep && (
             <Button
+              disabled={isNextButtonDisabled}
               style={{
                 textTransform: "none",
                 fontSize: "21px",
@@ -189,53 +535,18 @@ function ImportDrug(props) {
                 color: "#00a651",
                 backgroundColor: "transparent",
                 borderRadius: "13px",
-                cursor: "pointer",
+                cursor: isNextButtonDisabled ? "not-allowed" : "pointer",
               }}
-              onClick={handleBack}
+              onClick={handleArrowButtonClick}
               type="button"
             >
-              <FaArrowLeftLong
-                style={{
-                  fontSize: "20px",
-                  color: "#00a651",
-                }}
-                className="mr-2 text-[20px] text-[#00a651]"
-              />
-              Previous
+              {currentStep === 0 ? "Next" : null}
             </Button>
-          ) : (
-            <div style={{ width: "104px" }}></div> // Placeholder with the width of the button
           )}
         </div>
-        <Button
-          style={{
-            textTransform: "none",
-            fontSize: "21px",
-            fontFamily: "Roboto Condensed",
-            color: isLastStep ? "#fff" : "#00a651",
-            backgroundColor: isLastStep ? "#00a651" : "transparent",
-            borderRadius: isLastStep ? "13px" : "13px",
-          }}
-          onClick={handleArrowButtonClick}
-          type="button"
-        >
-          {isLastStep ? "Submit" : "Next"}
-          <FaArrowRightLong
-            style={{
-              fontSize: "20px",
-              color: isLastStep ? "text-white" : "text-[#00a651]",
-            }}
-            className={`ml-2 text-[20px] ${
-              isLastStep ? "hidden" : "text-[#00a651]"
-            }`}
-          />
-        </Button>
       </div>
-      {/* Footer Container End */}
     </div>
   );
 }
 
 export default ImportDrug;
-
-// ////////////////////////////////////////

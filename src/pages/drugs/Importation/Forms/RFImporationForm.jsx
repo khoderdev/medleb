@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles.css";
 
-const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
+const RFImportationForm = ({ handleInputChange, rfiFormData }) => {
   const [isInputsEnabled, setIsInputsEnabled] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -17,7 +17,10 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
           </h1>
         </div>
         <div className=" flex h-full w-full flex-col">
-          <form className="grid grid-cols-1 items-center gap-8 lg:gap-16 dark:text-white-text sm:grid-cols-1 sm:justify-items-center md:grid-cols-2 lg:grid-cols-2 py-16">
+          <div
+            onSubmit={(e) => e.preventDefault()}
+            className="grid grid-cols-1 items-center gap-8 lg:gap-16 dark:text-white-text sm:grid-cols-1 sm:justify-items-center md:grid-cols-2 lg:grid-cols-2 py-16"
+          >
             <div className="input-container relative">
               <label
                 htmlFor="RequestedDrug"
@@ -26,7 +29,7 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
                 Select Requested Drug
               </label>
               <input
-                value={formDataStep1.RequestedDrug}
+                value={rfiFormData.RequestedDrug}
                 onChange={(e) =>
                   handleInputChange("RequestedDrug", e.target.value)
                 }
@@ -43,7 +46,7 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
                 Quantity Requested
               </label>
               <input
-                value={formDataStep1.quantityRequested}
+                value={rfiFormData.quantityRequested}
                 onChange={(e) =>
                   handleInputChange("quantityRequested", e.target.value)
                 }
@@ -55,14 +58,13 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
 
             <div className="flex flex-col mt-6">
               <div className="checkbox-container flex items-center gap-2 w-fit text-left mb-2 ">
-               
                 <input
                   type="checkbox"
                   id="enableInputs"
                   checked={isInputsEnabled}
                   onChange={handleCheckboxChange}
                 />
-                 <label
+                <label
                   htmlFor="enableInputs"
                   className="labels text-lg block text-left font-medium"
                 >
@@ -84,12 +86,11 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
                       : "border-b-2 border-[#08251642]"
                   } `}
                 >
-                  {/* <div className="offerType-col flex flex-col border-red-500 border"> */}
                   <label htmlFor="offerType" className="labels text-md block">
                     Type
                   </label>
                   <select
-                    value={formDataStep1.offerType}
+                    value={rfiFormData.offerType}
                     onChange={(e) =>
                       handleInputChange("offerType", e.target.value)
                     }
@@ -125,7 +126,7 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
                     Percentage
                   </label>
                   <select
-                    value={formDataStep1.offerPercentage}
+                    value={rfiFormData.offerPercentage}
                     onChange={(e) =>
                       handleInputChange("offerPercentage", e.target.value)
                     }
@@ -157,14 +158,14 @@ const RFImportationForm = ({ handleInputChange, formDataStep1 }) => {
                 Notes
               </label>
               <textarea
-                value={formDataStep1.notes}
+                value={rfiFormData.notes}
                 onChange={(e) => handleInputChange("notes", e.target.value)}
-                className="mt-1 w-full h-24 rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
+                className="mt-1 w-full h-24 rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-6 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
                 type="text"
                 placeholder=""
               />
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>

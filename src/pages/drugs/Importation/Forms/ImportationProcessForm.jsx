@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ImportationProcessForm = ({
   handleInputChange,
-  formDataStep2,
-  formDataStep3,
+  importProcessPFIData,
+  importProcessSWIFTData,
+  isFormSubmitted,
+  currentStep,
 }) => {
   const [uploadedPFI, setUploadedPFI] = useState(false);
   const [uploadedSwift, setUploadedSwift] = useState(false);
-  const [dateValue, setDateValue] = useState(formDataStep2?.PFIdate || "");
 
   const handlePFIUpload = (e) => {
     const selectedPFI = e.target.files[0];
@@ -35,22 +36,60 @@ const ImportationProcessForm = ({
     }
   };
 
-  const handleDateChange = (e) => {
-    const newDateValue = e.target.value;
-    setDateValue(newDateValue);
+  const handlePFIDocChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    handleInputChange("PFIdoc", selectedFile);
+
+    setUploadedPFI(!!selectedFile);
   };
+
+  // const handlePFISubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Submitting data:", importProcessPFIData);
+  // };
+  const handlePFISubmit = (e) => {
+    e.preventDefault();
+
+    if (currentStep === 1) {
+      console.log("Submitting PFI data:", importProcessPFIData);
+    }
+  };
+
+  const handleSWIFTSubmit = (e) => {
+    e.preventDefault();
+    if (currentStep === 1) {
+      console.log("Submitting SWIFT data:", importProcessSWIFTData);
+    }
+  };
+
+  const handleSWIFTDocChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    handleInputChange("SWIFTdoc", selectedFile);
+
+    setUploadedSwift(!!selectedFile);
+  };
+
+  // const handleSWIFTSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Submitting data:", importProcessSWIFTData);
+  // };
+
+  useEffect(() => {
+    console.log("isFormSubmitted for ImportationProcessForm:", isFormSubmitted);
+  }, [isFormSubmitted]);
 
   return (
     <div className="grid grid-cols-1 w-full md:w-3/4 gap-10 text-black-text dark:text-white-text">
       {/* RESULT SECTION */}
-      <h1 className="pt-6 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
-      2 - Importation Process
-
+      <h1 className="pt-6 text-center text-[1.375rem] xs:text-xl sm:pt-8 font-medium">
+        2 - Importation Process
       </h1>
       <div className="flex flex-col">
         <label
           htmlFor="PFInumber"
-          className="labels text-lg font-bold pl-6 mb-4 text-left"
+          className="labels text-[1.375rem] font-medium pl-6 mb-4 text-left"
         >
           Result
         </label>
@@ -81,7 +120,7 @@ const ImportationProcessForm = ({
       <div className="flex flex-col">
         <label
           htmlFor="PFInumber"
-          className="labels text-lg font-bold pl-6 mb-4 text-left"
+          className="labels text-[1.375rem] font-medium pl-6 mb-4 text-left"
         >
           Proforma Invoice
         </label>
@@ -98,8 +137,8 @@ const ImportationProcessForm = ({
               <input
                 id="PFInumber"
                 name="PFInumber"
-                onChange={(e) => handleInputChange(e)}
-                value={formDataStep2?.PFInumber}
+                onChange={(e) => handleInputChange("PFInumber", e.target.value)}
+                value={importProcessPFIData.PFInumber || ""}
                 className="w-3/4 sm:w-full input-field mx-auto border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full"
                 type="text"
                 autoComplete="off"
@@ -117,8 +156,9 @@ const ImportationProcessForm = ({
               <input
                 id="PFIdate"
                 name="PFIdate"
-                onChange={(e) => handleDateChange(e)}
-                value={formDataStep2?.PFIdate}
+                onChange={(e) => handleInputChange("PFIdate", e.target.value)}
+                value={importProcessPFIData.PFIdate || ""}
+                // value={PFIdate}
                 className="w-full pl-6 sm:pl-0 input-field border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full"
                 type="date"
                 autoComplete="off"
@@ -136,8 +176,8 @@ const ImportationProcessForm = ({
               <input
                 id="PFIamount"
                 name="PFIamount"
-                value={formDataStep2?.PFIamount}
-                onChange={(e) => handleDateChange(e)}
+                value={importProcessPFIData.PFIamount || ""}
+                onChange={(e) => handleInputChange("PFIamount", e.target.value)}
                 className=" w-3/4 sm:w-full input-field border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full autofill:bg-transparent"
                 type="text"
                 autoComplete="off"
@@ -145,26 +185,33 @@ const ImportationProcessForm = ({
             </div>
 
             {/* Column 4 */}
-            <div className="mx-auto ">
+            <div className="mx-auto gap-4 flex">
               {uploadedPFI ? (
                 <button
-                  className="med-btn text-[#4edab9] font-bold border-2 border-green-sec  hover:border-green-pri px-6 py-2 rounded-full cursor-pointer"
+                  className="med-btn hover:text-white-text font-bold border-2 border-green-sec  hover:border-green-pri px-6 py-4 rounded-full cursor-pointer"
                   onClick={() => setUploadedPFI(false)}
                 >
                   <span className="px-8">Uploaded ✔</span>
                 </button>
               ) : (
-                <label className="med-btn border-2 border-green-pri px-6 py-3 text-[#00a651] font-bold p-2 dark:bg-black-input rounded-full cursor-pointer">
-                  <span className="text-[#00a651] hover:text-white-text px-8">Attach</span>
+                <label className="med-btn border-2 border-green-pri py-3 text-[#00a651] font-bold dark:bg-black-input rounded-full cursor-pointer">
+                  <span className=" hover:text-white-text w-full py-4">
+                    Attach
+                  </span>
                   <input
                     type="file"
                     id="attach"
                     className="hidden"
-                    value={formDataStep2?.PFIdoc}
-                    onChange={(e) => handlePFIUpload(e)}
+                    onChange={handlePFIDocChange} // Attach the handlePFIDocChange function
                   />
                 </label>
               )}
+              <button
+                className="med-btn border-2 border-green-pri hover:text-white-text font-bold dark:bg-black-input px-6 py-4 rounded-full cursor-pointer"
+                onClick={handlePFISubmit}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>
@@ -176,13 +223,13 @@ const ImportationProcessForm = ({
       <div className="flex flex-col">
         <label
           htmlFor="swiftNumber"
-          className="labels text-lg font-bold pl-6 mb-4 text-left"
+          className="labels text-[1.375rem] font-medium pl-6 mb-4 text-left"
         >
           Swift
         </label>
 
-        <div className=" dark:text-white-text rounded-[5em] sm:rounded-[6em] border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-4 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">
-          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-10 px-4 sm:px-10 items-center">
+        <div className=" dark:text-white-text rounded-[5em] sm:rounded-[6em] border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input pr-4 lg:px-4 py-4 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">
+          <div className="w-full grid grid-cols-2 lg:grid-cols-5 gap-6 px-4 lg:pr-20 items-center">
             {/* Column 1 */}
             <div className="mb-4 text-center border-b border-[#00a651] text-white">
               <label
@@ -194,8 +241,10 @@ const ImportationProcessForm = ({
               <input
                 id="swiftNumber"
                 name="swiftNumber"
-                onChange={(e) => handleInputChange(e)}
-                value={formDataStep3?.swiftNumber}
+                onChange={(e) =>
+                  handleInputChange("swiftNumber", e.target.value)
+                }
+                value={importProcessSWIFTData?.swiftNumber}
                 className="w-3/4 sm:w-full input-field mx-auto border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full"
                 type="text"
                 autoComplete="off"
@@ -213,8 +262,8 @@ const ImportationProcessForm = ({
               <input
                 id="swiftDate"
                 name="swiftDate"
-                onChange={(e) => handleDateChange(e)}
-                value={formDataStep3?.swiftDate}
+                onChange={(e) => handleInputChange("swiftDate", e.target.value)}
+                value={importProcessSWIFTData?.swiftDate}
                 className="w-full pl-6 sm:pl-0 input-field border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full"
                 type="date"
                 autoComplete="off"
@@ -232,35 +281,69 @@ const ImportationProcessForm = ({
               <input
                 id="swiftAmount"
                 name="swiftAmount"
-                value={formDataStep3?.swiftAmount}
-                onChange={(e) => handleDateChange(e)}
+                value={importProcessSWIFTData?.swiftAmount}
+                onChange={(e) =>
+                  handleInputChange("swiftAmount", e.target.value)
+                }
                 className=" w-3/4 sm:w-full input-field border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full autofill:bg-transparent"
                 type="text"
                 autoComplete="off"
               />
             </div>
-
             {/* Column 4 */}
-            <div className="mx-auto">
+            <div className="mb-4 text-center border-b border-[#00a651] text-white">
+              <label
+                htmlFor="bankName"
+                className="labels text-lg block text-center"
+              >
+                Bank
+              </label>
+              <select
+                id="bankName"
+                name="bankName"
+                value={importProcessSWIFTData?.bankName}
+                onChange={(e) => handleInputChange("bankName", e.target.value)}
+                className=" w-3/4 sm:w-full input-field border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-black-input rounded-full autofill:bg-transparent"
+                type="text"
+                autoComplete="off"
+              >
+                <option value="" disabled>
+                  select
+                </option>
+                <option>Bank bemo</option>
+                <option>Byblos bank</option>
+                <option>Audi bank</option>
+              </select>
+            </div>
+
+            {/* Column 5 */}
+            <div className="mx-auto gap-4 flex">
               {uploadedSwift ? (
                 <div
                   className="med-btn text-[#4edab9] font-bold border-2 border-green-sec hover:border-green-pri px-6 py-2 rounded-full cursor-pointer"
                   onClick={() => setUploadedSwift(false)}
                 >
-                  <span className="px-8">Uploaded ✔</span>
+                  <span className="">Uploaded ✔</span>
                 </div>
               ) : (
                 <label className="med-btn border-2 border-green-pri px-6 py-3 text-[#00a651] font-bold p-2 dark:bg-black-input rounded-full cursor-pointer">
-                  <span className="text-[#00a651] px-8">Attach</span>
+                  <span className=" hover:text-white-text w-full py-4">
+                    Attach
+                  </span>
                   <input
                     type="file"
                     id="attachSwift"
                     className="attachSwift hidden"
-                    value={formDataStep3?.SWIFTdoc}
-                    onChange={(e) => handleSwiftUpload(e)}
+                    onChange={handleSWIFTDocChange} // Attach the handleSWIFTDocChange function
                   />
                 </label>
               )}
+              <button
+                className="med-btn border-2 border-green-pri hover:text-white-text font-bold dark:bg-black-input px-6 py-4 rounded-full cursor-pointer"
+                onClick={handleSWIFTSubmit}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>
