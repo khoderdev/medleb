@@ -8,6 +8,7 @@ import AddDrug from "./pages/drugs/Forms/AddDrug";
 import List from "./pages/drugs/list/List";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import CreateUserForm from "./components/RegistrationForm";
 import Home from "./pages/Home/";
 import Dashboards from "./pages/dashboards/";
 import ImportDrug from "./pages/drugs/Importation/Import";
@@ -22,7 +23,7 @@ import GetDrugs from "./pages/drugs/Forms/Separated/GetDrugs";
 import ATCForm from "./pages/drugs/Forms/Separated/ATCForm";
 import ATCCodesForm from "./pages/drugs/Forms/Separated/ATCCodesForm";
 import AuthContainer from "./components/AuthContainer";
-import CreateUserForm from "./components/CreateUserForm";
+// import CreateUserForm from "./components/CreateUserForm";
 import UserFormContainer from "./components/UserFormContainer";
 import Table from "./Table";
 import ScrollBreakComponent from "./ScrollBreakComponent";
@@ -76,6 +77,7 @@ const App = () => {
             <Route path="/tracking/" element={<Tracking />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/newuser" element={<CreateUserForm />} />
             <Route path="/list" element={<List />} />
             <Route path="/editdrug/:drugId" element={<AddDrug />} />
             <Route path="/viewdrug/:drugId" element={<SingleDrug />} />

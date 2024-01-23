@@ -1,245 +1,140 @@
-// ATCCodesForm.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import * as yup from "yup";
 
-const schema = yup.object().shape({
-  atcGuid: yup.string().required("ATC Guid is required"),
-  code: yup.string().required("Code is required"),
-  levelName: yup.string().required("Level Name is required"),
-  levelNameAr: yup
-    .string()
-    .matches(
-      /^[\u0621-\u064A\s]*$/,
-      "Please use Arabic letters (أ ب ت) for the Level Name (Arabic)"
-    )
-    .required("Level Name (Arabic) is required"),
-  levelNumber: yup.number().required("Level Number is required"),
-  substanceName: yup.string().required("Substance Name is required"),
-  atcingredientName: yup.string().required("ATC Ingredient Name is required"),
-  atcingredientNameAr: yup
-    .string()
-    .matches(
-      /^[\u0621-\u064A\s]*$/,
-      "Please use Arabic letters (أ ب ت) for the ATC Ingredient Name (Arabic)"
-    )
-    .required("ATC Ingredient Name (Arabic) is required"),
-  interactionIngredientName: yup
-    .string()
-    .required("Interaction Ingredient Name is required"),
-  enabled: yup.boolean().required("Enabled is required"),
-  createdDate: yup.date().required("Created Date is required"),
-});
+const API_URL = "http://192.168.10.88:3010";
 
 const ATCCodesForm = () => {
+  const currentDate = new Date().toISOString();
+
   const [formData, setFormData] = useState({
-    guid: "",
+    guid: uuidv4(),
+    atcGuid: uuidv4(),
     code: "",
     levelName: "",
     levelNameAr: "",
-    atcrelatedLabel: "",
+    levelNumber: null,
+    substanceName: "",
+    atcingredientName: "",
+    atcingredientNameAr: "",
+    interactionIngredientName: "",
     enabled: true,
-    createdDate: new Date().toISOString(),
-    updatedDate: new Date().toISOString(),
+    createdDate: currentDate,
   });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Validate form data against the schema
-      await schema.validate(formData, { abortEarly: false });
-
-      const newGuid = uuidv4();
-
+      // Make a POST request to the server endpoint
       const response = await axios.post(
-        "http://85.112.70.8:3010/api/atccodes/v1.0",
-        { ...formData, guid: newGuid }
+        `${API_URL}`,
+        formData
+        // Include headers if needed
       );
 
-      console.log("ATC Codes data submitted successfully:", response.data);
+      console.log("Server Response:", response.data);
 
+      // Handle the response as needed
+
+      // Clear the form after successful submission
       setFormData({
-        guid: "",
-        atcGuid: "",
+        guid: uuidv4(),
+        atcGuid: uuidv4(),
         code: "",
         levelName: "",
         levelNameAr: "",
-        levelNumber: 0,
+        levelNumber: null,
         substanceName: "",
         atcingredientName: "",
         atcingredientNameAr: "",
         interactionIngredientName: "",
         enabled: true,
-        createdDate: new Date().toISOString(),
+        createdDate: currentDate,
       });
 
-      toast.success("ATC Codes data submitted successfully.");
+      // Display a success message
+      alert("Data submitted successfully!");
     } catch (error) {
-      // Check if the error is a validation error
-      if (error.name === "ValidationError") {
-        // Display validation errors using toast
-        error.errors.forEach((validationError) => {
-          toast.error(validationError);
-        });
-      } else {
-        console.error("Error submitting ATC Codes data:", error.message);
-      }
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    // Exclude createdDate and updatedDate from being updated in the state
-    if (name !== "createdDate" && name !== "updatedDate") {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: type === "checkbox" ? checked : value,
-      }));
+      // Handle errors and display an error message
+      console.error("Error submitting data:", error);
+      alert("Error submitting data");
     }
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-md mx-auto p-4 bg-gray-100 shadow-md rounded-md"
-      >
-        <label className="block mb-2">
-          ATC Guid:
-          <input
-            type="text"
-            name="atcGuid"
-            value={formData.atcGuid}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="atcGuid">ATC Guid:</label>
+      <input
+        type="text"
+        id="atcGuid"
+        name="atcGuid"
+        value={formData.atcGuid}
+        onChange={handleChange}
+        required
+      />
 
-        <label className="block mb-2">
-          Code:
-          <input
-            type="text"
-            name="code"
-            value={formData.code}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
+      <label htmlFor="code">Code:</label>
+      <input
+        type="text"
+        id="code"
+        name="code"
+        value={formData.code}
+        onChange={handleChange}
+        required
+      />
 
-        <label className="block mb-2">
-          Level Name:
-          <input
-            type="text"
-            name="levelName"
-            value={formData.levelName}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
+      <label htmlFor="levelName">Level Name:</label>
+      <input
+        type="text"
+        id="levelName"
+        name="levelName"
+        value={formData.levelName}
+        onChange={handleChange}
+        required
+      />
 
-        <label className="block mb-2">
-          Level Name (Arabic):
-          <input
-            type="text"
-            name="levelNameAr"
-            value={formData.levelNameAr}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
+      <label htmlFor="levelNameAr">Level Name (Arabic):</label>
+      <input
+        type="text"
+        id="levelNameAr"
+        name="levelNameAr"
+        value={formData.levelNameAr}
+        onChange={handleChange}
+        required
+      />
 
-        <label className="block mb-2">
-          Level Number:
-          <input
-            type="number"
-            name="levelNumber"
-            value={formData.levelNumber}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
+      <label htmlFor="levelNumber">Level Number:</label>
+      <input
+        type="number"
+        id="levelNumber"
+        name="levelNumber"
+        value={formData.levelNumber}
+        onChange={handleChange}
+        required
+      />
 
-        <label className="block mb-2">
-          Substance Name:
-          <input
-            type="text"
-            name="substanceName"
-            value={formData.substanceName}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
+      <label htmlFor="substanceName">Substance Name:</label>
+      <input
+        type="text"
+        id="substanceName"
+        name="substanceName"
+        value={formData.substanceName}
+        onChange={handleChange}
+      />
 
-        <label className="block mb-2">
-          ATC Ingredient Name:
-          <input
-            type="text"
-            name="atcingredientName"
-            value={formData.atcingredientName}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
+      {/* Add similar labels and inputs for other fields */}
 
-        <label className="block mb-2">
-          ATC Ingredient Name (Arabic):
-          <input
-            type="text"
-            name="atcingredientNameAr"
-            value={formData.atcingredientNameAr}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
-
-        <label className="block mb-2">
-          Interaction Ingredient Name:
-          <input
-            type="text"
-            name="interactionIngredientName"
-            value={formData.interactionIngredientName}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-          />
-        </label>
-
-        <label className="block mb-2">
-          Enabled:
-          <input
-            type="checkbox"
-            name="enabled"
-            checked={formData.enabled}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label className="hidden mb-2">
-          Created Date:
-          <input
-            type="text"
-            name="createdDate"
-            value={formData.createdDate}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-            readOnly
-          />
-        </label>
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300"
-        >
-          Submit
-        </button>
-      </form>
-      {/* Toast container for displaying messages */}
-      <ToastContainer position="top-right" autoClose={3000} />
-    </div>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 

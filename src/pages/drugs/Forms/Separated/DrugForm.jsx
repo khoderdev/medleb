@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_URL = "http://192.168.10.88:3010";
+
 const DrugForm = () => {
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -12,19 +14,19 @@ const DrugForm = () => {
     Guid: uuidv4(),
     ATCGuid: uuidv4(),
     DosageGuid: uuidv4(),
-    ATCGuid: uuidv4(),
-    DosageGuid: uuidv4(),
+    // ATCCodesGuid: uuidv4(),
+    // DosageGuid: uuidv4(),
     PresentationGuid: uuidv4(),
     FormGuid: uuidv4(),
     RouteGuid: uuidv4(),
     StratumGuid: uuidv4(),
-    StratumTypeGuid: uuidv4(),
+    // StratumTypeGuid: uuidv4(),
     AgentGuid: uuidv4(),
     BrandGuid: uuidv4(),
     ManufacturerGuid: uuidv4(),
     CountryGuid: uuidv4(),
     ResponsiblePartyGuid: uuidv4(),
-    DrugLabelGuid: uuidv4(), 
+    DrugLabelGuid: uuidv4(),
     Code: "123",
     RegistrationNumber: "123",
     REP_date: currentDate,
@@ -82,6 +84,7 @@ const DrugForm = () => {
       // Make a POST request to the server endpoint
       console.log("Drug Data:", drugData);
       const newGuid = uuidv4();
+
       const config = {
         headers: {
           Authorization:
@@ -92,22 +95,47 @@ const DrugForm = () => {
       // console.log("testttttttttttttt");
 
       const response = await axios.post(
-        // `https://85.112.70.8:3010/api/drugs/v1.0/${newGuid}`,
-        "http://1.1.1.252:3500/api/drugs/v1.0",
+        "http://192.168.10.88:3010/api/drugs/v1.0",
         drugData,
         config
       );
+
+      // Assuming you have different tables with dynamic endpoint names
+      const BrandsEndpoind = "/table1-endpoint";
+      const table2Endpoint = "/table2-endpoint";
+
+      const response1 = await axios.post(
+        `${API_URL}${table1Endpoint}`,
+        { data: drugData.table1Data },
+        config
+      );
+
+      const response2 = await axios.post(
+        `${API_URL}${table2Endpoint}`,
+        { data: drugData.table2Data },
+        config
+      );
+
+      // Handle the responses as needed
+      console.log("Response from Table 1:", response1.data);
+      console.log("Response from Table 2:", response2.data);
+
+      // Clear the form after successful submission
+      setDrugData({
+        // ... (reset your state here)
+      });
+
       console.log("Server Response:", response);
       // Handle the response as needed
       console.log("Drug added successfully:", response.data);
 
       // Clear the form after successful submission
       setDrugData({
-        ATCGuid: "", // Foreign key for Drug_ATCCodes
-        DosageGuid: "", // Foreign key for Drug_Dosage
+        // ATCGuid: "",
+        // DosageGuid: "",
         Guid: uuidv4(),
-        // ATCGuid: uuidv4(),
-        // DosageGuid: uuidv4(),
+        ATCGuid: uuidv4(),
+        DosageGuid: uuidv4(),
         PresentationGuid: uuidv4(),
         FormGuid: uuidv4(),
         RouteGuid: uuidv4(),

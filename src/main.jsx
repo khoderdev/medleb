@@ -11,6 +11,7 @@ import { store } from "./app/store";
 import { Provider } from "react-redux";
 // import { QueryClient, QueryClientProvider } from "./context/queryClient";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { AccessTokenProvider } from "./context/AccessTokenContext";
 
 Modal.setAppElement("#root");
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,19 +21,21 @@ document.addEventListener("DOMContentLoaded", () => {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <DarkModeProvider>
-            <BrowserRouter>
-              <AuthProvider>
-                <DashboardLayout>
-                  <Routes>
-                    <Route path="/*" element={<App />} />
-                  </Routes>
-                </DashboardLayout>
-              </AuthProvider>
-            </BrowserRouter>
-          </DarkModeProvider>
-        </QueryClientProvider>
+        <AccessTokenProvider>
+          <QueryClientProvider client={queryClient}>
+            <DarkModeProvider>
+              <BrowserRouter>
+                <AuthProvider>
+                  <DashboardLayout>
+                    <Routes>
+                      <Route path="/*" element={<App />} />
+                    </Routes>
+                  </DashboardLayout>
+                </AuthProvider>
+              </BrowserRouter>
+            </DarkModeProvider>
+          </QueryClientProvider>
+        </AccessTokenProvider>
       </Provider>
     </React.StrictMode>
   );
