@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { useAccessToken } from "../context/AccessTokenContext";
+import { useDispatch } from "react-redux";
+import { setAccessToken } from "../app/auth/authSlice";
+import axios from "axios";
 
 const Login = () => {
-  const { setToken } = useAccessToken();
+  const dispatch = useDispatch();
+  const { setToken } = setAccessToken();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -20,8 +23,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "http://192.168.10.88:3010/api/users/v1.0/authenticate",
+      const response = await axios.post(
+        "http://85.112.70.8:3010/api/users/v1.0/authenticate",
         {
           method: "POST",
           headers: {
@@ -44,8 +47,8 @@ const Login = () => {
         const { userDetails } = responseBody;
 
         if ("token" in userDetails) {
-          setToken(userDetails.token);
-          window.localStorage.setItem("token", userDetails.token);
+          dispatch(setAccessToken(userDetails.token)); // Dispatch the action
+          window.localStorage.setItem("accessToken", userDetails.token);
           setAuthStatus("Authenticated successfully");
         } else {
           console.error(

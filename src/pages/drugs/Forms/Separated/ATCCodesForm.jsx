@@ -1,140 +1,181 @@
 import React, { useState } from "react";
-import axios from "axios";
+import Axios from "../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const API_URL = "http://192.168.10.88:3010";
-
-const ATCCodesForm = () => {
-  const currentDate = new Date().toISOString();
-
+const ATCCodesForm = ({ atcGuid }) => {
   const [formData, setFormData] = useState({
     guid: uuidv4(),
-    atcGuid: uuidv4(),
+    atcGuid: "", 
     code: "",
     levelName: "",
     levelNameAr: "",
-    levelNumber: null,
+    levelNumber: 0,
     substanceName: "",
     atcingredientName: "",
     atcingredientNameAr: "",
     interactionIngredientName: "",
-    enabled: true,
-    createdDate: currentDate,
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Make a POST request to the server endpoint
-      const response = await axios.post(
-        `${API_URL}`,
-        formData
-        // Include headers if needed
-      );
+      const response = await Axios.post("/api/atccodes/v1.0", formData);
+      console.log(response.data);
 
-      console.log("Server Response:", response.data);
-
-      // Handle the response as needed
-
-      // Clear the form after successful submission
+      // Reset the form after successful submission
       setFormData({
         guid: uuidv4(),
-        atcGuid: uuidv4(),
+        atcGuid: atcGuid,
         code: "",
         levelName: "",
         levelNameAr: "",
-        levelNumber: null,
+        levelNumber: "",
         substanceName: "",
         atcingredientName: "",
         atcingredientNameAr: "",
         interactionIngredientName: "",
-        enabled: true,
-        createdDate: currentDate,
       });
-
-      // Display a success message
-      alert("Data submitted successfully!");
     } catch (error) {
-      // Handle errors and display an error message
-      console.error("Error submitting data:", error);
-      alert("Error submitting data");
+      console.error("Error:", error.response.data.message);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="atcGuid">ATC Guid:</label>
-      <input
-        type="text"
-        id="atcGuid"
-        name="atcGuid"
-        value={formData.atcGuid}
-        onChange={handleChange}
-        required
-      />
+    <div className="max-w-md mx-auto">
+      <h2 className="text-2xl font-semibold mb-4">Create New ATC Code</h2>
 
-      <label htmlFor="code">Code:</label>
-      <input
-        type="text"
-        id="code"
-        name="code"
-        value={formData.code}
-        onChange={handleChange}
-        required
-      />
+      <div className="mb-4">
+        <label htmlFor="code" className="block mb-1">
+          Code:
+        </label>
+        <input
+          type="text"
+          name="code"
+          value={formData.code}
+          onChange={handleChange}
+          className="w-full "
+          required
+          maxLength={3}
+          autoComplete="off"
+        />
+      </div>
 
-      <label htmlFor="levelName">Level Name:</label>
-      <input
-        type="text"
-        id="levelName"
-        name="levelName"
-        value={formData.levelName}
-        onChange={handleChange}
-        required
-      />
+      <div className="mb-4">
+        <label htmlFor="levelName" className="block mb-1">
+          Level Name:
+        </label>
+        <input
+          type="text"
+          name="levelName"
+          value={formData.levelName}
+          onChange={handleChange}
+          className="w-full"
+          required
+          autoComplete="off"
+        />
+      </div>
 
-      <label htmlFor="levelNameAr">Level Name (Arabic):</label>
-      <input
-        type="text"
-        id="levelNameAr"
-        name="levelNameAr"
-        value={formData.levelNameAr}
-        onChange={handleChange}
-        required
-      />
+      <div className="mb-4">
+        <label htmlFor="levelNameAr" className="block mb-1">
+          Level Name Arabic:
+        </label>
+        <input
+          type="text"
+          name="levelNameAr"
+          value={formData.levelNameAr}
+          onChange={handleChange}
+          className="w-full"
+          required
+          autoComplete="off"
+        />
+      </div>
 
-      <label htmlFor="levelNumber">Level Number:</label>
-      <input
-        type="number"
-        id="levelNumber"
-        name="levelNumber"
-        value={formData.levelNumber}
-        onChange={handleChange}
-        required
-      />
+      <div className="mb-4">
+        <label htmlFor="levelNumber" className="block mb-1">
+          Level Number:
+        </label>
+        <input
+          type="number"
+          name="levelNumber"
+          value={formData.levelNumber}
+          onChange={handleChange}
+          className="w-full"
+          required
+          autoComplete="off"
+        />
+      </div>
 
-      <label htmlFor="substanceName">Substance Name:</label>
-      <input
-        type="text"
-        id="substanceName"
-        name="substanceName"
-        value={formData.substanceName}
-        onChange={handleChange}
-      />
+      <div className="mb-4">
+        <label htmlFor="substanceName" className="block mb-1">
+          Substance Name:
+        </label>
+        <input
+          type="text"
+          name="substanceName"
+          value={formData.substanceName}
+          onChange={handleChange}
+          className="w-full"
+          required
+          autoComplete="off"
+        />
+      </div>
 
-      {/* Add similar labels and inputs for other fields */}
+      <div className="mb-4">
+        <label htmlFor="atcingredientName" className="block mb-1">
+          ATC Ingredient Name:
+        </label>
+        <input
+          type="text"
+          name="atcingredientName"
+          value={formData.atcingredientName}
+          onChange={handleChange}
+          className="w-full"
+          required
+          autoComplete="off"
+        />
+      </div>
 
-      <button type="submit">Submit</button>
-    </form>
+      <div className="mb-4">
+        <label htmlFor="atcingredientNameAr" className="block mb-1">
+          ATC Ingredient Name Arabic:
+        </label>
+        <input
+          type="text"
+          name="atcingredientNameAr"
+          value={formData.atcingredientNameAr}
+          onChange={handleChange}
+          className="w-full"
+          required
+          autoComplete="off"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="interactionIngredientName" className="block mb-1">
+          Interaction Ingredient Name:
+        </label>
+        <input
+          type="text"
+          name="interactionIngredientName"
+          value={formData.interactionIngredientName}
+          onChange={handleChange}
+          className="w-full"
+          required
+          autoComplete="off"
+        />
+      </div>
+      <button onClick={handleSubmit} className="med-btn-pri" type="submit">
+        Submit
+      </button>
+      <ToastContainer />
+    </div>
   );
 };
 

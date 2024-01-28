@@ -182,7 +182,7 @@ function ImportDrug(props) {
 
     <div className="flex justify-center">
       {currentStep === 1 && (
-        <div className="flex justify-center">
+        <div className="flex justify-center w-[80%]">
           <ImportationProcessForm
             currentStep={currentStep}
             handleInputChange={handleInputChange}
@@ -258,7 +258,7 @@ function ImportDrug(props) {
               onClick={handleArrowButtonClick}
               type="button"
             >
-              {currentStep === 0 ? "Next" : null}
+              {currentStep === 0 ? "Submit" : null}
             </Button>
           )}
         </div>

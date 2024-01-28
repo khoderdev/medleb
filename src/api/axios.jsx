@@ -1,76 +1,66 @@
-// import axios from 'axios';
-
-// export default axios.create({
-//     baseURL: 'http://1.1.1.252:3500'
-//     // baseURL: 'https://6b3e-85-112-70-8.ngrok-free.app/'
-// });
-
-// api.js
 import axios from "axios";
 
-export default axios.create({
-  // baseURL: 'https://medleb-api.onrender.com',
-  // baseURL: 'http://85.112.70.8:3010/api/users/v1.0/authenticate',
-  baseURL: "http://1.1.1.252:3500",
-  // baseURL: "http://192.168.10.88:3010",
-  withCredentials: true,
+// const baseURL = "http://85.112.70.8:3010";
+const baseURL = "http://192.168.10.88:3010";
+
+// Create Axios Instance
+const Axios = axios.create({
+  baseURL,
 });
 
-// export default api;
+// Request Interceptor
+Axios.interceptors.request.use(
+  (config) => {
+    // Retrieve access token from localStorage
+    const accessToken = localStorage.getItem("accessToken");
 
-// ///////////////////////////////////////////
+    // Add the access token to the Authorization header if it exists
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
+    }
 
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import { setCredentials } from "../../features/auth/authSlice";
+    // Set default Content-Type header
+    config.headers["Content-Type"] = "application/json";
+    config.headers["Accept"] = "text/plain";
 
-// const baseQuery = fetchBaseQuery({
-//   // baseUrl: 'https://MedLeb-api.onrender.com',
-//   baseUrl: "http://localhost:3400",
-//   credentials: "same-origin",
-//   // credentials: 'include',
-//   prepareHeaders: (headers, { getState }) => {
-//     const token = getState().auth.token;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-//     if (token) {
-//       headers.set("authorization", `Bearer ${token}`);
-//     }
-//     return headers;
-//   },
-// });
+// Response Interceptor
+Axios.interceptors.response.use(
+  (response) => {
+    // Handle response data
+    return response.data;
+  },
+  (error) => {
+    // Handle errors
+    if (error.response) {
+      // Server responded with a status code outside of 2xx
+      console.error("Server responded with an error:", error.response.data);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error("No response received:", error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error("Error during request setup:", error.message);
+    }
+    return Promise.reject(error);
+  }
+);
 
-// const baseQueryWithReauth = async (args, api, extraOptions) => {
-//   // console.log(args) // request url, method, body
-//   // console.log(api) // signal, dispatch, getState()
-//   // console.log(extraOptions) //custom like {shout: true}
+export default Axios;
 
-//   let result = await baseQuery(args, api, extraOptions);
+// // USAGE:
 
-//   // If you want, handle other status codes, too
-//   if (result?.error?.status === 403) {
-//     console.log("sending refresh token");
-
-//     // send refresh token to get new access token
-//     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
-
-//     if (refreshResult?.data) {
-//       // store the new token
-//       api.dispatch(setCredentials({ ...refreshResult.data }));
-
-//       // retry original query with new access token
-//       result = await baseQuery(args, api, extraOptions);
-//     } else {
-//       if (refreshResult?.error?.status === 403) {
-//         refreshResult.error.data.message = "Your login has expired.";
-//       }
-//       return refreshResult;
-//     }
-//   }
-
-//   return result;
-// };
-
-// export const apiSlice = createApi({
-//   baseQuery: baseQueryWithReauth,
-//   tagTypes: ["Drug", "User"],
-//   endpoints: (builder) => ({}),
-// });
+// axios
+//         .post("/api/drugs/v1.0")
+//         .then((response) => {
+//           console.log(response.data);
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });

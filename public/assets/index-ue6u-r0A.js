@@ -1,0 +1,1 @@
+import{j as i,G as t}from"./index-tGyFUHry.js";import o from"./Notifications-mu7VMWXZ.js";function r(){return i.jsx("div",{children:i.jsx(t,{title:"Notifications",children:i.jsx(o,{})})})}export{r as default};

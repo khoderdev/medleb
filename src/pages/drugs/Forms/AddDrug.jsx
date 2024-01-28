@@ -98,6 +98,7 @@ function AddDrug(props) {
   };
 
   const [formDataStep1, setFormDataStep1] = useState({
+    drugImages: "",
     drugName: "Panadol",
     type: "Brand",
     responsibleParty: "",
@@ -128,6 +129,9 @@ function AddDrug(props) {
     toxicity: "",
     storageConditions: "",
     shelfLife: "",
+  });
+  const [formDataStep12, setFormDataStep12] = useState({
+    drugImages: "",
   });
 
   const [formDataStep2, setFormDataStep2] = useState({
@@ -173,6 +177,16 @@ function AddDrug(props) {
     agentProfitMargin: "8",
     pharmacistProfitMargin: "8.5",
     hospitalPriceLBP: "900,000",
+  });
+
+  const [formDataStep5, setFormDataStep5] = useState({
+    responsibleParty: "",
+    responsiblePartyCountry: "",
+    responsiblePartyID: "123321",
+    manufacturer: "",
+    manufacturerID: "321123",
+    manufacturingCountry: "",
+    agent: "Omnipharma",
   });
 
   function convertToUSD() {
@@ -332,20 +346,6 @@ function AddDrug(props) {
       [name]: value,
     }));
   };
-
-  const [formDataStep12, setFormDataStep12] = useState({
-    drugImages: "",
-  });
-
-  const [formDataStep5, setFormDataStep5] = useState({
-    responsibleParty: "",
-    responsiblePartyCountry: "",
-    responsiblePartyID: "123321",
-    manufacturer: "",
-    manufacturerID: "321123",
-    manufacturingCountry: "",
-    agent: "",
-  });
 
   const logFormData = () => {
     const finalFormData = {

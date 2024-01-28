@@ -26,13 +26,14 @@ const RFImportationForm = ({ handleInputChange, rfiFormData }) => {
                 htmlFor="RequestedDrug"
                 className="labels text-lg block text-left font-medium"
               >
-                Select Requested Drug
+                Requested Drug
               </label>
               <input
                 value={rfiFormData.RequestedDrug}
                 onChange={(e) =>
                   handleInputChange("RequestedDrug", e.target.value)
                 }
+                autoFocus
                 className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
                 type="text"
                 placeholder="drug name"

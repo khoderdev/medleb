@@ -13,6 +13,12 @@ const Table = () => {
   const [agent, setAgent] = useState("");
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const userRole = useSelector(selectUserRole);
+
+  // If the user is not an admin, don't render the table
+  if (userRole !== "admin") {
+    return <div>Unauthorized access</div>;
+  }
 
   useEffect(() => {
     fetchData();
@@ -151,13 +157,13 @@ const Table = () => {
                       // className="rounded-xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 mr-2"
                       onClick={() => handleEdit(item._id)}
                     >
-                      <BsPencil style={{ color: 'green' }} /> {/* Edit icon */}
+                      <BsPencil style={{ color: "green" }} /> {/* Edit icon */}
                     </button>
                     <button
                       // className="rounded-xl bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2"
                       onClick={() => handleDelete(item.id)}
                     >
-                      <BsTrash style={{ color: 'red' }} /> {/* Delete icon */}
+                      <BsTrash style={{ color: "red" }} /> {/* Delete icon */}
                     </button>
                   </div>
                 )}

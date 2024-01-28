@@ -1,1 +1,0 @@
-import{j as r,G as t}from"./index-JHQ5FB9M.js";import o from"./Search-djDYV6el.js";import"./FilterButtons-yOooZyvt.js";import"./AlphabetButtons-8hHmOVii.js";import"./ATCContainer-IJHP-SAG.js";import"./SearchData-Grur1bri.js";function c(){return r.jsx("div",{children:r.jsx(t,{title:"Search",children:r.jsx(o,{})})})}export{c as default};

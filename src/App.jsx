@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import routes from "~react-pages";
 import { useRoutes, Route, Routes } from "react-router-dom";
-import { store } from "./app/store";
-import { Provider } from "react-redux";
+// import { store } from "./app/store";
+// import { Provider } from "react-redux";
 import { DrugProvider } from "./pages/drugs/DrugContext";
 import AddDrug from "./pages/drugs/Forms/AddDrug";
 import List from "./pages/drugs/list/List";
@@ -19,14 +19,15 @@ import Substitute from "./pages/drugs/Substitutes/";
 import LoginForm from "./pages/drugs/Forms/Separated/LoginForm";
 import SingleDrug from "./pages/drugs/list/View";
 import DrugForm from "./pages/drugs/Forms/Separated/DrugForm";
+import DrugFormEX from "./pages/drugs/Forms/Separated/DrugFormEX";
 import GetDrugs from "./pages/drugs/Forms/Separated/GetDrugs";
 import ATCForm from "./pages/drugs/Forms/Separated/ATCForm";
 import ATCCodesForm from "./pages/drugs/Forms/Separated/ATCCodesForm";
+import ParentComponent from "./pages/drugs/Forms/Separated/ParentComponent";
+import StaticData from "./pages/drugs/Forms/Separated/StaticData";
 import AuthContainer from "./components/AuthContainer";
-// import CreateUserForm from "./components/CreateUserForm";
 import UserFormContainer from "./components/UserFormContainer";
 import Table from "./Table";
-import ScrollBreakComponent from "./ScrollBreakComponent";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -39,7 +40,6 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // You can log the error to an error reporting service
     console.error(error, errorInfo);
   }
 
@@ -56,40 +56,39 @@ const App = () => {
   const routeElement = useRoutes(routes);
 
   return (
-    // <div className="app-container" ref={appContainerRef}>
-    <Provider store={store}>
-      <ErrorBoundary>
-        <DrugProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<AuthContainer />} />
-            <Route path="/scroll" element={<ScrollBreakComponent />} />
-            <Route path="/table" element={<Table />} />
-            <Route path="/newuser" element={<CreateUserForm />} />
-            <Route path="/dynaform" element={<UserFormContainer />} />
-            <Route path="/add" element={<AddDrug />} />
-            <Route path="/loginform" element={<LoginForm />} />
-            <Route path="/substitute/" element={<Substitute />} />
-            <Route path="/dashboard/" element={<Dashboards />} />
-            <Route path="/import/" element={<ImportDrug />} />
-            <Route path="/inspection/" element={<Inspection />} />
-            <Route path="/distribution/" element={<Distribution />} />
-            <Route path="/tracking/" element={<Tracking />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/newuser" element={<CreateUserForm />} />
-            <Route path="/list" element={<List />} />
-            <Route path="/editdrug/:drugId" element={<AddDrug />} />
-            <Route path="/viewdrug/:drugId" element={<SingleDrug />} />
-            <Route path="/atccodesform" element={<ATCCodesForm />} />
-            <Route path="/atcform" element={<ATCForm />} />
-            <Route path="/drugform" element={<DrugForm />} />
-            <Route path="/getdrugs" element={<GetDrugs />} />
-          </Routes>
-          <Suspense fallback={<p>Loading...</p>}>{routeElement}</Suspense>
-        </DrugProvider>
-      </ErrorBoundary>
-    </Provider>
+    <ErrorBoundary>
+      {/* <DrugProvider> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<AuthContainer />} />
+          <Route path="/table" element={<Table />} />
+          <Route path="/newuser" element={<CreateUserForm />} />
+          <Route path="/dynaform" element={<UserFormContainer />} />
+          <Route path="/add" element={<AddDrug />} />
+          <Route path="/loginform" element={<LoginForm />} />
+          <Route path="/substitute/" element={<Substitute />} />
+          <Route path="/dashboard/" element={<Dashboards />} />
+          <Route path="/import/" element={<ImportDrug />} />
+          <Route path="/inspection/" element={<Inspection />} />
+          <Route path="/distribution/" element={<Distribution />} />
+          <Route path="/tracking/" element={<Tracking />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/newuser" element={<CreateUserForm />} />
+          <Route path="/list" element={<List />} />
+          <Route path="/editdrug/:drugId" element={<AddDrug />} />
+          <Route path="/viewdrug/:drugId" element={<SingleDrug />} />
+          <Route path="/atccodesform" element={<ATCCodesForm />} />
+          <Route path="/atcform" element={<ATCForm />} />
+          <Route path="/drugform" element={<DrugForm />} />
+          <Route path="/parent" element={<ParentComponent />} />
+          <Route path="/static" element={<StaticData />} />
+          <Route path="/drugformex" element={<DrugFormEX />} />
+          <Route path="/getdrugs" element={<GetDrugs />} />
+        </Routes>
+        <Suspense fallback={<p>Loading...</p>}>{routeElement}</Suspense>
+      {/* </DrugProvider> */}
+    </ErrorBoundary>
   );
 };
 
