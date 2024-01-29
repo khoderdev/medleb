@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 
-const Geos = () => {
+const GeosForm = () => {
   const [formData, setFormData] = useState({
     // Country fields
     guid: uuidv4(),
@@ -20,6 +21,14 @@ const Geos = () => {
     code: "",
     govName: "",
     govNameAr: "",
+    enabled: true,
+    createdDate: new Date().toISOString(),
+    // Districts fields
+    guid: "",
+    governorateGuid: "",
+    code: "",
+    distName: "",
+    distNameAr: "",
     enabled: true,
     createdDate: new Date().toISOString(),
   });
@@ -51,7 +60,7 @@ const Geos = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Generate GUID for the new record in Governorate table
+      // Generate GUID for the new record in Country table
       const staticCountryGuid = uuidv4();
       // Perform API call to create a new record in Country table
       await Axios.post("/api/country/v1.0", {
@@ -62,9 +71,11 @@ const Geos = () => {
         enabled: formData.enabled,
       });
 
-      // Perform API call to create a new record in Drug_ATCCodes table
+      // Generate GUID for the new record in Governorate table
+      const governorateGuid = uuidv4();
+      // Perform API call to create a new record in Governorate table
       await Axios.post("/api/governorates/v1.0", {
-        guid: uuidv4(),
+        guid: governorateGuid,
         code: formData.staticCountryGuid,
         staticCountryGuid: staticCountryGuid,
         name: formData.govName,
@@ -72,49 +83,74 @@ const Geos = () => {
         enabled: formData.enabled,
       });
 
-      // Reset form fields after successful submission
-      setFormData({
-        guid: "",
-        code: "",
-        name: "",
-        nameAr: "",
-        enabled: true,
-        isNearByCountry: true,
-        isReferenceCountry: true,
-        isComparative: true,
-        // Governorates fields
-        guid: "",
-        staticCountryGuid: "",
-        govCode: "",
-        govName: "",
-        govNameAr: "",
-        enabled: true,
+      // Perform API call to create a new record in Districts table
+      await Axios.post("/api/district/v1.0", {
+        guid: uuidv4(),
+        code: formData.governorateGuid,
+        governorateGuid: governorateGuid, // Use the stored Governorate GUID here
+        name: formData.distName,
+        nameAr: formData.distNameAr,
+        enabled: formData.enabled,
       });
+
       console.log("Form submitted successfully");
     } catch (error) {
       console.error("Error submitting form data:", error);
       setError("Failed to submit form data");
+    } finally {
+      // Reset form fields after form submission (whether successful or not)
+      resetFormData();
     }
   };
 
+  const resetFormData = () => {
+    setFormData({
+      // Counrty fields
+      guid: "",
+      code: "",
+      name: "",
+      nameAr: "",
+      enabled: true,
+      isNearByCountry: true,
+      isReferenceCountry: true,
+      isComparative: true,
+      // Governorate fields
+      guid: "",
+      staticCountryGuid: "",
+      govCode: "",
+      govName: "",
+      govNameAr: "",
+      enabled: true,
+      // District fields
+      guid: "",
+      governorateGuid: "",
+      distCode: "",
+      distName: "",
+      distNameAr: "",
+      enabled: true,
+    });
+  };
+
   return (
-    <div className="flex flex-col max-w-lg mx-auto">
+    <div className="flex flex-col p-6 mx-auto">
       <form
-        className="grid grid-cols-2 gap-10 p-4 py-14 md:p-10"
+        className="grid grid-cols-4 gap-10 p-4 py-14 md:p-8"
         onSubmit={handleSubmit}
       >
-        {/* Drug_ATC fields */}
+        {/* Country fields */}
         <div className="flex flex-col gap-6">
           <h3 className="text-green-pri">Country</h3>
           <label className="flex flex-col">
             Counrty Code:
             <input
-              type="text"
+              type="number"
               name="code"
               value={formData.code}
               onChange={handleInputChange}
               placeholder="Code"
+              autoFocus
               minLength={3}
+              
             />
           </label>
 
@@ -143,7 +179,8 @@ const Geos = () => {
         {/* /////////////////////////////////////////////////////////////////////////////////////// */}
         {/* /////////////////////////////////////////////////////////////////////////////////////// */}
         {/* /////////////////////////////////////////////////////////////////////////////////////// */}
-        {/* Drug_ATCCodes fields */}
+
+        {/* Governorates fields */}
         <div className="flex flex-col gap-6">
           <h3 className="text-green-pri">Governorates</h3>
           <label className="flex flex-col">
@@ -178,17 +215,58 @@ const Geos = () => {
               required
             />
           </label>
-
-          {/* Add more Governorates fields as needed */}
         </div>
 
-        <button className="med-btn-pri col-span-full w-24" type="submit">
-          Submit
-        </button>
+        {/* Districts fields */}
+        <div className="flex flex-col gap-6">
+          <h3 className="text-green-pri">Districts</h3>
+          <label className="flex flex-col">
+            Code:
+            <input
+              type="text"
+              name="governorateGuid"
+              value={formData.governorateGuid}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+
+          <label className="flex flex-col">
+            Name:
+            <input
+              type="text"
+              name="distName"
+              value={formData.distName}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+
+          <label className="flex flex-col">
+            Name (Arabic):
+            <input
+              type="text"
+              name="distNameAr"
+              value={formData.distNameAr}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+        </div>
+
+        <div className="btns-col col-span-full flex justify-between">
+          <Link to="/geo/list" className="med-btn-pri">
+            Go to data table
+          </Link>
+
+          <button className="med-btn-sec w-24" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
       {error && <div style={{ color: "red" }}>{error}</div>}
     </div>
   );
 };
 
-export default Geos;
+export default GeosForm;
