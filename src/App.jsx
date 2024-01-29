@@ -21,10 +21,14 @@ import SingleDrug from "./pages/drugs/list/View";
 import DrugForm from "./pages/drugs/Forms/Separated/DrugForm";
 import DrugFormEX from "./pages/drugs/Forms/Separated/DrugFormEX";
 import GetDrugs from "./pages/drugs/Forms/Separated/GetDrugs";
-import ATCForm from "./pages/drugs/Forms/Separated/ATCForm";
 import ATCCodesForm from "./pages/drugs/Forms/Separated/ATCCodesForm";
 import ParentComponent from "./pages/drugs/Forms/Separated/ParentComponent";
 import StaticData from "./pages/drugs/Forms/Separated/StaticData";
+import ATCForm from "./pages/drugs/Forms/Separated/atc/ATCForm";
+import ATCsList from "./pages/drugs/Forms/Separated/atc/ATCsList";
+import BrandsForm from "./pages/drugs/Forms/Separated/brands/BrandsForm";
+import BrandsList from "./pages/drugs/Forms/Separated/brands/BrandsList";
+import Geos from "./pages/drugs/Forms/Separated/country/Geos";
 import AuthContainer from "./components/AuthContainer";
 import UserFormContainer from "./components/UserFormContainer";
 import Table from "./Table";
@@ -58,35 +62,40 @@ const App = () => {
   return (
     <ErrorBoundary>
       {/* <DrugProvider> */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/auth" element={<AuthContainer />} />
-          <Route path="/table" element={<Table />} />
-          <Route path="/newuser" element={<CreateUserForm />} />
-          <Route path="/dynaform" element={<UserFormContainer />} />
-          <Route path="/add" element={<AddDrug />} />
-          <Route path="/loginform" element={<LoginForm />} />
-          <Route path="/substitute/" element={<Substitute />} />
-          <Route path="/dashboard/" element={<Dashboards />} />
-          <Route path="/import/" element={<ImportDrug />} />
-          <Route path="/inspection/" element={<Inspection />} />
-          <Route path="/distribution/" element={<Distribution />} />
-          <Route path="/tracking/" element={<Tracking />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/newuser" element={<CreateUserForm />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/editdrug/:drugId" element={<AddDrug />} />
-          <Route path="/viewdrug/:drugId" element={<SingleDrug />} />
-          <Route path="/atccodesform" element={<ATCCodesForm />} />
-          <Route path="/atcform" element={<ATCForm />} />
-          <Route path="/drugform" element={<DrugForm />} />
-          <Route path="/parent" element={<ParentComponent />} />
-          <Route path="/static" element={<StaticData />} />
-          <Route path="/drugformex" element={<DrugFormEX />} />
-          <Route path="/getdrugs" element={<GetDrugs />} />
-        </Routes>
-        <Suspense fallback={<p>Loading...</p>}>{routeElement}</Suspense>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<AuthContainer />} />
+        <Route path="/table" element={<Table />} />
+        <Route path="/newuser" element={<CreateUserForm />} />
+        <Route path="/dynaform" element={<UserFormContainer />} />
+        <Route path="/add" element={<AddDrug />} />
+        <Route path="/loginform" element={<LoginForm />} />
+        <Route path="/substitute/" element={<Substitute />} />
+        <Route path="/dashboard/" element={<Dashboards />} />
+        <Route path="/import/" element={<ImportDrug />} />
+        <Route path="/inspection/" element={<Inspection />} />
+        <Route path="/distribution/" element={<Distribution />} />
+        <Route path="/tracking/" element={<Tracking />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/newuser" element={<CreateUserForm />} />
+        <Route path="/list" element={<List />} />
+        <Route path="/editdrug/:drugId" element={<AddDrug />} />
+        <Route path="/viewdrug/:drugId" element={<SingleDrug />} />
+        <Route path="/atccodesform" element={<ATCCodesForm />} />
+        <Route path="/atcform" element={<ATCForm />} />
+        <Route path="/drugform" element={<DrugForm />} />
+        <Route path="/parent" element={<ParentComponent />} />
+        <Route path="/static" element={<StaticData />} />
+        <Route path="/atc/list" element={<ATCsList />} />
+        <Route path="/atc/new" element={<ATCForm />} />
+        <Route path="/brands/list" element={<BrandsList />} />
+        <Route path="/brands/new" element={<BrandsForm />} />
+        <Route path="/geo/new" element={<Geos />} />
+        <Route path="/drugformex" element={<DrugFormEX />} />
+        <Route path="/getdrugs" element={<GetDrugs />} />
+      </Routes>
+      <Suspense fallback={<p>Loading...</p>}>{routeElement}</Suspense>
       {/* </DrugProvider> */}
     </ErrorBoundary>
   );

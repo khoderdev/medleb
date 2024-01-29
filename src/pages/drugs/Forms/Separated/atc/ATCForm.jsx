@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Axios from "../../../../api/axios";
+import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
 
-const StaticData = () => {
+const ATCForm = () => {
   const [formData, setFormData, selectedRow] = useState({
     // Drug_ATC fields
     guid: uuidv4(),
@@ -116,6 +116,7 @@ const StaticData = () => {
               onChange={handleInputChange}
               required
               autoFocus
+              maxLength={3}
             />
           </label>
 
@@ -174,6 +175,7 @@ const StaticData = () => {
               name="substanceName"
               value={formData.substanceName}
               onChange={handleInputChange}
+              required
             />
           </label>
 
@@ -184,6 +186,7 @@ const StaticData = () => {
               name="atcIngredientName"
               value={formData.atcIngredientName}
               onChange={handleInputChange}
+              required
             />
           </label>
 
@@ -194,6 +197,7 @@ const StaticData = () => {
               name="atcIngredientNameAr"
               value={formData.atcIngredientNameAr}
               onChange={handleInputChange}
+              required
             />
           </label>
 
@@ -201,6 +205,7 @@ const StaticData = () => {
             Interaction Ingredient Name:
             <input
               type="text"
+              required
               name="interactionIngredientName"
               value={formData.interactionIngredientName}
               onChange={handleInputChange}
@@ -209,10 +214,11 @@ const StaticData = () => {
           <label className="flex flex-col">
             Level Number:
             <input
-              type="text"
+              type="number"
               name="levelNumber"
               value={formData.levelNumber}
               onChange={handleInputChange}
+              required
             />
           </label>
           {/* Add more Drug_ATCCodes fields as needed */}
@@ -227,4 +233,4 @@ const StaticData = () => {
   );
 };
 
-export default StaticData;
+export default ATCForm;

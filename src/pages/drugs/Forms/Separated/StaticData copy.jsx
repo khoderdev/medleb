@@ -3,7 +3,7 @@ import Axios from "../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
 
 const StaticData = () => {
-  const [formData, setFormData, selectedRow] = useState({
+  const [formData, setFormData] = useState({
     // Drug_ATC fields
     guid: uuidv4(),
     code: "",
@@ -23,7 +23,6 @@ const StaticData = () => {
     interactionIngredientName: "",
     enabled: true,
   });
-  console.log("formData in CrudTable:", formData);
 
   const [atcList, setAtcList] = useState([]);
   const [error, setError] = useState("");

@@ -1,41 +1,31 @@
 import React, { useState, useEffect } from "react";
-import Axios from "../../../../api/axios";
+import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
 
-const StaticData = () => {
-  const [formData, setFormData, selectedRow] = useState({
-    // Drug_ATC fields
+const BrandsForm = () => {
+  const [formData, setFormData] = useState({
+    // Drug_Brands fields
     guid: uuidv4(),
-    code: "",
-    levelName: "",
-    levelNameAr: "",
-    atcRelatedLabel: "",
-    enabled: true,
-    // Drug_ATCCodes fields
-    guid: "",
-    atcCode: "",
-    levelName: "",
-    levelNameAr: "",
-    levelNumber: "",
-    substanceName: "",
-    atcIngredientName: "",
-    atcIngredientNameAr: "",
-    interactionIngredientName: "",
+    countryGuid: "",
+    countryName: "",
+    countryNameAr: "",
+    name: "",
+    nameAr: "",
     enabled: true,
   });
   console.log("formData in CrudTable:", formData);
 
-  const [atcList, setAtcList] = useState([]);
+  const [brandsList, setBrandsList] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Axios.get("/api/atc/v1.0");
-        setAtcList(response.data);
+        const response = await Axios.get("/api/brands/v1.0");
+        setBrandsList(response.data);
       } catch (error) {
-        console.error("Error fetching ATC data:", error);
-        setError("Failed to fetch ATC data");
+        console.error("Error fetching BRANDS data:", error);
+        setError("Failed to fetch BRANDS data");
       }
     };
 
@@ -227,4 +217,4 @@ const StaticData = () => {
   );
 };
 
-export default StaticData;
+export default BrandsForm;
