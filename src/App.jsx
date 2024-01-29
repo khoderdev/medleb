@@ -29,6 +29,7 @@ import ATCsList from "./pages/drugs/Forms/Separated/atc/ATCsList";
 import BrandsForm from "./pages/drugs/Forms/Separated/brands/BrandsForm";
 import BrandsList from "./pages/drugs/Forms/Separated/brands/BrandsList";
 import Geos from "./pages/drugs/Forms/Separated/country/Geos";
+import GeosList from "./pages/drugs/Forms/Separated/country/GeosList";
 import AuthContainer from "./components/AuthContainer";
 import UserFormContainer from "./components/UserFormContainer";
 import Table from "./Table";
@@ -92,6 +93,7 @@ const App = () => {
         <Route path="/brands/list" element={<BrandsList />} />
         <Route path="/brands/new" element={<BrandsForm />} />
         <Route path="/geo/new" element={<Geos />} />
+        <Route path="/geo/list" element={<GeosList />} />
         <Route path="/drugformex" element={<DrugFormEX />} />
         <Route path="/getdrugs" element={<GetDrugs />} />
       </Routes>
