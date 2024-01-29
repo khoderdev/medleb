@@ -140,7 +140,7 @@ const GeosForm = () => {
         {/* Country fields */}
         <div className="flex flex-col gap-6">
           <h3 className="text-green-pri">Country</h3>
-          <label className="flex flex-col">
+          <label className="flex flex-col mt-[-0.3rem]">
             Counrty Code:
             <input
               type="number"

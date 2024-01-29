@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Axios from "../../../../../api/axios";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const GeosList = () => {
   const { guid } = useParams();
   const [data, setData] = useState([]);
-  const [governoratesData, setGovernoratesData] = useState([]);
+  const [governoratesAndDistrictsData, setGovernoratesAndDistrictsData] =
+    useState([]);
   const [selectedCountryGuid, setSelectedCountryGuid] = useState(null);
   const [selectedCountryName, setSelectedCountryName] = useState("");
 
@@ -29,29 +30,49 @@ const GeosList = () => {
   }, []);
 
   useEffect(() => {
-    const fetchGovernoratesData = async () => {
+    const fetchGovernoratesAndDistrictsData = async () => {
       try {
         if (selectedCountryGuid) {
           console.log(
-            "Fetching governoratesData for country:",
+            "Fetching governorates for country:",
             selectedCountryGuid
           );
           const governoratesResponse = await Axios.get(
-            `/api/governorates/v1.0/governorates/${selectedCountryGuid}?Enabled=true&sortOrder=desc`
+            `/api/governorates/v1.0/governorates/${selectedCountryGuid}`
           );
-          console.log("Response governoratesData:", governoratesResponse.data);
-          setGovernoratesData(
-            Array.isArray(governoratesResponse.data)
-              ? governoratesResponse.data
-              : []
-          );
+          console.log("Response governorates data:", governoratesResponse.data);
+
+          const governorates = Array.isArray(governoratesResponse.data)
+            ? governoratesResponse.data
+            : [];
+
+          // Fetch districts for each governorate
+          const promises = governorates.map(async (governorate) => {
+            const districtsResponse = await Axios.get(
+              `/api/District/v1.0/District/${governorate.guid}`
+            );
+            console.log(
+              "Response districts data for governorate:",
+              governorate.guid,
+              districtsResponse.data
+            );
+            return {
+              governorate: governorate,
+              districts: Array.isArray(districtsResponse.data)
+                ? districtsResponse.data
+                : [],
+            };
+          });
+
+          const governoratesAndDistricts = await Promise.all(promises);
+          setGovernoratesAndDistrictsData(governoratesAndDistricts);
         }
       } catch (error) {
-        console.error("Error fetching governorates data:", error);
+        console.error("Error fetching governorates and districts data:", error);
       }
     };
 
-    fetchGovernoratesData();
+    fetchGovernoratesAndDistrictsData();
   }, [selectedCountryGuid]);
 
   const handleCountrySelection = async (event) => {
@@ -68,7 +89,7 @@ const GeosList = () => {
   return (
     <div className="container mx-auto h-screen border-2">
       <h2 className="text-center mb-4">Country Table</h2>
-      <div className="flex justify-between items-center mb-2 border-2 border-yellow-500">
+      <div className="flex justify-between items-center mb-4">
         <div className="selection-col">
           <select className="mb-2" onChange={handleCountrySelection}>
             <option value="">Select a country</option>
@@ -102,22 +123,39 @@ const GeosList = () => {
       </div>
 
       <div>
-        {governoratesData.length > 0 ? (
+        {governoratesAndDistrictsData.length > 0 ? (
           <table className="min-w-full table-auto">
             <thead>
               <tr>
-                <th className="w-24 px-4 py-2">Code</th>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Name (Arabic)</th>
+                <th className="text-left px-4 py-2">Governorate Code</th>
+                <th className="text-left px-4 py-2">Governorate Name</th>
+                <th className="text-left px-4 py-2">District Code</th>
+                <th className="text-left px-4 py-2">District Name</th>
               </tr>
             </thead>
             <tbody>
-              {governoratesData.map((item, index) => (
-                <tr key={index} className="hover:bg-gray-100">
-                  <td className="border px-4 py-2">{item.code}</td>
-                  <td className="border px-4 py-2">{item.name}</td>
-                  <td className="border px-4 py-2">{item.nameAr}</td>
-                </tr>
+              {governoratesAndDistrictsData.map((item, index) => (
+                <React.Fragment key={index}>
+                  <tr className="bg-gray-300">
+                    <td colSpan="4">{item.governorate.name}</td>
+                  </tr>
+                  {item.districts.map((district, idx) => (
+                    <tr key={`${index}-${idx}`} className="hover:bg-gray-100">
+                      <td className="border-b font-bold px-4 py-2">
+                        {item.governorate.code}
+                      </td>
+                      <td className="border-b font-bold px-4 py-2">
+                        {item.governorate.name}
+                      </td>
+                      <td className="border-b font-bold px-4 py-2">
+                        {district.code}
+                      </td>
+                      <td className="border-b font-bold px-4 py-2">
+                        {district.name}
+                      </td>
+                    </tr>
+                  ))}
+                </React.Fragment>
               ))}
             </tbody>
           </table>
