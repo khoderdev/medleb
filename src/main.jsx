@@ -6,13 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DashboardLayout } from "./dashboard/Layout";
 import { DarkModeProvider } from "./DarkModeContext";
 import Modal from "react-modal";
-// import { QueryClient, QueryClientProvider } from "react-query";
+import configureLocalForage from "./localforageConfig";
 import store from "./app/store";
 import { Provider } from "react-redux";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./app/react-query/queryClient";
-
 // import { AccessTokenProvider } from "./context/AccessTokenContext";
+
+configureLocalForage();
 
 Modal.setAppElement("#root");
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,15 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           {/* <AccessTokenProvider> */}
-            <DarkModeProvider>
-              <BrowserRouter>
-                <DashboardLayout>
-                  <Routes>
-                    <Route path="/*" element={<App />} />
-                  </Routes>
-                </DashboardLayout>
-              </BrowserRouter>
-            </DarkModeProvider>
+          <DarkModeProvider>
+            <BrowserRouter>
+              <DashboardLayout>
+                <Routes>
+                  <Route path="/*" element={<App />} />
+                </Routes>
+              </DashboardLayout>
+            </BrowserRouter>
+          </DarkModeProvider>
           {/* </AccessTokenProvider> */}
         </QueryClientProvider>
       </Provider>

@@ -31,26 +31,18 @@ const GeosForm = () => {
     distNameAr: "",
     enabled: true,
     createdDate: new Date().toISOString(),
+    // Cities fields
+    guid: "",
+    districtGuid: "",
+    code: "",
+    cityName: "",
+    cityNameAr: "",
+    enabled: true,
+    createdDate: new Date().toISOString(),
   });
-
-  console.log("formData:", formData);
 
   const [countryList, setCountryList] = useState([]);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await Axios.get("/api/country/v1.0");
-        setCountryList(response.data);
-      } catch (error) {
-        console.error("Error fetching Country data:", error);
-        setError("Failed to fetch Country data");
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -60,9 +52,9 @@ const GeosForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Generate GUID for the new record in Country table
+      // Generate GUID for the new record in Country records
       const staticCountryGuid = uuidv4();
-      // Perform API call to create a new record in Country table
+      // Perform API call to create a new record in Country records
       await Axios.post("/api/country/v1.0", {
         guid: staticCountryGuid,
         code: formData.code,
@@ -71,9 +63,9 @@ const GeosForm = () => {
         enabled: formData.enabled,
       });
 
-      // Generate GUID for the new record in Governorate table
+      // Generate GUID for the new record in Governorate records
       const governorateGuid = uuidv4();
-      // Perform API call to create a new record in Governorate table
+      // Perform API call to create a new record in Governorate records
       await Axios.post("/api/governorates/v1.0", {
         guid: governorateGuid,
         code: formData.staticCountryGuid,
@@ -83,13 +75,25 @@ const GeosForm = () => {
         enabled: formData.enabled,
       });
 
-      // Perform API call to create a new record in Districts table
+      // Generate GUID for the new record in Districts records
+      const districtGuid = uuidv4();
+      // Perform API call to create a new record in Districts records
       await Axios.post("/api/district/v1.0", {
-        guid: uuidv4(),
-        code: formData.governorateGuid,
-        governorateGuid: governorateGuid, // Use the stored Governorate GUID here
+        guid: districtGuid,
+        code: formData.distCode, // Assuming there's a field for District code in the form
+        governorateGuid: governorateGuid,
         name: formData.distName,
         nameAr: formData.distNameAr,
+        enabled: formData.enabled,
+      });
+      console.log("district GUID 1", districtGuid);
+      // Perform API call to create a new record in Cities records
+      await Axios.post("/api/city/v1.0", {
+        guid: uuidv4(),
+        code: formData.cityCode, // Assuming there's a field for City code in the form
+        districtGuid: districtGuid,
+        name: formData.cityName,
+        nameAr: formData.cityNameAr,
         enabled: formData.enabled,
       });
 
@@ -100,9 +104,10 @@ const GeosForm = () => {
     } finally {
       // Reset form fields after form submission (whether successful or not)
       resetFormData();
+      console.log("district GUID 2", districtGuid);
     }
   };
-
+  // console.log("district GUID 2", districtGuid);
   const resetFormData = () => {
     setFormData({
       // Counrty fields
@@ -128,6 +133,13 @@ const GeosForm = () => {
       distName: "",
       distNameAr: "",
       enabled: true,
+      // Cities fields
+      guid: "",
+      districtGuid: "",
+      cityCode: "",
+      cityName: "",
+      cityNameAr: "",
+      enabled: true,
     });
   };
 
@@ -140,17 +152,15 @@ const GeosForm = () => {
         {/* Country fields */}
         <div className="flex flex-col gap-6">
           <h3 className="text-green-pri">Country</h3>
-          <label className="flex flex-col mt-[-0.3rem]">
+          <label className="flex flex-col">
             Counrty Code:
             <input
-              type="number"
+              type="text"
               name="code"
               value={formData.code}
               onChange={handleInputChange}
-              placeholder="Code"
+              placeholder="+961"
               autoFocus
-              minLength={3}
-              
             />
           </label>
 
@@ -173,12 +183,7 @@ const GeosForm = () => {
               onChange={handleInputChange}
             />
           </label>
-
-          {/* Add more Country fields as needed */}
         </div>
-        {/* /////////////////////////////////////////////////////////////////////////////////////// */}
-        {/* /////////////////////////////////////////////////////////////////////////////////////// */}
-        {/* /////////////////////////////////////////////////////////////////////////////////////// */}
 
         {/* Governorates fields */}
         <div className="flex flex-col gap-6">
@@ -224,8 +229,8 @@ const GeosForm = () => {
             Code:
             <input
               type="text"
-              name="governorateGuid"
-              value={formData.governorateGuid}
+              name="distCode"
+              value={formData.distCode}
               onChange={handleInputChange}
               required
             />
@@ -254,9 +259,46 @@ const GeosForm = () => {
           </label>
         </div>
 
+        {/* Cities fields */}
+        <div className="flex flex-col gap-6">
+          <h3 className="text-green-pri">Cities</h3>
+          <label className="flex flex-col">
+            Code:
+            <input
+              type="text"
+              name="cityCode"
+              value={formData.cityCode}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+
+          <label className="flex flex-col">
+            Name:
+            <input
+              type="text"
+              name="cityName"
+              value={formData.cityName}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+
+          <label className="flex flex-col">
+            Name (Arabic):
+            <input
+              type="text"
+              name="cityNameAr"
+              value={formData.cityNameAr}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+        </div>
+
         <div className="btns-col col-span-full flex justify-between">
           <Link to="/geo/list" className="med-btn-pri">
-            Go to data table
+            Go to data records
           </Link>
 
           <button className="med-btn-sec w-24" type="submit">
