@@ -4,6 +4,8 @@ import localforage from "localforage";
 import { useTable, useSortBy } from "react-table";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const STORAGE_KEY = "countriesData";
 
@@ -112,7 +114,9 @@ const GeosList = () => {
   );
 
   const filteredCountries = React.useMemo(() => {
-    const lowercaseSearchTerm = searchTerm.toLowerCase().trim();
+    const lowercaseSearchTerm = searchTerm
+      ? searchTerm.toLowerCase().trim()
+      : "";
     return countriesData.filter((country) => {
       // Check if any field contains the search term
       return Object.values(country).some((value) =>
@@ -125,18 +129,27 @@ const GeosList = () => {
     useTable({ columns, data: filteredCountries }, useSortBy);
 
   return (
-    <div className="container mx-auto px-10">
-      <h2 className="text-2xl text-center font-bold mb-4">Countries Info List</h2>
-      <div className="flex justify-between items-center p-6">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="border border-gray-300 p-2 mb-4"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+    <div className="container mx-auto pt-10 md:px-10">
+      <h2 className="text-2xl text-center font-bold mb-4">
+        Countries Info List
+      </h2>
+      <div className="flex justify-between items-center pb-4 py-6">
+        <Autocomplete
+          disablePortal
+          id="search"
+          options={filteredCountries.map((country) => country.name)}
+          sx={{ width: 250 }}
+          value={searchTerm ? searchTerm : null}
+          onChange={(event, newValue) => {
+            setSearchTerm(newValue); // Update searchTerm when value changes
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="countries" autoComplete="off" />
+          )}
         />
+
         <Link to="/geo/new" className="med-btn-pri">
-          Add New
+          New
         </Link>
       </div>
 

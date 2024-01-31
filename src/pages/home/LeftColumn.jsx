@@ -71,8 +71,8 @@
 import React from "react";
 
 const containerStyle = {
-  backgroundImage: `url('/src/images/EB-Quote.png')`,
-  // backgroundImage: `url('/src/images/EB-Quote.png')`,
+  // backgroundImage: { EBQuote },
+  backgroundImage: `url('/assets/EB-Quote.png')`,
   // backgroundSize: "50% 70%",
   // backgroundSize: "contain",
   // backgroundPosition: "center",

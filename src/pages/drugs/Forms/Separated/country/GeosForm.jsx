@@ -146,7 +146,7 @@ const GeosForm = () => {
   return (
     <div className="flex flex-col p-6 mx-auto">
       <form
-        className="grid grid-cols-4 gap-10 p-4 py-14 md:p-8"
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-4 py-14 md:p-8"
         onSubmit={handleSubmit}
       >
         {/* Country fields */}
