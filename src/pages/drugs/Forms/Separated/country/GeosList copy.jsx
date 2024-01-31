@@ -2,30 +2,35 @@ import React, { useState, useEffect } from "react";
 import Axios from "../../../../../api/axios";
 import localforage from "localforage";
 import { useTable, useSortBy } from "react-table";
-import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa"; // Import the icons
 import { Link } from "react-router-dom";
 
-const STORAGE_KEY = "countriesData";
+const STORAGE_KEY = "countriesData"; // Define a storage key
 
 const GeosList = () => {
   const [countriesData, setCountriesData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // Retrieve accessToken from localStorage
+  const accessToken = localStorage.getItem("accessToken");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-
         let cachedData = localStorage.getItem(STORAGE_KEY);
         if (cachedData) {
+          // If cached data exists, parse and set it
           setCountriesData(JSON.parse(cachedData));
           setLoading(false);
+        } else {
+          // const response = await Axios.get("/api/country/v1.0/countries", {
+          //   headers: {
+          //     Authorization: `Bearer ${accessToken}`,
+          //   },
         }
-
         const response = await Axios.get("/api/country/v1.0/countries");
         const countries = response.data;
-
         const updatedCountries = await Promise.all(
           countries.map(async (country) => {
             try {
@@ -70,11 +75,17 @@ const GeosList = () => {
             }
           })
         );
-
         setCountriesData(updatedCountries);
         setLoading(false);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedCountries));
+        // Store the fetched data in localforage
         localforage.setItem("countriesData", updatedCountries);
+
+        // Store the fetched data in sessionStorage
+        sessionStorage.setItem(
+          "countriesData",
+          JSON.stringify(updatedCountries)
+        );
       } catch (error) {
         console.log("Error fetching countries data:", error);
         setLoading(false);
@@ -111,31 +122,27 @@ const GeosList = () => {
     []
   );
 
-  const filteredCountries = React.useMemo(() => {
-    const lowercaseSearchTerm = searchTerm.toLowerCase().trim();
-    return countriesData.filter((country) => {
-      // Check if any field contains the search term
-      return Object.values(country).some((value) =>
-        String(value).toLowerCase().includes(lowercaseSearchTerm)
-      );
-    });
-  }, [countriesData, searchTerm]);
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: filteredCountries }, useSortBy);
+    useTable({ columns, data: countriesData }, useSortBy);
+
+  const filteredCountries = countriesData.filter(
+    (country) =>
+      country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      country.code.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="container mx-auto px-10">
-      <h2 className="text-2xl text-center font-bold mb-4">Countries Info List</h2>
+    <div className=" w-full mx-auto p-4 overflow-x-auto">
+      <h2 className="text-2xl font-bold mb-4">Countries Info List</h2>
       <div className="flex justify-between items-center p-6">
         <input
           type="text"
           placeholder="Search..."
-          className="border border-gray-300 p-2 mb-4"
+          className="border border-gray-500 p-2 mb-4"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Link to="/geo/new" className="med-btn-pri">
+        <Link to="/geo/new" className=" med-btn-pri">
           Add New
         </Link>
       </div>
@@ -145,61 +152,58 @@ const GeosList = () => {
           <div className="loader ease-linear rounded-full border-8 border-t-8 border-green-pri absolute top-80 right-50 h-20 w-20"></div>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table
-            {...getTableProps()}
-            className="min-w-full table-auto"
-            // className="border-collapse border border-gray-300 w-full"
-          >
-            <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                      className="border border-gray-300 p-2"
-                    >
-                      {column.render("Header")}
-                      <span>
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <FaSortDown />
-                          ) : (
-                            <FaSortUp />
-                          )
-                        ) : (
-                          <FaSort />
-                        )}
-                      </span>
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr
-                    {...row.getRowProps()}
-                    className="border text-center border-gray-300 hover:bg-gray-100"
+        <table
+          {...getTableProps()}
+          className="border-collapse border border-gray-500 w-full"
+        >
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    className="border border-gray-500 p-2"
                   >
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          className="border-b border-gray-300 p-2"
-                        >
-                          {cell.render("Cell")}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <FaSortDown />
+                        ) : (
+                          <FaSortUp />
+                        )
+                      ) : (
+                        <FaSort />
+                      )}
+                    </span>
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className="border-b text-center border-gray-500"
+                >
+                  {row.cells.map((cell) => {
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                        className="border-b border-gray-500 p-2"
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       )}
     </div>
   );
