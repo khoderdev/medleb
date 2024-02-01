@@ -1,120 +1,17 @@
-// import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { setAccessToken } from "../app/auth/authSlice";
-// import axios from "axios";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEye,
+  faEyeSlash,
+  faCheck,
+  faTimes,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
 
-// const Login = () => {
-//   const dispatch = useDispatch();
-//   const { setToken } = setAccessToken();
-//   const [formData, setFormData] = useState({
-//     username: "",
-//     password: "",
-//   });
-//   const [authStatus, setAuthStatus] = useState(null);
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const response = await axios.post(
-//         "http://85.112.70.8:3010/api/users/v1.0/authenticate",
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({
-//             username: formData.username,
-//             password: formData.password,
-//           }),
-//         }
-//       );
-
-//       console.log("Response status:", response.status);
-//       console.log("Response headers:", response.headers);
-
-//       const responseBody = await response.json();
-//       console.log("Response body:", responseBody);
-
-//       if (response.ok) {
-//         const { userDetails } = responseBody;
-
-//         if ("token" in userDetails) {
-//           dispatch(setAccessToken(userDetails.token)); // Dispatch the action
-//           window.localStorage.setItem("accessToken", userDetails.token);
-//           setAuthStatus("Authenticated successfully");
-//         } else {
-//           console.error(
-//             "Authentication failed: Token not found in the userDetails object"
-//           );
-//           setAuthStatus("Authentication failed");
-//         }
-//       } else {
-//         console.error("Authentication failed");
-//         setAuthStatus("Authentication failed");
-//       }
-//     } catch (error) {
-//       console.error("Authentication error:", error);
-//       setAuthStatus("Authentication error");
-//     }
-//   };
-
-//   return (
-//     <div className="flex flex-col pt-16 items-center h-screen">
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label htmlFor="username">Username</label>
-//           <input
-//             type="text"
-//             id="username"
-//             name="username"
-//             value={formData.username}
-//             onChange={handleChange}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label htmlFor="password">Password</label>
-//           <input
-//             type="password"
-//             id="password"
-//             name="password"
-//             value={formData.password}
-//             onChange={handleChange}
-//             required
-//           />
-//         </div>
-//         <button type="submit">Login</button>
-//       </form>
-//       {authStatus && (
-//         <div
-//           className={`font-bold ${
-//             authStatus === "Authenticated successfully"
-//               ? "text-green-500"
-//               : "text-red-500"
-//           }`}
-//         >
-//           {authStatus}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Login;
-import React, { useState } from "react";
-
-const Login = () => {
+const Login = ({ switchToRegister }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null); // State to hold error message
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -151,29 +48,62 @@ const Login = () => {
   };
 
   return (
-    <div>
-      {error && <p>{error}</p>}
-      <form onSubmit={handleLogin}>
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
+    <div className="flex flex-col items-center text-left p-4 pt-16 overflow-hidden bg-white-bg dark:bg-black-bg dark:text-white-text h-[100dvh]">
+      <section className="login-section bg-white shadow-md rounded-xl p-8 max-w-sm w-full">
+        <h1 className="text-2xl font-semibold mb-4">Login</h1>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div className="flex flex-col">
+            <label htmlFor="username" className="text-sm font-medium">
+              Username:
+            </label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="mt-1 mb-2 w-full rounded-full border border-[#00a65100] dark:text-white-text dark:border-black-border bg-white-bg dark:bg-black-input px-6 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
+            />
+          </div>
+          <div className="flex flex-col relative">
+            <label htmlFor="password" className="text-sm font-medium">
+              Password:
+            </label>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 mb-2 w-full rounded-full border border-[#00a65100] dark:text-white-text dark:border-black-border bg-white-bg dark:bg-black-input px-6 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-4 top-[3rem] transform -translate-y-1/2 cursor-pointer"
+            >
+              <FontAwesomeIcon
+                icon={showPassword ? faEyeSlash : faEye}
+                className="text-gray-500"
+              />
+            </button>
+            {/* </div> */}
+          </div>
+          <button
+            type="submit"
+            className="bg-green-500 text-white rounded-md py-2 hover:bg-green-600 transition duration-300"
+          >
+            Login
+          </button>
+        </form>
+        <p className="mt-4">
+          Don't have an account?{" "}
+          <button
+            onClick={switchToRegister}
+            className="text-green-500 hover:underline focus:outline-none"
+          >
+            Register
+          </button>
+        </p>
+      </section>
     </div>
   );
 };
