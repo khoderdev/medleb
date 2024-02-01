@@ -14,6 +14,11 @@ const GeosList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
+
+  useEffect(() => {
+    setOpen(false); // Close the dropdown list when the component mounts
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -129,23 +134,17 @@ const GeosList = () => {
     useTable({ columns, data: filteredCountries }, useSortBy);
 
   return (
-    <div className="container mx-auto pt-10 md:px-10">
+    <div className="container mx-auto pt-10 md:px-10 text-black-text dark:text-white-text">
       <h2 className="text-2xl text-center font-bold mb-4">
         Countries Info List
       </h2>
       <div className="flex justify-between items-center pb-4 py-6">
-        <Autocomplete
-          disablePortal
-          id="search"
-          options={filteredCountries.map((country) => country.name)}
-          sx={{ width: 250 }}
-          value={searchTerm ? searchTerm : null}
-          onChange={(event, newValue) => {
-            setSearchTerm(newValue); // Update searchTerm when value changes
-          }}
-          renderInput={(params) => (
-            <TextField {...params} label="countries" autoComplete="off" />
-          )}
+        <input
+          label="Search countries"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          autoComplete="off"
+          className="rounded-md dark:border-white-text text-black-text dark:text-white-text bg-white-bg dark:bg-black-bg dark:focus:border-transparent outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
         />
 
         <Link to="/geo/new" className="med-btn-pri">
@@ -170,7 +169,7 @@ const GeosList = () => {
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps(column.getSortByToggleProps())}
-                      className="border border-gray-300 p-2"
+                      className="border border-gray-300 p-2 dark:border-black-contents p-2"
                     >
                       {column.render("Header")}
                       <span>
@@ -195,13 +194,13 @@ const GeosList = () => {
                 return (
                   <tr
                     {...row.getRowProps()}
-                    className="border text-center border-gray-300 hover:bg-gray-100"
+                    className="border text-center border-gray-300 p-2 dark:border-black-contents dark:hover:bg-black-contents"
                   >
                     {row.cells.map((cell) => {
                       return (
                         <td
                           {...cell.getCellProps()}
-                          className="border-b border-gray-300 p-2"
+                          className="border-b border-gray-300 p-2 dark:border-black-contents"
                         >
                           {cell.render("Cell")}
                         </td>

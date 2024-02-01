@@ -8,6 +8,7 @@ import { FaRegBell } from "react-icons/fa";
 import FullscreenButton from "../../components/FullscreenButton";
 import { FiLogIn } from "react-icons/fi";
 import { RiUserAddLine } from "react-icons/ri";
+import { AiOutlineDatabase } from "react-icons/ai";
 
 const SidebarRight = () => {
   const [isActive, setIsActive] = useState(false);
@@ -118,6 +119,24 @@ const SidebarRight = () => {
                     Notifications
                   </span>
                 </Link>
+
+                <Link
+                  to="/static"
+                  className="flex cursor-pointer items-center"
+                  onClick={() => handleIconClick()}
+                >
+                  <AiOutlineDatabase
+                    className={`text-[33px] ${
+                      activeIcon === "bell"
+                        ? "text-[#00a651]"
+                        : "text-[#9CA5BF]"
+                    } hover:text-[#00a651]`}
+                    onClick={() => handleIconsClick("data")}
+                  />
+                  <span className="text-md ml-4 text-gray-900 dark:text-gray-100">
+                    Static Data
+                  </span>
+                </Link>
               </div>
             </div>
           ) : (
@@ -147,6 +166,15 @@ const SidebarRight = () => {
                     activeIcon === "bell" ? "text-[#00a651]" : "text-[#9CA5BF]"
                   } hover:text-[#00a651]`}
                   onClick={() => handleIconsClick("bell")}
+                />
+              </Link>
+
+              <Link to="/static" onClick={() => handleIconClick()}>
+                <AiOutlineDatabase
+                  className={`text-[33px] ${
+                    activeIcon === "bell" ? "text-[#00a651]" : "text-[#9CA5BF]"
+                  } hover:text-[#00a651]`}
+                  onClick={() => handleIconsClick("data")}
                 />
               </Link>
             </div>

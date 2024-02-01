@@ -23,13 +23,14 @@ import DrugFormEX from "./pages/drugs/Forms/Separated/DrugFormEX";
 import GetDrugs from "./pages/drugs/Forms/Separated/GetDrugs";
 import ATCCodesForm from "./pages/drugs/Forms/Separated/ATCCodesForm";
 import ParentComponent from "./pages/drugs/Forms/Separated/ParentComponent";
-import StaticData from "./pages/drugs/Forms/Separated/StaticData";
+import StaticDataPage from "./pages/drugs/Forms/Separated/StaticDataPage";
 import ATCForm from "./pages/drugs/Forms/Separated/atc/ATCForm";
 import ATCsList from "./pages/drugs/Forms/Separated/atc/ATCsList";
 import BrandsForm from "./pages/drugs/Forms/Separated/brands/BrandsForm";
 import BrandsList from "./pages/drugs/Forms/Separated/brands/BrandsList";
 import GeosForm from "./pages/drugs/Forms/Separated/country/GeosForm";
 import GeosList from "./pages/drugs/Forms/Separated/country/GeosList";
+import AgentsList from "./pages/drugs/Forms/Separated/agents/AgentsList";
 import AuthContainer from "./components/AuthContainer";
 import UserFormContainer from "./components/UserFormContainer";
 import Table from "./Table";
@@ -87,13 +88,14 @@ const App = () => {
         <Route path="/atcform" element={<ATCForm />} />
         <Route path="/drugform" element={<DrugForm />} />
         <Route path="/parent" element={<ParentComponent />} />
-        <Route path="/static" element={<StaticData />} />
+        <Route path="/static" element={<StaticDataPage />} />
         <Route path="/atc/list" element={<ATCsList />} />
         <Route path="/atc/new" element={<ATCForm />} />
         <Route path="/brands/list" element={<BrandsList />} />
         <Route path="/brands/new" element={<BrandsForm />} />
         <Route path="/geo/new" element={<GeosForm />} />
         <Route path="/geo/list" element={<GeosList />} />
+        <Route path="/agents/list" element={<AgentsList />} />
         <Route path="/drugformex" element={<DrugFormEX />} />
         <Route path="/getdrugs" element={<GetDrugs />} />
       </Routes>
