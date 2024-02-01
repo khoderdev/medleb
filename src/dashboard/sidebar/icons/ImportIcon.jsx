@@ -1,26 +1,41 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export function ImportIcon() {
   const [activeState, setActiveState] = useState("default");
+  const [isHovered, setIsHovered] = useState(false);
+  const iconRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setActiveState(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleMouseEnter = () => {
-    setActiveState("hovered");
+    setIsHovered("hovered");
   };
 
   const handleMouseLeave = () => {
-    setActiveState("default");
+    setIsHovered("default");
   };
 
   const handleClick = () => {
     setActiveState(activeState === "active" ? "default" : "active");
   };
+
   return (
     <svg
+      ref={iconRef}
       width="38"
       height="38"
       viewBox="0 0 62 62"
-      // fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -28,7 +43,7 @@ export function ImportIcon() {
       fill={
         activeState === "active"
           ? "#00a651" // Active color
-          : activeState === "hovered"
+          : isHovered === "hovered"
           ? "#00a651" // Hover color
           : "none" // Default color
       }
@@ -41,15 +56,21 @@ export function ImportIcon() {
         rx="21"
         stroke="#00a651"
         strokeWidth="2"
+        fill={
+          activeState === "active"
+            ? "#00a651" // Active color
+            : isHovered === "hovered"
+            ? "#00a651" // Hover color
+            : "" // Default color
+        }
       />
 
       <path
         d="M17 33.6529L17 40.6651C17 43.1157 18.909 45.1023 21.264 45.1023H26.236H34.764H39.736C42.091 45.1023 44 43.1157 44 40.6651V33.6529"
-        // stroke="#00a651"
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -58,7 +79,7 @@ export function ImportIcon() {
         fill={
           activeState === "active"
             ? "#00a651" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#00a651" // Hover color
             : "" // Default color
         }
@@ -72,7 +93,7 @@ export function ImportIcon() {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -85,19 +106,12 @@ export function ImportIcon() {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
         strokeWidth="5"
         strokeLinecap="round"
-        // fill={
-        //   activeState === "active"
-        //     ? "#00a651" // Active color
-        //     : activeState === "hovered"
-        //     ? "#00a651" // Hover color
-        //     : "#00a651" // Default color
-        // }
       />
 
       <path
@@ -105,7 +119,7 @@ export function ImportIcon() {
         stroke={
           activeState === "active"
             ? "#00a651" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#00a651" // Hover color
             : "#fff" // Default color
         }
@@ -113,7 +127,7 @@ export function ImportIcon() {
         strokeWidth={
           activeState === "active"
             ? "0.5" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "0.5" // Hover color
             : "1.1" // Default color
         }

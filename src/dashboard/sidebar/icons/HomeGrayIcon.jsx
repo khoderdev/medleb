@@ -1,7 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 export default function HomeGrayIcon() {
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const iconRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setIsActive(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -10,16 +25,17 @@ export default function HomeGrayIcon() {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+
   const handleClick = () => {
     setIsActive(!isActive);
   };
 
   return (
     <svg
+      ref={iconRef}
       width="38"
       height="38"
       viewBox="0 0 55 60"
-      // fill="none"
       fill={
         isActive
           ? "#00a651" // Active color

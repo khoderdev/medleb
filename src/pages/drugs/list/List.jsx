@@ -5,9 +5,9 @@ import List from "./DrugCardsList";
 function DrugListPage() {
   return (
     <div>
-      <GlobalPagesLayouts title="Medicines List">
-        <List className="p-3" />
-      </GlobalPagesLayouts>
+      {/* <GlobalPagesLayouts title="Medicines List"> */}
+      <List className="p-3" />
+      {/* </GlobalPagesLayouts> */}
     </div>
   );
 }

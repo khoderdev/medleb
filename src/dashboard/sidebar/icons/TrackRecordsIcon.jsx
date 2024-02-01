@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 export function TrackRecordsIcon() {
   const [activeState, setActiveState] = useState("default");
@@ -15,6 +15,13 @@ export function TrackRecordsIcon() {
     setActiveState(activeState === "active" ? "default" : "active");
   };
 
+  // Reset active state when the component unmounts
+  useEffect(() => {
+    return () => {
+      setActiveState("default");
+    };
+  }, []);
+
   return (
     <svg
       width="38"
@@ -26,8 +33,8 @@ export function TrackRecordsIcon() {
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
       style={{
-        backgroundColor: activeState === "hovered" ? "#00a651" : "transparent", // Set background color on hover
-        borderRadius: "12px", // Set border radius
+        backgroundColor: activeState === "hovered" ? "#00a651" : "transparent",
+        borderRadius: "12px",
       }}
     >
       <path

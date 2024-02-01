@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import Axios from "../../../api/axios";
 import Modal from "../../../components/Modals/TableCreateModal";
 import { BsPencil, BsTrash } from "react-icons/bs";
-import { useSelector } from "react-redux"; // Import the useSelector hook
 
-// Update API_URL
-const API_URL = "http://1.1.1.252:3500/drugs";
+// // Update API_URL
+// const API_URL = "http://1.1.1.252:3500/drugs";
 
 const List = () => {
   const [data, setData] = useState([]);
@@ -24,7 +23,7 @@ const List = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await Axios.get("./api/list");
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -33,7 +32,7 @@ const List = () => {
 
   const handleCreate = async () => {
     try {
-      const response = await axios.post(API_URL, {
+      const response = await axios.post("./api/list", {
         drugName,
         ingredients,
         agent,
@@ -108,7 +107,7 @@ const List = () => {
   };
 
   return (
-    <div className=" mt-8 p-4 bg-gray-100">
+    <div className="container w-[90%] mt-14 mx-auto bg-white-contents dark:bg-black-contents">
       <div className="flex justify-end mb-4">
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2"
@@ -131,43 +130,44 @@ const List = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr
-              key={item._id}
-              className={editingId === item.id ? "bg-yellow-200" : "bg-white"}
-            >
-              <td className="border p-2">{item.drugName}</td>
-              <td className="border p-2">{item.ingredientsAndstrength}</td>
-              <td className="border p-2">{item.agent}</td>
-              <td className="border p-2 w-16">
-                {editingId === item.id ? (
-                  <>
-                    <button
-                      className="rounded-xl bg-green-pri hover:bg-green-sec text-white font-bold py-1 px-2 mr-2"
-                      onClick={handleUpdate}
-                    >
-                      Save
-                    </button>
-                    <button
-                      className="rounded-xl bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-2"
-                      onClick={() => setEditingId(null)}
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <div className="flex gap-4">
-                    <button onClick={() => handleEdit(item._id)}>
-                      <BsPencil style={{ color: "green" }} />
-                    </button>
-                    <button onClick={() => handleClickDelete(item._id)}>
-                      <BsTrash style={{ color: "red" }} />
-                    </button>
-                  </div>
-                )}
-              </td>
-            </tr>
-          ))}
+          {Array.isArray(data) &&
+            data.map((item) => (
+              <tr
+                key={item._id}
+                className={editingId === item.id ? "bg-yellow-200" : "bg-white"}
+              >
+                <td className="border p-2">{item.drugName}</td>
+                <td className="border p-2">{item.ingredientsAndstrength}</td>
+                <td className="border p-2">{item.agent}</td>
+                <td className="border p-2 w-16">
+                  {editingId === item.id ? (
+                    <>
+                      <button
+                        className="rounded-xl bg-green-pri hover:bg-green-sec text-white font-bold py-1 px-2 mr-2"
+                        onClick={handleUpdate}
+                      >
+                        Save
+                      </button>
+                      <button
+                        className="rounded-xl bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-2"
+                        onClick={() => setEditingId(null)}
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <div className="flex gap-4">
+                      <button onClick={() => handleEdit(item._id)}>
+                        <BsPencil style={{ color: "green" }} />
+                      </button>
+                      <button onClick={() => handleClickDelete(item._id)}>
+                        <BsTrash style={{ color: "red" }} />
+                      </button>
+                    </div>
+                  )}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 

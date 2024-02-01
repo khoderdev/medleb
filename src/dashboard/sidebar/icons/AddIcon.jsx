@@ -1,14 +1,28 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 export function AddIcon() {
   const [activeState, setActiveState] = useState("default");
+  const [isHovered, setIsHovered] = useState(false);
+  const iconRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setActiveState(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleMouseEnter = () => {
-    setActiveState("hovered");
+    setIsHovered("hovered");
   };
 
   const handleMouseLeave = () => {
-    setActiveState("default");
+    setIsHovered("default");
   };
 
   const handleClick = () => {
@@ -17,6 +31,7 @@ export function AddIcon() {
 
   return (
     <svg
+      ref={iconRef}
       width="38"
       height="38"
       viewBox="0 0 62 62"
@@ -37,13 +52,10 @@ export function AddIcon() {
         fill={
           activeState === "active"
             ? "#00a651" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#00a651" // Hover color
             : "" // Default color
         }
-        style={{
-          backgroundColor: activeState === "active" ? "yellow" : "transparent",
-        }}
       />
       <path
         fillRule="evenodd"
@@ -52,18 +64,17 @@ export function AddIcon() {
         fill={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
       />
       <path
         d="M42.1167 29.8667C41.9714 30.0141 41.7736 30.0981 41.5667 30.1002H34.6C34.3972 30.1013 34.2034 30.0166 34.0667 29.8668C33.9203 29.7277 33.8361 29.5353 33.8333 29.3333C33.8343 29.1294 33.9116 28.9332 34.05 28.7833C34.197 28.6405 34.3951 28.5625 34.6 28.5667H41.5667C41.7716 28.5625 41.9697 28.6405 42.1167 28.7833C42.255 28.9332 42.3323 29.1294 42.3333 29.3333C42.3298 29.5318 42.2526 29.7219 42.1167 29.8667Z"
-        // fill="#fff"
         fill={
           activeState === "active"
             ? "#00a651" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#00a651" // Hover color
             : "#fff" // Default color
         }
@@ -72,6 +83,3 @@ export function AddIcon() {
     </svg>
   );
 }
-
-
-//#8d9f25

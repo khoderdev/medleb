@@ -16,6 +16,7 @@ import { InspectionIcon } from "./icons/InspectionIcon.jsx";
 import { TrackRecordsIcon } from "./icons/TrackRecordsIcon.jsx";
 import React from "react";
 import { Pivot as Hamburger } from "hamburger-react";
+import ThemeToggle from "./ThemeToggle";
 
 export const SidebarOffCanvas = () => {
   // const [open, setOpen] = useState(false);
@@ -24,33 +25,6 @@ export const SidebarOffCanvas = () => {
   const toggleSidebar = () => setOpen((prev) => !prev);
   const [open, setOpen] = useState(false);
   const controls = useAnimation();
-  // const [isFullscreen, setIsFullscreen] = useState(false);
-  // const toggleFullscreen = () => {
-  //   const element = document.documentElement;
-
-  //   if (!isFullscreen) {
-  //     if (element.requestFullscreen) {
-  //       element.requestFullscreen();
-  //     } else if (element.mozRequestFullScreen) {
-  //       element.mozRequestFullScreen();
-  //     } else if (element.webkitRequestFullscreen) {
-  //       element.webkitRequestFullscreen();
-  //     } else if (element.msRequestFullscreen) {
-  //       element.msRequestFullscreen();
-  //     }
-  //   } else {
-  //     if (document.exitFullscreen) {
-  //       document.exitFullscreen();
-  //     } else if (document.mozCancelFullScreen) {
-  //       document.mozCancelFullScreen();
-  //     } else if (document.webkitExitFullscreen) {
-  //       document.webkitExitFullscreen();
-  //     } else if (document.msExitFullscreen) {
-  //       document.msExitFullscreen();
-  //     }
-  //   }
-  //   setIsFullscreen(!isFullscreen);
-  // };
 
   return (
     <>
@@ -83,8 +57,10 @@ export const SidebarOffCanvas = () => {
                   <MedLebLogo />
                 </div>
                 <div className="">
-                  <div className="p-6">
-                    <FullscreenButton />
+                  
+                  <div className="pr-6 flex gap-2 items-center">
+                  <ThemeToggle />
+                    {/* <FullscreenButton /> */}
                   </div>
                 </div>
               </div>

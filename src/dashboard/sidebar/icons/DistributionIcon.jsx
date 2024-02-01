@@ -1,33 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export function DistributionIcon() {
-const [activeState, setActiveState] = useState("default");
+  const [activeState, setActiveState] = useState("default");
+  const [isHovered, setIsHovered] = useState(false);
+  const iconRef = useRef(null);
 
-const handleMouseEnter = () => {
-  setActiveState("hovered");
-};
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setActiveState(false);
+      }
+    };
 
-const handleMouseLeave = () => {
-  setActiveState("default");
-};
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
-const handleClick = () => {
-  setActiveState(activeState === "active" ? "default" : "active");
-};
+  const handleMouseEnter = () => {
+    setIsHovered("hovered");
+  };
 
+  const handleMouseLeave = () => {
+    setIsHovered("default");
+  };
+
+  const handleClick = () => {
+    setActiveState(activeState === "active" ? "default" : "active");
+  };
 
   return (
     <svg
+      ref={iconRef}
       width="38"
       height="38"
       viewBox="0 0 62 62"
-      fill="none"
+      fill={
+        activeState === "active"
+          ? "#00a651" // Active color
+          : isHovered === "hovered"
+          ? "#00a651" // Hover color
+          : "none" // Default color
+      }
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
       style={{
-        backgroundColor: activeState === "hovered" ? "#00a651" : "transparent", // Set background color on hover
         borderRadius: "12px", // Set border radius
       }}
     >
@@ -48,7 +68,7 @@ const handleClick = () => {
         fill={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -58,7 +78,7 @@ const handleClick = () => {
         fill={
           activeState === "active"
             ? "#00a651" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#00a651" // Hover color
             : "#fff" // Default color
         }
@@ -71,7 +91,7 @@ const handleClick = () => {
         fill={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -81,7 +101,7 @@ const handleClick = () => {
         fill={
           activeState === "active"
             ? "#00a651" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#00a651" // Hover color
             : "#fff" // Default color
         }
@@ -91,7 +111,7 @@ const handleClick = () => {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -104,14 +124,14 @@ const handleClick = () => {
         fill={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -123,7 +143,7 @@ const handleClick = () => {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -135,7 +155,7 @@ const handleClick = () => {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -150,7 +170,7 @@ const handleClick = () => {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -162,7 +182,7 @@ const handleClick = () => {
         fill={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -175,7 +195,7 @@ const handleClick = () => {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -187,7 +207,7 @@ const handleClick = () => {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -202,9 +222,9 @@ const handleClick = () => {
         fill={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
-            : "#00a651" // Default color
+            : "none" // Default color
         }
       />
       <path
@@ -212,7 +232,7 @@ const handleClick = () => {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }
@@ -225,7 +245,7 @@ const handleClick = () => {
         stroke={
           activeState === "active"
             ? "#fff" // Active color
-            : activeState === "hovered"
+            : isHovered === "hovered"
             ? "#fff" // Hover color
             : "#00a651" // Default color
         }

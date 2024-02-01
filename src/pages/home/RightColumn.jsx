@@ -48,7 +48,7 @@ import SearchBar from "../../pages/search/Bar";
 const RightColumn = () => {
   return (
     <div className="flex flex-col justify-around  items-center w-full h-screen lg:py-4 lg:pt-0 p-4 lg:pr-8 pb-20 sm:pb-2 gap-4 ">
-      <div className="w-full flex flex-col justify-center items-stretch lg:w-[40rem] rounded-xl p-2 pt-6 pb-4 lg:pb-5 overflow-hidden  text-black-bg dark:text-white-text ">
+      <div className="w-full flex flex-col justify-center items-stretch lg:w-[40rem] rounded-xl p-2 pt-16 pb-4 lg:pb-5 overflow-hidden  text-black-bg dark:text-white-text ">
         <label className="mb-2 text-center text-xl text-green-pri font-bold">
           Search
         </label>

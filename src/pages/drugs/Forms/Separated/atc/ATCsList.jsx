@@ -1,4 +1,4 @@
-// import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect, useMemo } from "react";
 // import Axios from "../../../../../api/axios";
 // import { Link, useParams } from "react-router-dom";
 // import { useTable, useSortBy } from "react-table";
@@ -16,13 +16,22 @@
 //       try {
 //         setLoading(true);
 
-//         const response = await Axios.get(guid ? `/api/atc/v1.0?guid=${guid}` : "/api/atc/v1.0");
+//         const response = await Axios.get(
+//           guid ? `/api/atc/v1.0?guid=${guid}` : "/api/atc/v1.0"
+//         );
 //         setData(Array.isArray(response.data) ? response.data : []);
 //         localStorage.setItem("data", JSON.stringify(response.data));
 
-//         const atcCodeResponse = await Axios.get(guid ? `/api/atccodes/codes/v1.0/${guid}` : "/api/atccodes/codes/v1.0");
-//         setAtcCodeData(Array.isArray(atcCodeResponse.data) ? atcCodeResponse.data : []);
-//         localStorage.setItem("atcCodeData", JSON.stringify(atcCodeResponse.data));
+//         // const atcCodeResponse = await Axios.get(
+//         //   guid ? `/api/atccodes/codes/v1.0/${guid}` : "/api/atccodes/codes/v1.0"
+//         // );
+//         // setAtcCodeData(
+//         //   Array.isArray(atcCodeResponse.data) ? atcCodeResponse.data : []
+//         // );
+//         // localStorage.setItem(
+//         //   "atcCodeData",
+//         //   JSON.stringify(atcCodeResponse.data)
+//         // );
 //       } catch (error) {
 //         console.error("Error fetching data:", error);
 //       } finally {
@@ -48,7 +57,7 @@
 
 //   const columns = React.useMemo(
 //     () => [
-//       { Header: "ID", accessor: "guid" },
+//       // { Header: "ID", accessor: "guid" },
 //       { Header: "Code", accessor: "code" },
 //       { Header: "Level Name", accessor: "levelName" },
 //       { Header: "Level Name (Arabic)", accessor: "levelNameAr" },
@@ -59,22 +68,42 @@
 //   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 //     useTable({ columns, data }, useSortBy);
 
+//   const filteredRows = React.useMemo(() => {
+//     const filteredData = data.filter((row) =>
+//       row.code.toLowerCase().includes(searchTerm.toLowerCase())
+//     );
+//     return filteredData;
+//   }, [data, searchTerm]);
+
+//   const handleChange = (e) => {
+//     setSearchTerm(e.target.value);
+//   };
+
 //   return (
-//     <div className="container mx-auto">
+//     <div className="container mx-auto pt-6 md:px-10 text-black-text dark:text-white-text">
 //       <div>
-//         <h2>ATCs Table</h2>
+//         <h2 className="text-2xl text-center font-bold mb-4">ATCs Table</h2>
+//         <input
+//           type="text"
+//           placeholder="Search by code"
+//           value={searchTerm}
+//           onChange={handleChange}
+//           className="rounded-md dark:border-white-text text-black-text dark:text-white-text mb-4 bg-white-bg dark:bg-black-bg shadow-md dark:shadow-black-shadow dark:focus:border-transparent outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
+//         />
 //         {loading ? (
 //           <p>Loading...</p>
 //         ) : (
-//           <div className="overflow-x-auto">
-//             <table {...getTableProps()} className="min-w-full table-auto">
+//           <div className="overflow-x-auto ">
+//             <table {...getTableProps()} className="w-full table-auto">
 //               <thead>
 //                 {headerGroups.map((headerGroup) => (
 //                   <tr {...headerGroup.getHeaderGroupProps()}>
 //                     {headerGroup.headers.map((column) => (
 //                       <th
-//                         {...column.getHeaderProps(column.getSortByToggleProps())}
-//                         className="px-4 py-2 border"
+//                         {...column.getHeaderProps(
+//                           column.getSortByToggleProps()
+//                         )}
+//                         className="px-4 py-2 border font-normal w-20"
 //                       >
 //                         {column.render("Header")}
 //                         <span>
@@ -99,12 +128,12 @@
 //                   return (
 //                     <tr
 //                       {...row.getRowProps()}
-//                       className="hover:bg-gray-100"
+//                       className="hover:bg-gray-100 dark:hover:bg-black-contents"
 //                     >
 //                       {row.cells.map((cell) => (
 //                         <td
 //                           {...cell.getCellProps()}
-//                           className="border px-4 py-2"
+//                           className="border-b px-4 py-2"
 //                         >
 //                           {cell.render("Cell")}
 //                         </td>
@@ -122,11 +151,14 @@
 // };
 
 // export default ATCsList;
-import React, { useState, useEffect , useMemo} from "react";
+
+import React, { useState, useEffect, useMemo } from "react";
 import Axios from "../../../../../api/axios";
 import { Link, useParams } from "react-router-dom";
 import { useTable, useSortBy } from "react-table";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 const ATCsList = () => {
   const { guid } = useParams();
@@ -146,16 +178,16 @@ const ATCsList = () => {
         setData(Array.isArray(response.data) ? response.data : []);
         localStorage.setItem("data", JSON.stringify(response.data));
 
-        const atcCodeResponse = await Axios.get(
-          guid ? `/api/atccodes/codes/v1.0/${guid}` : "/api/atccodes/codes/v1.0"
-        );
-        setAtcCodeData(
-          Array.isArray(atcCodeResponse.data) ? atcCodeResponse.data : []
-        );
-        localStorage.setItem(
-          "atcCodeData",
-          JSON.stringify(atcCodeResponse.data)
-        );
+        // const atcCodeResponse = await Axios.get(
+        //   guid ? `/api/atccodes/codes/v1.0/${guid}` : "/api/atccodes/codes/v1.0"
+        // );
+        // setAtcCodeData(
+        //   Array.isArray(atcCodeResponse.data) ? atcCodeResponse.data : []
+        // );
+        // localStorage.setItem(
+        //   "atcCodeData",
+        //   JSON.stringify(atcCodeResponse.data)
+        // );
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -181,7 +213,7 @@ const ATCsList = () => {
 
   const columns = React.useMemo(
     () => [
-      { Header: "ID", accessor: "guid" },
+      // { Header: "ID", accessor: "guid" },
       { Header: "Code", accessor: "code" },
       { Header: "Level Name", accessor: "levelName" },
       { Header: "Level Name (Arabic)", accessor: "levelNameAr" },
@@ -192,32 +224,37 @@ const ATCsList = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
 
-  const filteredRows = React.useMemo(() => {
-    const filteredData = data.filter((row) =>
+  const filteredRows = useMemo(() => {
+    return data.filter((row) =>
       row.code.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    return filteredData;
   }, [data, searchTerm]);
 
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
+  const handleChange = (event, newValue) => {
+    setSearchTerm(newValue ? newValue : "");
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto pt-6 md:px-10 text-black-text dark:text-white-text">
       <div>
-        <h2>ATCs Table</h2>
-        <input
-          type="text"
-          placeholder="Search by code"
+        <h2 className="text-2xl text-center font-bold mb-4">ATCs Table</h2>
+        <Autocomplete
+          disablePortal
+          id="search"
+          options={filteredRows.map((row) => row.code)} // Assuming 'code' is the property to search
+          sx={{ width: 250 }}
           value={searchTerm}
           onChange={handleChange}
+          renderInput={(params) => (
+            <TextField {...params} label="ATC Codes" autoComplete="off" />
+          )}
         />
+
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table {...getTableProps()} className="min-w-full table-auto">
+          <div className="overflow-x-auto ">
+            <table {...getTableProps()} className="w-full table-auto">
               <thead>
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
@@ -226,7 +263,7 @@ const ATCsList = () => {
                         {...column.getHeaderProps(
                           column.getSortByToggleProps()
                         )}
-                        className="px-4 py-2 border"
+                        className="px-4 py-2 border font-normal w-20"
                       >
                         {column.render("Header")}
                         <span>
@@ -246,14 +283,19 @@ const ATCsList = () => {
                 ))}
               </thead>
               <tbody {...getTableBodyProps()}>
-                {rows.map((row) => {
+                {filteredRows.map((row, rowIndex) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()} className="hover:bg-gray-100">
-                      {row.cells.map((cell) => (
+                    <tr
+                      key={rowIndex}
+                      {...row.getRowProps()}
+                      className="hover:bg-gray-100 dark:hover:bg-black-contents"
+                    >
+                      {row.cells.map((cell, cellIndex) => (
                         <td
+                          key={cellIndex}
                           {...cell.getCellProps()}
-                          className="border px-4 py-2"
+                          className="border-b px-4 py-2"
                         >
                           {cell.render("Cell")}
                         </td>

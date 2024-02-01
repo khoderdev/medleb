@@ -16,7 +16,7 @@ export default function ThemeToggle() {
         onChange={toggleDarkMode}
       />
       <label
-        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-[#00a651] hover:bg-[#00a651] dark:bg-slate-700 dark:hover:bg-slate-600/80"
+        className="flex h-7 sm:h-8 w-7 sm:w-8 cursor-pointer items-center justify-center rounded-full bg-[#00a651] hover:bg-[#00a651] dark:bg-slate-700 dark:hover:bg-slate-600/80"
         htmlFor="light-switch"
       >
         <svg
@@ -55,7 +55,3 @@ export default function ThemeToggle() {
     </div>
   );
 }
-
-
-
-
