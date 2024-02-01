@@ -13,7 +13,7 @@ const BrandsForm = () => {
     nameAr: "",
     enabled: true,
   });
-  console.log("formData in CrudTable:", formData);
+  console.log("formData in CountyForm:", formData);
 
   const [brandsList, setBrandsList] = useState([]);
   const [error, setError] = useState("");

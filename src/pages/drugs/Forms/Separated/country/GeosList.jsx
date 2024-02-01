@@ -4,8 +4,6 @@ import localforage from "localforage";
 import { useTable, useSortBy } from "react-table";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 
 const STORAGE_KEY = "countriesData";
 
@@ -13,7 +11,6 @@ const GeosList = () => {
   const [countriesData, setCountriesData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     setOpen(false); // Close the dropdown list when the component mounts

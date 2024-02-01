@@ -1073,29 +1073,305 @@
 // };
 
 // export default Table;
-import * as React from "react";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+
+
+
+import React, { useState, useEffect } from "react";
+import Axios from "./api/axios";
+import { motion } from "framer-motion";
+
+const fadeInOut = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 const Table = () => {
+  const [atcCodes, setAtcCodes] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [editableRows, setEditableRows] = useState({});
+  const [originalData, setOriginalData] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const atcResponse = await Axios.get("/api/atc/v1.0");
+        const atcItems = Array.isArray(atcResponse.data)
+          ? atcResponse.data
+          : [];
+        console.log("ATC Data:", atcItems);
+        const atcCodeData = await Promise.all(
+          atcItems.map(async (atcItem) => {
+            const atcCodeResponse = await Axios.get(
+              `/api/atccodes/v1.0/codes/${atcItem.guid}`
+            );
+            return atcCodeResponse.data;
+          })
+        );
+        console.log("ATC Code Data:", atcCodeData);
+        setAtcCodes(atcCodeData);
+        setFilteredData(atcCodeData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const sortedData = [...atcCodes].sort((a, b) => {
+      if (sortConfig.key && a[sortConfig.key] && b[sortConfig.key]) {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === "asc" ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === "asc" ? 1 : -1;
+        }
+      }
+      return 0;
+    });
+    setFilteredData(sortedData);
+  }, [sortConfig, atcCodes]);
+
+  const handleInputChange = (e, index, fieldName) => {
+    const newData = [...atcCodes];
+    newData[index] = { ...newData[index] }; // Create a copy of the nested object
+    newData[index][fieldName] = e.target.value;
+    setAtcCodes(newData);
+  };
+
+  const handleEdit = (index) => {
+    setOriginalData((prev) => ({
+      ...prev,
+      [index]: { ...atcCodes[index] },
+    }));
+
+    setEditableRows((prev) => ({
+      ...prev,
+      [index]: true,
+    }));
+  };
+
+  const handleSave = async (index) => {
+    try {
+      const atcCodeItem = atcCodes[index];
+      console.log("atcCodeItem:", atcCodeItem);
+
+      if (!atcCodeItem || !atcCodeItem[0]) {
+        console.error("Error editing data: ATC code item not found");
+        return;
+      }
+
+      const editedItem = atcCodeItem[0]; // Access the first item in the array
+      console.log("editedItem:", editedItem);
+
+      if (!editedItem || !editedItem.guid) {
+        console.error("Error editing data: Edited item or guid not found");
+        return;
+      }
+
+      const parentAtcGuid = editedItem.atcGuid; // Use atcGuid from the editedItem
+      console.log("parentAtcGuid:", parentAtcGuid);
+
+      if (!parentAtcGuid) {
+        console.error("Error editing data: Parent ATC GUID not found");
+        return;
+      }
+
+      const config = {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      };
+
+      const requestBody = {
+        guid: editedItem.guid,
+        atcGuid: parentAtcGuid,
+        code: editedItem.code,
+        levelName: editedItem.levelName,
+        levelNameAr: editedItem.levelNameAr,
+        substanceName: editedItem.substanceName,
+        atcingredientName: editedItem.atcingredientName,
+        atcingredientNameAr: editedItem.atcingredientNameAr,
+        interactionIngredientName: editedItem.interactionIngredientName,
+      };
+
+      await Axios.put(`/api/atccodes/v1.0`, requestBody, config);
+      setEditableRows((prev) => ({
+        ...prev,
+        [index]: false,
+      }));
+    } catch (error) {
+      console.error("Error editing data:", error);
+    }
+  };
+
+  const handleCancel = (index) => {
+    const newData = [...atcCodes];
+    newData[index] = originalData[index];
+    setAtcCodes(newData);
+    setEditableRows((prev) => ({
+      ...prev,
+      [index]: false,
+    }));
+  };
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
-    <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={top100Films}
-      sx={{ width: 250 }}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
-    />
+    <motion.div
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={fadeInOut}
+    >
+      <div className="container mx-auto">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="mb-4 px-4 py-2 rounded-lg border focus:outline-none focus:ring focus:border-blue-300"
+        />
+        <div className="overflow-x-auto">
+          <table className="min-w-full table-auto">
+            {/* Table headers */}
+            <thead>
+              <tr className="bg-gray-200">
+                <th
+                  onClick={() => handleSort("code")}
+                  className="px-4 py-2 cursor-pointer"
+                >
+                  ATC Code
+                </th>
+                <th
+                  onClick={() => handleSort("levelName")}
+                  className="px-4 py-2 cursor-pointer"
+                >
+                  Level Name
+                </th>
+                <th
+                  onClick={() => handleSort("levelNameAr")}
+                  className="px-4 py-2 cursor-pointer"
+                >
+                  Level Name (Arabic)
+                </th>
+                <th className="px-4 py-2">Actions</th>
+              </tr>
+            </thead>
+            {/* Table body */}
+            <tbody>
+              {filteredData.map((atcCodeItem, index) => (
+                <tr key={index} className="border-b">
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {editableRows[index] ? (
+                      <input
+                        type="text"
+                        value={atcCodeItem[0].code}
+                        onChange={(e) => handleInputChange(e, index, 0)}
+                        className="border rounded p-1"
+                      />
+                    ) : (
+                      atcCodeItem && atcCodeItem[0] && atcCodeItem[0].code
+                    )}
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {editableRows[index] ? (
+                      <input
+                        type="text"
+                        value={atcCodeItem[0].levelName}
+                        onChange={(e) => handleInputChange(e, index, 0)}
+                        className="border rounded p-1"
+                      />
+                    ) : (
+                      atcCodeItem && atcCodeItem[0] && atcCodeItem[0].levelName
+                    )}
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {editableRows[index] ? (
+                      <input
+                        type="text"
+                        value={atcCodeItem[0].levelNameAr}
+                        onChange={(e) => handleInputChange(e, index, 0)}
+                        className="border rounded p-1"
+                      />
+                    ) : (
+                      atcCodeItem &&
+                      atcCodeItem[0] &&
+                      atcCodeItem[0].levelNameAr
+                    )}
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {editableRows[index] ? (
+                      <div>
+                        <button
+                          onClick={() => handleSave(index)}
+                          className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => handleCancel(index)}
+                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleEdit(index)}
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {/* Pagination */}
+        <ul className="pagination mt-4 flex justify-center">
+          {Array(Math.ceil(filteredData.length / itemsPerPage))
+            .fill()
+            .map((_, i) => (
+              <li
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className="cursor-pointer mx-1 px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300"
+              >
+                {i + 1}
+              </li>
+            ))}
+        </ul>
+      </div>
+    </motion.div>
   );
 };
 
 export default Table;
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: "Pulp Fiction", year: 1994 },
-];

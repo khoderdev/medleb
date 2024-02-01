@@ -1,26 +1,32 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Axios from "../../../../../api/axios";
-import { Link, useParams } from "react-router-dom";
-import { useTable, useSortBy } from "react-table";
-import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
+import { FaSortDown, FaSortUp } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import "./atc.css";
 
 const ATCsList = () => {
-  const { guid } = useParams();
-  const [data, setData] = useState([]);
-  const [atcCodeData, setAtcCodeData] = useState([]);
+  const [atcCodes, setAtcCodes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-
-        const response = await Axios.get(
-          guid ? `/api/atc/v1.0?guid=${guid}` : "/api/atc/v1.0"
+        const atcResponse = await Axios.get("/api/atc/v1.0");
+        const atcItems = Array.isArray(atcResponse.data)
+          ? atcResponse.data
+          : [];
+        const atcCodeData = await Promise.all(
+          atcItems.map(async (atcItem) => {
+            const atcCodeResponse = await Axios.get(
+              `/api/atccodes/v1.0/codes/${atcItem.guid}`
+            );
+            return atcCodeResponse.data;
+          })
         );
-        setData(Array.isArray(response.data) ? response.data : []);
-        localStorage.setItem("data", JSON.stringify(response.data));
+        setAtcCodes(atcCodeData);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -29,119 +35,229 @@ const ATCsList = () => {
     };
 
     fetchData();
-  }, [guid]);
-
-  useEffect(() => {
-    const localData = localStorage.getItem("data");
-    const localAtcCodeData = localStorage.getItem("atcCodeData");
-
-    if (localData) {
-      setData(JSON.parse(localData));
-    }
-
-    if (localAtcCodeData) {
-      setAtcCodeData(JSON.parse(localAtcCodeData));
-    }
   }, []);
 
-  const columns = React.useMemo(
-    () => [
-      // { Header: "ID", accessor: "guid" },
-      { Header: "Code", accessor: "code" },
-      { Header: "Level Name", accessor: "levelName" },
-      { Header: "Level Name (Arabic)", accessor: "levelNameAr" },
-    ],
-    []
-  );
+  const requestSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
 
-  const filteredData = React.useMemo(() => {
-    const lowercaseSearchTerm = searchTerm
-      ? searchTerm.toLowerCase().trim()
-      : "";
-    return data.filter((atc) => {
-      // Check if any field contains the search term
-      return Object.values(atc).some((value) =>
-        String(value).toLowerCase().includes(lowercaseSearchTerm)
+  const sortedData = useMemo(() => {
+    if (sortConfig.key !== null) {
+      return [...atcCodes].sort((a, b) => {
+        const valueA = a[0] ? a[0][sortConfig.key] : "";
+        const valueB = b[0] ? b[0][sortConfig.key] : "";
+        if (valueA < valueB) {
+          return sortConfig.direction === "asc" ? -1 : 1;
+        }
+        if (valueA > valueB) {
+          return sortConfig.direction === "asc" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return atcCodes;
+  }, [atcCodes, sortConfig]);
+
+  const filteredData = useMemo(() => {
+    return sortedData.filter((atcCodeItem) => {
+      return (
+        atcCodeItem[0]?.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        atcCodeItem[0]?.levelName
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        atcCodeItem[0]?.levelNameAr
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        atcCodeItem[0]?.substanceName
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        atcCodeItem[0]?.atcingredientName
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        atcCodeItem[0]?.atcingredientNameAr
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        atcCodeItem[0]?.interactionIngredientName
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
       );
     });
-  }, [data, searchTerm]);
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: filteredData }, useSortBy);
+  }, [sortedData, searchTerm]);
 
   return (
-    <div className="container mx-auto pt-6 md:px-10 text-black-text dark:text-white-text">
-      <div>
-        <h2 className="text-2xl text-center font-bold mb-4">ATCs Table</h2>
-        <div className="flex justify-between items-center pb-4 py-6">
-          <input
-            type="text"
-            placeholder="Search by code"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            // onChange={handleChange}
-            className="rounded-md dark:border-white-text text-black-text dark:text-white-text mb-4 bg-white-bg dark:bg-black-bg dark:focus:border-transparent outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
-          />
-          <Link to="/atc/new" className="med-btn-pri">
-            New
-          </Link>
-        </div>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div className="overflow-x-auto ">
-            <table {...getTableProps()} className="w-full table-auto">
-              <thead>
-                {headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => (
-                      <th
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
-                        className="px-4 py-2 border font-normal w-20"
-                      >
-                        {column.render("Header")}
-                        <span>
-                          {column.isSorted ? (
-                            column.isSortedDesc ? (
-                              <FaSortDown />
-                            ) : (
-                              <FaSortUp />
-                            )
-                          ) : (
-                            <FaSort />
-                          )}
-                        </span>
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps()}>
-                {rows.map((row) => {
-                  prepareRow(row);
-                  return (
-                    <tr
-                      {...row.getRowProps()}
-                      className="hover:bg-gray-100 dark:hover:bg-black-contents"
-                    >
-                      {row.cells.map((cell) => (
-                        <td
-                          {...cell.getCellProps()}
-                          className="border-b px-4 py-2"
-                        >
-                          {cell.render("Cell")}
-                        </td>
-                      ))}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
+    <div className="container mx-auto h-screen p-4 text-black-text dark:text-white-text">
+      <h2 className="text-[1.750rem] text-center text-green-pri font-medium">
+        ATCs Data
+      </h2>
+      <div className="flex justify-between items-center pb-4 py-6">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="rounded-md py-1 px-3 dark:border-white-text text-black-text dark:text-white-text bg-white-bg dark:bg-black-bg dark:focus:border-transparent outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
+        />
+        <Link to="/atc/new" className="med-btn-pri-sm">
+          New
+        </Link>
       </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="overflow-x-auto max-h-[calc(100vh-284px)]">
+          <table className="w-full table-auto border border-collapse">
+            <thead className="select-none h-10 sticky top-0 z-50 bg-gray-200 dark:bg-black-input font-normal">
+              <tr>
+                <th className="relative">
+                  <div
+                    onClick={() => requestSort("code")}
+                    className="cursor-pointer"
+                  >
+                    Code
+                    <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+                      {sortConfig.key === "code" &&
+                        (sortConfig.direction === "asc" ? (
+                          <FaSortDown />
+                        ) : (
+                          <FaSortUp />
+                        ))}
+                    </div>
+                  </div>
+                </th>
+
+                <th className="relative">
+                  <div
+                    onClick={() => requestSort("levelName")}
+                    className="cursor-pointer"
+                  >
+                    Level Name
+                    <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+                      {sortConfig.key === "levelName" &&
+                        (sortConfig.direction === "asc" ? (
+                          <FaSortDown />
+                        ) : (
+                          <FaSortUp />
+                        ))}
+                    </div>
+                  </div>
+                </th>
+
+                <th className="relative">
+                  <div
+                    onClick={() => requestSort("levelNameAr")}
+                    className="cursor-pointer"
+                  >
+                    Level Name ar
+                    <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+                      {sortConfig.key === "levelNameAr" &&
+                        (sortConfig.direction === "asc" ? (
+                          <FaSortDown />
+                        ) : (
+                          <FaSortUp />
+                        ))}
+                    </div>
+                  </div>
+                </th>
+
+                <th className="relative">
+                  <div
+                    onClick={() => requestSort("substanceName")}
+                    className="cursor-pointer"
+                  >
+                    Substance
+                    <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+                      {sortConfig.key === "substanceName" &&
+                        (sortConfig.direction === "asc" ? (
+                          <FaSortDown />
+                        ) : (
+                          <FaSortUp />
+                        ))}
+                    </div>
+                  </div>
+                </th>
+
+                <th className="relative">
+                  <div
+                    onClick={() => requestSort("atcingredientName")}
+                    className="cursor-pointer"
+                  >
+                    ATC ingredient
+                    <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+                      {sortConfig.key === "atcingredientName" &&
+                        (sortConfig.direction === "asc" ? (
+                          <FaSortDown />
+                        ) : (
+                          <FaSortUp />
+                        ))}
+                    </div>
+                  </div>
+                </th>
+
+                <th className="relative">
+                  <div
+                    onClick={() => requestSort("atcingredientNameAr")}
+                    className="cursor-pointer"
+                  >
+                    ATC ingr ar
+                    <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+                      {sortConfig.key === "atcingredientNameAr" &&
+                        (sortConfig.direction === "asc" ? (
+                          <FaSortDown />
+                        ) : (
+                          <FaSortUp />
+                        ))}
+                    </div>
+                  </div>
+                </th>
+
+                <th className="relative">
+                  <div
+                    onClick={() => requestSort("interactionIngredientName")}
+                    className="cursor-pointer"
+                  >
+                    Interaction ing
+                    <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+                      {sortConfig.key === "interactionIngredientName" &&
+                        (sortConfig.direction === "asc" ? (
+                          <FaSortDown />
+                        ) : (
+                          <FaSortUp />
+                        ))}
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody className="text-center overflow-y-auto z-0">
+              {filteredData.map((atcCodeItem, index) => (
+                <tr
+                  key={index}
+                  className="border-b hover:bg-white-contents dark:hover:bg-black-contents"
+                >
+                  <td className="py-2 px-4">{atcCodeItem[0]?.code}</td>
+                  <td className="py-2 px-4">{atcCodeItem[0]?.levelName}</td>
+                  <td className="py-2 px-4">{atcCodeItem[0]?.levelNameAr}</td>
+                  <td className="py-2 px-4">{atcCodeItem[0]?.substanceName}</td>
+                  <td className="py-2 px-4">
+                    {atcCodeItem[0]?.atcingredientName}
+                  </td>
+                  <td className="py-2 px-4">
+                    {atcCodeItem[0]?.atcingredientNameAr}
+                  </td>
+                  <td className="py-2 px-4">
+                    {atcCodeItem[0]?.interactionIngredientName}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

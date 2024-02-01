@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 
 const ATCForm = () => {
-  const [formData, setFormData, selectedRow] = useState({
+  const [formData, setFormData] = useState({
     // Drug_ATC fields
     guid: uuidv4(),
     code: "",
@@ -23,24 +24,24 @@ const ATCForm = () => {
     interactionIngredientName: "",
     enabled: true,
   });
-  console.log("formData in CrudTable:", formData);
+  // console.log("formData in AtcForm:", formData);
 
-  const [atcList, setAtcList] = useState([]);
+  // const [atcList, setAtcList] = useState([]);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await Axios.get("/api/atc/v1.0");
-        setAtcList(response.data);
-      } catch (error) {
-        console.error("Error fetching ATC data:", error);
-        setError("Failed to fetch ATC data");
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await Axios.get("/api/atc/v1.0");
+  //       setAtcList(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching ATC data:", error);
+  //       setError("Failed to fetch ATC data");
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -224,9 +225,15 @@ const ATCForm = () => {
           {/* Add more Drug_ATCCodes fields as needed */}
         </div>
 
-        <button className="med-btn-pri col-span-full w-24" type="submit">
-          Submit
-        </button>
+        <div className="btns-col col-span-full flex justify-between">
+          <Link to="/atc/list" className="med-btn-pri">
+            Go to data records
+          </Link>
+
+          <button className="med-btn-sec w-24" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
       {error && <div style={{ color: "red" }}>{error}</div>}
     </div>

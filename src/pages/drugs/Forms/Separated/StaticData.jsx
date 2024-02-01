@@ -23,7 +23,7 @@ const StaticData = () => {
     interactionIngredientName: "",
     enabled: true,
   });
-  console.log("formData in CrudTable:", formData);
+  console.log("formData in AtcForm:", formData);
 
   const [atcList, setAtcList] = useState([]);
   const [error, setError] = useState("");
