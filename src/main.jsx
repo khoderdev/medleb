@@ -11,6 +11,7 @@ import store from "./app/store";
 import { Provider } from "react-redux";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./app/react-query/queryClient";
+
 // import { AccessTokenProvider } from "./context/AccessTokenContext";
 
 configureLocalForage();

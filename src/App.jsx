@@ -1,9 +1,6 @@
 import React, { Suspense } from "react";
 import routes from "~react-pages";
 import { useRoutes, Route, Routes } from "react-router-dom";
-// import { store } from "./app/store";
-// import { Provider } from "react-redux";
-import { DrugProvider } from "./pages/drugs/DrugContext";
 import AddDrug from "./pages/drugs/Forms/AddDrug";
 import List from "./pages/drugs/list/List";
 import Login from "./components/Login";
@@ -28,9 +25,13 @@ import ATCForm from "./pages/drugs/Forms/Separated/atc/ATCForm";
 import ATCsList from "./pages/drugs/Forms/Separated/atc/ATCsList";
 import BrandsForm from "./pages/drugs/Forms/Separated/brands/BrandsForm";
 import BrandsList from "./pages/drugs/Forms/Separated/brands/BrandsList";
+import PresentationForm from "./pages/drugs/Forms/Separated/presentation/PresentationForm";
+import PresentationList from "./pages/drugs/Forms/Separated/presentation/PresentationList";
 import GeosForm from "./pages/drugs/Forms/Separated/country/GeosForm";
 import GeosList from "./pages/drugs/Forms/Separated/country/GeosList";
 import AgentsList from "./pages/drugs/Forms/Separated/agents/AgentsList";
+import CompanyTypeForm from "./pages/drugs/Forms/Separated/companies/CompanyTypeForm";
+import CompanyTypeList from "./pages/drugs/Forms/Separated/companies/CompanyTypeList";
 import AuthContainer from "./components/AuthContainer";
 import UserFormContainer from "./components/UserFormContainer";
 import Table from "./Table";
@@ -93,8 +94,12 @@ const App = () => {
         <Route path="/atc/new" element={<ATCForm />} />
         <Route path="/brands/list" element={<BrandsList />} />
         <Route path="/brands/new" element={<BrandsForm />} />
+        <Route path="/presentation/new" element={<PresentationForm />} />
+        <Route path="/presentation/list" element={<PresentationList />} />
         <Route path="/geo/new" element={<GeosForm />} />
         <Route path="/geo/list" element={<GeosList />} />
+        <Route path="/companyType/new" element={<CompanyTypeForm />} />
+        <Route path="/companyType/list" element={<CompanyTypeList />} />
         <Route path="/agents/list" element={<AgentsList />} />
         <Route path="/drugformex" element={<DrugFormEX />} />
         <Route path="/getdrugs" element={<GetDrugs />} />

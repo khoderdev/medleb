@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
 
-const BrandsForm = () => {
+const CompanyTypeForm = () => {
   const [formData, setFormData] = useState({
     guid: uuidv4(),
     name: "",
@@ -63,4 +63,4 @@ const BrandsForm = () => {
   );
 };
 
-export default BrandsForm;
+export default CompanyTypeForm;
