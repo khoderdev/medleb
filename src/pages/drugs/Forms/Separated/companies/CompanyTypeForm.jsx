@@ -1,66 +1,46 @@
-import React, { useState } from "react";
+// CompanyTypeForm.js
+import React, { useState } from 'react';
 import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 
-const CompanyTypeForm = () => {
+function CompanyTypeForm({ onSubmit }) {
   const [formData, setFormData] = useState({
-    guid: uuidv4(),
-    name: "",
-    nameAr: "",
-    enabled: true,
-    createdDate: new Date().toISOString(),
+    name: '',
+    // Add other fields as needed
   });
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await Axios.post("/api/companyType/v1.0", formData);
-      alert("Data submitted successfully");
-      // Optionally, clear the form fields after successful submission
+      const response = await axios.post('/api/CompanyType/v1.0', formData);
+      onSubmit(response.data);
       setFormData({
-        guid: "",
-        name: "",
-        nameAr: "",
-        enabled: true,
-        createdDate: new Date().toISOString(),
+        name: '',
+        // Reset other fields as needed
       });
+      setError(null);
     } catch (error) {
-      console.error("Error submitting data:", error);
-      alert("An error occurred while submitting data");
+      setError(error.response.data.message || 'An error occurred');
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
+        <label htmlFor="name">Company Type Name:</label>
+        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
       </div>
-      <div>
-        <label htmlFor="nameAr">Name (Arabic):</label>
-        <input
-          type="text"
-          id="nameAr"
-          name="nameAr"
-          value={formData.nameAr}
-          onChange={handleChange}
-        />
-      </div>
-
-      <button type="submit">Submit</button>
+      {/* Add other necessary input fields */}
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      <button type="submit">Create Company Type</button>
     </form>
   );
-};
+}
 
 export default CompanyTypeForm;

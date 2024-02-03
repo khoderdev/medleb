@@ -23,14 +23,16 @@ import ParentComponent from "./pages/drugs/Forms/Separated/ParentComponent";
 import StaticDataPage from "./pages/drugs/Forms/Separated/StaticDataPage";
 import ATCForm from "./pages/drugs/Forms/Separated/atc/ATCForm";
 import ATCsList from "./pages/drugs/Forms/Separated/atc/ATCsList";
-import BrandsForm from "./pages/drugs/Forms/Separated/brands/BrandsForm";
+// import BrandsForm from "./pages/drugs/Forms/Separated/brands/BrandsForm";
 import BrandsList from "./pages/drugs/Forms/Separated/brands/BrandsList";
 import PresentationForm from "./pages/drugs/Forms/Separated/presentation/PresentationForm";
 import PresentationList from "./pages/drugs/Forms/Separated/presentation/PresentationList";
 import GeosForm from "./pages/drugs/Forms/Separated/country/GeosForm";
 import GeosList from "./pages/drugs/Forms/Separated/country/GeosList";
 import AgentsList from "./pages/drugs/Forms/Separated/agents/AgentsList";
+import CompanyForm from "./pages/drugs/Forms/Separated/companies/CompanyForm";
 import CompanyTypeForm from "./pages/drugs/Forms/Separated/companies/CompanyTypeForm";
+import CompanyList from "./pages/drugs/Forms/Separated/companies/CompanyList";
 import CompanyTypeList from "./pages/drugs/Forms/Separated/companies/CompanyTypeList";
 import AuthContainer from "./components/AuthContainer";
 import UserFormContainer from "./components/UserFormContainer";
@@ -93,11 +95,13 @@ const App = () => {
         <Route path="/atc/list" element={<ATCsList />} />
         <Route path="/atc/new" element={<ATCForm />} />
         <Route path="/brands/list" element={<BrandsList />} />
-        <Route path="/brands/new" element={<BrandsForm />} />
+        {/* <Route path="/brands/new" element={<BrandsForm />} /> */}
         <Route path="/presentation/new" element={<PresentationForm />} />
         <Route path="/presentation/list" element={<PresentationList />} />
         <Route path="/geo/new" element={<GeosForm />} />
         <Route path="/geo/list" element={<GeosList />} />
+        <Route path="/company/new" element={<CompanyForm />} />
+        <Route path="/company/list" element={<CompanyForm />} />
         <Route path="/companyType/new" element={<CompanyTypeForm />} />
         <Route path="/companyType/list" element={<CompanyTypeList />} />
         <Route path="/agents/list" element={<AgentsList />} />
