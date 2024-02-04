@@ -10,6 +10,7 @@ import Home from "./pages/Home/";
 import Dashboards from "./pages/dashboards/";
 import ImportDrug from "./pages/drugs/Importation/Import";
 import Inspection from "./pages/drugs/Inspection/Inspection";
+import ShipmentSummary from "./pages/drugs/Inspection/Forms/ShipmentSummary";
 import Distribution from "./pages/drugs/Distribution/index";
 import Tracking from "./pages/drugs/Tracking/";
 import Substitute from "./pages/drugs/Substitutes/";
@@ -79,6 +80,7 @@ const App = () => {
         <Route path="/dashboard/" element={<Dashboards />} />
         <Route path="/import/" element={<ImportDrug />} />
         <Route path="/inspection/" element={<Inspection />} />
+        <Route path="/shipsum/" element={<ShipmentSummary />} />
         <Route path="/distribution/" element={<Distribution />} />
         <Route path="/tracking/" element={<Tracking />} />
         <Route path="/login" element={<Login />} />

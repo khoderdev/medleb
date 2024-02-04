@@ -469,7 +469,7 @@ const BatchComponent = ({ label, inputs, onAddSerials, onInputChange }) => {
             >
               <label
                 htmlFor={input.id}
-                className="labels text-lg block text-center"
+                className="labels block text-center"
               >
                 {input.label}
               </label>
@@ -590,21 +590,21 @@ const ShipmentForm = ({
   };
 
   return (
-    <div className="grid grid-cols-1 w-3/4 gap-10 text-black-text dark:text-white-text">
-      <div className="flex flex-col">
-        <div className=" dark:text-white-text rounded-[5em] sm:rounded-[6em] border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-bg px-4 lg:px-4 py-4 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">
-          <div className="w-full grid grid-cols-2 gap-8 px-4 items-center">
+    <div className="grid grid-cols-1 w-full lg:w-3/4 gap-10 text-black-text dark:text-white-text">
+      <div className="flex flex-col w-full">
+        <div className="dark:text-white-text rounded-[5em] sm:rounded-[6em] border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 lg:px-4 py-4 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri">
+          <div className="w-full grid grid-cols-2 gap-8 px-2 md:px-4 items-center">
             <div className="mb-4 text-center border-b border-[#00a651] text-white">
               <label
                 htmlFor="batchBarcode"
-                className="labels text-lg block text-center"
+                className="labels block text-center"
               >
                 Barcode Number
               </label>
               <input
                 id="batchBarcode"
                 name="batchBarcode"
-                className="input-field border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-transparent rounded-full autofill:bg-transparent"
+                className="input-field w-20 sm:w-full border-none text-[#00a651] font-bold focus:ring-transparent outline-none p-2 bg-white-bg dark:bg-transparent rounded-full autofill:bg-transparent"
                 type="number"
                 autoComplete="off"
                 value={formData.batchBarcode || ""}
@@ -617,7 +617,7 @@ const ShipmentForm = ({
             <div className="mb-4 text-center border-b border-[#00a651] text-white">
               <label
                 htmlFor="batchesQty"
-                className="labels text-lg block text-center"
+                className="labels block text-center"
               >
                 Batches Quantity
               </label>
