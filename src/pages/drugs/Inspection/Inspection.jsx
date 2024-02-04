@@ -36,6 +36,7 @@ function FormStepper({ currentStep, steps }) {
 }
 
 function Inspection() {
+  const [batchComponents, setBatchComponents] = useState([]);
   const [shipmentFormData, setShipmentFormData] = useState({});
   const steps = ["Shipment", "Decleration Status & Agent Stock "];
   const classes = useStyles();
@@ -44,11 +45,39 @@ function Inspection() {
   const isLastStep = currentStep === 1;
 
   const handleShipmentFormChange = (data) => {
-    setShipmentFormData(data);
+    setShipmentFormData((prevData) => ({
+      ...prevData,
+      ...data, // Merge new form data with existing form data
+    }));
   };
 
   const handleBatchesQtyChange = (qty) => {
     setBatchesQty(qty);
+
+    // Update batch components state based on the new quantity
+    setBatchComponents((prevBatchComponents) => {
+      const updatedBatchComponents = [...prevBatchComponents];
+
+      // Remove excess batch components if decreasing quantity
+      if (qty < updatedBatchComponents.length) {
+        updatedBatchComponents.splice(qty);
+      }
+
+      // Add new batch components if increasing quantity
+      if (qty > updatedBatchComponents.length) {
+        for (let i = updatedBatchComponents.length; i < qty; i++) {
+          updatedBatchComponents.push({});
+        }
+      }
+
+      return updatedBatchComponents;
+    });
+  };
+
+  const handleBatchComponentChange = (index, newData) => {
+    const updatedBatchComponents = [...batchComponents];
+    updatedBatchComponents[index] = newData;
+    setBatchComponents(updatedBatchComponents);
   };
 
   const handleNext = () => {
@@ -60,6 +89,15 @@ function Inspection() {
 
   const handleBack = () => {
     setCurrentStep(currentStep - 1);
+  };
+
+  const logFormData = () => {
+    const finalFormData = {
+      ...shipmentFormData,
+      batchComponents: batchComponents, // Ensure batchComponents is included in final form data
+    };
+
+    console.log("Final Form Data:", finalFormData);
   };
 
   const handleArrowButtonClick = () => {
@@ -99,6 +137,8 @@ function Inspection() {
                 onFormChange={handleShipmentFormChange}
                 batchesQty={batchesQty}
                 onBatchesQtyChange={handleBatchesQtyChange}
+                batchComponents={batchComponents} // Make sure batchComponents is passed down as a prop
+                onBatchComponentChange={handleBatchComponentChange}
               />
             </div>
           )}
