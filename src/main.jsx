@@ -9,23 +9,29 @@ import Modal from "react-modal";
 import configureLocalForage from "./localforageConfig";
 import store from "./app/store";
 import { Provider } from "react-redux";
-import { QueryClientProvider } from "react-query";
-import { queryClient } from "./app/react-query/queryClient";
+// import { QueryClientProvider, queryClient } from "react-query";
+// import { queryClient } from "./app/react-query/queryClient";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 
-// import { AccessTokenProvider } from "./context/AccessTokenContext";
+const queryClient = new QueryClient();
 
 configureLocalForage();
 
 Modal.setAppElement("#root");
 document.addEventListener("DOMContentLoaded", () => {
   const root = createRoot(document.getElementById("root"));
-  // const queryClient = new QueryClient();
 
   root.render(
     <React.StrictMode>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-          {/* <AccessTokenProvider> */}
           <DarkModeProvider>
             <BrowserRouter>
               <DashboardLayout>
@@ -35,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
               </DashboardLayout>
             </BrowserRouter>
           </DarkModeProvider>
-          {/* </AccessTokenProvider> */}
+          {/* <ReactQueryDevtools /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </Provider>
     </React.StrictMode>

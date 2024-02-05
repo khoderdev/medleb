@@ -1,27 +1,26 @@
 // import { defineConfig } from "vite";
 // import react from "@vitejs/plugin-react-swc";
 // import Pages from "vite-plugin-pages";
-// // import CSS from "vite-plugin-css";
+// import jotaiDebugLabel from 'jotai/babel/plugin-debug-label'
+// import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh'
 
 // // https://vitejs.dev/config/
 // export default defineConfig({
-//   base: "./",
+//   base: "/", // Adjust according to your deployment configuration
 //   build: {
 //     outDir: "public",
 //     rollupOptions: {
 //       external: ["@material-ui/icons/ArrowBack", "@mui/x-data-grid"],
 //     },
 //   },
-
-//   plugins: [react(), Pages()],
+//   plugins: [react(), Pages(), ] ,
 //   // plugins: [react(), Pages(), CSS()],
 // });
+// vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import Pages from "vite-plugin-pages";
-// import CSS from "vite-plugin-css";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: "/", // Adjust according to your deployment configuration
   build: {
@@ -30,6 +29,8 @@ export default defineConfig({
       external: ["@material-ui/icons/ArrowBack", "@mui/x-data-grid"],
     },
   },
-  plugins: [react(), Pages()],
-  // plugins: [react(), Pages(), CSS()],
+  plugins: [
+    react(),
+    Pages()
+  ]
 });

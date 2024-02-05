@@ -436,16 +436,6 @@ function AddDrug(props) {
     <div className="flex flex-col justify-center h-full pb-16 gap-3">
       {currentStep === 2 && (
         <>
-          <DrugImages
-            drugImagesList={drugImagesList}
-            setImagesList={setImagesList}
-            formDataStep12={formDataStep12}
-            handleInputChangeStep1={handleInputChangeStep1}
-            updateImageState={updateImageState}
-            uploadedImages={uploadedImages}
-            newUploadedImages={newUploadedImages}
-            handleImageUpload={handleImageUpload}
-          />
           <DrugDocuments
             drugDocumentsList={drugDocumentsList}
             setDrugDocumentsList={setDrugDocumentsList}
@@ -455,6 +445,16 @@ function AddDrug(props) {
             uploadedDocuments={uploadedDocuments}
             newUploadedDocuments={newUploadedDocuments}
             handleDocumentUpload={handleDocumentUpload}
+          />
+          <DrugImages
+            drugImagesList={drugImagesList}
+            setImagesList={setImagesList}
+            formDataStep12={formDataStep12}
+            handleInputChangeStep1={handleInputChangeStep1}
+            updateImageState={updateImageState}
+            uploadedImages={uploadedImages}
+            newUploadedImages={newUploadedImages}
+            handleImageUpload={handleImageUpload}
           />
         </>
       )}

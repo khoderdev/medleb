@@ -7,14 +7,15 @@ const ShipmentSummary = ({ formData, batchesQty, batchComponents }) => {
       <div>
         <h3>Shipment Form Data:</h3>
         <p>Batch Barcode: {formData.batchBarcode}</p>
-        <p>Batch Serials: {formData.batchSerials.join(", ")}</p>
+        <p>Batch Serials: {formData.batchSerials && formData.batchSerials.join(", ")}</p>
+
       </div>
       <div>
         <h3>Batches Quantity:</h3>
         <p>{batchesQty}</p>
       </div>
       <div>
-        {/* <h3>Batch Components:</h3> */}
+        <h3>Batch Components:</h3>
         {batchComponents?.length > 0 ? (
           <ul>
             {batchComponents.map((batch, index) => (
