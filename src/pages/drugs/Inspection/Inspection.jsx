@@ -81,11 +81,31 @@ function Inspection() {
   };
 
   const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+    if (currentStep === 2) {
+    }
+
+    setCurrentStep(currentStep + 1);
   };
 
   const handleBack = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
+    setCurrentStep(currentStep - 1);
+  };
+
+  // const handleNext = () => {
+  //   setCurrentStep((prevStep) => prevStep + 1);
+  // };
+
+  // const handleBack = () => {
+  //   setCurrentStep((prevStep) => prevStep - 1);
+  // };
+
+  const handleArrowButtonClick = () => {
+    if (isLastStep) {
+      console.log("Final Data:", isLastStep)
+      // logFormData();
+    } else {
+      handleNext();
+    }
   };
 
   return (
@@ -173,6 +193,7 @@ function Inspection() {
         >
           {isLastStep ? "Submit" : "Next"}
           <FaArrowRightLong
+            onClick={handleArrowButtonClick}
             style={{
               fontSize: "20px",
               color: isLastStep ? "text-white" : "text-[#00a651]",
