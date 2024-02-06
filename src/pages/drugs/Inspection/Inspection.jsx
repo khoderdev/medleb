@@ -81,32 +81,21 @@ function Inspection() {
   };
 
   const handleNext = () => {
-    if (currentStep === 2) {
-    }
-
-    setCurrentStep(currentStep + 1);
+    setCurrentStep((prevStep) => prevStep + 1);
   };
 
   const handleBack = () => {
-    setCurrentStep(currentStep - 1);
+    setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  // const handleNext = () => {
-  //   setCurrentStep((prevStep) => prevStep + 1);
+  // const handleArrowButtonClick = () => {
+  //   if (isLastStep) {
+  //     console.log("Final Data:", isLastStep)
+  //     // logFormData();
+  //   } else {
+  //     handleNext();
+  //   }
   // };
-
-  // const handleBack = () => {
-  //   setCurrentStep((prevStep) => prevStep - 1);
-  // };
-
-  const handleArrowButtonClick = () => {
-    if (isLastStep) {
-      console.log("Final Data:", isLastStep)
-      // logFormData();
-    } else {
-      handleNext();
-    }
-  };
 
   return (
     <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-4 px-2 sm:px-6 dark:text-white-500">
@@ -193,7 +182,7 @@ function Inspection() {
         >
           {isLastStep ? "Submit" : "Next"}
           <FaArrowRightLong
-            onClick={handleArrowButtonClick}
+            // onClick={handleArrowButtonClick}
             style={{
               fontSize: "20px",
               color: isLastStep ? "text-white" : "text-[#00a651]",
