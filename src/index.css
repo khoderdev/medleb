@@ -18,21 +18,6 @@
     font-weight: 600;
   }
 }
-.bottom-border-focus {
-  border: none;
-  border-bottom: 1px solid #ccc; /* Initial bottom border */
-  outline: none;
-  transition: border-bottom-color 0.3s ease; /* Smooth transition for border color change */
-}
-
-.bottom-border-focus:focus {
-  border-bottom-color: #00a651; /* Change bottom border color on focus */
-}
-
-.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root {
-  width: 100px;
-  height: 100px;
-}
 
 .MuiSvgIcon-root
   .MuiSvgIcon-fontSizeMedium
@@ -47,47 +32,19 @@
   background-color: red;
 }
 
-/* Green : #00a651  #0D9488 */
-/* @font-face {
-  font-family: "BebasNeue-Regular";
-  src: url("./fonts/BebasNeueProRegular.otf") format("opentype");
-} */
-/* Disable zooming for the entire page */
-
-/* styles.css (or your preferred stylesheet) */
 .scroll-break {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #ff00b3; /* Adjust the background color as needed */
-  /* Add any other styling you want for the fixed element */
+  background-color: #ff00b3;
 }
-/*  */
 
 html,
 body {
   font-family: "Roboto Condensed", sans-serif;
-  /* font-size: small; */
   touch-action: manipulation;
-  /* user-select: none; */
   user-scalable: no;
 }
-
-/* body.light-mode .your-container-class .your-paper-class .search-field {
-  background-color: red;
-  color: red;
-}
-
-body.dark-mode .your-container-class .your-paper-class .search-field {
-  background-color: #333;
-  color: #0e0e0e;
-} */
-
-/* .name-price-cont{
-  bac
-  margin-top: 0px;
-  padding-top: 0px;
-} */
 
 body {
   font-family: "Roboto Condensed", sans-serif;
@@ -125,49 +82,6 @@ section {
   css-1e6y48t-MuiButtonBase-root-MuiButton-root-root {
   font-family: "Roboto Condensed", sans-serif;
 }
-
-/* .msg-cont {
-  text-align: center;
-  padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.msg {
-  color: #333333;
-}
-
-span {
-  color: #ff6347;
-}
-
-@media screen and (max-width: 600px) {
-  .msg-cont {
-    width: 80%;
-  }
-} */
-/* a,
-a:visited {
-  color: #fff;
-} */
-
-/* .instructions {
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  background: #333;
-  color: #ffffffe0;
-  padding: 0.25rem;
-  position: relative;
-} */
-
-/* .instructions > svg {
-  margin-right: 0.25rem;
-} */
-
-/* .offscreen {
-  position: absolute;
-  left: -9999px;
-} */
 
 .hide {
   display: none;

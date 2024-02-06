@@ -35,6 +35,11 @@ module.exports = {
           sec: "#5cd3b7",
         },
 
+        yellow: {
+          pri: "#FAAF40",
+          light: "#ffffe0",
+        },
+
         white: {
           bg: "#fbfcf8",
           contents: "#e0e0e0",
