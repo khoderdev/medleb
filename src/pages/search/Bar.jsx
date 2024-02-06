@@ -107,7 +107,7 @@ const Bar = () => {
         placeholder="Search for medicines..."
         value={searchQuery}
         onChange={(e) => handleSearch(e.target.value, selectedClassFilter)}
-        className="w-full p-2 rounded-full border border-white-shadow dark:border-black-border bg-white-contents dark:bg-black-contents px-4 py-2 font-normal dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
+        className="w-full p-2 rounded-t-2xl border border-white-shadow dark:border-black-border bg-white-contents dark:bg-black-contents px-4 py-2 font-normal dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
       />
 
       <div className="search-icon cursor-pointer absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">

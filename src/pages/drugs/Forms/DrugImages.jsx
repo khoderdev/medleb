@@ -184,7 +184,7 @@ const DrugImages = (props) => {
             onClick={uploadImages}
             disabled={loading}
           >
-            {loading ? "Uploading..." : success ? "Confirmed ✔" : "Upload All images"}
+            {loading ? "Uploading..." : success ? "Done ✔" : "Upload All images"}
           </button>
         </div>
       </div>

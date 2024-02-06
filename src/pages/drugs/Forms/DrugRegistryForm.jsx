@@ -381,7 +381,7 @@ const DrugRegistryForm = ({
             </div>
           </div>
 
-          <div className="input-container h-16 relative flex flex-col justify-between items-center col-span-full lg:col-span-1">
+          {/* <div className="input-container h-16 relative flex flex-col justify-between items-center col-span-full lg:col-span-1">
             <label
               htmlFor="continue"
               className="labels text-md block text-left"
@@ -397,7 +397,7 @@ const DrugRegistryForm = ({
                 />
               </div>
             </div>
-          </div>
+          </div> */}
           {isAddModalOpen && (
             <AddModal
               closeModal={() => setAddModalOpen(false)}

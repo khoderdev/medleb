@@ -5,6 +5,7 @@ import AddDrug from "./pages/drugs/Forms/AddDrug";
 import List from "./pages/drugs/list/List";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import PropsTest from "./components/PropsTest";
 import CreateUserForm from "./components/RegistrationForm";
 import Home from "./pages/Home/";
 import Dashboards from "./pages/dashboards/";
@@ -75,6 +76,7 @@ const App = () => {
       <Khoder.Provider value="Panadol">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/props" element={<PropsTest />} />
           <Route path="/benta" element={<BentaSAL />} />
           <Route path="/omni" element={<Omnipharma />} />
           <Route path="/mersaco" element={<Mersaco />} />

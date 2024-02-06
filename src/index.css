@@ -18,6 +18,17 @@
     font-weight: 600;
   }
 }
+.bottom-border-focus {
+  border: none;
+  border-bottom: 1px solid #ccc; /* Initial bottom border */
+  outline: none;
+  transition: border-bottom-color 0.3s ease; /* Smooth transition for border color change */
+}
+
+.bottom-border-focus:focus {
+  border-bottom-color: #00a651; /* Change bottom border color on focus */
+}
+
 .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root {
   width: 100px;
   height: 100px;

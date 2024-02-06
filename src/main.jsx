@@ -12,13 +12,8 @@ import { Provider } from "react-redux";
 // import { QueryClientProvider, queryClient } from "react-query";
 // import { queryClient } from "./app/react-query/queryClient";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 
@@ -41,8 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </DashboardLayout>
             </BrowserRouter>
           </DarkModeProvider>
-          {/* <ReactQueryDevtools /> */}
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </QueryClientProvider>
       </Provider>
     </React.StrictMode>
