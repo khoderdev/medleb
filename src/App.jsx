@@ -21,7 +21,6 @@ import DrugForm from "./pages/drugs/Forms/Separated/DrugForm";
 import DrugFormEX from "./pages/drugs/Forms/Separated/DrugFormEX";
 import GetDrugs from "./pages/drugs/Forms/Separated/GetDrugs";
 import ATCCodesForm from "./pages/drugs/Forms/Separated/ATCCodesForm";
-import ParentComponent from "./pages/drugs/Forms/Separated/ParentComponent";
 import StaticDataPage from "./pages/drugs/Forms/Separated/StaticDataPage";
 import ATCForm from "./pages/drugs/Forms/Separated/atc/ATCForm";
 import ATCsList from "./pages/drugs/Forms/Separated/atc/ATCsList";
@@ -31,6 +30,7 @@ import PresentationForm from "./pages/drugs/Forms/Separated/presentation/Present
 import PresentationList from "./pages/drugs/Forms/Separated/presentation/PresentationList";
 import GeosForm from "./pages/drugs/Forms/Separated/country/GeosForm";
 import GeosList from "./pages/drugs/Forms/Separated/country/GeosList";
+import ParentComponent from "./pages/drugs/Forms/Separated/country/ParentComponent";
 import AgentsList from "./pages/drugs/Forms/Separated/agents/AgentsList";
 import CompanyForm from "./pages/drugs/Forms/Separated/companies/CompanyForm";
 import CompanyTypeForm from "./pages/drugs/Forms/Separated/companies/CompanyTypeForm";
@@ -111,6 +111,7 @@ const App = () => {
         <Route path="/presentation/new" element={<PresentationForm />} />
         <Route path="/presentation/list" element={<PresentationList />} />
         <Route path="/geo/new" element={<GeosForm />} />
+        <Route path="/geo/newmain" element={<ParentComponent />} />
         <Route path="/geo/list" element={<GeosList />} />
         <Route path="/company/new" element={<CompanyForm />} />
         <Route path="/company/list" element={<CompanyList/>} />
