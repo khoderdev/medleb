@@ -1,0 +1,63 @@
+.geo-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .geo-form div {
+    margin-bottom: 15px;
+  }
+  
+  .geo-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .geo-form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+  
+  .geo-form button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  .geo-form button[type="submit"] {
+    background-color: #008cba;
+    margin-top: 20px;
+  }
+  
+  .geo-form button[type="button"] {
+    background-color: #ff9800;
+    margin-top: 5px;
+  }
+  
+  .geo-form button[type="button"]:hover,
+  .geo-form button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .geo-form button[type="button"]:last-of-type {
+    float: left;
+  }
+  
+  .geo-form .city-wrapper {
+    padding-left: 20px;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .geo-form input[type="text"] {
+      width: calc(100% - 22px);
+    }
+  }
+  

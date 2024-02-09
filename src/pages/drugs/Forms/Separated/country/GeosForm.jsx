@@ -1,314 +1,620 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState } from "react";
+// import Axios from "../../../../../api/axios";
+// import { v4 as uuidv4 } from "uuid";
+// import "./GeoForm.css";
+
+// const GeoForm = () => {
+//   const [code, setCode] = useState("");
+//   const [englishName, setEnglishName] = useState("");
+//   const [arabicName, setArabicName] = useState("");
+//   const [governorates, setGovernorates] = useState([]);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     const countryGuid = uuidv4();
+//     const countryData = {
+//       guid: countryGuid,
+//       code: code,
+//       name: englishName,
+//       nameAr: arabicName,
+//       enabled: true,
+//       createdDate: new Date().toISOString(),
+//     };
+
+//     try {
+//       // Post country data to its endpoint
+//       await Axios.post("/api/country/v1.0", countryData);
+//       console.log("Country data posted successfully:", countryData);
+
+//       // Post governorates, districts, and cities data
+//       await Promise.all(
+//         governorates.map(async (governorate) => {
+//           const governorateGuid = uuidv4();
+//           await Axios.post("/api/governorates/v1.0", {
+//             guid: governorateGuid,
+//             code: governorate.code,
+//             name: governorate.name,
+//             nameAr: governorate.nameAr,
+//             enabled: true,
+//             createdDate: new Date().toISOString(),
+//             staticCountryGuid: countryGuid,
+//           });
+//           console.log("Governorate data posted successfully");
+
+//           return Promise.all(
+//             governorate.districts.map(async (district) => {
+//               const districtGuid = uuidv4();
+//               await Axios.post("/api/district/v1.0", {
+//                 guid: districtGuid,
+//                 code: district.code,
+//                 name: district.name,
+//                 nameAr: district.nameAr,
+//                 enabled: true,
+//                 createdDate: new Date().toISOString(),
+//                 governorateGuid: governorateGuid,
+//               });
+//               console.log("District data posted successfully");
+
+//               return Promise.all(
+//                 district.cities.map(async (city) => {
+//                   await Axios.post("/api/city/v1.0", {
+//                     guid: uuidv4(),
+//                     code: city.code,
+//                     name: city.name,
+//                     nameAr: city.nameAr,
+//                     enabled: true,
+//                     createdDate: new Date().toISOString(),
+//                     districtGuid: districtGuid,
+//                   });
+//                   console.log("City data posted successfully");
+//                 })
+//               );
+//             })
+//           );
+//         })
+//       );
+//     } catch (error) {
+//       console.error("Error posting data:", error);
+//     }
+//   };
+
+//   const addGovernorate = () => {
+//     setGovernorates([
+//       ...governorates,
+//       { code: "", name: "", nameAr: "", districts: [] },
+//     ]);
+//   };
+
+//   const addDistrict = (index) => {
+//     const updatedGovernorates = [...governorates];
+//     updatedGovernorates[index].districts.push({
+//       code: "",
+//       name: "",
+//       nameAr: "",
+//       cities: [],
+//     });
+//     setGovernorates(updatedGovernorates);
+//   };
+
+//   const addCity = (govIndex, distIndex) => {
+//     const updatedGovernorates = [...governorates];
+//     updatedGovernorates[govIndex].districts[distIndex].cities.push({
+//       code: "",
+//       name: "",
+//       nameAr: "",
+//     });
+//     setGovernorates(updatedGovernorates);
+//   };
+
+//   const handleGovernorateChange = (index, field, value) => {
+//     const updatedGovernorates = [...governorates];
+//     updatedGovernorates[index][field] = value;
+//     setGovernorates(updatedGovernorates);
+//   };
+
+//   const handleDistrictChange = (govIndex, distIndex, field, value) => {
+//     const updatedGovernorates = [...governorates];
+//     updatedGovernorates[govIndex].districts[distIndex][field] = value;
+//     setGovernorates(updatedGovernorates);
+//   };
+
+//   const handleCityChange = (govIndex, distIndex, cityIndex, field, value) => {
+//     const updatedGovernorates = [...governorates];
+//     updatedGovernorates[govIndex].districts[distIndex].cities[cityIndex][
+//       field
+//     ] = value;
+//     setGovernorates(updatedGovernorates);
+//   };
+
+//   return (
+//     <form className="geo-form" onSubmit={handleSubmit}>
+//       <div>
+//         <label htmlFor="code">Country Code:</label>
+//         <input
+//           type="text"
+//           id="code"
+//           value={code}
+//           onChange={(e) => setCode(e.target.value)}
+//         />
+//       </div>
+//       <div>
+//         <label htmlFor="englishName">Country English Name:</label>
+//         <input
+//           type="text"
+//           id="englishName"
+//           value={englishName}
+//           onChange={(e) => setEnglishName(e.target.value)}
+//         />
+//       </div>
+//       <div>
+//         <label htmlFor="arabicName">Country Arabic Name:</label>
+//         <input
+//           type="text"
+//           id="arabicName"
+//           value={arabicName}
+//           onChange={(e) => setArabicName(e.target.value)}
+//         />
+//       </div>
+//       <div>
+//         <label>Governorates:</label>
+//         {governorates.map((governorate, govIndex) => (
+//           <div key={govIndex}>
+//             <input
+//               type="text"
+//               placeholder="Governorate Code"
+//               value={governorate.code}
+//               onChange={(e) =>
+//                 handleGovernorateChange(govIndex, "code", e.target.value)
+//               }
+//             />
+//             <input
+//               type="text"
+//               placeholder="Name (English)"
+//               value={governorate.name}
+//               onChange={(e) =>
+//                 handleGovernorateChange(govIndex, "name", e.target.value)
+//               }
+//             />
+//             <input
+//               type="text"
+//               placeholder="Name (Arabic)"
+//               value={governorate.nameAr}
+//               onChange={(e) =>
+//                 handleGovernorateChange(govIndex, "nameAr", e.target.value)
+//               }
+//             />
+//             <div>
+//               <label>Districts:</label>
+//               {governorate.districts.map((district, distIndex) => (
+//                 <div key={distIndex}>
+//                   <input
+//                     type="text"
+//                     placeholder="District Code"
+//                     value={district.code}
+//                     onChange={(e) =>
+//                       handleDistrictChange(
+//                         govIndex,
+//                         distIndex,
+//                         "code",
+//                         e.target.value
+//                       )
+//                     }
+//                   />
+//                   <input
+//                     type="text"
+//                     placeholder="Name (English)"
+//                     value={district.name}
+//                     onChange={(e) =>
+//                       handleDistrictChange(
+//                         govIndex,
+//                         distIndex,
+//                         "name",
+//                         e.target.value
+//                       )
+//                     }
+//                   />
+//                   <input
+//                     type="text"
+//                     placeholder="Name (Arabic)"
+//                     value={district.nameAr}
+//                     onChange={(e) =>
+//                       handleDistrictChange(
+//                         govIndex,
+//                         distIndex,
+//                         "nameAr",
+//                         e.target.value
+//                       )
+//                     }
+//                   />
+//                   <div>
+//                     <label>Cities:</label>
+//                     {district.cities.map((city, cityIndex) => (
+//                       <div key={cityIndex}>
+//                         <input
+//                           type="text"
+//                           placeholder="City Code"
+//                           value={city.code}
+//                           onChange={(e) =>
+//                             handleCityChange(
+//                               govIndex,
+//                               distIndex,
+//                               cityIndex,
+//                               "code",
+//                               e.target.value
+//                             )
+//                           }
+//                         />
+//                         <input
+//                           type="text"
+//                           placeholder="Name (English)"
+//                           value={city.name}
+//                           onChange={(e) =>
+//                             handleCityChange(
+//                               govIndex,
+//                               distIndex,
+//                               cityIndex,
+//                               "name",
+//                               e.target.value
+//                             )
+//                           }
+//                         />
+//                         <input
+//                           type="text"
+//                           placeholder="Name (Arabic)"
+//                           value={city.nameAr}
+//                           onChange={(e) =>
+//                             handleCityChange(
+//                               govIndex,
+//                               distIndex,
+//                               cityIndex,
+//                               "nameAr",
+//                               e.target.value
+//                             )
+//                           }
+//                         />
+//                       </div>
+//                     ))}
+//                     <button
+//                       type="button"
+//                       onClick={() => addCity(govIndex, distIndex)}
+//                     >
+//                       Add City
+//                     </button>
+//                   </div>
+//                 </div>
+//               ))}
+//               <button type="button" onClick={() => addDistrict(govIndex)}>
+//                 Add District
+//               </button>
+//             </div>
+//           </div>
+//         ))}
+//         <button type="button" onClick={addGovernorate}>
+//           Add Governorate
+//         </button>
+//       </div>
+//       <button type="submit">Submit</button>
+//     </form>
+//   );
+// };
+
+// export default GeoForm;
+
+// ///////////////////////////////////
+// ///////////////////////////////////
+// ///////////////////////////////////
+// ///////////////////////////////////
+
+import React, { useState } from "react";
 import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
+import "./GeoForm.css";
 
-const GeosForm = () => {
-  const [formData, setFormData] = useState({
-    // Country fields
-    guid: uuidv4(),
-    code: "",
-    name: "",
-    nameAr: "",
-    enabled: true,
-    createdDate: new Date().toISOString(),
-    isNearByCountry: true,
-    isReferenceCountry: true,
-    isComparative: true,
-    // Governorates fields
-    guid: "",
-    staticCountryGuid: "",
-    code: "",
-    govName: "",
-    govNameAr: "",
-    enabled: true,
-    createdDate: new Date().toISOString(),
-    // Districts fields
-    guid: "",
-    governorateGuid: "",
-    code: "",
-    distName: "",
-    distNameAr: "",
-    enabled: true,
-    createdDate: new Date().toISOString(),
-    // Cities fields
-    guid: "",
-    districtGuid: "",
-    code: "",
-    cityName: "",
-    cityNameAr: "",
-    enabled: true,
-    createdDate: new Date().toISOString(),
-  });
+const GeoForm = () => {
+  const [code, setCode] = useState("");
+  const [englishName, setEnglishName] = useState("");
+  const [arabicName, setArabicName] = useState("");
+  const [governorates, setGovernorates] = useState([]);
 
-  const [countryList, setCountryList] = useState([]);
-  const [error, setError] = useState("");
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const resetForm = () => {
+    setCode("");
+    setEnglishName("");
+    setArabicName("");
+    setGovernorates([]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const countryGuid = uuidv4();
+    const countryData = {
+      guid: countryGuid,
+      code: code,
+      name: englishName,
+      nameAr: arabicName,
+      enabled: true,
+      createdDate: new Date().toISOString(),
+    };
+
     try {
-      // Generate GUID for the new record in Country records
-      const staticCountryGuid = uuidv4();
-      // Perform API call to create a new record in Country records
-      await Axios.post("/api/country/v1.0", {
-        guid: staticCountryGuid,
-        code: formData.code,
-        name: formData.name,
-        nameAr: formData.nameAr,
-        enabled: formData.enabled,
-      });
+      // Post country data to its endpoint
+      await Axios.post("/api/country/v1.0", countryData);
+      console.log("Country data posted successfully:", countryData);
 
-      // Generate GUID for the new record in Governorate records
-      const governorateGuid = uuidv4();
-      // Perform API call to create a new record in Governorate records
-      await Axios.post("/api/governorates/v1.0", {
-        guid: governorateGuid,
-        code: formData.staticCountryGuid,
-        staticCountryGuid: staticCountryGuid,
-        name: formData.govName,
-        nameAr: formData.govNameAr,
-        enabled: formData.enabled,
-      });
+      // Post governorates, districts, and cities data
+      await Promise.all(
+        governorates.map(async (governorate) => {
+          const governorateGuid = uuidv4();
+          await Axios.post("/api/governorates/v1.0", {
+            guid: governorateGuid,
+            code: governorate.code,
+            name: governorate.name,
+            nameAr: governorate.nameAr,
+            enabled: true,
+            createdDate: new Date().toISOString(),
+            staticCountryGuid: countryGuid,
+          });
+          console.log("Governorate data posted successfully");
 
-      // Generate GUID for the new record in Districts records
-      const districtGuid = uuidv4();
-      // Perform API call to create a new record in Districts records
-      await Axios.post("/api/district/v1.0", {
-        guid: districtGuid,
-        code: formData.distCode, // Assuming there's a field for District code in the form
-        governorateGuid: governorateGuid,
-        name: formData.distName,
-        nameAr: formData.distNameAr,
-        enabled: formData.enabled,
-      });
-      console.log("district GUID 1", districtGuid);
-      // Perform API call to create a new record in Cities records
-      await Axios.post("/api/city/v1.0", {
-        guid: uuidv4(),
-        code: formData.cityCode, // Assuming there's a field for City code in the form
-        districtGuid: districtGuid,
-        name: formData.cityName,
-        nameAr: formData.cityNameAr,
-        enabled: formData.enabled,
-      });
+          return Promise.all(
+            governorate.districts.map(async (district) => {
+              const districtGuid = uuidv4();
+              await Axios.post("/api/district/v1.0", {
+                guid: districtGuid,
+                code: district.code,
+                name: district.name,
+                nameAr: district.nameAr,
+                enabled: true,
+                createdDate: new Date().toISOString(),
+                governorateGuid: governorateGuid,
+              });
+              console.log("District data posted successfully");
 
-      console.log("Form submitted successfully");
+              return Promise.all(
+                district.cities.map(async (city) => {
+                  await Axios.post("/api/city/v1.0", {
+                    guid: uuidv4(),
+                    code: city.code,
+                    name: city.name,
+                    nameAr: city.nameAr,
+                    enabled: true,
+                    createdDate: new Date().toISOString(),
+                    districtGuid: districtGuid,
+                  });
+                  console.log("City data posted successfully");
+                })
+              );
+            })
+          );
+        })
+      );
+
+      resetForm();
+      
     } catch (error) {
-      console.error("Error submitting form data:", error);
-      setError("Failed to submit form data");
-    } finally {
-      // Reset form fields after form submission (whether successful or not)
-      resetFormData();
-      console.log("district GUID 2", districtGuid);
+      console.error("Error posting data:", error);
     }
   };
-  // console.log("district GUID 2", districtGuid);
-  const resetFormData = () => {
-    setFormData({
-      // Counrty fields
-      guid: "",
+
+  const addGovernorate = () => {
+    setGovernorates([
+      ...governorates,
+      { code: "", name: "", nameAr: "", districts: [] },
+    ]);
+  };
+
+  const addDistrict = (index) => {
+    const updatedGovernorates = [...governorates];
+    updatedGovernorates[index].districts.push({
       code: "",
       name: "",
       nameAr: "",
-      enabled: true,
-      isNearByCountry: true,
-      isReferenceCountry: true,
-      isComparative: true,
-      // Governorate fields
-      guid: "",
-      staticCountryGuid: "",
-      govCode: "",
-      govName: "",
-      govNameAr: "",
-      enabled: true,
-      // District fields
-      guid: "",
-      governorateGuid: "",
-      distCode: "",
-      distName: "",
-      distNameAr: "",
-      enabled: true,
-      // Cities fields
-      guid: "",
-      districtGuid: "",
-      cityCode: "",
-      cityName: "",
-      cityNameAr: "",
-      enabled: true,
+      cities: [],
     });
+    setGovernorates(updatedGovernorates);
+  };
+
+  const addCity = (govIndex, distIndex) => {
+    const updatedGovernorates = [...governorates];
+    updatedGovernorates[govIndex].districts[distIndex].cities.push({
+      code: "",
+      name: "",
+      nameAr: "",
+    });
+    setGovernorates(updatedGovernorates);
+  };
+
+  const handleGovernorateChange = (index, field, value) => {
+    const updatedGovernorates = [...governorates];
+    updatedGovernorates[index][field] = value;
+    setGovernorates(updatedGovernorates);
+  };
+
+  const handleDistrictChange = (govIndex, distIndex, field, value) => {
+    const updatedGovernorates = [...governorates];
+    updatedGovernorates[govIndex].districts[distIndex][field] = value;
+    setGovernorates(updatedGovernorates);
+  };
+
+  const handleCityChange = (govIndex, distIndex, cityIndex, field, value) => {
+    const updatedGovernorates = [...governorates];
+    updatedGovernorates[govIndex].districts[distIndex].cities[cityIndex][
+      field
+    ] = value;
+    setGovernorates(updatedGovernorates);
   };
 
   return (
-    <div className="flex flex-col p-6 mx-auto">
-      <form
-        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-4 py-14 md:p-8"
-        onSubmit={handleSubmit}
-      >
-        {/* Country fields */}
-        <div className="flex flex-col gap-6">
-          <h3 className="text-green-pri">Country</h3>
-          <label className="flex flex-col">
-            Counrty Code:
+    <form className="geo-form" onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="code">Country Code:</label>
+        <input
+          type="text"
+          id="code"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="englishName">Country English Name:</label>
+        <input
+          type="text"
+          id="englishName"
+          value={englishName}
+          onChange={(e) => setEnglishName(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="arabicName">Country Arabic Name:</label>
+        <input
+          type="text"
+          id="arabicName"
+          value={arabicName}
+          onChange={(e) => setArabicName(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Governorates:</label>
+        {governorates.map((governorate, govIndex) => (
+          <div key={govIndex}>
             <input
               type="text"
-              name="code"
-              value={formData.code}
-              onChange={handleInputChange}
-              placeholder="+961"
-              autoFocus
+              placeholder="Governorate Code"
+              value={governorate.code}
+              onChange={(e) =>
+                handleGovernorateChange(govIndex, "code", e.target.value)
+              }
             />
-          </label>
-
-          <label className="flex flex-col">
-            Name:
             <input
               type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
+              placeholder="Name (English)"
+              value={governorate.name}
+              onChange={(e) =>
+                handleGovernorateChange(govIndex, "name", e.target.value)
+              }
             />
-          </label>
-
-          <label className="flex flex-col">
-            Name (Arabic):
             <input
               type="text"
-              name="nameAr"
-              value={formData.nameAr}
-              onChange={handleInputChange}
+              placeholder="Name (Arabic)"
+              value={governorate.nameAr}
+              onChange={(e) =>
+                handleGovernorateChange(govIndex, "nameAr", e.target.value)
+              }
             />
-          </label>
-        </div>
-
-        {/* Governorates fields */}
-        <div className="flex flex-col gap-6">
-          <h3 className="text-green-pri">Governorates</h3>
-          <label className="flex flex-col">
-            Code:
-            <input
-              type="text"
-              name="staticCountryGuid"
-              value={formData.staticCountryGuid}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-
-          <label className="flex flex-col">
-            Name:
-            <input
-              type="text"
-              name="govName"
-              value={formData.govName}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-
-          <label className="flex flex-col">
-            Name (Arabic):
-            <input
-              type="text"
-              name="govNameAr"
-              value={formData.govNameAr}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-        </div>
-
-        {/* Districts fields */}
-        <div className="flex flex-col gap-6">
-          <h3 className="text-green-pri">Districts</h3>
-          <label className="flex flex-col">
-            Code:
-            <input
-              type="text"
-              name="distCode"
-              value={formData.distCode}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-
-          <label className="flex flex-col">
-            Name:
-            <input
-              type="text"
-              name="distName"
-              value={formData.distName}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-
-          <label className="flex flex-col">
-            Name (Arabic):
-            <input
-              type="text"
-              name="distNameAr"
-              value={formData.distNameAr}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-        </div>
-
-        {/* Cities fields */}
-        <div className="flex flex-col gap-6">
-          <h3 className="text-green-pri">Cities</h3>
-          <label className="flex flex-col">
-            Code:
-            <input
-              type="text"
-              name="cityCode"
-              value={formData.cityCode}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-
-          <label className="flex flex-col">
-            Name:
-            <input
-              type="text"
-              name="cityName"
-              value={formData.cityName}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-
-          <label className="flex flex-col">
-            Name (Arabic):
-            <input
-              type="text"
-              name="cityNameAr"
-              value={formData.cityNameAr}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
-        </div>
-
-        <div className="btns-col col-span-full flex justify-between">
-          <Link to="/geo/list" className="med-btn-pri">
-            Go to data records
-          </Link>
-
-          <button className="med-btn-sec w-24" type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-    </div>
+            <div>
+              <label>Districts:</label>
+              {governorate.districts.map((district, distIndex) => (
+                <div key={distIndex}>
+                  <input
+                    type="text"
+                    placeholder="District Code"
+                    value={district.code}
+                    onChange={(e) =>
+                      handleDistrictChange(
+                        govIndex,
+                        distIndex,
+                        "code",
+                        e.target.value
+                      )
+                    }
+                  />
+                  <input
+                    type="text"
+                    placeholder="Name (English)"
+                    value={district.name}
+                    onChange={(e) =>
+                      handleDistrictChange(
+                        govIndex,
+                        distIndex,
+                        "name",
+                        e.target.value
+                      )
+                    }
+                  />
+                  <input
+                    type="text"
+                    placeholder="Name (Arabic)"
+                    value={district.nameAr}
+                    onChange={(e) =>
+                      handleDistrictChange(
+                        govIndex,
+                        distIndex,
+                        "nameAr",
+                        e.target.value
+                      )
+                    }
+                  />
+                  <div>
+                    <label>Cities:</label>
+                    {district.cities.map((city, cityIndex) => (
+                      <div key={cityIndex}>
+                        <input
+                          type="text"
+                          placeholder="City Code"
+                          value={city.code}
+                          onChange={(e) =>
+                            handleCityChange(
+                              govIndex,
+                              distIndex,
+                              cityIndex,
+                              "code",
+                              e.target.value
+                            )
+                          }
+                        />
+                        <input
+                          type="text"
+                          placeholder="Name (English)"
+                          value={city.name}
+                          onChange={(e) =>
+                            handleCityChange(
+                              govIndex,
+                              distIndex,
+                              cityIndex,
+                              "name",
+                              e.target.value
+                            )
+                          }
+                        />
+                        <input
+                          type="text"
+                          placeholder="Name (Arabic)"
+                          value={city.nameAr}
+                          onChange={(e) =>
+                            handleCityChange(
+                              govIndex,
+                              distIndex,
+                              cityIndex,
+                              "nameAr",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => addCity(govIndex, distIndex)}
+                    >
+                      Add City
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <button type="button" onClick={() => addDistrict(govIndex)}>
+                Add District
+              </button>
+            </div>
+          </div>
+        ))}
+        <button type="button" onClick={addGovernorate}>
+          Add Governorate
+        </button>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 
-export default GeosForm;
+export default GeoForm;

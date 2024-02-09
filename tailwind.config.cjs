@@ -73,6 +73,7 @@ module.exports = {
   plugins: [
     require("tailwindcss-animate"),
     require("react-widgets-tailwind"),
+    require('@tailwindcss/custom-forms'),
     require("@tailwindcss/forms")({
       strategy: "base",
     }),

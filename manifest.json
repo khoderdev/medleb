@@ -3,7 +3,7 @@
   "name": "Pharmacy Service",
   "description": "MedLeb - Pharmacy Service",
   "start_url": "./",
-  "display": "fullscreen",
+  "display": "standalone",
   "background_color": "#e0e0e0",
   "theme_color": "#00a651",
   "icons": [

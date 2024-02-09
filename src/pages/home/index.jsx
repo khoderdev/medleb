@@ -98,7 +98,7 @@ const Home = () => {
       {/* Left Column */}
       <div
         className="lg:w-2/6 lg:flex-1 h-screen bg-fixed bg-contain bg-no-repeat md:bg-[6rem]"
-        style={{ backgroundImage: `url('/src/images/EB-Quote.png')` }}
+        style={{ backgroundImage: `url('/public/assets/EB-Quote.png')` }}
       >
         {/* Left content */}
       </div>

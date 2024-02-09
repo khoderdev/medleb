@@ -48,14 +48,14 @@ self.addEventListener("activate", (event) => {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/atc/sw.jsx", { type: "text/plain" })
+      // .register("/atc/sw.jsx", { type: "text/plain" })
       .then((registration) => {
         console.log("Service Worker registered:", registration);
       })
       .catch((error) => {
         // If registration with text/plain fails, try registering again with application/javascript
         navigator.serviceWorker
-          .register("/atc/sw.jsx", { type: "application/javascript" })
+          // .register("/atc/sw.jsx", { type: "application/javascript" })
           .then((registration) => {
             console.log(
               "Service Worker registered with application/javascript:",

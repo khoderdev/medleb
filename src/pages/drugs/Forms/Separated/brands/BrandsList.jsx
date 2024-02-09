@@ -1,106 +1,142 @@
+// import React, { useState, useEffect } from "react";
+// import Axios from "../../../../../api/axios";
+// import StaticDataTable from "../StaticDataTable";
+
+// const BrandsList = () => {
+//   const [brands, setBrands] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         setLoading(true);
+//         const [brandsResponse, countriesResponse] = await Promise.all([
+//           Axios.get("/api/brands/v1.0/brands"),
+//           Axios.get("/api/country/v1.0/countries"),
+//         ]);
+//         const brandsItems = Array.isArray(brandsResponse.data)
+//           ? brandsResponse.data
+//           : [];
+//         const countriesMap = new Map(
+//           countriesResponse.data.map((country) => [country.guid, country])
+//         );
+//         const brandsWithCountries = brandsItems.map((brand) => ({
+//           ...brand,
+//           countryName: countriesMap.get(brand.countryGuid)?.name || "",
+//           countryNameAr: countriesMap.get(brand.countryGuid)?.nameAr || "",
+//         }));
+//         setBrands(brandsWithCountries);
+//       } catch (error) {
+//         console.error("Error fetching data:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   const columns = [
+//     { name: "Brand Name", key: "name" },
+//     { name: "Brand Name ar", key: "nameAr" },
+//     { name: "Country Name", key: "countryName" },
+//     { name: "Country Name ar", key: "countryNameAr" },
+//   ];
+
+//   return (
+//     <div>
+//       <h3>Brands Table</h3>
+//       {loading ? (
+//         <div>Loading...</div>
+//       ) : (
+//         <StaticDataTable
+//           title="Brands Data"
+//           createBtnLabel="Create Brand"
+//           onCreateBtnClick={handleCreateBrand}
+//           data={brands}
+//           columns={columns}
+//           initialSortConfig={{ key: "name", direction: "asc" }}
+//           tableClasses="my-custom-table-class"
+//           headerClasses="my-custom-header-class"
+//           rowClasses="my-custom-row-class"
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default BrandsList;
+
 import React, { useState, useEffect } from "react";
 import Axios from "../../../../../api/axios";
-import { Link, useParams } from "react-router-dom";
+import StaticDataTable from "../StaticDataTable";
+import { useNavigate } from "react-router-dom";
 
 const BrandsList = () => {
-  const { guid } = useParams();
-  const [data, setData] = useState([]);
-  const [atcCodeData, setAtcCodeData] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (guid) {
-          console.log("Fetching data for guid:", guid);
-          const response = await Axios.get(`/api/atc/v1.0?guid=${guid}`);
-          console.log("Response data:", response.data);
-          setData(Array.isArray(response.data) ? response.data : []);
-
-          console.log("Fetching atcCodeData for guid:", guid);
-          const atcCodeResponse = await Axios.get(
-            `/api/atccodes/codes/v1.0/${guid}`
-          );
-          console.log("Response atcCodeData:", atcCodeResponse.data);
-          setAtcCodeData(
-            Array.isArray(atcCodeResponse.data) ? atcCodeResponse.data : []
-          );
-        } else {
-          console.log("Fetching all data");
-          const response = await Axios.get("/api/atc/v1.0");
-          console.log("Response data:", response.data);
-          setData(Array.isArray(response.data) ? response.data : []);
-
-          console.log("Fetching all atcCodeData");
-          const atcCodeResponse = await Axios.get("/api/atccodes/codes/v1.0");
-          console.log("Response atcCodeData:", atcCodeResponse.data);
-          setAtcCodeData(
-            Array.isArray(atcCodeResponse.data) ? atcCodeResponse.data : []
-          );
-        }
+        setLoading(true);
+        const [brandsResponse, countriesResponse] = await Promise.all([
+          Axios.get("/api/brands/v1.0/brands"),
+          Axios.get("/api/country/v1.0/countries"),
+        ]);
+        const brandsItems = Array.isArray(brandsResponse.data)
+          ? brandsResponse.data
+          : [];
+        const countriesMap = new Map(
+          countriesResponse.data.map((country) => [country.guid, country])
+        );
+        const brandsWithCountries = brandsItems.map((brand) => ({
+          ...brand,
+          countryName: countriesMap.get(brand.countryGuid)?.name || "",
+          countryNameAr: countriesMap.get(brand.countryGuid)?.nameAr || "",
+        }));
+        setBrands(brandsWithCountries);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, [guid]);
+  }, []);
+
+  const handleCreateBrand = () => {
+    // Navigate to the create brand page
+    navigate("/brands/new");
+  };
+
+  const columns = [
+    { name: "Brand Name", key: "name" },
+    { name: "Brand Name ar", key: "nameAr" },
+    { name: "Country Name", key: "countryName" },
+    { name: "Country Name ar", key: "countryNameAr" },
+  ];
 
   return (
-    <div className="container mx-auto">
-      <div>
-        <h2>Main Table</h2>
-        <table className="min-w-full table-auto">
-          <thead>
-            <tr>
-              <th className="px-4 py-2">ID</th>
-              <th className="px-4 py-2">Code</th>
-              <th className="px-4 py-2">Level Name</th>
-              <th className="px-4 py-2">Level Name (Arabic)</th>
-              {/* <th className="px-4 py-2">ATC Related Label</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-100">
-                <td className="border px-4 py-2">{item.guid}</td>
-                <td className="border px-4 py-2">{item.code}</td>
-                <td className="border px-4 py-2">{item.levelName}</td>
-                <td className="border px-4 py-2">{item.levelNameAr}</td>
-                {/* <td className="border px-4 py-2">{item.atcRelatedLabel}</td> */}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <h2>Secondary Table</h2>
-        <table className="min-w-full table-auto">
-          <thead>
-            <tr>
-              <th className="px-4 py-2">ID</th>
-              <th className="px-4 py-2">Code</th>
-              <th className="px-4 py-2">ATC Guid</th>
-              <th className="px-4 py-2">Level Name</th>
-              <th className="px-4 py-2">Level Name (Arabic)</th>
-              <th className="px-4 py-2">Level Number</th>
-              <th className="px-4 py-2">ATC Related Label</th>
-            </tr>
-          </thead>
-          <tbody>
-            {atcCodeData.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-100">
-                <td className="border px-4 py-2">{item.guid}</td>
-                <td className="border px-4 py-2">{item.code}</td>
-                <td className="border px-4 py-2">{item.atcGuid}</td>
-                <td className="border px-4 py-2">{item.levelName}</td>
-                <td className="border px-4 py-2">{item.levelNameAr}</td>
-                <td className="border px-4 py-2">{item.levelNumber}</td>
-                <td className="border px-4 py-2">{item.atcRelatedLabel}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <StaticDataTable
+          title="Brands Data"
+          createBtnLabel=""
+          createBtnUrl="/brands/new"
+          onCreateBtnClick={handleCreateBrand}
+          data={brands}
+          columns={columns}
+          initialSortConfig={{ key: "name", direction: "asc" }}
+          tableClasses="my-custom-table-class"
+          headerClasses="my-custom-header-class"
+          rowClasses="my-custom-row-class"
+        />
+      )}
     </div>
   );
 };

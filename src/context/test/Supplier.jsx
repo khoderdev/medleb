@@ -1,16 +1,16 @@
-import { createContext } from "react";
-import App from "../../App";
+// import { createContext } from "react";
+// import App from "../../App";
 
-const Khoder = createContext();
+// const Khoder = createContext();
 
-function Supplier() {
-  return;
+// function Supplier() {
+//   return;
 
-  <div>
-    <Khoder.Provider value="Panadol">
-      <App />
-    </Khoder.Provider>
-  </div>;
-}
+//   <div>
+//     <Khoder.Provider value="Panadol">
+//       <App />
+//     </Khoder.Provider>
+//   </div>;
+// }
 
-export default Supplier;
+// export default Supplier;

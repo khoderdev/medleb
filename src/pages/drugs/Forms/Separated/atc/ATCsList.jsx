@@ -2,8 +2,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import Axios from "../../../../../api/axios";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
-const ATCsList = () => {
+import { AddIcon } from "../AddIcon";
+const ATCsList = (onCreateBtnClick) => {
   const [atcCodes, setAtcCodes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
@@ -100,16 +100,17 @@ const ATCsList = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="rounded-md py-1 px-3 dark:border-white-text text-black-text dark:text-white-text bg-white-bg dark:bg-black-bg dark:focus:border-transparent outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
         />
-        <Link to="/atc/new" className="med-btn-pri-sm">
-          New
-        </Link>
+ <Link to={'/atc/new'} className="icon-hovered button-with-icon">
+            <AddIcon />
+           
+          </Link>
       </div>
       {loading ? (
         <div>Loading...</div>
       ) : (
         <div className="overflow-x-auto max-h-[calc(100vh-284px)]">
           <table className="w-full table-auto border border-collapse">
-            <thead className="select-none h-10 sticky top-0 z-50 bg-gray-200 dark:bg-black-input font-normal">
+            <thead className="select-none h-10 sticky top-0 z-20 bg-gray-200 dark:bg-black-input font-normal">
               <tr>
                 <th className="relative">
                   <div

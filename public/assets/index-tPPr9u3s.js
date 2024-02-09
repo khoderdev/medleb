@@ -1,1 +1,0 @@
-import{j as r,G as o}from"./index-nT-sMeGS.js";import i from"./Profile-lA9L86EM.js";import"./DashboardTab-WH-YOj7D.js";import"./DrugsTab-d3KGILzs.js";import"./ProfileSettingsTab-bZWqd3KD.js";function m(){return r.jsx("div",{children:r.jsx(o,{title:"Profile",children:r.jsx(i,{})})})}export{m as default};

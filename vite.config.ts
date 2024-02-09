@@ -24,7 +24,7 @@ import Pages from "vite-plugin-pages";
 export default defineConfig({
   base: "/", // Adjust according to your deployment configuration
   build: {
-    outDir: "public",
+    outDir: "dist",
     rollupOptions: {
       external: ["@material-ui/icons/ArrowBack", "@mui/x-data-grid"],
     },
