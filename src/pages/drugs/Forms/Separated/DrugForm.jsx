@@ -1,607 +1,303 @@
-import React, { useState } from "react";
-import axios from "../../../../api/axios";
-import * as yup from "yup";
-import { v4 as uuidv4 } from "uuid";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import React, { useContext } from "react";
+// import "./DrugForm.css";
+// // import { useDrugFormContext } from "./drugs/DrugFormProvider";
+// import { DrugProvider, useDrugContext } from "../../../drugs/DrugContext";
+// import DrugRegistryForm from "../DrugRegistryForm";
+// import { useNavigate, Link, useParams } from "react-router-dom";
+// import { FaArrowRightLong } from "react-icons/fa6";
+// import { FaArrowLeftLong } from "react-icons/fa6";
+// import Button from "@mui/material/Button";
+// import { Step, Stepper, StepLabel } from "@mui/material";
+// import Paper from "@mui/material/Paper";
+// import { makeStyles } from "@mui/styles";
+// import CloseIcon from "@mui/icons-material/Close";
+
+// const DrugForm = () => {
+//   const {
+//     formData,
+//     handleInputChange,
+//     handleSubmit,
+//     handleNext,
+//     handlePrevious,
+//     error,
+//     currentStep,
+//     steps,
+//   } = useDrugContext();
+
+//   const renderStep = (stepIndex) => {
+//     switch (stepIndex) {
+//       case 0:
+//         return (
+//           <div className="step-0">
+//             <div className="input-group">
+//               <label className="drug-label" htmlFor="Code">
+//                 Code:
+//               </label>
+//               <input
+//                 type="text"
+//                 id="Code"
+//                 name="Code"
+//                 value={formData.Code}
+//                 onChange={handleInputChange}
+//                 className="drug-input"
+//                 required
+//               />
+//             </div>
+
+//             <div className="input-group">
+//               <label className="drug-label" htmlFor="BrandName">
+//                 Brand Name:
+//               </label>
+//               <input
+//                 type="text"
+//                 id="BrandName"
+//                 name="BrandName"
+//                 value={formData.BrandName}
+//                 onChange={handleInputChange}
+//                 className="drug-input"
+//                 required
+//               />
+//             </div>
+
+//             <div className="input-group">
+//               <label className="drug-label" htmlFor="DosageName">
+//                 Dosage Name:
+//               </label>
+//               <input
+//                 type="text"
+//                 id="DosageName"
+//                 name="DosageName"
+//                 value={formData.DosageName}
+//                 onChange={handleInputChange}
+//                 className="drug-input"
+//                 required
+//               />
+//             </div>
+//           </div>
+//         );
+//       case 1:
+//         return (
+//           <div className="step-1">
+//             <div className="input-group">
+//               <label className="drug-label" htmlFor="FormName">
+//                 Form Name:
+//               </label>
+//               <input
+//                 type="text"
+//                 id="FormName"
+//                 name="FormName"
+//                 value={formData.FormName}
+//                 onChange={handleInputChange}
+//                 className="drug-input"
+//                 required
+//               />
+//             </div>
+
+//             <div className="input-group">
+//               <label className="drug-label" htmlFor="RouteName">
+//                 Route Name:
+//               </label>
+//               <input
+//                 type="text"
+//                 id="RouteName"
+//                 name="RouteName"
+//                 value={formData.RouteName}
+//                 onChange={handleInputChange}
+//                 className="drug-input"
+//                 required
+//               />
+//             </div>
+//           </div>
+//         );
+//       case 2:
+//         return (
+//           <div className="step-2">
+//             <div className="input-group">
+//               <label className="drug-label" htmlFor="PriceUSD">
+//                 Price USD:
+//               </label>
+//               <input
+//                 type="number"
+//                 id="PriceUSD"
+//                 name="PriceUSD"
+//                 value={formData.PriceUSD}
+//                 onChange={handleInputChange}
+//                 className="drug-input"
+//                 required
+//               />
+//             </div>
+
+//             <div className="input-group">
+//               <label className="drug-label" htmlFor="PriceLBP">
+//                 Price LBP:
+//               </label>
+//               <input
+//                 type="number"
+//                 id="PriceLBP"
+//                 name="PriceLBP"
+//                 value={formData.PriceLBP}
+//                 onChange={handleInputChange}
+//                 className="drug-input"
+//                 required
+//               />
+//             </div>
+//           </div>
+//         );
+//       // Add cases for other steps
+//       default:
+//         return null;
+//     }
+//   };
+
+//   return (
+//     <form
+//       className="drug-form grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-14 gap-8 mx-auto w-[80%] "
+//       onSubmit={handleSubmit}
+//     >
+//       {error && <div className="error-message">{error}</div>}
+
+//       {/* Render current step */}
+//       {renderStep(currentStep)}
+
+//       <div className="buttons-container">
+//         {/* Previous Button */}
+//         {currentStep > 0 && (
+//           <button
+//             type="button"
+//             onClick={handlePrevious}
+//             className="previous-button"
+//           >
+//             Previous
+//           </button>
+//         )}
+
+//         {/* Next Button */}
+//         {currentStep < steps.length - 1 && (
+//           <button type="button" onClick={handleNext} className="next-button">
+//             Next
+//           </button>
+//         )}
+
+//         {/* Submit Button */}
+//         {currentStep === steps.length - 1 && (
+//           <button type="submit" className="submit-button">
+//             Submit
+//           </button>
+//         )}
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default DrugForm;
+
+// //////////////////////////
+// //////////////////////////
+// //////////////////////////
+// //////////////////////////
+
+import React, { useContext } from "react";
+import "./DrugForm.css";
+// import { useDrugFormContext } from "./drugs/DrugFormProvider";
+import { DrugProvider, useDrugContext } from "../../../drugs/DrugContext";
+import DrugRegistryFormTest from "../DrugRegistryFormTest";
+import DrugRegistryFormAddons from "../DrugRegistryFormAddons";
+import { useNavigate, Link, useParams } from "react-router-dom";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import Button from "@mui/material/Button";
+import { Step, Stepper, StepLabel } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import { makeStyles } from "@mui/styles";
+import CloseIcon from "@mui/icons-material/Close";
 
 const DrugForm = () => {
-  const currentDate = new Date().toISOString().split("T")[0];
+  const {
+    formData,
+    handleSubmit,
+    handleNext,
+    handlePrevious,
+    error,
+    currentStep,
+    steps,
+    exchangeRates,
+    currencySymbols,
+    handleInputChange,
+  } = useDrugContext();
 
-  const [drugData, setDrugData] = useState({
-    Guid: "",
-    ATCGuid: "",
-    DosageGuid: "",
-    PresentationGuid: "",
-    FormGuid: "",
-    RouteGuid: "",
-    StratumGuid: "",
-    StratumTypeGuid: "",
-    AgentGuid: "",
-    BrandGuid: "",
-    ManufacturerGuid: "",
-    CountryGuid: "",
-    ResponsiblePartyGuid: "",
-    DrugLabelGuid: "",
-    Code: "123", // Assuming this should be a unique identifier
-    RegistrationNumber: "123",
-    REP_date: currentDate,
-    IsDouanes: true,
-    Date_dc: currentDate,
-    LASTEffective_Date: currentDate,
-    CIF_FOB: "FOB",
-    LASTPublicABP: 10,
-    LASTCurrencyGuid: "",
-    SubsidyLabel: "",
-    SubsidyPercentage: 0,
-    LJ_FOB_ValueUSD: 100,
-    HospPricing: true,
-    WJ_Leb_PubPriceHos: "90000",
-    Seq: "Seq123",
-    B_G: "Brand",
-    Substitutable: false,
-    WEBCIF_FOB: "92000",
-    WEBPublicABP: 1000,
-    WEBCurrency: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    NM: true,
-    GTIN: "1111111111111",
-    Notes: "Drug Note Test",
-    Description: "Drug Description Test",
-    ActiveInactiveIngredient: "Paracetamol",
-    Indication: "Drug Indication",
-    Posology: "Drug posology Test",
-    MethodOfAdministration: "Drug method Of Administration Text",
-    Contraindications: "Drug contraindications Test",
-    PrecautionForUse: "Drug precaution For Use Test",
-    EffectOnFGN: "Drug effect On Fgn Test",
-    SideEffect: "Drug Side Effect Test",
-    Toxicity: "drug toxicity Test",
-    StorageCondition: "good",
-    ShelfLife: "3edai",
-    IngredientLabel: "Paracetamol 500",
-    IsBiological: true,
-    IsNarcotis: true,
-    IsOTC: true,
-    IsNSSF: true,
-  });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setDrugData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // Make a POST request to the server endpoint
-      console.log("Drug Data:", drugData);
-
-      const response = await axios.post(
-        "http://192.68.10.88:3010/api/drugs/v1.0",
-        drugData
-      );
-
-      console.log("Server Response:", response);
-      // Handle the response as needed
-      console.log("Drug added successfully:", response.data);
-
-      // Clear the form after successful submission
-      setDrugData({
-        // Reset the drugData state with initial values
-      });
-
-      // Display a success toast notification
-      toast.success("Drug added successfully");
-    } catch (error) {
-      // Handle errors and display an error toast notification
-      console.error("Error adding drug:", error);
-      toast.error("Error adding drug");
-    }
-  };
-
+  // const renderStep = (stepIndex, formData, setFormData, handleInputChange) => {
+  //   switch (stepIndex) {
+  //     case 0:
+  //       return (
+  //         <div className="relative">
+  //           <DrugRegistryFormTest
+  //             formData={formData}
+  //             handleInputChange={handleInputChange}
+  //             currencySymbols={currencySymbols}
+  //             exchangeRates={exchangeRates}
+  //           />
+  //         </div>
+  //       );
+  //     // case 1:
+  //     //   return (
+  //     //     <div className="relative">
+  //     //       <DrugRegistryFormAddons
+  //     //         formData={formData}
+  //     //         handleInputChange={handleInputChange}
+  //     //       />
+  //     //     </div>
+  //     //   );
+  //     default:
+  //       return null;
+  //   }
+  // };
   return (
     <form
-      className="flex flex-col items-center w-full mx-auto pt-10 pb-6 text-black-text dark:text-white-text bg-[#fff] dark:bg-black-bg"
+      className="content w-full sm:h-full overflow-auto rounded-t-3xl py-6 pb-0 text-center bg-white-contents dark:bg-black-contents"
       onSubmit={handleSubmit}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 w-full xl:w-fit items-center gap-8 mx-auto px-8 bg-white rounded">
-        <div className="col-1">
-          <label
-            className="font-medium block mb-2"
-            htmlFor="registrationNumber"
-          >
-            Registration Number
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="registrationNumber"
-            name="registrationNumber"
-            value={drugData.registrationNumber}
-            onChange={handleChange}
-            // required
-          />
+      {error && <div className="error-message">{error}</div>}
 
-          <label className="font-medium block" htmlFor="SubsidyPercentage">
-            Subsidy Percentage
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="SubsidyPercentage"
-            name="SubsidyPercentage"
-            value={drugData.SubsidyPercentage}
-            onChange={handleChange}
-            // required
-          />
-
-          <div className="col-2 flex flex-col">
-            <label className="font-medium block" htmlFor="repDate">
-              repDate
-            </label>
-            <input
-              className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-              type="date"
-              id="repDate"
-              name="repDate"
-              value={drugData.repDate}
-              onChange={handleChange}
-              // required
-            />
-          </div>
-
-          <label className="font-medium block" htmlFor="bg">
-            B/G
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="bg"
-            name="bg"
-            value={drugData.bg}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div className="col-2">
-          <label className="font-medium block" htmlFor="dateDc">
-            dateDc
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="date"
-            id="dateDc"
-            name="dateDc"
-            value={drugData.dateDc}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block" htmlFor="lasteffectiveDate">
-            Last effective Date
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="date"
-            id="lasteffectiveDate"
-            name="lasteffectiveDate"
-            value={drugData.lasteffectiveDate}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block" htmlFor="cifFob">
-            CIF/FOB
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="cifFob"
-            name="cifFob"
-            value={drugData.cifFob}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block" htmlFor="lastpublicAbp">
-            Last public Abp
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="number"
-            id="lastpublicAbp"
-            name="lastpublicAbp"
-            value={drugData.lastpublicAbp}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div className="col-3">
-          <label className="font-medium block" htmlFor="ljFobValueUsd">
-            lj Fob Value Usd
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="number"
-            id="ljFobValueUsd"
-            name="ljFobValueUsd"
-            value={drugData.ljFobValueUsd}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block mt-3" htmlFor="wjLebPubPriceHos">
-            wjLeb Pub Price Hos
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="wjLebPubPriceHos"
-            name="wjLebPubPriceHos"
-            value={drugData.wjLebPubPriceHos}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block" htmlFor="seq">
-            Seq
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="seq"
-            name="seq"
-            value={drugData.seq}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block" htmlFor="sideEffect">
-            Side Effect
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="sideEffect"
-            name="sideEffect"
-            value={drugData.sideEffect}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div className="col-">
-          <label className="font-medium block" htmlFor="webcifFob">
-            Web cif/Fob
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="webcifFob"
-            name="webcifFob"
-            value={drugData.webcifFob}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block" htmlFor="webpublicAbp">
-            Web public Abp
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="number"
-            id="webpublicAbp"
-            name="webpublicAbp"
-            value={drugData.webpublicAbp}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block" htmlFor="webcurrency">
-            Web currency
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            id="webcurrency"
-            name="webcurrency"
-            value={drugData.webcurrency}
-            onChange={handleChange}
-            // required
-          />
-
-          <label className="font-medium block" htmlFor="posology">
-            Posology
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="posology"
-            name="posology"
-            value={drugData.posology}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div className="col-2 flex flex-col">
-          <label className="font-medium block" htmlFor="gtin">
-            GTIN
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="gtin"
-            name="gtin"
-            value={drugData.gtin}
-            onChange={handleChange}
-            // required
-          />
-          <label className="font-medium block" htmlFor="notes">
-            Notes
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="notes"
-            name="notes"
-            value={drugData.notes}
-            onChange={handleChange}
-            // required
-          />
-          <label className="font-medium block" htmlFor="ingredientLabel">
-            Ingredient Label
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="ingredientLabel"
-            name="ingredientLabel"
-            value={drugData.ingredientLabel}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div className="col-5">
-          <label className="font-medium block" htmlFor="description">
-            Description
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="description"
-            name="description"
-            value={drugData.description}
-            onChange={handleChange}
-            // required
-          />
-          <label
-            className="font-medium block"
-            htmlFor="activeInactiveIngredient"
-          >
-            Active Inactive Ingredient
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="activeInactiveIngredient"
-            name="activeInactiveIngredient"
-            value={drugData.activeInactiveIngredient}
-            onChange={handleChange}
-            // required
-          />
-          <label className="font-medium block" htmlFor="indication">
-            Indication
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="indication"
-            name="indication"
-            value={drugData.indication}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div className="col-">
-          <label className="font-medium block" htmlFor="methodOfAdministration">
-            Method Of Administration
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="methodOfAdministration"
-            name="methodOfAdministration"
-            value={drugData.methodOfAdministration}
-            onChange={handleChange}
-            // required
-          />
-          <label className="font-medium block" htmlFor="contraindications">
-            Contraindications
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="contraindications"
-            name="contraindications"
-            value={drugData.contraindications}
-            onChange={handleChange}
-            // required
-          />
-          <label className="font-medium block" htmlFor="precautionForUse">
-            Precaution For Use
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="precautionForUse"
-            name="precautionForUse"
-            value={drugData.precautionForUse}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div className="col-">
-          <label className="font-medium block" htmlFor="toxicity">
-            Toxicity
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="toxicity"
-            name="toxicity"
-            value={drugData.toxicity}
-            onChange={handleChange}
-            // required
-          />
-          <label className="font-medium block" htmlFor="storageCondition">
-            Storage Condition
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="storageCondition"
-            name="storageCondition"
-            value={drugData.storageCondition}
-            onChange={handleChange}
-            // required
-          />
-          <label className="font-medium block" htmlFor="shelfLife">
-            Shelf Life
-          </label>
-          <input
-            className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-            type="text"
-            id="shelfLife"
-            name="shelfLife"
-            value={drugData.shelfLife}
-            onChange={handleChange}
-            // required
-          />
-        </div>
+      {/* Render current step */}
+      {/* {renderStep(currentStep)} */}
+      <div className="relative">
+        <DrugRegistryFormTest
+          formData={formData}
+          handleInputChange={handleInputChange}
+          currencySymbols={currencySymbols}
+          exchangeRates={exchangeRates}
+        />
       </div>
 
-      <div className="checkboxes flex flex-wrap border-2 w-fit mb-4 justify-center gap-10 p-4">
-        <div>
-          <label className="font-medium block" htmlFor="hospPricing">
-            Hosp Pricing
-          </label>
-          <input
-            className="mb-4 cursor-pointer border rounded"
-            type="checkbox"
-            id="hospPricing"
-            name="hospPricing"
-            value={drugData.hospPricing}
-            onChange={handleChange}
-            // required
-          />
-        </div>
+      <div className="buttons-container flex justify-evenly">
+        {/* Previous Button */}
+        {currentStep > 0 && (
+          <button
+            type="button"
+            onClick={handlePrevious}
+            className="previous-button med-btn-pri-sm"
+          >
+            Previous
+          </button>
+        )}
 
-        <div>
-          <label className="font-medium block" htmlFor="isDouanes">
-            isDouanes:
-          </label>
-          <input
-            className="mb-4 border cursor-pointer rounded"
-            type="checkbox"
-            id="isDouanes"
-            name="isDouanes"
-            value={drugData.isDouanes}
-            onChange={handleChange}
-            // required
-          />
-        </div>
+        {/* Next Button */}
+        {currentStep < steps.length - 1 && (
+          <button
+            type="button"
+            onClick={handleNext}
+            className="med-btn-pri-sm next-button"
+          >
+            Next
+          </button>
+        )}
 
-        <div>
-          <label className="font-medium block" htmlFor="nm">
-            None Marketed
-          </label>
-          <input
-            className="cursor-pointer border rounded"
-            type="checkbox"
-            id="nm"
-            name="nm"
-            value={drugData.nm}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-        <div>
-          <label className="font-medium block" htmlFor="isOtc">
-            is Otc
-          </label>
-          <input
-            className="border cursor-pointer rounded"
-            type="checkbox"
-            id="isOtc"
-            name="isOtc"
-            value={drugData.isOtc}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div>
-          <label className="font-medium block" htmlFor="isNssf">
-            is Nssf
-          </label>
-          <input
-            className="border cursor-pointer rounded"
-            type="checkbox"
-            id="isNssf"
-            name="isNssf"
-            value={drugData.isNssf}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div>
-          <label className="font-medium block" htmlFor="isNarcotis">
-            is Narcotis
-          </label>
-          <input
-            className="border cursor-pointer rounded"
-            type="checkbox"
-            id="isNarcotis"
-            name="isNarcotis"
-            value={drugData.isNarcotis}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-
-        <div>
-          <label className="font-medium block" htmlFor="isBiological">
-            is Biological
-          </label>
-          <input
-            className="border cursor-pointer rounded"
-            type="checkbox"
-            id="isBiological"
-            name="isBiological"
-            value={drugData.isBiological}
-            onChange={handleChange}
-            // required
-          />
-        </div>
-      </div>
-      <div className="btn-col flex-shrink">
-        <button
-          className="med-btn-pri"
-          // className="inline-block cursor-pointer rounded-md bg-teal-600 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-teal-400"
-          type="submit"
-        >
-          Submit
-        </button>
+        {/* Submit Button */}
+        {currentStep === steps.length - 1 && (
+          <button type="submit" className="submit-button med-btn-pri-sm">
+            Submit
+          </button>
+        )}
       </div>
     </form>
   );

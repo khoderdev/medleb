@@ -60,7 +60,7 @@
     width: calc(100% - 22px);
   }
 }
-
+*/
 .modal {
   position: absolute;
   top: 50%;
@@ -82,8 +82,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-} */
-
+}
 
 .geo-form {
   max-width: 600px;

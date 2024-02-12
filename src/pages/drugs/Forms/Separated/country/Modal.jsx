@@ -1,25 +1,10 @@
 import React, { useState } from "react";
 import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import { useGeoModalProvider } from "./GeoModalProvider";
 
-const ModalForm = ({ modalType, setModalType, countryGuid }) => {
-  // Generate unique GUID for the form submission
-  const formGuid = uuidv4();
-
-  // State variables for governorate inputs
-  const [governorateCode, setGovernorateCode] = useState("");
-  const [governorateEnglishName, setGovernorateEnglishName] = useState("");
-  const [governorateArabicName, setGovernorateArabicName] = useState("");
-
-  // State variables for district inputs
-  const [districtCode, setDistrictCode] = useState("");
-  const [districtEnglishName, setDistrictEnglishName] = useState("");
-  const [districtArabicName, setDistrictArabicName] = useState("");
-
-  // State variables for city inputs
-  const [cityCode, setCityCode] = useState("");
-  const [cityEnglishName, setCityEnglishName] = useState("");
-  const [cityArabicName, setCityArabicName] = useState("");
+const ModalForm = () => {
+  const { modalType, setModalType, countryGuid } = useGeoModalProvider();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -578,4 +578,172 @@ function AddDrug(props) {
 
 export default AddDrug;
 
-// //////////////////////////////////////////////////////////////////////
+// // //////////////////////////////////////////////////////////////////////
+// // //////////////////////////////////////////////////////////////////////
+// // //////////////////////////////////////////////////////////////////////
+// // //////////////////////////////////////////////////////////////////////
+
+// // //////////////////////////////////////////////////////////////////////
+
+// import { useNavigate, Link, useParams } from "react-router-dom";
+// import { FaArrowRightLong } from "react-icons/fa6";
+// import { FaArrowLeftLong } from "react-icons/fa6";
+// import Button from "@mui/material/Button";
+// import { Step, Stepper, StepLabel } from "@mui/material";
+// import Paper from "@mui/material/Paper";
+// import { makeStyles } from "@mui/styles";
+// import CloseIcon from "@mui/icons-material/Close";
+// import DrugRegistryForm from "./DrugRegistryForm";
+// import { DrugProvider, useDrugContext } from "../DrugContext";
+
+// const useStyles = makeStyles((theme) => ({
+//   stepperPaper: {
+//     boxShadow: "none",
+//     backgroundColor: "transparent",
+//   },
+// }));
+
+// function FormStepper({ currentStep, steps }) {
+//   const classes = useStyles();
+
+//   return (
+//     <Stepper
+//       activeStep={currentStep}
+//       alternativeLabel
+//       style={{ background: "transparent", boxShadow: "none" }}
+//     >
+//       {steps.map((label, index) => (
+//         <Step key={label}>
+//           <StepLabel
+//             className={`dot  ${currentStep === index ? "active" : ""}`}
+//           />
+//         </Step>
+//       ))}
+//     </Stepper>
+//   );
+// }
+
+// function AddDrug() {
+//   const classes = useStyles();
+//   const {
+//     drugsData,
+//     drugDataWithGuid,
+//     setDrugsData,
+//     imageState,
+//     updateImageState,
+//     handleInputChange,
+//     handleSubmit,
+//     handleNext,
+//     handlePrevious,
+//     handleArrowButtonClick,
+//     error,
+//     currentStep,
+//     isLastStep,
+//     steps,
+//     generateGUID,
+//     exchangeRates,
+//     currencySymbols,
+//     currencyForeign,
+//     convertToUSD,
+//     convertToLBP,
+//   } = useDrugContext();
+
+//   const forms = [
+//     <div className="flex justify-center ">
+//       <DrugRegistryForm
+//         handleInputChange={handleInputChange}
+//         drugsData={drugsData}
+//       />
+//     </div>,
+//   ];
+
+//   return (
+//     /* Page Title Header Container (Outside the Box) Start */
+//     <DrugProvider>
+//       <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-2 px-2 sm:px-6 dark:text-white-500">
+//         <div className="title py-4 pb-0 lg:mb-[-1rem] 2xl:mb-0 pl-0 flex w-full justify-center items-center">
+//           <h1 className="text-3xl font-semibold text-center text-[#00a651]">
+//             Registration
+//           </h1>
+//         </div>
+
+//         <div className="flex w-full justify-end pr-2">
+//           <Link to={`/list`} className="text-md  text-[#00a651]">
+//             Close
+//             <CloseIcon fontSize="small" />
+//           </Link>
+//         </div>
+
+//         {/* Content Container Start */}
+//         {/* <div className="content w-full sm:h-full overflow-auto rounded-t-3xl py-6 pb-0 text-center bg-white-contents dark:bg-black-contents">
+//           <Paper elevation={3} className={classes.stepperPaper}>
+//             <FormStepper currentStep={currentStep} steps={steps} />
+//           </Paper>
+//           <form className="flex w-full flex-col">{forms[currentStep]}</form>
+//         </div> */}
+
+//         {/* Content Container End */}
+
+//         {/* Footer Container Start */}
+//         <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-black-contents sm:pb-0">
+//           <div className="flex items-center justify-center space-x-20 pt-0">
+//             {currentStep > 0 ? (
+//               <Button
+//                 style={{
+//                   textTransform: "none",
+//                   fontSize: "21px",
+//                   fontFamily: "Roboto Condensed",
+//                   color: "#00a651",
+//                   backgroundColor: "transparent",
+//                   borderRadius: "13px",
+//                   cursor: "pointer",
+//                 }}
+//                 onClick={handlePrevious}
+//                 type="button"
+//               >
+//                 <FaArrowLeftLong
+//                   style={{
+//                     fontSize: "20px",
+//                     color: "#00a651",
+//                   }}
+//                   className="mr-2 text-[20px] text-[#00a651]"
+//                 />
+//                 Previous
+//               </Button>
+//             ) : (
+//               <div style={{ width: "104px" }}></div> // Placeholder with the width of the button
+//             )}
+//           </div>
+//           <Button
+//             style={{
+//               textTransform: "none",
+//               fontSize: "21px",
+//               fontFamily: "Roboto Condensed",
+//               color: isLastStep ? "#fff" : "#00a651",
+//               backgroundColor: isLastStep ? "#00a651" : "transparent",
+//               borderRadius: isLastStep ? "13px" : "13px",
+//             }}
+//             onClick={handleArrowButtonClick}
+//             type="button"
+//           >
+//             {isLastStep ? "Submit" : "Next"}
+//             <FaArrowRightLong
+//               style={{
+//                 fontSize: "20px",
+//                 color: isLastStep ? "text-white" : "text-[#00a651]",
+//               }}
+//               className={`ml-2 text-[20px] ${
+//                 isLastStep ? "hidden" : "text-[#00a651]"
+//               }`}
+//             />
+//           </Button>
+//         </div>
+//         {/* Footer Container End */}
+//       </div>
+//     </DrugProvider>
+//   );
+// }
+
+// export default AddDrug;
+
+// // //////////////////////////////////////////////////////////////////////
