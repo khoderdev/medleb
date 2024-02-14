@@ -179,17 +179,17 @@ export const CurrenciesProvider = ({ children }) => {
   }, []);
 
   // // Event listener to fetch currencies when user clicks anywhere on the screen
-  useEffect(() => {
-    const handleClick = () => {
-      fetchCurrencies();
-    };
+  // useEffect(() => {
+  //   const handleClick = () => {
+  //     fetchCurrencies();
+  //   };
 
-    document.addEventListener("click", handleClick);
+  //   document.addEventListener("click", handleClick);
 
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("click", handleClick);
+  //   };
+  // }, []);
 
   return (
     <CurrenciesContext.Provider value={contextValue}>
