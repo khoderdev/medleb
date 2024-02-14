@@ -45,10 +45,10 @@
         navigator.serviceWorker
           .register("./sw.jsx") // Adjust the path to match the actual location of your sw.js file
           .then((registration) => {
-            console.log(
-              "Service Worker registered with scope:",
-              registration.scope
-            );
+            // console.log(
+            //   "Service Worker registered with scope:",
+            //   registration.scope
+            // );
           })
           .catch((error) => {
             console.error("Service Worker registration failed:", error);

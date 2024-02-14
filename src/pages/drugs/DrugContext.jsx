@@ -90,7 +90,7 @@ export const DrugProvider = ({ children }) => {
   const exchangeRates = {
     USD: 1,
     CAD: 0.72,
-    EUR: 1.06,
+    EUR: 1.08,
     CHF: 1.11,
     DKK: 0.72,
     GBP: 1.21,
@@ -99,24 +99,25 @@ export const DrugProvider = ({ children }) => {
     LBP: 90000,
   };
 
-  // const currencySymbols = {
-  //   USD: "$",
-  //   CAD: "C$",
-  //   EUR: "€",
-  //   CHF: "CHF",
-  //   DKK: "kr",
-  //   GBP: "£",
-  //   SAR: "SAR",
-  //   JOD: "JD",
-  //   LBP: "LBP",
+  // const convertToUSD = () => {
+  //   if (formData.PriceFOREIGN && formData.currencyForeign) {
+  //     const convertedPrice =
+  //       formData.PriceFOREIGN / exchangeRates[formData.currencyForeign];
+  //     console.log("Converted Price USD:", convertedPrice);
+  //     return convertedPrice.toFixed(2);
+  //   }
+  //   return "";
   // };
 
   const convertToUSD = () => {
     if (formData.PriceFOREIGN && formData.currencyForeign) {
-      const convertedPrice =
-        formData.PriceFOREIGN / exchangeRates[formData.currencyForeign];
-      console.log("Converted Price USD:", convertedPrice);
-      return convertedPrice.toFixed(2);
+      const priceForeign = parseFloat(formData.PriceFOREIGN);
+      const exchangeRate = parseFloat(exchangeRates[formData.currencyForeign]);
+      if (!isNaN(priceForeign) && !isNaN(exchangeRate) && exchangeRate !== 0) {
+        const convertedPrice = priceForeign / exchangeRate;
+        console.log("Converted Price USD:", convertedPrice);
+        return convertedPrice.toFixed(2);
+      }
     }
     return "";
   };
@@ -126,7 +127,7 @@ export const DrugProvider = ({ children }) => {
       const priceInUSD = convertToUSD();
       const convertedPrice = priceInUSD * exchangeRates.LBP;
       console.log("Converted Price LBP:", convertedPrice);
-      return convertedPrice.toFixed(2);
+      return convertedPrice.toFixed(0);
     }
     return "";
   };
@@ -151,47 +152,6 @@ export const DrugProvider = ({ children }) => {
       [name]: fieldValue,
     }));
   };
-
-  // CONCATINATING THE CURRENCY SYMBOLS WITH THE PriceFOREIGN value
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Calculate and update PriceUSD and PriceLBP in formData
-  //     const PriceUSD = convertToUSD();
-  //     const PriceLBP = convertToLBP();
-  //     setFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       PriceUSD,
-  //       PriceLBP,
-  //     }));
-
-  //     // Concatenate the selected currency symbol with the PriceFOREIGN value
-  //     const selectedCurrency = formData.currencyForeign;
-  //     const priceForeignWithCurrency = `${formData.PriceFOREIGN} ${currencySymbols[selectedCurrency]}`;
-
-  //     console.log("Converted Price USD:", PriceUSD);
-  //     console.log("Converted Price LBP:", PriceLBP);
-  //     console.log("Form Data after update:", formData);
-
-  //     // Submit form data with the concatenated price and currency
-  //     const response = await Axios.post("http://localhost:3000/drugs/add", {
-  //       ...formData,
-  //       PriceFOREIGN: priceForeignWithCurrency,
-  //     });
-
-  //     // Check if response contains data property
-  //     if (response && response.data) {
-  //       console.log(response.data); // Log response data if available
-  //     } else {
-  //       // Log error and response for debugging
-  //       console.error("Unexpected response format:", response);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during form submission:", error);
-  //     setError(error.response?.data?.error || "An error occurred");
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -18,6 +18,7 @@ import Substitute from "./pages/drugs/Substitutes/";
 import LoginForm from "./pages/drugs/Forms/Separated/LoginForm";
 import SingleDrug from "./pages/drugs/list/View";
 import DrugForm from "./pages/drugs/Forms/Separated/DrugForm";
+import Currencies from "./pages/drugs/Forms/Separated/currencies/CurrenciesTable";
 import DrugFormEX from "./pages/drugs/Forms/Separated/DrugFormEX";
 import GetDrugs from "./pages/drugs/Forms/Separated/GetDrugs";
 import ATCCodesForm from "./pages/drugs/Forms/Separated/ATCCodesForm";
@@ -47,7 +48,9 @@ import { GeoFormProvider } from "./pages/drugs/Forms/Separated/country/GeoFormCo
 import { ModalFormProvider } from "./pages/drugs/Forms/Separated/country/GeoModalProvider";
 import { DrugFormProvider } from "./pages/drugs/Forms/Separated/drugs/DrugFormProvider";
 import { DrugProvider } from "./pages/drugs/DrugContext";
-
+import { CurrenciesProvider } from "./pages/drugs/Forms/Separated/currencies/CurrenciesContext";
+import CurrencyForm from "./pages/drugs/Forms/Separated/currencies/CurrencyForm";
+import CurrencyTable from "./pages/drugs/Forms/Separated/currencies/CurrencyTable";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -77,7 +80,7 @@ const App = () => {
   return (
     <ErrorBoundary>
       <DrugProvider>
-        {/* <DrugFormProvider> */}
+        <CurrenciesProvider>
           <GeoFormProvider>
             <ModalFormProvider>
               <Routes>
@@ -109,6 +112,9 @@ const App = () => {
                 <Route path="/atccodesform" element={<ATCCodesForm />} />
                 <Route path="/atcform" element={<ATCForm />} />
                 <Route path="/drugform" element={<DrugForm />} />
+                <Route path="/currencyForm" element={<CurrencyForm />} />
+                <Route path="/currencyTable" element={<CurrencyTable />} />
+                <Route path="/currencies" element={<Currencies />} />
                 <Route path="/parent" element={<ParentComponent />} />
                 <Route path="/static" element={<StaticDataPage />} />
                 <Route path="/atc/list" element={<ATCsList />} />
@@ -136,7 +142,7 @@ const App = () => {
               </Routes>
             </ModalFormProvider>
           </GeoFormProvider>
-        {/* </DrugFormProvider> */}
+        </CurrenciesProvider>
       </DrugProvider>
       <Suspense fallback={<p>Loading...</p>}>{routeElement}</Suspense>
     </ErrorBoundary>

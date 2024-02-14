@@ -8,6 +8,7 @@ import "../../../../index.css";
 const StaticDataTable = ({
   title,
   createBtnLabel,
+  createBtnUrl,
   onCreateBtnClick,
   data,
   columns,

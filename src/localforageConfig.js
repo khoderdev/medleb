@@ -10,12 +10,12 @@ const configureLocalForage = () => {
 
   // Set data
   localforage.setItem("key", "value").then(() => {
-    console.log("Data set successfully");
+    // console.log("Data set successfully");
   });
 
   // Retrieve data
   localforage.getItem("key").then((value) => {
-    console.log("Retrieved value:", value);
+    // console.log("Retrieved value:", value);
   });
 };
 

@@ -19,12 +19,31 @@ const DrugRegistryFormTest = () => {
   };
 
   useEffect(() => {
+    // const convertToUSD = () => {
+    //   if (formData.PriceFOREIGN && formData.currencyForeign) {
+    //     const convertedPrice =
+    //       formData.PriceFOREIGN / exchangeRates[formData.currencyForeign];
+    //     console.log("Converted Price USD:", convertedPrice);
+    //     return convertedPrice.toFixed(2);
+    //   }
+    //   return "";
+    // };
+
     const convertToUSD = () => {
       if (formData.PriceFOREIGN && formData.currencyForeign) {
-        const convertedPrice =
-          formData.PriceFOREIGN / exchangeRates[formData.currencyForeign];
-        console.log("Converted Price USD:", convertedPrice);
-        return convertedPrice.toFixed(2);
+        const priceForeign = parseFloat(formData.PriceFOREIGN);
+        const exchangeRate = parseFloat(
+          exchangeRates[formData.currencyForeign]
+        );
+        if (
+          !isNaN(priceForeign) &&
+          !isNaN(exchangeRate) &&
+          exchangeRate !== 0
+        ) {
+          const convertedPrice = priceForeign / exchangeRate;
+          console.log("Converted Price USD:", convertedPrice);
+          return convertedPrice.toFixed(2);
+        }
       }
       return "";
     };

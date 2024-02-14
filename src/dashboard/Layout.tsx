@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useEffect } from "react";
 
 import { SidebarOffCanvas } from "./sidebar/SidebarOffCanvas";
@@ -16,7 +16,7 @@ const style = {
 
   mainContainer: "w-full md:pl-[5em] pl-0 sm:pr-[2.6em] flex-1 flex overflow-hidden",
 
-  main: "h-[100svh] w-full overflow-auto  ",
+  main: "h-[100svh] w-full overflow-auto",
 
   NavBottomContainer: "flex sm:hidden z-40",
 
