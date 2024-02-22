@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
-import Axios from "../../api/axios";
+import axios from "axios";
+// import Axios from "../../api/axios";
 import { v4 as uuidv4 } from "uuid";
 
 // Create the context
@@ -86,6 +87,7 @@ export const DrugProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [priceUSD, setPriceUSD] = useState("");
   const [priceLBP, setPriceLBP] = useState("");
+  const [selectedDrugGuid, setSelectedDrugGuid] = useState(null); // State to store selected drug data
 
   const exchangeRates = {
     USD: 1,
@@ -98,16 +100,6 @@ export const DrugProvider = ({ children }) => {
     JOD: 1.41,
     LBP: 90000,
   };
-
-  // const convertToUSD = () => {
-  //   if (formData.PriceFOREIGN && formData.currencyForeign) {
-  //     const convertedPrice =
-  //       formData.PriceFOREIGN / exchangeRates[formData.currencyForeign];
-  //     console.log("Converted Price USD:", convertedPrice);
-  //     return convertedPrice.toFixed(2);
-  //   }
-  //   return "";
-  // };
 
   const convertToUSD = () => {
     if (formData.PriceFOREIGN && formData.currencyForeign) {
@@ -170,7 +162,7 @@ export const DrugProvider = ({ children }) => {
       console.log("Form Data after update:", formData);
 
       // Submit form data
-      const response = await Axios.post("http://localhost:3000/drugs/add", {
+      const response = await axios.post("http://localhost:3000/drugs/add", {
         ...formData,
       });
       console.log(response.data); // Handle success response
@@ -189,6 +181,16 @@ export const DrugProvider = ({ children }) => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
+  // Function to set selected drug
+  const selectDrug = (drugData) => {
+    setSelectedDrugGuid(drugData);
+  };
+
+  // Function to clear selected drug
+  const clearselectedDrugGuid = () => {
+    setSelectedDrugGuid(null);
+  };
+
   // Context values
   const contextValues = {
     formData,
@@ -203,6 +205,9 @@ export const DrugProvider = ({ children }) => {
     exchangeRates,
     priceUSD,
     priceLBP,
+    selectedDrugGuid,
+    selectDrug,
+    clearselectedDrugGuid,
   };
 
   return (

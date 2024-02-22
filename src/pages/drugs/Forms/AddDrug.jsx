@@ -281,7 +281,7 @@ function AddDrug(props) {
         await axios.post("http://1.1.1.252:3500/drugs", finalFormData);
       }
       // You might want to add a success message or further handling here
-      navigate("/list"); // Navigate to the list page after successful update/creation
+      navigate("/search"); // Navigate to the list page after successful update/creation
     } catch (error) {
       console.error("Error updating/creating drug:", error);
       // Handle the error, such as showing an error message to the user
@@ -359,7 +359,7 @@ function AddDrug(props) {
     console.log("Final Form Data:", finalFormData);
 
     // Perform submission or redirection here
-    navigate("/list");
+    navigate("/search");
     FetchData(finalFormData);
   };
 
@@ -500,7 +500,7 @@ function AddDrug(props) {
         </div>
 
         <div className="flex w-full justify-end pr-2">
-          <Link to={`/list`} className="text-md  text-[#00a651]">
+          <Link to={`/search`} className="text-md  text-[#00a651]">
             Close
             <CloseIcon fontSize="small" />
           </Link>

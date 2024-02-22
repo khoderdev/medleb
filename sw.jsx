@@ -16,7 +16,7 @@ self.addEventListener("fetch", (event) => {
         // Clone the response before caching
         const responseToCache = response.clone();
         caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
+          // cache.put(event.request, responseToCache);
         });
         return response;
       })
@@ -61,10 +61,10 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker
       .register("/sw.js")
       .then((registration) => {
-        console.log("Service Worker registered:", registration);
+        // console.log("Service Worker registered:", registration);
       })
       .catch((error) => {
-        console.error("Service Worker registration failed:", error);
+        // console.error("Service Worker registration failed:", error);
       });
   });
 }

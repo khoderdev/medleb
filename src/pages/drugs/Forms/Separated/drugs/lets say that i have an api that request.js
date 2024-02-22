@@ -14,7 +14,7 @@
     manufacturerGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6", //existing unique id (select input), endpoint: Axios.get("/api/atc/v1.0")
     countryGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6", //existing unique id (select input), endpoint: Axios.get("/api/country/v1.0/countries")
     responsiblePartyGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6", //existing unique id (select input), endpoint: Axios.get("/api/atc/v1.0")
-    drugLabelGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6", //existing unique id (select input), endpoint: Axios.get("/api/atc/v1.0")
+    drugLabelGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa6", //existing unique id (select input), endpoint: Axios.get("/api/labels/v1.0/druglabels")
     registrationNumber: "string",
     repDate: "2024-02-07T01:04:10.785Z",
     isDouanes: true,

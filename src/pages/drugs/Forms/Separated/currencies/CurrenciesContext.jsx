@@ -133,7 +133,8 @@ import React, {
   useEffect,
   useMemo,
 } from "react";
-import Axios from "../../../../../api/axios";
+// import Axios from "../../../../../api/axios";
+import axios from "axios";
 
 const CurrenciesContext = createContext();
 
@@ -148,14 +149,16 @@ export const CurrenciesProvider = ({ children }) => {
     const fetchCurrenciesAndRates = async () => {
       try {
         // Fetch currencies
-        const currenciesResponse = await Axios.get(
-          "/api/currency/v1.0/currencies"
+        const currenciesResponse = await axios.get(
+          "http://localhost:3010/api/currency/v1.0/currencies"
+          // "http://85.112.70.8:3010/api/currency/v1.0/currencies"
         );
         const currenciesData = currenciesResponse.data;
 
         // Fetch currency rates
-        const currencyRatesResponse = await Axios.get(
-          "/api/currency/v1.0/currencyRate"
+        const currencyRatesResponse = await axios.get(
+          "http://localhost:3010/api/currency/v1.0/currencyRate"
+          // "http://85.112.70.8:3010/api/currency/v1.0/currencyRate"
         );
         const currencyRatesData = currencyRatesResponse.data;
 
@@ -164,7 +167,7 @@ export const CurrenciesProvider = ({ children }) => {
         setCurrencyRates(currencyRatesData);
         setLoading(false);
       } catch (error) {
-        console.error("Failed to fetch currencies and rates:", error);
+        // console.error("Failed to fetch currencies and rates:", error);
         setLoading(false);
       }
     };
@@ -175,10 +178,12 @@ export const CurrenciesProvider = ({ children }) => {
   const fetchCurrencies = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/currency/v1.0/currencies");
+      const response = await axios.get(
+        "http://85.112.70.8:3010/api/currency/v1.0/currencies"
+      );
       setCurrencies(response.data);
     } catch (error) {
-      console.error("Failed to fetch currencies:", error);
+      // console.error("Failed to fetch currencies:", error);
     } finally {
       setLoading(false);
     }
@@ -192,7 +197,10 @@ export const CurrenciesProvider = ({ children }) => {
         throw new Error("Code and Name are required.");
       }
 
-      const response = await Axios.post("/api/currency/v1.0", currencyData);
+      const response = await axios.post(
+        "http://85.112.70.8:3010/api/currency/v1.0",
+        currencyData
+      );
 
       if (
         response.data &&
@@ -232,7 +240,10 @@ export const CurrenciesProvider = ({ children }) => {
       // Include the guid in the updatedData object
       updatedData.guid = guid;
 
-      const response = await Axios.put(`/api/currency/v1.0/`, updatedData);
+      const response = await axios.put(
+        `http://85.112.70.8:3010/api/currency/v1.0/`,
+        updatedData
+      );
 
       if (
         response.data &&
@@ -257,7 +268,9 @@ export const CurrenciesProvider = ({ children }) => {
   const fetchCurrencyRates = async () => {
     try {
       setLoading(true);
-      const response = await Axios.get("/api/currency/v1.0/currencyRate");
+      const response = await axios.get(
+        "http://85.112.70.8:3010/api/currency/v1.0/currencyRate"
+      );
       setCurrencyRates(response.data);
     } catch (error) {
       setMsg("Failed to fetch currency rates.");
@@ -269,7 +282,7 @@ export const CurrenciesProvider = ({ children }) => {
   const addCurrencyRate = async (currencyRateData) => {
     try {
       setLoading(true);
-      const response = await Axios.post(
+      const response = await axios.post(
         "/api/currency/v1.0/Rate",
         currencyRateData
       );

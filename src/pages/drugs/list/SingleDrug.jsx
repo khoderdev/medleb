@@ -1,39 +1,75 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Modal from "react-modal";
 import "./ViewModalStyles.css";
 import ImageSlider from "./ImageSlider";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDrugContext } from "../DrugContext";
 
 Modal.setAppElement("#root");
 
-function SingleDrug({ className, customNavigation }) {
-  const { drugId } = useParams();
+const SingleDrug = forwardRef(({ guid, className }, ref) => {
+  // const { drugId } = useParams();
   const [drug, setDrug] = useState([]);
+  const { selectDrug } = useDrugContext();
 
   useEffect(() => {
-    console.log("Drug ID:", drugId);
-    if (!drugId) {
-      console.error("Drug ID is undefined");
-      // Handle the case where drugId is undefined
-      return;
-    }
+    if (!guid) return; // Make sure guid is not null or undefined
 
     axios
-      .get(`http://1.1.1.252:3500/drugs/${drugId}`)
+      .get(`http://localhost:3000/drugs/guid/${guid}`)
       .then((res) => {
-        setDrug(res.data);
+        const drugData = res.data;
+        setDrug(drugData);
+        selectDrug(drugData);
       })
       .catch((error) => {
-        console.error(`Error fetching drug with ID ${drugId}:`, error);
+        console.error("Error fetching drug:", error);
       });
-  }, [drugId]);
+  }, [guid, selectDrug]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:3000/drugs/guid/${guid}`)
+  //     .then((res) => {
+  //       // Set selected drug data in context
+  //       selectDrug(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(`Error fetching drug with GUID ${guid}:`, error);
+  //     });
+  // }, [guid, selectDrug]);
+
+  // ////////////////////////////////////////////
+
+  // useEffect(() => {
+  //   if (!guid) {
+  //     console.error("Drug ID is undefined");
+  //     return;
+  //   }
+
+  //   axios
+  //     .get(`http://localhost:3000/drugs/${drugId}`)
+  //     .then((res) => {
+  //       setDrug(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(`Error fetching drug with ID ${drugId}:`, error);
+  //     });
+  // }, [drugId]);
+
+  // // Forwarding the ref to the underlying DOM element
+  // useEffect(() => {
+  //   if (ref && drug.length > 0) {
+  //     ref.current = drug;
+  //   }
+  // }, [ref, drug]);
 
   return (
-    <div className="flex flex-col h-full pb-28">
+    <div className="flex flex-col h-full pb-28" ref={ref}>
       <div
-        className={`grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4  h-full ${className}`}
+        className={`grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 h-full ${className}`}
       >
         <div className="col-1 w-full col-span-3 md:col-span-3 lg:col-span-1">
           {/* <div className="col-span-1 md:col-span-2 w-full h-full overflow-auto"> */}
@@ -45,7 +81,9 @@ function SingleDrug({ className, customNavigation }) {
 
         <div className="col-2 col-span-3 md:col-span-3 lg:col-span-2 flex flex-col border w-full h-full rounded-xl border-black-text dark:border-green-pri">
           <div className="name-price-cont p-4 text-left">
-            <h2 className="text-2xl leading-none font-bold">{drug.drugName}</h2>
+            <h2 className="text-2xl leading-none font-bold">
+              {drug.BrandName}
+            </h2>
             <div className="text-xl leading-none">
               {drug.ingredientsAndstrength}
               <span className="text-green-pri ml-2">
@@ -91,128 +129,146 @@ function SingleDrug({ className, customNavigation }) {
             <div className="">
               <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Ingredients:</h4>
-                <p className="text-green-pri text-[1.1rem]">{drug.ingredientsAndstrength}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.ingredientsAndstrength}
+                </p>
               </div>
               <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Dosage:</h4>
-                 <p className="text-green-pri text-[1.1rem]">
+                <p className="text-green-pri text-[1.1rem]">
                   {drug.dosageValueN} {drug.dosageUnitN}
                 </p>
               </div>
               <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Form:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
               </div>
             </div>
             {/* COL 2 */}
             <div className="">
-             <div className="flex items-center w-fit gap-2">
+              <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Type:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.type}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.type}</p>
               </div>
               <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Route:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.route}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.route}</p>
               </div>
               <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Presentation</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.presentationContentQty}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.presentationContentQty}
+                </p>
               </div>
             </div>
             {/* COL 3 */}
             <div className="">
-             <div className="flex items-center w-fit gap-2">
+              <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Country:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.manufacturingCountry}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.manufacturingCountry}
+                </p>
               </div>
-             <div className="flex items-center w-fit gap-2">
+              <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Stratum:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.stratum}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.stratum}</p>
               </div>
               <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Cargo & Shipping:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.cargoShippingTerms}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.cargoShippingTerms}
+                </p>
               </div>
             </div>
             {/* COL 4 */}
             <div className="">
-             <div className="flex items-center w-fit gap-2">
+              <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">ATC Code:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.atcCode}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.atcCode}</p>
               </div>
               <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">Registration #:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.registrationNumber}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.registrationNumber}
+                </p>
               </div>
               <div className="flex items-center w-fit gap-2">
                 <h4 className="text-lg font-medium">MOH Code:</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.mohCode}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.mohCode}</p>
               </div>
             </div>
             {/* COL 5 */}
             <div className="">
               <div className="">
                 <h4 className="text-lg font-medium">Agent</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.agent}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.agent}</p>
               </div>
               <div className="">
                 <h4 className="text-lg font-medium">Dosage</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.dosageValueN}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.dosageValueN}
+                </p>
               </div>
               <div className="">
                 <h4 className="text-lg font-medium">Form</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
               </div>
             </div>
             {/* COL 6 */}
             <div className="">
               <div className="">
                 <h4 className="text-lg font-medium">Ingredients</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.ingredientsAndstrength}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.ingredientsAndstrength}
+                </p>
               </div>
               <div className="">
                 <h4 className="text-lg font-medium">Dosage</h4>
-                 <p className="text-green-pri text-[1.1rem]">
+                <p className="text-green-pri text-[1.1rem]">
                   {drug.dosageValueN} {drug.dosageUnitN}
                 </p>
               </div>
               <div className="">
                 <h4 className="text-lg font-medium">Form</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
               </div>
             </div>
             {/* COL 7 */}
             <div className="">
               <div className="">
                 <h4 className="text-lg font-medium">Ingredients</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.ingredientsAndstrength}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.ingredientsAndstrength}
+                </p>
               </div>
               <div className="">
                 <h4 className="text-lg font-medium">Dosage</h4>
-                 <p className="text-green-pri text-[1.1rem]">
+                <p className="text-green-pri text-[1.1rem]">
                   {drug.dosageValueN} {drug.dosageUnitN}
                 </p>
               </div>
               <div className="">
                 <h4 className="text-lg font-medium">Form</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
               </div>
             </div>
             {/* COL 8 */}
             <div className="">
               <div className="">
                 <h4 className="text-lg font-medium">Ingredients</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.ingredientsAndstrength}</p>
+                <p className="text-green-pri text-[1.1rem]">
+                  {drug.ingredientsAndstrength}
+                </p>
               </div>
               <div className="">
                 <h4 className="text-lg font-medium">Dosage</h4>
-                 <p className="text-green-pri text-[1.1rem]">
+                <p className="text-green-pri text-[1.1rem]">
                   {drug.dosageValueN} {drug.dosageUnitN}
                 </p>
               </div>
               <div className="">
                 <h4 className="text-lg font-medium">Form</h4>
-                 <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
+                <p className="text-green-pri text-[1.1rem]">{drug.form}</p>
               </div>
             </div>
           </div>
@@ -220,6 +276,6 @@ function SingleDrug({ className, customNavigation }) {
       </div>
     </div>
   );
-}
+});
 
 export default SingleDrug;

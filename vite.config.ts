@@ -29,8 +29,8 @@ export default defineConfig({
       external: ["@material-ui/icons/ArrowBack", "@mui/x-data-grid"],
     },
   },
-  plugins: [
-    react(),
-    Pages()
-  ]
+  plugins: [react(), Pages()],
+  // optimizeDeps: {
+  //   exclude: ["react-select"],
+  // },
 });

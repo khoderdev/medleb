@@ -1,7 +1,10 @@
 import { fontSize } from "@mui/system";
 
 module.exports = {
-  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+  content: [
+    "./src/**/*.{html,js,jsx,ts,tsx}",
+    require.resolve("react-widgets/styles.css"),
+  ],
   darkMode: "class",
   theme: {
     screens: {
@@ -47,7 +50,7 @@ module.exports = {
           text: "#F5F5F5",
           input: "#bcbcbc",
           shadow: "#00a65100",
-           // border: "#00a65100",
+          // border: "#00a65100",
         },
 
         black: {
@@ -73,7 +76,7 @@ module.exports = {
   plugins: [
     require("tailwindcss-animate"),
     require("react-widgets-tailwind"),
-    require('@tailwindcss/custom-forms'),
+    require("@tailwindcss/custom-forms"),
     require("@tailwindcss/forms")({
       strategy: "base",
     }),

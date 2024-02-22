@@ -1,40 +1,95 @@
+// const Data = [
+//   {
+//     id: "1",
+//     drugName: "Panadol",
+//     requestedQty: "354",
+//     agent: "Benta SAL",
+//     notes: "Brand",
+//   },
+//   {
+//     id: "2",
+//     drugName: "Zolof",
+//     requestedQty: "778",
+//     agent: "Omnipharma",
+//     notes: "Generic",
+//   },
+//   {
+//     id: "3",
+//     drugName: "Nexium",
+//     requestedQty: "25",
+//     agent: "Pharmaline",
+//     notes: "Biological Human",
+//   },
+//   {
+//     id: "4",
+//     drugName: "Risperdal",
+//     requestedQty: "154",
+//     agent: "Mersaco",
+//     notes: "Biological Similar",
+//     offerType: [
+//       {
+//         type: "type 1",
+//         percentage: "10%",
+//       },
+//     ],
+//   },
+// ];
+
+// const orderStatus = [
+//   { label: "Pending", value: "pending" },
+//   { label: "Approved", value: "approved" },
+//   { label: "Corrected", value: "corrected" },
+//   { label: "Rejected", value: "Rejected" },
+//   { label: "", value: "" },
+// ];
+
+// export { Data, orderStatus };
 const Data = [
   {
     id: "1",
     drugName: "Panadol",
-    ingredients: "Paracetamol",
+    requestedQty: "354",
     agent: "Benta SAL",
-    type: "Brand",
+    notes: "Brand",
+    orderStatus: "", // Add orderStatus field with initial value
   },
   {
     id: "2",
     drugName: "Zolof",
-    ingredients: "Sertraline",
+    requestedQty: "778",
     agent: "Omnipharma",
-    type: "Generic",
+    notes: "Generic",
+    orderStatus: "", // Add orderStatus field with initial value
   },
   {
     id: "3",
     drugName: "Nexium",
-    ingredients: "Esomeprazole",
+    requestedQty: "25",
     agent: "Pharmaline",
-    type: "Biological Human",
+    notes: "Biological Human",
+    orderStatus: "", // Add orderStatus field with initial value
   },
   {
     id: "4",
     drugName: "Risperdal",
-    ingredients: "Risperdirone",
+    requestedQty: "154",
     agent: "Mersaco",
-    type: "Biological Similar",
+    notes: "Biological Similar",
+    offerType: [
+      {
+        type: "type 1",
+        percentage: "10%",
+      },
+    ],
+    orderStatus: "", // Add orderStatus field with initial value
   },
 ];
 
-const drugTypes = [
-  { label: "Brand", value: "brand" },
-  { label: "Generic", value: "generic" },
-  { label: "Chicago", value: "Chic" },
-  { label: "Los Angelos", value: "LA" },
-  { label: "", value: "" }, // Add an empty string option
+const orderStatus = [
+  { label: "Pending", value: "pending" },
+  { label: "Approved", value: "approved" },
+  { label: "Corrected", value: "corrected" },
+  { label: "Rejected", value: "rejected" },
 ];
 
-export { Data, drugTypes };
+export { Data, orderStatus };
