@@ -81,6 +81,7 @@ app.post("/orders", async (req, res) => {
 
     console.log("Create Order Request:", orderData);
     const order = await Order.create(orderData);
+    console.log("Order created successfully:", order);
     res.json(order);
   } catch (error) {
     console.error("Error creating order:", error);
@@ -102,15 +103,49 @@ app.get("/orders", async (req, res) => {
 // Update operation
 app.put("/orders/:id", async (req, res) => {
   try {
-    const order = await Order.findByPk(req.params.id);
+    const orderId = req.params.id;
+
+    // Check if orderId is undefined or "undefined"
+    if (!orderId || orderId === "undefined") {
+      console.error(
+        `[${new Date().toISOString()}] PUT /orders/undefined - Received undefined orderId: ${orderId}`
+      );
+      return res.status(400).json({ error: "Invalid orderId" });
+    }
+
+    const order = await Order.findByPk(orderId);
+
     if (!order) {
+      console.error(
+        `[${new Date().toISOString()}] PUT /orders/${orderId} - Order not found for orderId: ${orderId}`
+      );
       return res.status(404).json({ error: "Order not found" });
     }
-    await order.update(req.body);
-    res.json(order);
+
+    console.log(
+      `[${new Date().toISOString()}] PUT /orders/${orderId} - Updated order with ID: ${orderId}, Updated Data:`,
+      req.body
+    );
+
+    const { orderStatus } = req.body; // Extract the orderStatus field from the request body
+
+    // Update only the orderStatus field in the database
+    const updatedOrder = await order.update({ orderStatus });
+
+    console.log(
+      `[${new Date().toISOString()}] PUT /orders/${orderId} - Updated order with ID: ${orderId}, Updated Data:`,
+      updatedOrder
+    );
+
+    res.json(updatedOrder); // Return the updated order
   } catch (error) {
-    console.error("Error updating order:", error);
-    res.status(400).json({ error: error.message });
+    console.error(
+      `[${new Date().toISOString()}] PUT /orders/${
+        req.params.id
+      } - Error updating order:`,
+      error
+    );
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

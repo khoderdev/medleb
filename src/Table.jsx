@@ -39,7 +39,7 @@ const CrudTable = () => {
         id: "drugName",
         accessorKey: "drugName",
         header: "Drug Name",
-        muiEditTextFieldProps: {
+        uiEditTextFieldProps: {
           type: "text",
         },
       },
