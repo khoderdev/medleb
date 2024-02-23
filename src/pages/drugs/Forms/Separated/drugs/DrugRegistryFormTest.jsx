@@ -103,7 +103,7 @@ const DrugRegistryFormTest = () => {
 
   return (
     <>
-      <form
+      <div
         onSubmit={handleSubmit}
         className="w-full pb-14 p-10 h-screen text-black-text dark:text-white-text "
       >
@@ -749,7 +749,7 @@ const DrugRegistryFormTest = () => {
             />
           </div>
         </div>
-      </form>
+      </div>
     </>
   );
 };

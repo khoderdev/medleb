@@ -151,6 +151,9 @@ const CrudTable = () => {
     muiTableContainerProps: {
       sx: {
         minHeight: "500px",
+        borderRadius: "20px",
+
+        // marginTop:"",
       },
     },
     onCreatingRowCancel: () => setValidationErrors({}),
@@ -211,7 +214,9 @@ const queryClient = new QueryClient();
 const Table = () => (
   //Put this with your other react-query providers near root of your app
   <QueryClientProvider client={queryClient}>
-    <CrudTable />
+    <div className="p-10">
+      <CrudTable />
+    </div>
   </QueryClientProvider>
 );
 

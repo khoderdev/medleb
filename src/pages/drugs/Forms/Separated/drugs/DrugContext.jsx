@@ -15,7 +15,7 @@ const generateInitialFormData = () => {
     Guid: generateGUID(),
     ATCGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa7",
     // ATCGuid: null,
-    ATCCodes: null,
+    // ATCCodes: null,
     DosageGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
     // DosageGuid: generateGUID(),
     PresentationGuid: "91C44FF9-D234-4306-BF87-AE8894D0CF0C",

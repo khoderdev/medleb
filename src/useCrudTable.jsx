@@ -53,6 +53,9 @@ export function useUpdateOrder() {
   return useMutation({
     mutationFn: async (updatedOrder) => {
       try {
+        if (!updatedOrder.id) {
+          throw new Error("Order ID is missing");
+        }
         // Ensure status field is always submitted
         const response = await axios.put(
           `http://localhost:3000/orders/${updatedOrder.id}`,
@@ -66,11 +69,13 @@ export function useUpdateOrder() {
     },
     onMutate: (updatedOrder) => {
       // Optimistic update: Update order in cache
-      queryClient.setQueryData(["orders"], (prevOrders) =>
-        prevOrders.map((order) =>
-          order.id === updatedOrder.id ? updatedOrder : order
-        )
-      );
+      if (updatedOrder.id) {
+        queryClient.setQueryData(["orders"], (prevOrders) =>
+          prevOrders.map((order) =>
+            order.id === updatedOrder.id ? updatedOrder : order
+          )
+        );
+      }
     },
   });
 }
@@ -106,7 +111,15 @@ export function useGetOrders() {
       try {
         // Send API request to fetch orders
         const response = await axios.get("http://localhost:3000/orders");
-        return response.data;
+
+        // Modify response data to include default values for Order ID and Status
+        const ordersWithDefaults = response.data.map((order) => ({
+          ...order,
+          orderId: order.orderId || generateSerialNumber(), // Include default Order ID if not provided
+          status: order.status || "pending", // Include default status if not provided
+        }));
+
+        return ordersWithDefaults;
       } catch (error) {
         console.error("Error fetching orders:", error);
         throw new Error("Failed to fetch orders");
