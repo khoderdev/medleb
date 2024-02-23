@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
+import axios from "axios"; // Import axios for making HTTP requests
 import {
   MaterialReactTable,
-  // createRow,
   useMaterialReactTable,
 } from "material-react-table";
 import {
@@ -12,165 +12,137 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { Data, orderStatus } from "./makeData";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { orderStatus } from "./makeData"; // Assuming this file contains the orderStatus array
 import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  useCreateOrder,
+  useGetOrders,
+  useUpdateOrder,
+  useDeleteOrder,
+} from "./useCrudTable";
 
 const CrudTable = () => {
   const [validationErrors, setValidationErrors] = useState({});
-  //keep track of rows that have been edited
-  const [editedUsers, setEditedUsers] = useState({});
+  const [editedOrders, setEditedOrders] = useState({});
 
   const columns = useMemo(
     () => [
       {
-        accessorKey: "id",
-        header: "Id",
+        id: "orderId",
+        accessorKey: "orderId",
+        header: "Order ID",
         enableEditing: false,
-        size: 80,
+        size: 100,
       },
       {
+        id: "drugName",
         accessorKey: "drugName",
         header: "Drug Name",
-        muiEditTextFieldProps: ({ cell, row }) => ({
+        muiEditTextFieldProps: {
           type: "text",
-          required: true,
-          error: !!validationErrors?.[cell.id],
-          helperText: validationErrors?.[cell.id],
-          //store edited user in status to be saved later
-          onBlur: (event) => {
-            const validationError = !validateRequired(event.currentTarget.value)
-              ? "Required"
-              : undefined;
-            setValidationErrors({
-              ...validationErrors,
-              [cell.id]: validationError,
-            });
-            setEditedUsers({ ...editedUsers, [row.id]: row.original });
-          },
-        }),
+        },
       },
       {
+        id: "requestedQty",
         accessorKey: "requestedQty",
         header: "Req Quantity",
-        muiEditTextFieldProps: ({ cell, row }) => ({
-          type: "text",
-          required: true,
-          error: !!validationErrors?.[cell.id],
-          helperText: validationErrors?.[cell.id],
-          //store edited user in status to be saved later
-          onBlur: (event) => {
-            const validationError = !validateRequired(event.currentTarget.value)
-              ? "Required"
-              : undefined;
-            setValidationErrors({
-              ...validationErrors,
-              [cell.id]: validationError,
-            });
-            setEditedUsers({ ...editedUsers, [row.id]: row.original });
-          },
-        }),
+        muiEditTextFieldProps: {
+          type: "number",
+        },
       },
       {
+        accessorKey: "agent",
+        header: "Agent",
+        muiEditTextFieldProps: {
+          type: "agent",
+        },
+      },
+      {
+        id: "notes",
         accessorKey: "notes",
         header: "Notes",
-        muiEditTextFieldProps: ({ cell, row }) => ({
-          type: "notes",
-          required: true,
-          error: !!validationErrors?.[cell.id],
-          helperText: validationErrors?.[cell.id],
-          //store edited user in status to be saved later
-          onBlur: (event) => {
-            const validationError = !validateNotes(event.currentTarget.value)
-              ? "Incorrect Notes Format"
-              : undefined;
-            setValidationErrors({
-              ...validationErrors,
-              [cell.id]: validationError,
-            });
-            setEditedUsers({ ...editedUsers, [row.id]: row.original });
-          },
-        }),
+        muiEditTextFieldProps: {
+          type: "text",
+        },
       },
       {
+        id: "status",
         accessorKey: "status",
         header: "Status",
         editVariant: "select",
         editSelectOptions: orderStatus,
-        muiEditTextFieldProps: ({ row }) => ({
+        muiEditTextFieldProps: {
           select: true,
-          error: !!validationErrors?.status,
-          helperText: validationErrors?.status,
-          onChange: (event) =>
-            setEditedUsers({
-              ...editedUsers,
-              [row.id]: { ...row.original, status: event.target.value },
-            }),
-        }),
+        },
       },
     ],
-    [editedUsers, validationErrors]
+    []
   );
 
-  //call CREATE hook
-  const { mutateAsync: createUser, isPending: isCreatingUser } =
-    useCreateUser();
-  //call READ hook
+  // Define CREATE hook to handle order creation
+  const { mutateAsync: createOrder, isPending: isCreatingOrder } =
+    useCreateOrder();
+
+  // Call READ hook
   const {
-    data: fetchedUsers = [],
-    isError: isLoadingUsersError,
-    isFetching: isFetchingUsers,
-    isLoading: isLoadingUsers,
-  } = useGetUsers();
-  //call UPDATE hook
-  const { mutateAsync: updateUsers, isPending: isUpdatingUsers } =
-    useUpdateUsers();
-  //call DELETE hook
-  const { mutateAsync: deleteUser, isPending: isDeletingUser } =
-    useDeleteUser();
+    data: fetchedOrders = [],
+    isError: isLoadingOrdersError,
+    isFetching: isFetchingOrders,
+    isLoading: isLoadingOrders,
+  } = useGetOrders();
 
-  //CREATE action
-  const handleCreateUser = async ({ values, table }) => {
-    const newValidationErrors = validateUser(values);
-    if (Object.values(newValidationErrors).some((error) => error)) {
-      setValidationErrors(newValidationErrors);
-      return;
+  // Call UPDATE hook
+  const { mutateAsync: updateOrder, isPending: isUpdatingOrders } =
+    useUpdateOrder();
+  // Call DELETE hook
+  const { mutateAsync: deleteOrder, isPending: isDeletingOrder } =
+    useDeleteOrder();
+
+  // CREATE action
+  const handleCreateOrder = async ({ values, table }) => {
+    try {
+      // Send a POST request to create a new order
+      await createOrder(values);
+      table.setCreatingRow(null);
+    } catch (error) {
+      console.error("Error creating order:", error);
     }
-    setValidationErrors({});
-    await createUser(values);
-    table.setCreatingRow(null); //exit creating mode
   };
 
-  //UPDATE action
-  const handleSaveUsers = async () => {
-    if (Object.values(validationErrors).some((error) => !!error)) return;
-    await updateUsers(Object.values(editedUsers));
-    setEditedUsers({});
+  // UPDATE action
+  const handleSaveOrders = async () => {
+    try {
+      // Send a PUT request to update orders
+      await updateOrder(Object.values(editedOrders)); // Change editedOrders to editedOrders
+      setEditedOrders({}); // Change setEditedOrders to setEditedOrders
+    } catch (error) {
+      console.error("Error saving orders:", error);
+    }
   };
 
-  //DELETE action
-  const openDeleteConfirmModal = (row) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      deleteUser(row.original.id);
+  // DELETE action
+  const openDeleteConfirmModal = async (row) => {
+    if (window.confirm("Are you sure you want to delete this order?")) {
+      try {
+        // Send a DELETE request to delete an order
+        await deleteOrder(row.original.id);
+      } catch (error) {
+        console.error("Error deleting order:", error);
+      }
     }
   };
 
   const table = useMaterialReactTable({
     columns,
-    data: fetchedUsers,
+    data: fetchedOrders,
     createDisplayMode: "row", // ('modal', and 'custom' are also available)
     editDisplayMode: "table", // ('modal', 'row', 'cell', and 'custom' are also
     enableEditing: true,
     enableRowActions: true,
     positionActionsColumn: "last",
     getRowId: (row) => row.id,
-    muiToolbarAlertBannerProps: isLoadingUsersError
+    muiToolbarAlertBannerProps: isLoadingOrdersError
       ? {
           color: "error",
           children: "Error loading data",
@@ -182,7 +154,7 @@ const CrudTable = () => {
       },
     },
     onCreatingRowCancel: () => setValidationErrors({}),
-    onCreatingRowSave: handleCreateUser,
+    onCreatingRowSave: handleCreateOrder,
     renderRowActions: ({ row }) => (
       <Box sx={{ display: "flex", gap: "1rem" }}>
         <Tooltip title="Delete">
@@ -192,24 +164,26 @@ const CrudTable = () => {
         </Tooltip>
       </Box>
     ),
+
     renderBottomToolbarCustomActions: () => (
       <Box sx={{ display: "flex", gap: "1rem", alignItems: "center" }}>
         <Button
           color="success"
           variant="contained"
-          onClick={handleSaveUsers}
+          onClick={handleSaveOrders}
           disabled={
-            Object.keys(editedUsers).length === 0 ||
+            Object.keys(editedOrders).length === 0 ||
             Object.values(validationErrors).some((error) => !!error)
           }
         >
-          {isUpdatingUsers ? <CircularProgress size={25} /> : "Save"}
+          {isUpdatingOrders ? <CircularProgress size={25} /> : "Save"}
         </Button>
         {Object.values(validationErrors).some((error) => !!error) && (
           <Typography color="error">Fix errors before submitting</Typography>
         )}
       </Box>
     ),
+
     renderTopToolbarCustomActions: ({ table }) => (
       <Button
         variant="contained"
@@ -217,93 +191,20 @@ const CrudTable = () => {
           table.setCreatingRow(true);
         }}
       >
-        Create New User
+        Create New Order
       </Button>
     ),
+
     status: {
-      isLoading: isLoadingUsers,
-      isSaving: isCreatingUser || isUpdatingUsers || isDeletingUser,
-      showAlertBanner: isLoadingUsersError,
-      showProgressBars: isFetchingUsers,
+      isLoading: isLoadingOrders,
+      isSaving: isCreatingOrder || isUpdatingOrders || isDeletingOrder,
+      showAlertBanner: isLoadingOrdersError,
+      showProgressBars: isFetchingOrders,
     },
   });
 
   return <MaterialReactTable table={table} />;
 };
-
-//CREATE hook (post new user to api)
-function useCreateUser() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (user) => {
-      //send api update request here
-      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
-      return Promise.resolve();
-    },
-    //client side optimistic update
-    onMutate: (newUserInfo) => {
-      queryClient.setQueryData(["users"], (prevUsers) => [
-        ...prevUsers,
-        {
-          ...newUserInfo,
-          id: (Math.random() + 1).toString(36).substring(7),
-        },
-      ]);
-    },
-  });
-}
-
-//READ hook (get users from api)
-function useGetUsers() {
-  return useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      //send api request here
-      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
-      return Promise.resolve(Data);
-    },
-    refetchOnWindowFocus: false,
-  });
-}
-
-//UPDATE hook (put user in api)
-function useUpdateUsers() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (users) => {
-      //send api update request here
-      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
-      return Promise.resolve();
-    },
-    //client side optimistic update
-    onMutate: (newUsers) => {
-      queryClient.setQueryData(["users"], (prevUsers) =>
-        prevUsers?.map((user) => {
-          const newUser = newUsers.find((u) => u.id === user.id);
-          return newUser ? newUser : user;
-        })
-      );
-    },
-  });
-}
-
-//DELETE hook (delete user in api)
-function useDeleteUser() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (userId) => {
-      //send api update request here
-      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
-      return Promise.resolve();
-    },
-    //client side optimistic update
-    onMutate: (userId) => {
-      queryClient.setQueryData(["users"], (prevUsers) =>
-        prevUsers?.filter((user) => user.id !== userId)
-      );
-    },
-  });
-}
 
 const queryClient = new QueryClient();
 
@@ -315,14 +216,3 @@ const Table = () => (
 );
 
 export default Table;
-
-const validateRequired = (value) => !!value.length;
-
-function validateUser(user) {
-  return {
-    drugName: !validateRequired(user.drugName) ? "Drug Name is Required" : "",
-    requestedQty: !validateRequired(user.requestedQty)
-      ? "Last Name is Required"
-      : "",
-  };
-}

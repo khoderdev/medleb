@@ -12,7 +12,7 @@ app.use(cors());
 const sequelize = new Sequelize({
   dialect: "mssql",
   host: "localhost",
-  database: "MedLebOrders",
+  database: "MedLeb_Tables",
   username: "sa",
   password: "1234",
 });
@@ -20,9 +20,14 @@ const sequelize = new Sequelize({
 // Define Sequelize model for your table
 const Order = sequelize.define("Order", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: Sequelize.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+  },
+  OrderId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true, // Ensure uniqueness
   },
   drugName: {
     type: DataTypes.STRING,
@@ -41,18 +46,44 @@ const Order = sequelize.define("Order", {
     allowNull: false,
   },
   orderStatus: {
-    type: DataTypes.STRING, // Assuming orderStatus is a string
+    type: DataTypes.STRING,
     allowNull: false,
+    defaultValue: "pending", // Set default value
   },
 });
 
+// Middleware function for logging requests
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
+
+// Synchronize the models with the database
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Database synchronized");
+  })
+  .catch((error) => {
+    console.error("Error synchronizing database:", error);
+  });
+
 // Define routes for CRUD operations
+
 // Create operation
 app.post("/orders", async (req, res) => {
   try {
-    const order = await Order.create(req.body);
+    // Generate unique 4-digit serial number for OrderId
+    const OrderId = String(Math.floor(Math.random() * 10000)).padStart(4, "0");
+
+    // Include OrderId in the request body
+    const orderData = { ...req.body, OrderId };
+
+    console.log("Create Order Request:", orderData);
+    const order = await Order.create(orderData);
     res.json(order);
   } catch (error) {
+    console.error("Error creating order:", error);
     res.status(400).json({ error: error.message });
   }
 });
@@ -63,6 +94,7 @@ app.get("/orders", async (req, res) => {
     const orders = await Order.findAll();
     res.json(orders);
   } catch (error) {
+    console.error("Error fetching orders:", error);
     res.status(400).json({ error: error.message });
   }
 });
@@ -77,6 +109,7 @@ app.put("/orders/:id", async (req, res) => {
     await order.update(req.body);
     res.json(order);
   } catch (error) {
+    console.error("Error updating order:", error);
     res.status(400).json({ error: error.message });
   }
 });
@@ -91,8 +124,15 @@ app.delete("/orders/:id", async (req, res) => {
     await order.destroy();
     res.json({ message: "Order deleted successfully" });
   } catch (error) {
+    console.error("Error deleting order:", error);
     res.status(400).json({ error: error.message });
   }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error("An error occurred:", err);
+  res.status(500).json({ error: "Internal server error" });
 });
 
 // Start the server
