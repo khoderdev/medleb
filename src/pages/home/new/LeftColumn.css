@@ -9,11 +9,11 @@
 }
 
 #EB {
-  background-position: 5rem -82px;
+  background-position: rem -82px;
 }
 
 @media (max-width: 700px) {
   #EB {
-    background-position: 0 -82px;
+    background-position: 0 -22px;
   }
 }

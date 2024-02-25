@@ -47,7 +47,7 @@ const LeftColumn = () => {
       style={{
         backgroundImage: "url('/public/assets/EB-Quote.png')",
         backgroundAttachment: "fixed",
-        backgroundSize: "32rem",
+        backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
       }}
     >
