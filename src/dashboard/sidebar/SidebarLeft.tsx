@@ -30,9 +30,8 @@ const SidebarLeft = () => {
       <div ref={sidebarRef} className="">
         <motion.div
           {...framerSidebarPanel}
-          className={`z-50 h-[100svh] bg-white-contents dark:bg-black-contents ${
-            isCollapsed ? "w-50" : "w-250"
-          }px text-gray-700 dark:text-white-text h-[100svh] shrink-0 text-lg transition-all duration-150 ease-in-out sm:overflow-y-auto 2xl:overflow-hidden`}
+          className={`z-50 h-[100svh] bg-white-contents dark:bg-black-contents ${isCollapsed ? "w-50" : "w-250"
+            }px text-gray-700 dark:text-white-text h-[100svh] shrink-0 text-lg transition-all duration-150 ease-in-out sm:overflow-y-auto 2xl:overflow-hidden`}
           style={{ right: isCollapsed ? 0 : "auto" }}
         >
           {/* Sidebar Header */}
@@ -49,9 +48,8 @@ const SidebarLeft = () => {
                     onClick={toggleCollapse}
                   >
                     <svg
-                      className={`h-5 w-5 text-white-bg transition-transform duration-300 ease-in-out dark:text-white ${
-                        isCollapsed ? "rotate-90" : "rotate-90"
-                      }`}
+                      className={`h-5 w-5 text-white-bg transition-transform duration-300 ease-in-out dark:text-white ${isCollapsed ? "rotate-90" : "rotate-90"
+                        }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -78,7 +76,7 @@ const SidebarLeft = () => {
               </div>
             </>
           ) : (
-            <div className="header-collapsed">
+            <div className="header-collapsed bg-white-bg dark:bg-black-contents">
               <div className="logo px-4 pt-4">
                 <MedLebLogoIcon />
               </div>
@@ -87,9 +85,8 @@ const SidebarLeft = () => {
                 onClick={toggleCollapse}
               >
                 <svg
-                  className={`h-5 w-5 text-white-bg transition-transform duration-300 ease-in-out dark:text-white-text ${
-                    isCollapsed ? "hidden ml-6" : "rotate-90"
-                  }`}
+                  className={`h-5 w-5 text-white-bg transition-transform duration-300 ease-in-out dark:text-white-text ${isCollapsed ? "hidden ml-6" : "rotate-90"
+                    }`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -208,7 +205,7 @@ const SidebarLeft = () => {
           ) : (
             // /////////////////////////////////COLLAPSED/CLOSED///////////////////////////////////////////////////////////////////////////////////
 
-            <div className="flex flex-col w-full h-full items-center justify-evenly px-2 overflow-y-auto text-gray-900 dark:text-gray-100 mt-[-2em]">
+            <div className="flex flex-col  w-full h-full items-center justify-evenly px-2 overflow-y-auto bg-white-bg dark:bg-black-contents text-gray-900 dark:text-gray-100 mt-[-2em]">
               {/* icons without text when collapsed, stacked */}
 
               <div className="menu-section w-full justify-center items-center gap-6 flex flex-col">

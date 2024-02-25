@@ -1,0 +1,19 @@
+/* Default background position */
+.default-background {
+  background-position: 120px 20px;
+}
+
+/* Background position for smaller screens */
+.smaller-screen-background {
+  background-position: center;
+}
+
+#EB {
+  background-position: 5rem -82px;
+}
+
+@media (max-width: 700px) {
+  #EB {
+    background-position: 0 -82px;
+  }
+}
