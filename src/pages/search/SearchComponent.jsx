@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import axios from "axios";
 import singleDrugRef from "../drugs/list/SingleDrug";
-import { useDrugContext } from "../drugs/DrugContext";
+import { useDrugContext } from "../../pages/drugs/Forms/Separated/drugs/DrugContext";
 
 const SearchComponent = () => {
   const {

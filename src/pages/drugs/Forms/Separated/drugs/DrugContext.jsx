@@ -2,6 +2,9 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
 import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import { Step, Stepper, StepLabel } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import { makeStyles } from "@mui/styles";
 
 // Create the context
 const DrugContext = createContext();
@@ -103,17 +106,38 @@ const generateInitialFormData = () => {
   };
 };
 
-// Define the steps for the form
-const steps = [
-  "Step 1",
-  // "Step 2",
-  // "Step 3"
-];
+const useStyles = makeStyles((theme) => ({
+  stepperPaper: {
+    boxShadow: "none",
+    backgroundColor: "transparent",
+  },
+}));
+
+function FormStepper({ currentStep, steps }) {
+  const classes = useStyles();
+
+  return (
+    <Stepper
+      activeStep={currentStep}
+      alternativeLabel
+      style={{ background: "transparent", boxShadow: "none" }}
+    >
+      {steps.map((label, index) => (
+        <Step key={label}>
+          <StepLabel
+            className={`dot  ${currentStep === index ? "active" : ""}`}
+          />
+        </Step>
+      ))}
+    </Stepper>
+  );
+}
 
 // Create a context provider
 export const DrugProvider = ({ children }) => {
   const [formData, setFormData] = useState(generateInitialFormData());
   const [currentStep, setCurrentStep] = useState(0);
+  const isLastStep = currentStep === 6;
   const [error, setError] = useState(null);
   const [priceUSD, setPriceUSD] = useState("");
   const [priceLBP, setPriceLBP] = useState("");
@@ -132,6 +156,41 @@ export const DrugProvider = ({ children }) => {
     JOD: 1.41,
     LBP: 90000,
   };
+
+  const steps = [
+    "Drug Registry",
+    "Drug Registry Addons",
+    "Drug Images",
+    "Pricing Approval",
+    "Marketing Approval",
+    "Substance Information",
+    "Unified Drug Information",
+  ];
+
+  const handleNext = () => {
+    console.log("handleNext called");
+    setCurrentStep(prevStep => prevStep + 1);
+    console.log("Current step:", currentStep); // Add this line to check the updated currentStep
+  };
+
+  const handleBack = () => {
+    console.log("handleBack called");
+    setCurrentStep(prevStep => prevStep - 1);
+    console.log("Current step:", currentStep); // Add this line to check the updated currentStep
+  };
+
+  // const handleNext = () => {
+  //   console.log("handleNext called");
+  //   if (currentStep === 2) {
+  //     // Additional logic for a specific step if needed
+  //   }
+  //   setCurrentStep(currentStep + 1);
+  // };
+
+  // const handleBack = () => {
+  //   console.log("handleBack called");
+  //   setCurrentStep(currentStep - 1);
+  // };
 
   const convertToUSD = () => {
     if (formData.PriceFOREIGN && formData.currencyForeign) {
@@ -222,8 +281,73 @@ export const DrugProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     // Calculate and update PriceUSD and PriceLBP in formData
+  //     const PriceUSD = convertToUSD();
+  //     const PriceLBP = convertToLBP();
+  //     setFormData((prevFormData) => ({
+  //       ...prevFormData,
+  //       PriceUSD,
+  //       PriceLBP,
+  //     }));
+
+  //     // Submit form data
+  //     const response = await axios.post(
+  //       "http://localhost:3500/drugs/",
+  //       formData
+  //     );
+
+  //     console.log(response.data); // Handle success response
+  //     setFormData(generateInitialFormData()); // Reset form after successful submission
+  //     setCurrentStep(0); // Reset to the first step after submission
+  //   } catch (error) {
+  //     console.error("Error:", error); // Log any errors
+  //     setError(error.response?.data?.error || "An error occurred"); // Handle error response
+  //   }
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   if (e) {
+  //     e.preventDefault();
+  //   }
+
+  //   try {
+  //     // Calculate and update PriceUSD and PriceLBP in formData
+  //     const PriceUSD = convertToUSD();
+  //     const PriceLBP = convertToLBP();
+  //     setFormData((prevFormData) => ({
+  //       ...prevFormData,
+  //       PriceUSD,
+  //       PriceLBP,
+  //     }));
+
+  //     // If it's the last step, submit form data
+  //     if (currentStep === steps.length - 1) {
+  //       const response = await axios.post(
+  //         "http://localhost:3500/drugs/",
+  //         formData
+  //       );
+
+  //       console.log(response.data); // Handle success response
+  //       setFormData(generateInitialFormData()); // Reset form after successful submission
+  //       setCurrentStep(0); // Reset to the first step after submission
+  //     } else {
+  //       // If it's not the last step, proceed to the next step
+  //       handleNext();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error); // Log any errors
+  //     setError(error.response?.data?.error || "An error occurred"); // Handle error response
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
+
     try {
       // Calculate and update PriceUSD and PriceLBP in formData
       const PriceUSD = convertToUSD();
@@ -234,95 +358,24 @@ export const DrugProvider = ({ children }) => {
         PriceLBP,
       }));
 
-      // Submit form data
-      const response = await axios.post(
-        "http://localhost:3000/drugs/add",
-        formData
-      );
-      console.log(response.data); // Handle success response
-      setFormData(generateInitialFormData()); // Reset form after successful submission
-      setCurrentStep(0); // Reset to the first step after submission
+      // If it's the last step, submit form data
+      if (currentStep === steps.length - 1) {
+        const response = await axios.post(
+          "http://localhost:3500/drugs/",
+          formData
+        );
+
+        console.log(response.data); // Handle success response
+        setFormData(generateInitialFormData()); // Reset form after successful submission
+        setCurrentStep(0); // Reset to the first step after submission
+      } else {
+        // If it's not the last step, proceed to the next step
+        handleNext();
+      }
     } catch (error) {
       console.error("Error:", error); // Log any errors
       setError(error.response?.data?.error || "An error occurred"); // Handle error response
     }
-  };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Calculate and update PriceUSD and PriceLBP in formData
-  //     const PriceUSD = convertToUSD();
-  //     const PriceLBP = convertToLBP();
-  //     setFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       PriceUSD,
-  //       PriceLBP,
-  //     }));
-  //     const decimalValue = parseFloat(formData.LASTPublicABP);
-  //     // console.log("Converted Price USD:", PriceUSD);
-  //     // console.log("Converted Price LBP:", PriceLBP);
-  //     console.log("Form Data after update:", formData);
-
-  //     // Submit form data
-  //     const response = await axios.post("http://localhost:3000/drugs/add", {
-  //       ...formData,
-  //     });
-  //     console.log(response.data); // Handle success response
-  //     setFormData(generateInitialFormData()); // Reset form after successful submission
-  //     setCurrentStep(0); // Reset to the first step after submission
-  //   } catch (error) {
-  //     setError(error.response.data.error || "An error occurred");
-  //   }
-  // };
-
-  // ////////////////////////////////////////////////
-  // ////////////////////////////////////////////////
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Fetch GUID of ATC
-  //     const atcResponse = await Axios.get("/api/atc/v1.0");
-  //     console.log("ATC Response:", atcResponse.data);
-  //     const atcGuid = atcResponse.data[0].guid; // This line causes the TypeError
-
-  //     // Fetch GUID of ATCCodes
-  //     const atcCodesResponse = await Axios.get("/api/atccodes/v1.0/codes");
-  //     console.log("ATC Codes Response:", atcCodesResponse.data);
-  //     const atcCodesGuid = atcCodesResponse.data[0].guid;
-
-  //     // Update formData with fetched GUIDs
-  //     setFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       ATCGuid: atcGuid,
-  //       ATCCodes: atcCodesGuid,
-  //     }));
-
-  //     // Calculate and update PriceUSD and PriceLBP in formData
-  //     const PriceUSD = convertToUSD();
-  //     const PriceLBP = convertToLBP();
-  //     setFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       PriceUSD,
-  //       PriceLBP,
-  //     }));
-
-  //     // Submit form data
-  //     const response = await axios.post("http://localhost:3000/drugs/add", {
-  //       ...formData,
-  //     });
-  //     console.log(response.data); // Handle success response
-  //     setFormData(generateInitialFormData()); // Reset form after successful submission
-  //     setCurrentStep(0); // Reset to the first step after submission
-  //   } catch (error) {
-  //     console.error("Error:", error); // Log any errors
-  //     setError(error.response?.data?.error || "An error occurred"); // Handle error response
-  //   }
-  // };
-
-  const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
   };
 
   const handlePrevious = () => {
@@ -368,19 +421,23 @@ export const DrugProvider = ({ children }) => {
     setFormData,
     handleInputChange,
     handleSubmit,
-    handleNext,
     handlePrevious,
-    error,
-    currentStep,
+    handleNext,
+    handleBack,
+    isLastStep,
+    FormStepper,
     steps,
+    error,
     exchangeRates,
+    convertToUSD,
+    convertToLBP,
     priceUSD,
     priceLBP,
     selectedDrugGuid,
     selectDrug,
-    // atcCodes,
     selectATC,
     clearselectedDrugGuid,
+    
   };
 
   return (

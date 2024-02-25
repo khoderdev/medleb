@@ -256,7 +256,7 @@ function AddDrug(props) {
     if (drugId) {
       // Fetch the existing drug data using the drugId
       axios
-        .get(`http://1.1.1.252:3500/drugs/${drugId}`)
+        .get(`http://1.1.1.250:3500/drugs/${drugId}`)
         .then((res) => {
           // Initialize the form data with existing drug data
           setFormDataStep1(res.data); // You might need to adjust this based on the actual structure of your data
@@ -274,11 +274,11 @@ function AddDrug(props) {
       if (isEditMode) {
         // If in edit mode, update the existing drug
         console.log("Updating an existing drug");
-        await axios.put(`http://1.1.1.252:3500/drugs/${drugId}`, finalFormData);
+        await axios.put(`http://1.1.1.250:3500/drugs/${drugId}`, finalFormData);
       } else {
         // If not in edit mode, create a new drug
         console.log("Creating a new drug");
-        await axios.post("http://1.1.1.252:3500/drugs", finalFormData);
+        await axios.post("http://1.1.1.250:3500/drugs", finalFormData);
       }
       // You might want to add a success message or further handling here
       navigate("/search"); // Navigate to the list page after successful update/creation

@@ -72,7 +72,7 @@ const DrugDocuments = (props) => {
 
       // Use axios to post the images to your backend
       const response = await axios.post(
-        "http://1.1.1.252:3500/upload",
+        "http://1.1.1.250:3500/upload",
         formData
       );
 

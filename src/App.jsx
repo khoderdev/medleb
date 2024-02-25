@@ -63,6 +63,8 @@ import EComProduct from "./ecom/ECom";
 import ProductComponent from "./ecom/productComponent";
 import MantineTable from "./pages/tables/Table2.tsx";
 import { MantineProvider } from "@mantine/core";
+import StepperExample from "./Stepper/StepperExample.jsx";
+import { StepperProvider } from "./Stepper/StepperContext";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -98,92 +100,106 @@ const App = () => {
             <CurrenciesProvider>
               <GeoFormProvider>
                 <ModalFormProvider>
-                  <Routes>
-                    {/* //////////ecom /////////////// */}
-                    <Route path="/ecom/auth" element={<AuthComponent />} />
-                    <Route
-                      path="/ecom/products"
-                      element={<ProductComponent />}
-                    />
-                    <Route path="/ecom" element={<ECom />} />
+                  <StepperProvider>
+                    <Routes>
+                      {/* //////////ecom /////////////// */}
+                      <Route path="/ecom/auth" element={<AuthComponent />} />
+                      <Route
+                        path="/ecom/products"
+                        element={<ProductComponent />}
+                      />
+                      <Route path="/ecom" element={<ECom />} />
 
-                    {/* ///////////////////////// */}
+                      {/* ///////////////////////// */}
 
-                    {/* //////////IMPORTATION FORMS/////////////// */}
-                    <Route path="/rfi" element={<RFIForm />} />
-                    <Route path="/pi" element={<PIForm />} />
-                    <Route path="/order" element={<OrderForm />} />
-                    <Route path="/swift" element={<SwiftForm />} />
-                    <Route path="/shipment" element={<ShipmentForm />} />
-                    <Route
-                      path="/submitted-order"
-                      element={<SubmittedOrderForm />}
-                    />
-                    {/* ///////////////////////// */}
-                    <Route path="/" element={<Home />} />
-                    <Route path="/get-auths" element={<DrugsComponent />} />
-                    <Route path="/auth" element={<AuthContainer />} />
-                    <Route path="/table" element={<Table />} />
-                    <Route path="/table2" element={<MantineTable />} />
-                    {/* <Route path="/search" element={<Search />} /> */}
-                    <Route path="/newuser" element={<CreateUserForm />} />
-                    <Route path="/dynaform" element={<UserFormContainer />} />
-                    <Route path="/add" element={<AddDrug />} />
-                    <Route path="/loginform" element={<LoginForm />} />
-                    <Route path="/substitute/" element={<Substitute />} />
-                    <Route path="/dashboard/" element={<Dashboards />} />
-                    <Route path="/import/" element={<ImportDrug />} />
-                    <Route path="/import2/" element={<ImportDrugs />} />
-                    <Route path="/inspection/" element={<Inspection />} />
-                    <Route path="/shipsum/" element={<ShipmentSummary />} />
-                    <Route path="/distribution/" element={<Distribution />} />
-                    <Route path="/tracking/" element={<Tracking />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/newuser" element={<CreateUserForm />} />
-                    <Route path="/list" element={<List />} />
-                    <Route path="/editdrug/:drugId" element={<AddDrug />} />
-                    <Route path="/viewdrug/:drugId" element={<SingleDrug />} />
-                    <Route path="/atccodesform" element={<ATCCodesForm />} />
-                    <Route path="/atcform" element={<ATCForm />} />
-                    <Route path="/drugform" element={<DrugForm />} />
-                    <Route path="/currencyForm" element={<CurrencyForm />} />
-                    <Route path="/currencyTable" element={<CurrencyTable />} />
-                    <Route path="/currencies" element={<Currencies />} />
-                    <Route path="/parent" element={<ParentComponent />} />
-                    <Route path="/static" element={<StaticDataPage />} />
-                    <Route path="/atc/list" element={<ATCsList />} />
-                    <Route path="/atc/new" element={<ATCForm />} />
-                    <Route path="/brands/list" element={<BrandsList />} />
-                    <Route path="/brands/new" element={<BrandsForm />} />
-                    <Route
-                      path="/presentation/new"
-                      element={<PresentationForm />}
-                    />
-                    <Route
-                      path="/presentation/list"
-                      element={<PresentationList />}
-                    />
-                    <Route path="/geo/new" element={<GeosForm />} />
-                    <Route path="/geo/newmain" element={<ParentComponent />} />
-                    <Route path="/geo/list" element={<GeosList />} />
-                    <Route path="/company/new" element={<CompanyForm />} />
-                    <Route path="/company/list" element={<CompanyList />} />
-                    <Route
-                      path="/companyType/new"
-                      element={<CompanyTypeForm />}
-                    />
-                    <Route
-                      path="/companyType/list"
-                      element={<CompanyTypeList />}
-                    />
-                    <Route path="/agents/list" element={<AgentsList />} />
-                    <Route
-                      path="/drugs/add"
-                      element={<DrugRegistryFormTest />}
-                    />
-                    <Route path="/drugs-search" element={<SearchBar />} />
-                  </Routes>
+                      {/* //////////IMPORTATION FORMS/////////////// */}
+                      <Route path="/rfi" element={<RFIForm />} />
+                      <Route path="/pi" element={<PIForm />} />
+                      <Route path="/order" element={<OrderForm />} />
+                      <Route path="/swift" element={<SwiftForm />} />
+                      <Route path="/shipment" element={<ShipmentForm />} />
+                      <Route
+                        path="/submitted-order"
+                        element={<SubmittedOrderForm />}
+                      />
+                      {/* ///////////////////////// */}
+
+                      <Route path="/stepper" element={<StepperExample />} />
+
+                      <Route path="/" element={<Home />} />
+                      <Route path="/get-auths" element={<DrugsComponent />} />
+                      <Route path="/auth" element={<AuthContainer />} />
+                      <Route path="/table" element={<Table />} />
+                      <Route path="/table2" element={<MantineTable />} />
+                      {/* <Route path="/search" element={<Search />} /> */}
+                      <Route path="/newuser" element={<CreateUserForm />} />
+                      <Route path="/dynaform" element={<UserFormContainer />} />
+                      <Route path="/add" element={<AddDrug />} />
+                      <Route path="/loginform" element={<LoginForm />} />
+                      <Route path="/substitute/" element={<Substitute />} />
+                      <Route path="/dashboard/" element={<Dashboards />} />
+                      <Route path="/import/" element={<ImportDrug />} />
+                      <Route path="/import2/" element={<ImportDrugs />} />
+                      <Route path="/inspection/" element={<Inspection />} />
+                      <Route path="/shipsum/" element={<ShipmentSummary />} />
+                      <Route path="/distribution/" element={<Distribution />} />
+                      <Route path="/tracking/" element={<Tracking />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
+                      <Route path="/newuser" element={<CreateUserForm />} />
+                      <Route path="/list" element={<List />} />
+                      <Route path="/editdrug/:drugId" element={<AddDrug />} />
+                      <Route
+                        path="/viewdrug/:drugId"
+                        element={<SingleDrug />}
+                      />
+                      <Route path="/atccodesform" element={<ATCCodesForm />} />
+                      <Route path="/atcform" element={<ATCForm />} />
+                      <Route path="/drugform" element={<DrugForm />} />
+                      <Route path="/currencyForm" element={<CurrencyForm />} />
+                      <Route
+                        path="/currencyTable"
+                        element={<CurrencyTable />}
+                      />
+                      <Route path="/currencies" element={<Currencies />} />
+                      <Route path="/parent" element={<ParentComponent />} />
+                      <Route path="/static" element={<StaticDataPage />} />
+                      <Route path="/atc/list" element={<ATCsList />} />
+                      <Route path="/atc/new" element={<ATCForm />} />
+                      <Route path="/brands/list" element={<BrandsList />} />
+                      <Route path="/brands/new" element={<BrandsForm />} />
+                      <Route
+                        path="/presentation/new"
+                        element={<PresentationForm />}
+                      />
+                      <Route
+                        path="/presentation/list"
+                        element={<PresentationList />}
+                      />
+                      <Route path="/geo/new" element={<GeosForm />} />
+                      <Route
+                        path="/geo/newmain"
+                        element={<ParentComponent />}
+                      />
+                      <Route path="/geo/list" element={<GeosList />} />
+                      <Route path="/company/new" element={<CompanyForm />} />
+                      <Route path="/company/list" element={<CompanyList />} />
+                      <Route
+                        path="/companyType/new"
+                        element={<CompanyTypeForm />}
+                      />
+                      <Route
+                        path="/companyType/list"
+                        element={<CompanyTypeList />}
+                      />
+                      <Route path="/agents/list" element={<AgentsList />} />
+                      <Route
+                        path="/drugs/add"
+                        element={<DrugRegistryFormTest />}
+                      />
+                      <Route path="/drugs-search" element={<SearchBar />} />
+                    </Routes>
+                  </StepperProvider>
                 </ModalFormProvider>
               </GeoFormProvider>
             </CurrenciesProvider>

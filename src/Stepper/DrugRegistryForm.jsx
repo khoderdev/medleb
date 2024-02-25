@@ -1,70 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./styles.css";
-import { FaArrowRightLong } from "react-icons/fa6";
 import AddModal from "../../../components/Modals/AddModal";
 import EditModal from "../../../components/Modals/EditModal";
+import { useStepperContext } from "../../../Stepper/StepperContext";
 
-const exchangeRates = {
-  USD: 1,
-  CAD: 0.72,
-  EUR: 1.06,
-  CHF: 1.11,
-  DKK: 0.72,
-  GBP: 1.21,
-  SAR: 0.27,
-  JOD: 1.41,
-  LBP: 900,
-};
-
-const currencySymbols = {
-  USD: "$",
-  CAD: "C$",
-  EUR: "€",
-  CHF: "CHF",
-  DKK: "kr",
-  GBP: "£",
-  SAR: "SAR",
-  JOD: "JD",
-  LBP: "LBP",
-};
-
-const DrugRegistryForm = ({
-  handleInputChange,
-  formDataStep1,
-  handleChildArrowButtonClick,
-}) => {
+const DrugRegistryForm = () => {
+  const { formData, handleInputChange, priceUSD, priceLBP, currencySymbols } =
+    useStepperContext();
   const [selectedInput, setSelectedInput] = useState("");
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [editInputValue, setEditInputValue] = useState("");
-
-  function convertToUSD() {
-    if (
-      formDataStep1 &&
-      formDataStep1.priceForeign &&
-      formDataStep1.currencyForeign
-    ) {
-      const convertedPrice =
-        formDataStep1.priceForeign /
-        exchangeRates[formDataStep1.currencyForeign];
-      return convertedPrice.toFixed(2); // Display with 2 decimal places
-    }
-    return "";
-  }
-
-  function convertToLBP() {
-    if (
-      formDataStep1 &&
-      formDataStep1.priceForeign &&
-      formDataStep1.currencyForeign
-    ) {
-      const priceInUSD = convertToUSD();
-      const convertedPrice =
-        (priceInUSD / exchangeRates.USD) * exchangeRates.LBP;
-      return convertedPrice.toFixed(2);
-    }
-    return "";
-  }
 
   const openAddModal = (inputName) => {
     setSelectedInput(inputName);
@@ -98,20 +44,20 @@ const DrugRegistryForm = ({
   };
 
   const inputOptions = {
-    type: [
+    Type: [
       "Brand",
       "Generic",
       "Biological: Bio - Human",
       "Biological: Bio - Similar",
     ],
-    responsibleParty: [
+    ResponsibleParty: [
       "Leo Pharma A/S",
       "Bayer Hispania",
       "Abbvie Ltd",
       "Ferring GmbH",
     ],
     // Add more inputs and their options as needed
-    responsiblePartyCountry: [
+    ResponsiblePartyCountry: [
       "France",
       "Spain",
       "USA",
@@ -119,14 +65,14 @@ const DrugRegistryForm = ({
       "Lebanon",
       // Add more countries as needed
     ],
-    manufacturer: [
+    ManufacturerName: [
       "Leo Pharma A/S",
       "Bayer Hispania",
       "Abbvie Ltd",
       "Ferring GmbH",
       // Add more manufacturers as needed
     ],
-    manufacturingCountry: [
+    ManufacturerCountry: [
       "France",
       "Spain",
       "USA",
@@ -134,7 +80,7 @@ const DrugRegistryForm = ({
       "Lebanon",
       // Add more countries as needed
     ],
-    cargoShippingTerms: ["CIF", "FOB"],
+    CargoAndShippingTerms: ["CIF", "FOB"],
     // Add more inputs and their options as needed
   };
 
@@ -172,10 +118,10 @@ const DrugRegistryForm = ({
                   >
                     Add
                   </button>
-                  {formDataStep1[inputName] && (
+                  {formData[inputName] && (
                     <button
                       onClick={() =>
-                        openEditModal(inputName, formDataStep1[inputName])
+                        openEditModal(inputName, formData[inputName])
                       }
                       type="button"
                       className="rounded-xl bg-transparent p-2 text-green-pri focus:border-[#00a651] focus:outline-none focus:ring-1"
@@ -187,8 +133,9 @@ const DrugRegistryForm = ({
               </div>
               <select
                 name={inputName}
-                value={formDataStep1[inputName] || ""}
-                onChange={(e) => handleInputChange(e)}
+                value={formData[inputName] || ""}
+                onChange={handleInputChange}
+                // onChange={(e) => handleInputChange(e)}
                 className="mt-1 w-full cursor-pointer rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               >
                 <option disabled value="">
@@ -205,15 +152,16 @@ const DrugRegistryForm = ({
 
           <div className="input-container relative">
             <label
-              htmlFor="drugName"
+              htmlFor="BrandName"
               className="labels text-md block text-left"
             >
               Drug Name
             </label>
             <input
-              name="drugName"
-              value={formDataStep1.drugName}
-              onChange={(e) => handleInputChange(e)}
+              name="BrandName"
+              value={formData.BrandName}
+              onChange={handleInputChange}
+              // onChange={(e) => handleInputChange(e)}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               type="text"
               autoComplete="off"
@@ -221,102 +169,68 @@ const DrugRegistryForm = ({
             />
           </div>
 
-          <div className="input-container relative">
-            <label
-              htmlFor="priceForeign"
-              className="labels text-md mb-2 block text-left"
-            >
-              Foreign Price
-            </label>
-            <div className="relative" style={{ borderColor: "transparent" }}>
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 font-bold">
-                <span className="text-green-pri">
-                  {currencySymbols[formDataStep1.currencyForeign]}
-                </span>
-              </div>
+          <div className="flex flex-col gap-4">
+            <div className="inline-">
+              <label
+                htmlFor="PriceFOREIGN"
+                className="labels text-md block text-left"
+              >
+                Foreign Price
+              </label>
               <input
-                name="priceForeign"
+                name="PriceFOREIGN"
                 type="number"
-                id="price"
-                className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-12 py-2 font-semibold shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
-                placeholder="0.00"
-                autoComplete="off"
-                value={formDataStep1?.priceForeign}
-                onChange={(e) => handleInputChange(e)}
+                value={formData.PriceFOREIGN}
+                onChange={handleInputChange}
               />
-              <div className="absolute inset-y-0 right-0 flex items-center">
-                <label htmlFor="currencyForeign" className="sr-only ">
-                  Foreign Currency
-                </label>
-                <select
-                  id="currency"
-                  name="currencyForeign"
-                  className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#00a65100] dark:border-black-border bg-white-fg dark:bg-black-fg  py-2 font-normal shadow outline-none focus:border-green-pri focus:outline-none focus:ring-1 focus:ring-green-pri dark:focus:ring-1 dark:focus:ring-green-pri sm:w-20"
-                  onChange={(e) => handleInputChange(e)}
-                  value={formDataStep1.currencyForeign}
-                >
-                  {Object.keys(exchangeRates).map((currencyForeign) => (
-                    <option key={currencyForeign} value={currencyForeign}>
-                      {currencyForeign}
-                    </option>
-                  ))}
-                </select>
-              </div>
+
+              <select
+                name="currencyForeign"
+                // className="w-fit h-10"
+                value={formData.currencyForeign}
+                onChange={handleInputChange}
+              >
+                <option value="" disabled>
+                  Select currency
+                </option>
+                {/* Iterate over currencySymbols to generate options */}
+                {Object.entries(currencySymbols).map(([currency, symbol]) => (
+                  <option key={currency} value={currency}>
+                    {`${symbol} ${currency}`}{" "}
+                    {/* Display symbol and currency code */}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Converted price inputs */}
+            <div className="input-container flex">
+              <label className="labels text-md block text-left">
+                Foreign Price in USD
+                <input
+                  name="PriceUSD"
+                  value={priceUSD}
+                  readOnly /* Make the input read-only */
+                />
+              </label>
+
+              <label className="labels text-md block text-left">
+                Foreign Price in LBP
+                <input name="PriceLBP" value={priceLBP} readOnly />
+              </label>
             </div>
           </div>
 
           <div className="input-container relative">
-            <label className="labels text-md block text-left">
-              Foreign Price in USD
-            </label>
-            <input
-              name="convertToUSD"
-              disabled
-              className="converted-price-usd mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-semibold shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
-              value={" " + convertToUSD()}
-            />
-          </div>
-          <div className="input-container relative">
-            <label className="labels text-md block text-left">
-              Foreign Price in LBP
-            </label>
-            <input
-              name="convertToLBP"
-              disabled
-              className="converted-price-usd mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-semibold shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
-              value={
-                " " +
-                (() => {
-                  const convertedValue = convertToLBP();
-                  // console.log("Converted Value:", convertedValue);
-
-                  const numericValue = parseFloat(
-                    convertedValue.replace(".", "")
-                  );
-                  // console.log("Numeric Value:", numericValue);
-
-                  if (!isNaN(numericValue) && isFinite(numericValue)) {
-                    const formattedValue = numericValue.toLocaleString("en-LB");
-                    // console.log("Formatted Value:", formattedValue);
-                    return formattedValue;
-                  } else {
-                    return "";
-                  }
-                })()
-              }
-            />
-          </div>
-
-          <div className="input-container relative">
             <label
-              htmlFor="registrationNumber"
+              htmlFor="RegistrationNumber"
               className="labels text-md block text-left"
             >
               Registration Number
             </label>
             <input
-              name="registrationNumber"
-              value={formDataStep1.registrationNumber}
+              name="RegistrationNumber"
+              value={formData.RegistrationNumber}
               onChange={(e) => handleInputChange(e)}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               type="text"
@@ -327,12 +241,12 @@ const DrugRegistryForm = ({
 
           {/* Text Input 2 */}
           <div className="input-container relative">
-            <label htmlFor="mohCode" className="labels text-md block text-left">
+            <label htmlFor="MOHCode" className="labels text-md block text-left">
               MOH Code
             </label>
             <input
-              name="mohCode"
-              value={formDataStep1.mohCode}
+              name="MOHCode"
+              value={formData.MOHCode}
               onChange={(e) => handleInputChange(e)}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               type="text"
@@ -344,17 +258,17 @@ const DrugRegistryForm = ({
           {/* Date Input 1 */}
           <div className="input-container relative">
             <label
-              htmlFor="registrationDate"
+              htmlFor="RegistrationDate"
               className="labels text-md block text-left"
             >
               Registration Date
               <div className="relative mt-1">
                 <input
-                  name="registrationDate"
-                  value={formDataStep1.registrationDate}
+                  name="RegistrationDate"
+                  value={formData.RegistrationDate}
                   onChange={(e) => handleInputChange(e)}
                   type="date"
-                  id="registrationDate"
+                  id="RegistrationDate"
                   className="dateInput mt-1 w-full cursor-pointer rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
                 />
               </div>
@@ -364,40 +278,23 @@ const DrugRegistryForm = ({
           {/* Date Input 2 */}
           <div className="input-container relative">
             <label
-              htmlFor="reviewDate"
+              htmlFor="ReviewDate"
               className="labels text-md block text-left"
             >
               Review Date
             </label>
             <div className="relative mt-1">
               <input
-                value={formDataStep1.reviewDate}
+                value={formData.ReviewDate}
                 onChange={(e) => handleInputChange(e)}
                 type="date"
-                id="reviewDate"
-                name="reviewDate"
+                id="ReviewDate"
+                name="ReviewDate"
                 className="dateInput mt-1 w-full cursor-pointer rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               />
             </div>
           </div>
 
-          {/* <div className="input-container h-16 relative flex flex-col justify-between items-center col-span-full lg:col-span-1">
-            <label
-              htmlFor="continue"
-              className="labels text-md block text-left"
-            >
-              Continue to upload the images
-            </label>
-            <div className="relative">
-              <div className="flex items-center">
-                <FaArrowRightLong
-                  className="text-green-pri cursor-pointer hover:text-green-pri transition-transform transform-gpu animate-slide-right-left"
-                  style={{ fontSize: "30px" }}
-                  onClick={handleChildArrowButtonClick}
-                />
-              </div>
-            </div>
-          </div> */}
           {isAddModalOpen && (
             <AddModal
               closeModal={() => setAddModalOpen(false)}

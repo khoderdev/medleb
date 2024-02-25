@@ -264,6 +264,19 @@ const DrugRegistryFormTest = () => {
               onChange={handleInputChange}
               // required
             />
+
+            <label className="font-medium block" htmlFor="ResponsiblePartyName">
+              Responsible Party
+            </label>
+            <input
+              className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
+              type="text"
+              id="ResponsiblePartyName"
+              name="ResponsiblePartyName"
+              value={formData.ResponsiblePartyName}
+              onChange={handleInputChange}
+              // required
+            />
           </div>
 
           <div className="col-2">
@@ -331,32 +344,6 @@ const DrugRegistryFormTest = () => {
               onChange={handleInputChange}
               // required
             />
-
-            {/* <label className="font-medium block" htmlFor="LASTPublicABP">
-              Last public Abp
-            </label>
-            <input
-              className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-              type="number"
-              id="LASTPublicABP"
-              name="LASTPublicABP"
-              value={formData.LASTPublicABP}
-              onChange={handleInputChange}
-              // required
-            /> */}
-
-            {/* <label className="font-medium block" htmlFor="LASTCurrencyGuid">
-              Last Currency
-            </label>
-            <input
-              className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-              type="text"
-              id="LASTCurrencyGuid"
-              name="LASTCurrencyGuid"
-              value={formData.LASTCurrencyGuid}
-              onChange={handleInputChange}
-              // required
-            /> */}
           </div>
 
           <div className="col-3">

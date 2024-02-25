@@ -95,7 +95,7 @@ function EditDrug() {
     // Check if drugId is truthy before making the GET request
     if (drugId) {
       axios
-        .get(`http://1.1.1.252:3500/drugs/${drugId}`)
+        .get(`http://1.1.1.250:3500/drugs/${drugId}`)
         .then((res) => {
           setDrug(res.data);
         })
@@ -117,7 +117,7 @@ function EditDrug() {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`http://1.1.1.252:3500/drugs/${drugId}`, drug)
+      .put(`http://1.1.1.250:3500/drugs/${drugId}`, drug)
       .then(() => {
         console.log("Update successful");
         navigate("/list");

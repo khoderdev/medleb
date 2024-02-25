@@ -1,11 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./styles.css";
+import { useStepperContext } from "../../../Stepper/StepperContext";
 
-const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
+const DrugRegistryFormAddons = () => {
+  const { formData, handleInputChange } = useStepperContext();
   return (
     <>
       <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
-      <h1 className="pb-2 pt-2 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
+        <h1 className="pb-2 pt-2 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
           2 - Drug Registry Additional Info
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-16 pt-6">
@@ -20,8 +22,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="productDesc"
               name="productDesc"
               type="text"
-              value={formDataStep11.productDesc}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.productDesc}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -38,8 +40,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="activeInactiveIngredients"
               name="activeInactiveIngredients"
               type="text"
-              value={formDataStep11.activeInactiveIngredients}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.activeInactiveIngredients}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -56,8 +58,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="indications"
               name="indications"
               type="text"
-              value={formDataStep11.indications}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.indications}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -74,8 +76,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="posology"
               name="posology"
               type="text"
-              value={formDataStep11.posology}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.posology}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -92,8 +94,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="methodOfAdministration"
               name="methodOfAdministration"
               type="text"
-              value={formDataStep11.methodOfAdministration}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.methodOfAdministration}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -110,8 +112,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="contraindications"
               name="contraindications"
               type="text"
-              value={formDataStep11.contraindications}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.contraindications}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -128,8 +130,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="precautionsForUse"
               name="precautionsForUse"
               type="text"
-              value={formDataStep11.precautionsForUse}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.precautionsForUse}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -146,8 +148,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="effectsOnFGN"
               name="effectsOnFGN"
               type="text"
-              value={formDataStep11.effectsOnFGN}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.effectsOnFGN}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -164,8 +166,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="sideEffects"
               name="sideEffects"
               type="text"
-              value={formDataStep11.sideEffects}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.sideEffects}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -182,8 +184,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="toxicity"
               name="toxicity"
               type="text"
-              value={formDataStep11.toxicity}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.toxicity}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -200,8 +202,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="storageConditions"
               name="storageConditions"
               type="text"
-              value={formDataStep11.storageConditions}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.storageConditions}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />
@@ -218,8 +220,8 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
               id="shelfLife"
               name="shelfLife"
               type="text"
-              value={formDataStep11.shelfLife}
-              onChange={(e) => handleInputChange(e)}
+              value={formData.shelfLife}
+              onChange={handleInputChange}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               placeholder=""
             />

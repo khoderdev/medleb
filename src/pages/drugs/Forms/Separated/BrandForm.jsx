@@ -22,7 +22,7 @@ const BrandForm = () => {
 
     try {
       const response = await axios.post(
-        "http://1.1.1.252:3500/api/brands/v1.0",
+        "http://1.1.1.250:3500/api/brands/v1.0",
         formData
       );
       console.log("Brand added successfully:", response.data);

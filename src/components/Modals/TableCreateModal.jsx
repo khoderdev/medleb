@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDrugContext } from "../../pages/drugs/DrugContext";
+import { useDrugContext } from "../../pages/drugs/Forms/Separated/drugs/DrugContext";
 
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const { formData, handleChange, handleSubmit } = useDrugContext();

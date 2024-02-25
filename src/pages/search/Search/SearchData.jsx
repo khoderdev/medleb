@@ -95,7 +95,7 @@
 
 //   async function loadDrugs() {
 //     try {
-//       const res = await axios.get("http://1.1.1.252:3500/drugs");
+//       const res = await axios.get("http://1.1.1.250:3500/drugs");
 //       setDrugs(res.data.reverse());
 //       setLoading(false);
 //     } catch (error) {
@@ -114,7 +114,7 @@
 
 //   function deleteDrug(id) {
 //     axios
-//       .delete(`http://1.1.1.252:3500/drugs/${id}`)
+//       .delete(`http://1.1.1.250:3500/drugs/${id}`)
 //       .then(() => loadDrugs());
 //   }
 

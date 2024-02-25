@@ -13,7 +13,7 @@ const DrugSearch = () => {
       return response.data;
     } catch (error) {
       console.error("Error searching drugs by ATC name:", error);
-      throw error;
+      return []; // Return an empty array in case of an error
     }
   };
 
@@ -25,23 +25,19 @@ const DrugSearch = () => {
       return response.data;
     } catch (error) {
       console.error("Error searching drugs by Brand name:", error);
-      throw error;
+      return []; // Return an empty array in case of an error
     }
   };
 
   const handleSearch = async () => {
     try {
-      // Call search functions for both ATC and Brand
       const atcResults = await searchByATCName();
       const brandResults = await searchByBrandName();
-
-      // Combine both sets of results
       const combinedResults = [...atcResults, ...brandResults];
-
-      // Update results state with the combined search results
       setResults(combinedResults);
     } catch (error) {
       console.error("Error searching drugs:", error);
+      setResults([]); // Set results to an empty array in case of an error
     }
   };
 
@@ -55,22 +51,26 @@ const DrugSearch = () => {
       />
       <button onClick={handleSearch}>Search</button>
       <ul>
-        {results.map((drug, index) => (
-          <li key={index}>
-            <p>Brand Name: {drug.BrandName}</p>
-            <p>ATC Name: {drug.ATCName}</p>
-            <p>Price USD: {drug.PriceUSD}</p>
-            <p>Price LBP: {drug.PriceLBP}</p>
-            <p>Dosage Name: {drug.DosageName}</p>
-            <p>Presentation Name: {drug.PresentationName}</p>
-            <p>Form Name: {drug.FormName}</p>
-            <p>Route Name: {drug.RouteName}</p>
-            <p>Stratum Type Name: {drug.StratumTypeName}</p>
-            <p>Country Name: {drug.CountryName}</p>
-            <p>Manufacturer Name: {drug.ManufacturerName}</p>
-            <p>Image Default: {drug.ImageDefault}</p>
-          </li>
-        ))}
+        {results && results.length > 0 ? (
+          results.map((drug, index) => (
+            <li key={index}>
+              <p>Brand Name: {drug.BrandName}</p>
+              <p>ATC Name: {drug.ATCName}</p>
+              <p>Price USD: {drug.PriceUSD}</p>
+              <p>Price LBP: {drug.PriceLBP}</p>
+              <p>Dosage Name: {drug.DosageName}</p>
+              <p>Presentation Name: {drug.PresentationName}</p>
+              <p>Form Name: {drug.FormName}</p>
+              <p>Route Name: {drug.RouteName}</p>
+              <p>Stratum Type Name: {drug.StratumTypeName}</p>
+              <p>Country Name: {drug.CountryName}</p>
+              <p>Manufacturer Name: {drug.ManufacturerName}</p>
+              <p>Image Default: {drug.ImageDefault}</p>
+            </li>
+          ))
+        ) : (
+          <li>No results found</li>
+        )}
       </ul>
     </div>
   );

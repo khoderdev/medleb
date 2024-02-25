@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import "./ViewModalStyles.css";
 import ImageSlider from "./ImageSlider";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDrugContext } from "../DrugContext";
+import { useDrugContext } from "../Forms/Separated/drugs/DrugContext";
 
 Modal.setAppElement("#root");
 

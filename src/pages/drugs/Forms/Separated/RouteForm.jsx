@@ -41,7 +41,7 @@ const RouteForm = () => {
 
       // Send the access token in the Authorization header for authorization
       const response = await axios.post(
-        "http://1.1.1.252:3500/api/route/v1.0", // Update the route as needed
+        "http://1.1.1.250:3500/api/route/v1.0", // Update the route as needed
         updatedFormData,
         {
           headers: {

@@ -5,7 +5,7 @@ import Modal from "../../../components/Modals/TableCreateModal";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { useNavigate, Link } from "react-router-dom";
 // // Update API_URL
-// const API_URL = "http://1.1.1.252:3500/drugs";
+// const API_URL = "http://1.1.1.250:3500/drugs";
 
 const DrugsTable = ({ isCreateModalOpen, setCreateModalOpen }) => {
   const [data, setData] = useState([]);

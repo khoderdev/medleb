@@ -47,7 +47,7 @@ const CountryForm = () => {
       const currentDate = new Date().toISOString();
 
       const response = await axios.post(
-        "http://1.1.1.252:3500/api/country/v1.0",
+        "http://1.1.1.250:3500/api/country/v1.0",
         { ...formData, guid: newGuid, createdDate: currentDate }
       );
 

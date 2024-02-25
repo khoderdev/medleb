@@ -22,7 +22,7 @@ function List({ className }) {
   async function loadDrugs() {
     try {
       console.log("Fetching drugs...");
-      const res = await axios.get("http://1.1.1.252:3500/drugs");
+      const res = await axios.get("http://1.1.1.250:3500/drugs");
       console.log("Response data:", res.data);
 
       if (isMounted.current) {
@@ -83,7 +83,7 @@ function List({ className }) {
   function deleteDrug(id) {
     console.log(`Deleting drug with ID: ${id}`);
     axios
-      .delete(`http://1.1.1.252:3500/drugs/${id}`)
+      .delete(`http://1.1.1.250:3500/drugs/${id}`)
       .then(() => {
         console.log("Drug deleted successfully. Reloading drugs...");
         loadDrugs();

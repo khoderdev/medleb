@@ -69,7 +69,7 @@ const DrugImages = (props) => {
       // await axios.post("https://e6ca-85-112-70-8.ngrok-free.app/upload", formData);
       // Use axios to post the images to your backend
       const response = await axios.post(
-        "http://1.1.1.252:3500/upload",
+        "http://1.1.1.250:3500/upload",
         formData
       );
       setSuccess(true);
