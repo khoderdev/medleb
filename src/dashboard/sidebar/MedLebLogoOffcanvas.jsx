@@ -6,7 +6,7 @@ const MedLebLogoOffCanvas = ({ onClick, color }) => {
   return (
     <a onClick={onClick} style={style} target="_blank" rel="noreferrer">
       <svg
-        width="55"
+        width="59"
         height="auto"
         viewBox="0 0 306 260"
         fill="none"

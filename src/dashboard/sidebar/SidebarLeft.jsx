@@ -57,23 +57,21 @@
 //   }, []);
 
 //   return (
-//     <section className="flex flex-col md:flex-row bg-white-contents dark:bg-black-contents  md:h-screen gap-6 overflow-auto overflow-x-hidden shadow-md shadow-[#00000057]">
+//     <section className="flex flex-col md:flex-row bg-white-contents dark:bg-black-contents md:h-screen gap-6 overflow-auto overflow-x-hidden shadow-md shadow-[#00000057]">
 //       <div
 //         ref={sidebarRef}
 //         className={`${
-//           open
-//             ? "md:w-[14rem]  overflow-x-hidden"
-//             : "md:w-20  overflow-x-hidden"
+//           open ? "md:w-[14rem] overflow-x-hidden" : "md:w-20 overflow-x-hidden"
 //         } w-full duration-200 px- flex flex-col justify-between`}
 //       >
 //         <div>
 //           <div className="pt-3 flex justify-end ">
 //             <div
-//               className="absolute top-0 flex cursor-pointer items-center justify-end border-green-500 border w-full"
+//               className="absolute top-0 flex cursor-pointer p-2 items-center justify-end w-full"
 //               onClick={toggleSidebar}
 //             >
 //               <svg
-//                 className="h-6 w-6  rotate-90 text-green-pri transition-transform duration-200 ease-in-out dark:text-white"
+//                 className="h-6 w-6 rotate-90 text-green-pri transition-transform duration-200 ease-in-out dark:text-white"
 //                 fill="none"
 //                 stroke="currentColor"
 //                 viewBox="0 0 24 24"
@@ -100,48 +98,63 @@
 //             </div>
 //           </div>
 
-//           <div className="text-xl mt-6 font-semibold px-3 overflow-hidden">
+//           <div className="text-xl mt-6 px-3 overflow-hidden">
 //             {open ? <MedLebLogo /> : <MedLebLogoOffCanvas />}
 //           </div>
 
-//           <div className="mt-4 2xl:mt-14 flex flex-col relative items-center md:items-start overflow-auto overflow-x-hidden px-3">
-//             <div className="gap-1 md:gap-1 2xl:gap-6 relative flex flex-col text-black-text dark:text-white-text">
-//               {menus?.map((group, groupIndex) => (
-//                 <React.Fragment key={groupIndex}>
+//           <div className="mt-4 2xl:mt-20 flex flex-col 2xl:h-full 2xl:justify- relative overflow-auto overflow-x-hidden text-black-text dark:text-white-text">
+//             {menus?.map((group, groupIndex) => (
+//               <div key={groupIndex} className="marker:flex r">
+//                 {/* Wrap each section (Menu and Drug items) into a separate div */}
+//                 <div className="">
 //                   {/* Title */}
 //                   <h2
-//                     className={`text-sm font-semibold px-3 mt-1 ${
-//                       group.margin ? "2xl:mt-20" : ""
+//                     className={`text-sm font-normal p-3 ${
+//                       group.margin ? "2xl:mt-0" : ""
 //                     }`}
 //                   >
 //                     {group.title}
 //                   </h2>
 //                   {/* Menu items */}
 //                   {group.items.map((menu, itemIndex) => (
-//                     <div key={itemIndex} className="flex flex-row">
-//                       {" "}
+//                     <div key={itemIndex} className="flex w-full items-center">
 //                       {/* Wrap each Link in a div with flex-row */}
 //                       <Link
 //                         to={menu.link}
-//                         className={` ${
-//                           group.margin ? "m-0" : "" // Apply margin above the section title if section has margin property
-//                         } group  w-full flex items-center gap-3.5 p-2 rounded-md hover:text-green-pri`}
+//                         className={`${
+//                           group.margin ? "mx-2 2xl:m-2" : "mb-2 ml-2" // Apply margin above the section title if section has margin property
+//                         } group flex items-center gap-3.5 pb pl- rounded-md hover:text-green-pri ${
+//                           menu.name === "Home" ? "home-link" : ""
+//                         }`}
+//                         style={{
+//                           padding: "10px", // Add padding to maintain consistent spacing
+//                           height: "40px", // Set a fixed height for consistency
+//                         }}
 //                       >
 //                         {/* Icon rendering */}
-//                         <div className="group-hover:text-green-pri">
+//                         <div className=" group-hover:text-green-pri">
 //                           {React.createElement(menu.icon, {
 //                             size: open ? 20 : 16,
 //                           })}
-//                           {/* Adjust size value as needed */}
 //                         </div>
 //                         {/* Menu name */}
 //                         <h2
 //                           style={{
 //                             fontSize: "16px", // Adjust font size as needed
-//                             fontWeight: "500", // Adjust font weight as needed
+//                             fontWeight: "400", // Adjust font weight as needed
 //                             transitionDelay: `${
 //                               groupIndex * 100 + itemIndex * 100
 //                             }ms`,
+
+//                             // Adjust the margin bottom for the menu items link
+//                             marginBottom:
+//                               menu.name === "Home"
+//                                 ? "-15px"
+//                                 : menu.name === "Search"
+//                                 ? "-15px"
+//                                 : menu.name === "Dashboard"
+//                                 ? "-10px"
+//                                 : "0",
 //                           }}
 //                           className={`whitespace-pre duration-200 ${
 //                             !open && "opacity-0 translate-x-28 overflow-hidden"
@@ -153,16 +166,26 @@
 //                         <h2
 //                           className={`${
 //                             open && "hidden"
-//                           } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 px-0 py-0 w-0 overflow-hidden `}
+//                           } absolute left-48  whitespace-pre  px-0 py-0 w-0 overflow-hidden `}
 //                         >
 //                           {menu.name}
 //                         </h2>
 //                       </Link>
 //                     </div>
 //                   ))}
-//                 </React.Fragment>
-//               ))}
-//             </div>
+//                 </div>
+//                 {/* Horizontal Divider */}
+//                 {groupIndex === 0 && (
+//                   <div className="flex">
+//                     <hr
+//                       className={`border-green-pri my-4 mx-4 2xl:my-10 ${
+//                         open ? "w-full mx-auto" : "w-10 "
+//                       }`}
+//                     />
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
 //           </div>
 //         </div>
 //       </div>
@@ -171,12 +194,12 @@
 // };
 
 // export default SidebarLeft;
-// // ///////////////////
-// // ///////////////////
-// // ///////////////////
-// // ///////////////////
-// // ///////////////////
-// // ///////////////////
+
+
+// ///////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////
 
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
@@ -237,13 +260,11 @@ const SidebarLeft = () => {
   }, []);
 
   return (
-    <section className="flex flex-col md:flex-row bg-white-contents dark:bg-black-contents  md:h-screen gap-6 overflow-auto overflow-x-hidden shadow-md shadow-[#00000057]">
+    <section className="flex flex-col md:flex-row bg-white-contents dark:bg-black-contents md:h-screen gap-6 overflow-auto overflow-x-hidden shadow-md shadow-[#00000057]">
       <div
         ref={sidebarRef}
         className={`${
-          open
-            ? "md:w-[14rem]  overflow-x-hidden"
-            : "md:w-20  overflow-x-hidden"
+          open ? "md:w-[14rem] overflow-x-hidden" : "md:w-20 overflow-x-hidden"
         } w-full duration-200 px- flex flex-col justify-between`}
       >
         <div>
@@ -253,7 +274,7 @@ const SidebarLeft = () => {
               onClick={toggleSidebar}
             >
               <svg
-                className="h-6 w-6  rotate-90 text-green-pri transition-transform duration-200 ease-in-out dark:text-white"
+                className="h-6 w-6 rotate-90 text-green-pri transition-transform duration-200 ease-in-out dark:text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -280,48 +301,63 @@ const SidebarLeft = () => {
             </div>
           </div>
 
-          <div className="text-xl mt-6 font-semibold px-3 overflow-hidden">
+          <div className="text-xl mt-6 px-3 overflow-hidden">
             {open ? <MedLebLogo /> : <MedLebLogoOffCanvas />}
           </div>
 
-          <div className="mt-4 2xl:mt-14 flex flex-col relative items-center md:items-start overflow-auto overflow-x-hidden px-3">
-            <div className="gap-1 md:gap-1 2xl:gap-6 relative flex flex-col text-black-text dark:text-white-text">
-              {menus?.map((group, groupIndex) => (
-                <React.Fragment key={groupIndex}>
+          <div className="mt-4 2xl:mt-20 flex flex-col 2xl:h-full 2xl:justify- relative overflow-auto overflow-x-hidden text-black-text dark:text-white-text">
+            {menus?.map((group, groupIndex) => (
+              <div key={groupIndex} className="marker:flex r">
+                {/* Wrap each section (Menu and Drug items) into a separate div */}
+                <div className="">
                   {/* Title */}
                   <h2
-                    className={`text-sm font-semibold px-3 mt-1 ${
-                      group.margin ? "2xl:mt-20" : ""
+                    className={`text-sm font-normal p-3 ${
+                      group.margin ? "2xl:mt-0" : ""
                     }`}
                   >
                     {group.title}
                   </h2>
                   {/* Menu items */}
                   {group.items.map((menu, itemIndex) => (
-                    <div key={itemIndex} className="flex flex-row">
-                      {" "}
+                    <div key={itemIndex} className="flex w-full items-center">
                       {/* Wrap each Link in a div with flex-row */}
                       <Link
                         to={menu.link}
-                        className={` ${
-                          group.margin ? "m-0" : "" // Apply margin above the section title if section has margin property
-                        } group  w-full flex items-center gap-3.5 p-2 rounded-md hover:text-green-pri`}
+                        className={`${
+                          group.margin ? "mx-2 2xl:m-2" : "mb-2 ml-2" // Apply margin above the section title if section has margin property
+                        } group flex items-center gap-3.5 pb pl- rounded-md hover:text-green-pri ${
+                          menu.name === "Home" ? "home-link" : ""
+                        }`}
+                        style={{
+                          padding: "10px", // Add padding to maintain consistent spacing
+                          height: "40px", // Set a fixed height for consistency
+                        }}
                       >
                         {/* Icon rendering */}
-                        <div className="group-hover:text-green-pri">
+                        <div className=" group-hover:text-green-pri">
                           {React.createElement(menu.icon, {
                             size: open ? 20 : 16,
                           })}
-                          {/* Adjust size value as needed */}
                         </div>
                         {/* Menu name */}
                         <h2
                           style={{
                             fontSize: "16px", // Adjust font size as needed
-                            fontWeight: "500", // Adjust font weight as needed
+                            fontWeight: "400", // Adjust font weight as needed
                             transitionDelay: `${
                               groupIndex * 100 + itemIndex * 100
                             }ms`,
+
+                            // Adjust the margin bottom for the menu items link
+                            marginBottom:
+                              menu.name === "Home"
+                                ? "-15px"
+                                : menu.name === "Search"
+                                ? "-15px"
+                                : menu.name === "Dashboard"
+                                ? "-10px"
+                                : "0",
                           }}
                           className={`whitespace-pre duration-200 ${
                             !open && "opacity-0 translate-x-28 overflow-hidden"
@@ -333,16 +369,26 @@ const SidebarLeft = () => {
                         <h2
                           className={`${
                             open && "hidden"
-                          } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 px-0 py-0 w-0 overflow-hidden `}
+                          } absolute left-48  whitespace-pre  px-0 py-0 w-0 overflow-hidden `}
                         >
                           {menu.name}
                         </h2>
                       </Link>
                     </div>
                   ))}
-                </React.Fragment>
-              ))}
-            </div>
+                </div>
+                {/* Horizontal Divider */}
+                {groupIndex === 0 && (
+                  <div className="flex">
+                    <hr
+                      className={`border-green-pri my-4 mx-4 2xl:my-10 ${
+                        open ? "w-full mx-auto" : "w-10 "
+                      }`}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -351,10 +397,3 @@ const SidebarLeft = () => {
 };
 
 export default SidebarLeft;
-// ///////////////////
-// ///////////////////
-// ///////////////////
-// ///////////////////
-// ///////////////////
-// ///////////////////
-

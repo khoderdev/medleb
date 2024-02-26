@@ -17,6 +17,9 @@
     font-size: 1.5rem;
     font-weight: 600;
   }
+  /* * {
+    outline: 1px solid tomato;
+  } */
 }
 
 .MuiSvgIcon-root
@@ -387,7 +390,6 @@ body {
 .select-none {
   user-select: none;
 }
-
 
 .icon-hovered {
   transition: transform 0.3s ease-in-out; /* Smooth transition on hover */
