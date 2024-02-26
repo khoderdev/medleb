@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 
-export function TrackRecordsIcon() {
+export default function TrackRecordsIcon() {
   const [activeState, setActiveState] = useState("default");
 
   const handleMouseEnter = () => {
@@ -24,8 +24,8 @@ export function TrackRecordsIcon() {
 
   return (
     <svg
-      width="38"
-      height="38"
+      width="35"
+      height="35"
       viewBox="0 0 62 62"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

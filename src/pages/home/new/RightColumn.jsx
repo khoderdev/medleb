@@ -3,7 +3,7 @@ import SearchBar from "../../../pages/search/Bar";
 
 const RightColumn = () => {
   return (
-    <div className="flex md:pl-2 md:pr-14 justify-between md:dark:bg-transparent md:w-[65%] h-screen md:min-h-[55%]">
+    <div className="flex md:pl-2 md:pr-4 justify-between md:dark:bg-transparent md:w-[65%] h-screen md:min-h-[55%]">
       {/* Right Column */}
       <div className="w-full h-screen flex flex-col md:dark:bg-transparent pt-12 pb-[4.5rem] md:py-2 gap-2">
         {/* First Block */}

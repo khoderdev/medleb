@@ -1,4 +1,6 @@
-export function SearchIcon() {
+import React from "react";
+
+export default function SearchIcon() {
   return (
     <svg
       width="24"

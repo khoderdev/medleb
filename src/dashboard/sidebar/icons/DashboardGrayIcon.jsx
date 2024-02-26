@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export function DashboardGrayIcon() {
+function DashboardGrayIcon() {
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const iconRef = useRef(null);
@@ -33,8 +33,8 @@ export function DashboardGrayIcon() {
   return (
     <svg
       ref={iconRef}
-      width="38"
-      height="38"
+      width="35"
+      height="35"
       viewBox="0 0 55 60"
       // fill="none"
       fill={
@@ -73,3 +73,5 @@ export function DashboardGrayIcon() {
     </svg>
   );
 }
+
+export default DashboardGrayIcon;

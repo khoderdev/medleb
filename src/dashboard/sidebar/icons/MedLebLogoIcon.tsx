@@ -1,4 +1,6 @@
-export function MedLebLogoIcon() {
+import React from "react";
+
+export default function MedLebLogoIcon() {
   return (
     <svg
       width="55"

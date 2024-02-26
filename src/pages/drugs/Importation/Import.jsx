@@ -197,7 +197,7 @@ function ImportDrug(props) {
 
   return (
     <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-2 px-2 sm:px-6 dark:text-white-500">
-      <div className="title py-4 pb-0 lg:mb-[-1rem] 2xl:mb-0 pl-0 flex w-full justify-center items-center">
+      <div className="title py-4 pb-0 lg:mb-[-0rem] 2xl:mb-0 pl-0 flex w-full justify-center items-center">
         <h1 className="text-3xl font-semibold text-center text-[#00a651]">
           Importation
         </h1>

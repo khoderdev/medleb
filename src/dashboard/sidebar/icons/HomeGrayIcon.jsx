@@ -33,8 +33,8 @@ export default function HomeGrayIcon() {
   return (
     <svg
       ref={iconRef}
-      width="38"
-      height="38"
+      width="35"
+      height="35"
       viewBox="0 0 55 60"
       fill={
         isActive

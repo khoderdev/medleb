@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export function DistributionIcon() {
+export default function DistributionIcon() {
   const [activeState, setActiveState] = useState("default");
   const [isHovered, setIsHovered] = useState(false);
   const iconRef = useRef(null);
@@ -33,8 +33,8 @@ export function DistributionIcon() {
   return (
     <svg
       ref={iconRef}
-      width="38"
-      height="38"
+      width="35"
+      height="35"
       viewBox="0 0 62 62"
       fill={
         activeState === "active"

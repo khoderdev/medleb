@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-export function AddIcon() {
+export default function AddIcon() {
   const [activeState, setActiveState] = useState("default");
   const [isHovered, setIsHovered] = useState(false);
   const iconRef = useRef(null);
@@ -32,8 +32,8 @@ export function AddIcon() {
   return (
     <svg
       ref={iconRef}
-      width="38"
-      height="38"
+      width="35"
+      height="35"
       viewBox="0 0 62 62"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

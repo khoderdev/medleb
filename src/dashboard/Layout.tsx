@@ -12,10 +12,10 @@ interface LayoutProps {
 }
 
 const style = {
-  container: "flex w-full h-[100dvh] bg-white-bg dark:bg-black-bg",
+  container: "flex w-full h-[100dvh] bg-white-contents dark:bg-black-bg",
 
-  mainContainer: "w-full  bg-red-500 flex-1 flex overflow-hidden",
-  // mainContainer: "w-full md:pl-[5em] pl-0 sm:pr-[2.6em] bg-red-500 flex-1 flex overflow-hidden",
+  // mainContainer: "w-full md:pl-52 pl-0 sm:pr-[2.6em] bg-red-500 flex-1 flex overflow-hidden",
+  mainContainer: "w-full md:pl-[5em] pl-0 sm:pr-[2.6em] flex-1 flex overflow-hidden",
 
   main: "h-[100svh] w-full overflow-auto",
 
@@ -46,9 +46,9 @@ export function DashboardLayout(props: LayoutProps) {
           <NavBottom />
         </div>
 
-        {/* <div className={style.mainContainer}> */}
+        <div className={style.mainContainer}>
         <main className={style.main}>{props.children}</main>
-        {/* </div> */}
+        </div>
 
         <div className={style.sidebarContainerRight}>
           <SidebarRight />

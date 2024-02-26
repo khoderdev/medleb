@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 import "../sidebar/SideBar.css";
 import FullscreenButton from "../../components/FullscreenButton.jsx";
 import HomeGrayIcon from "./icons/HomeGrayIcon.jsx";
-import { SearchGrayIcon } from "./icons/SearchGrayIcon.jsx";
-import { DashboardGrayIcon } from "./icons/DashboardGrayIcon.jsx";
-import { AddIcon } from "./icons/AddIcon.jsx";
-import { ImportIcon } from "./icons/ImportIcon.jsx";
-import { DistributionIcon } from "./icons/DistributionIcon.jsx";
-import { InspectionIcon } from "./icons/InspectionIcon.jsx";
-import { TrackRecordsIcon } from "./icons/TrackRecordsIcon.jsx";
+import SearchGrayIcon from "./icons/SearchGrayIcon.jsx";
+import DashboardGrayIcon from "./icons/DashboardGrayIcon.jsx";
+import AddIcon from "./icons/AddIcon.jsx";
+import ImportIcon from "./icons/ImportIcon.jsx";
+import DistributionIcon from "./icons/DistributionIcon.jsx";
+import InspectionIcon from "./icons/InspectionIcon.jsx";
+import TrackRecordsIcon from "./icons/TrackRecordsIcon.jsx";
 import React from "react";
 import { Pivot as Hamburger } from "hamburger-react";
 import ThemeToggle from "./ThemeToggle";
@@ -57,9 +57,8 @@ export const SidebarOffCanvas = () => {
                   <MedLebLogo />
                 </div>
                 <div className="">
-                  
                   <div className="pr-6 flex gap-2 items-center">
-                  <ThemeToggle />
+                    <ThemeToggle />
                     {/* <FullscreenButton /> */}
                   </div>
                 </div>

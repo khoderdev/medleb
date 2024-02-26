@@ -21,6 +21,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import "./styles.css";
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
+import useCustomNavigation from "../../useCustomNavigation";
+import GlobalPagesLayouts from "../../GlobalPagesLayouts";
 
 const useStyles = makeStyles((theme) => ({
   stepperPaper: {
@@ -62,7 +64,7 @@ function AddDrug(props) {
   const isLastStep = currentStep === 6;
   const { drugId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
-
+  const { goBack } = useCustomNavigation();
   const steps = [
     "Drug Registry",
     "Drug Registry Addons",
