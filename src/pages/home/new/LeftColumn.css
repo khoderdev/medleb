@@ -8,12 +8,12 @@
   background-position: center;
 }
 
-#EB {
+#left-col {
   background-position: rem -82px;
 }
 
 @media (max-width: 700px) {
-  #EB {
+  #left-col {
     background-position: 0 -22px;
   }
 }

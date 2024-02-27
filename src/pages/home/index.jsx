@@ -91,14 +91,15 @@
 
 import React from "react";
 import SearchBar from "../../pages/search/Bar";
+import './home.css'
 
 const Home = () => {
   return (
     <div className="flex flex-col lg:flex-row">
       {/* Left Column */}
       <div
-        className="lg:w-2/6 lg:flex-1 h-screen bg-fixed bg-contain bg-no-repeat md:bg-[6rem]"
-        style={{ backgroundImage: `url('/public/assets/EB-Quote.png')` }}
+        className="left-col lg:w-2/6 lg:flex-1 h-screen bg-fixed bg-contain bg-no-repeat md:bg-[6rem]"
+        style={{ backgroundImage: `url('/dist/assets/EB-Quote.png')` }}
       >
         {/* Left content */}
       </div>

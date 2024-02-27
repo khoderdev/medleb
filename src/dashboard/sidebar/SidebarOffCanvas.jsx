@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { useClickAway } from "react-use";
-import { MedLebLogo } from "./icons/MedLebLogo";
+import MedLebLogoMobileDrawer from "./MedLebLogoMobileDrawer";
 import { Link } from "react-router-dom";
 import "../sidebar/SideBar.css";
 import FullscreenButton from "../../components/FullscreenButton.jsx";
@@ -52,9 +52,9 @@ export const SidebarOffCanvas = () => {
               ref={ref}
               aria-label="Sidebar"
             >
-              <div className="flex items-center justify-between border-[#00a65173] px-5 pr-0 py-2 pb-0 text-gray-900 dark:text-[#ffffffaf]">
+              <div className="flex items-center justify-between border-[#00a65173] mb-4 px-5 pr-0 py-4 pb-0 text-gray-900 dark:text-[#ffffffaf]">
                 <div className="flex">
-                  <MedLebLogo />
+                  <MedLebLogoMobileDrawer />
                 </div>
                 <div className="">
                   <div className="pr-6 flex gap-2 items-center">
@@ -67,8 +67,8 @@ export const SidebarOffCanvas = () => {
               <div className="items flex h-full max-h-[calc(100vh-72px)] overflow-y-scroll flex-col justify-start pt-2">
                 <ul className="">
                   {sections.map((section) => (
-                    <div key={section.title} className="ml-5 ">
-                      <h2 className="mb- text-lg font-semibold text-gray-700 dark:text-[#ffffffaf]">
+                    <div key={section.title} className="ml- ">
+                      <h2 className="ml-10 mb-4 text-sm font-normal text-gray-700 dark:text-[#ffffffaf]">
                         {section.title}
                       </h2>
                       {section.items.map((item, idx) => (
@@ -95,7 +95,7 @@ export const SidebarOffCanvas = () => {
                           </Link>
                           {/* Conditionally render a divider after "Dashboard" icon */}
                           {item.title === "Dashboard" && (
-                            <div className="divider my-6 ml-[-25px] h-px w-[80%] self-center bg-[#00a651e1] dark:bg-[#ffffffaf]"></div>
+                            <div className="divider my-6 ml-[-2px] h-px w-[80%] self-center bg-gray-500 dark:bg-[#ffffffaf]"></div>
                           )}
                         </li>
                       ))}
