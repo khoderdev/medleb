@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Axios from "../../../../api/Axios";
+import Axios from "../../../../api/axios";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 

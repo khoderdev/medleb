@@ -1,17 +1,42 @@
 import { useEffect, useState } from "react";
 // import "./styles.css";
-import { useDrugContext } from "./DrugContext";
-import Axios from "../../../../../api/axios";
+// import { useDrugContext } from "./DrugContext";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addDrugRequest,
+  updateDrugRequest,
+  deleteDrugRequest,
+} from "../../../../../app/actions/AddDrugAndImportActions";
 
 const DrugRegistryFormTest = () => {
-  const {
-    formData,
-    handleSubmit,
-    handleInputChange,
-    priceUSD,
-    priceLBP,
-    exchangeRates,
-  } = useDrugContext();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.drugs);
+
+  // const {
+  //   formData,
+  //   handleSubmit,
+  //   handleInputChange,
+  //   priceUSD,
+  //   priceLBP,
+  //   exchangeRates,
+  // } = useDrugContext();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.id) {
+      // If formData has an ID, update the drug
+      dispatch(updateDrugRequest(formData));
+    } else {
+      // If formData doesn't have an ID, add a new drug
+      dispatch(addDrugRequest(formData));
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    dispatch({ type: "UPDATE_FORM_DATA", payload: { [name]: value } });
+  };
 
   const currencySymbols = {
     USD: "$",
@@ -27,20 +52,22 @@ const DrugRegistryFormTest = () => {
 
   const [atcCodes, setAtcCodes] = useState([]);
   const [selectedATC, setSelectedATC] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const atcResponse = await Axios.get("/api/atc/v1.0");
+        const atcResponse = await axios.get(
+          "http://localhost/:3000/api/atc/v1.0"
+        );
         const atcItems = Array.isArray(atcResponse.data)
           ? atcResponse.data
           : [];
         const atcCodeData = await Promise.all(
           atcItems.map(async (atcItem) => {
-            const atcCodeResponse = await Axios.get(
-              `/api/atccodes/v1.0/codes/${atcItem.guid}`
+            const atcCodeResponse = await axios.get(
+              `http://localhost/:3000/api/atccodes/v1.0/codes/${atcItem.guid}`
             );
             return atcCodeResponse.data;
           })
@@ -96,13 +123,17 @@ const DrugRegistryFormTest = () => {
     const newPriceUSD = convertToUSD();
     const newPriceLBP = convertToLBP();
 
-    // Update formData.PriceUSD and formData.PriceLBP
-    handleInputChange({ target: { name: "PriceUSD", value: newPriceUSD } });
-    handleInputChange({ target: { name: "PriceLBP", value: newPriceLBP } });
-  }, [formData.PriceFOREIGN, formData.currencyForeign]); // Update only when PriceFOREIGN or currencyForeign change
+    //   // Update formData.PriceUSD and formData.PriceLBP
+    //   handleInputChange({ target: { name: "PriceUSD", value: newPriceUSD } });
+    //   handleInputChange({ target: { name: "PriceLBP", value: newPriceLBP } });
+    // }, [formData.PriceFOREIGN, formData.currencyForeign]); // Update only when PriceFOREIGN or currencyForeign change
+  });
 
   return (
     <>
+      {error && <div className="error-message">{error}</div>}
+      {loading && <div className="loading-spinner">Loading...</div>}
+
       <div
         onSubmit={handleSubmit}
         className="w-full pb-14 p-10 h-screen text-black-text dark:text-white-text "
@@ -646,7 +677,6 @@ const DrugRegistryFormTest = () => {
               // required
             />
           </div>
-
           <div>
             <label className="font-medium block" htmlFor="IsDouanes">
               is Douanes:
@@ -661,7 +691,6 @@ const DrugRegistryFormTest = () => {
               // required
             />
           </div>
-
           <div>
             <label className="font-medium block" htmlFor="NM">
               None Marketed
@@ -690,7 +719,6 @@ const DrugRegistryFormTest = () => {
               // required
             />
           </div>
-
           <div>
             <label className="font-medium block" htmlFor="isNssf">
               is Nssf
@@ -705,7 +733,6 @@ const DrugRegistryFormTest = () => {
               // required
             />
           </div>
-
           <div>
             <label className="font-medium block" htmlFor="isNarcotis">
               is Narcotis
@@ -720,7 +747,6 @@ const DrugRegistryFormTest = () => {
               // required
             />
           </div>
-
           <div>
             <label className="font-medium block" htmlFor="isBiological">
               is Biological
@@ -734,7 +760,10 @@ const DrugRegistryFormTest = () => {
               onChange={handleInputChange}
               // required
             />
-          </div>
+          </div>{" "}
+          <button type="submit" className="submit-button med-btn-pri-sm ">
+            Submit
+          </button>
         </div>
       </div>
     </>

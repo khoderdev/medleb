@@ -48,7 +48,7 @@ import { ImportationProvider } from "./pages/drugs/Importation/ImportationContex
 import { CurrenciesProvider } from "./pages/drugs/Forms/Separated/currencies/CurrenciesContext";
 import CurrencyForm from "./pages/drugs/Forms/Separated/currencies/CurrencyForm";
 import CurrencyTable from "./pages/drugs/Forms/Separated/currencies/CurrencyTable";
-import DrugRegistryFormTest from "./pages/drugs/Forms/Separated/drugs/DrugForm";
+import AddDrugForm from "./pages/drugs/Forms/Separated/drugs/AddDrugForm";
 // import DrugRegistryFormTest from "./pages/drugs/Forms/Separated/drugs/DrugRegistryFormTest";
 import RFIForm from "./pages/drugs/Importation/test/RFIForm";
 import PIForm from "./pages/drugs/Importation/test/PIForm";
@@ -58,14 +58,11 @@ import SubmittedOrderForm from "./pages/drugs/Importation/test/SubmittedOrder";
 import OrderForm from "./pages/drugs/Importation/test/OrderForm";
 import SearchBar from "./pages/drugs/Forms/Separated/SearchBar";
 import DrugsComponent from "./pages/drugs/Forms/Separated/drugs/DrugsComponent";
-import AuthComponent from "./ecom/LoginForm";
-import ECom from "./ecom/ECom";
-import EComProduct from "./ecom/ECom";
-import ProductComponent from "./ecom/productComponent";
 import MantineTable from "./pages/tables/Table2.tsx";
 import { MantineProvider } from "@mantine/core";
 import StepperExample from "./Stepper/StepperExample.jsx";
 import { StepperProvider } from "./Stepper/StepperContext";
+import DrugSearch from "./pages/drugs/Forms/Separated/drugs/DrugSearch";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -103,16 +100,6 @@ const App = () => {
                 <ModalFormProvider>
                   <StepperProvider>
                     <Routes>
-                      {/* //////////ecom /////////////// */}
-                      <Route path="/ecom/auth" element={<AuthComponent />} />
-                      <Route
-                        path="/ecom/products"
-                        element={<ProductComponent />}
-                      />
-                      <Route path="/ecom" element={<ECom />} />
-
-                      {/* ///////////////////////// */}
-
                       {/* //////////IMPORTATION FORMS/////////////// */}
                       <Route path="/rfi" element={<RFIForm />} />
                       <Route path="/pi" element={<PIForm />} />
@@ -156,7 +143,7 @@ const App = () => {
                       />
                       <Route path="/atccodesform" element={<ATCCodesForm />} />
                       <Route path="/atcform" element={<ATCForm />} />
-                      <Route path="/drugform" element={<DrugForm />} />
+                      <Route path="/drugform" element={<AddDrugForm />} />
                       <Route path="/currencyForm" element={<CurrencyForm />} />
                       <Route
                         path="/currencyTable"
@@ -194,11 +181,9 @@ const App = () => {
                         element={<CompanyTypeList />}
                       />
                       <Route path="/agents/list" element={<AgentsList />} />
-                      <Route
-                        path="/drugs/add"
-                        element={<DrugRegistryFormTest />}
-                      />
-                      <Route path="/drugs-search" element={<SearchBar />} />
+                      {/* <Route path="/drugs/add" element={<DrugForm />} /> */}
+                      <Route path="/drugs-search" element={<DrugSearch />} />
+                      {/* <Route path="/drugs-search" element={<SearchBar />} /> */}
                     </Routes>
                   </StepperProvider>
                 </ModalFormProvider>

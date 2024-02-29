@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </BrowserRouter>
           </DarkModeProvider>
           {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-          <ToastContainer position="top-right" autoClose={3000} />
+          <ToastContainer position="top-right" autoClose={2000} />
         </QueryClientProvider>
       </Provider>
     </React.StrictMode>

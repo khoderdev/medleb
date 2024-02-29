@@ -8,7 +8,7 @@ import {
   setCountryList,
   setError,
   resetFormData,
-} from "../../../../../App/slices/BrandsFormSlice";
+} from "../../../../../app/slices/BrandsFormSlice";
 
 const GeosForm = () => {
   const [formData, setFormData] = useState({

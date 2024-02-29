@@ -372,7 +372,7 @@ import {
   setCityList,
   setError,
   resetForm,
-} from "../../../../../App/slices/CompaniesFormSlice"; // Import actions from CompaniesFormSlice
+} from "../../../../../app/slices/CompaniesFormSlice"; // Import actions from CompaniesFormSlice
 
 const CompanyForm = () => {
   const dispatch = useDispatch();

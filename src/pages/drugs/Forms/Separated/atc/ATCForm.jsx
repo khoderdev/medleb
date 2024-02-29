@@ -29,20 +29,6 @@ const ATCForm = () => {
   // const [atcList, setAtcList] = useState([]);
   const [error, setError] = useState("");
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await Axios.get("/api/atc/v1.0");
-  //       setAtcList(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching ATC data:", error);
-  //       setError("Failed to fetch ATC data");
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });

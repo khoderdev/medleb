@@ -1,54 +1,55 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setAccessToken  } from "../auth/authSlice";
 
-const baseQuery = fetchBaseQuery({
+const apiUrl = "http://localhost:3000";
 
-  baseUrl: "http://85.112.70.8:3010",
-  credentials: "same-origin",
-  // credentials: 'include',
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
-
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`);
-    }
-    return headers;
-  },
+const api = createApi({
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({ baseUrl: apiUrl }),
+  endpoints: (builder) => ({
+    addPharmacyDrug: builder.mutation({
+      // Add this mutation for addPharmacyDrug
+      query: (drugData) => ({
+        url: `/drugs/addPharmacy`,
+        method: "POST",
+        body: drugData,
+      }),
+    }),
+    addDrug: builder.mutation({
+      query: (drugData) => ({
+        url: `/drugs/add`,
+        method: "POST",
+        body: drugData,
+      }),
+    }),
+    updateDrug: builder.mutation({
+      query: ({ id, ...drugData }) => ({
+        url: `/drugs/${id}`,
+        method: "PUT",
+        body: drugData,
+      }),
+    }),
+    deleteDrug: builder.mutation({
+      query: (id) => ({
+        url: `/drugs/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    searchDrugByATCName: builder.query({
+      query: (query) => `/drugs/search/atc/${query}`,
+    }),
+    searchDrugByBrandName: builder.query({
+      query: (query) => `/drugs/search/brand/${query}`,
+    }),
+  }),
 });
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
-  // console.log(args) // request url, method, body
-  // console.log(api) // signal, dispatch, getState()
-  // console.log(extraOptions) //custom like {shout: true}
+export const {
+  useAddDrugMutation,
+  useUpdateDrugMutation,
+  useDeleteDrugMutation,
+  useSearchDrugByATCNameQuery,
+  useSearchDrugByBrandNameQuery,
+  useAddPharmacyDrugMutation,
+} = api;
 
-  let result = await baseQuery(args, api, extraOptions);
-
-  // If you want, handle other status codes, too
-  if (result?.error?.status === 403) {
-    // console.log("sending refresh token");
-
-    // send refresh token to get new access token
-    const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
-
-    if (refreshResult?.data) {
-      // store the new token
-      api.dispatch(setAccessToken ({ ...refreshResult.data }));
-
-      // retry original query with new access token
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      if (refreshResult?.error?.status === 403) {
-        refreshResult.error.data.message = "Your login has expired.";
-      }
-      return refreshResult;
-    }
-  }
-
-  return result;
-};
-
-export const apiSlice = createApi({
-  baseQuery: baseQueryWithReauth,
-  tagTypes: ["Drug", "User"],
-  endpoints: (builder) => ({}),
-});
+export default api;

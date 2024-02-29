@@ -3,7 +3,6 @@ import axios from "axios";
 import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
 import { Step, Stepper, StepLabel } from "@mui/material";
-import Paper from "@mui/material/Paper";
 import { makeStyles } from "@mui/styles";
 
 // Create the context
@@ -45,17 +44,17 @@ const generateInitialFormData = () => {
     // DrugLabelGuid: generateGUID(),
     LASTCurrencyGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA1",
     // LASTCurrencyGuid: generateGUID(),
-    ATCName: "",
-    DosageName: "",
-    PresentationName: "",
-    FormName: "",
-    RouteName: "",
-    StratumName: "",
-    StratumTypeName: "",
-    AgentName: "",
-    BrandName: "",
-    ManufacturerName: "",
-    CountryName: "",
+    ATCName: "atc1",
+    DosageName: "mg",
+    PresentationName: "34",
+    FormName: "Tablet",
+    RouteName: "oral",
+    StratumName: "Strat1",
+    StratumTypeName: "StartType1",
+    AgentName: "Mersaco",
+    BrandName: "Nexium",
+    ManufacturerName: "Bayer",
+    CountryName: "germany",
     ResponsiblePartyName: "",
     DrugLabelName: "",
     Code: "1234",
@@ -169,13 +168,13 @@ export const DrugProvider = ({ children }) => {
 
   const handleNext = () => {
     console.log("handleNext called");
-    setCurrentStep(prevStep => prevStep + 1);
+    setCurrentStep((prevStep) => prevStep + 1);
     console.log("Current step:", currentStep); // Add this line to check the updated currentStep
   };
 
   const handleBack = () => {
     console.log("handleBack called");
-    setCurrentStep(prevStep => prevStep - 1);
+    setCurrentStep((prevStep) => prevStep - 1);
     console.log("Current step:", currentStep); // Add this line to check the updated currentStep
   };
 
@@ -246,7 +245,7 @@ export const DrugProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const atcResponse = await Axios.get("/api/atc/v1.0");
+        const atcResponse = await Axios.get("http://localhost:3000/api/atc/v1.0");
         console.log("ATC Response:", atcResponse.data);
         const atcItems = Array.isArray(atcResponse.data)
           ? atcResponse.data
@@ -257,7 +256,7 @@ export const DrugProvider = ({ children }) => {
 
         if (atcGuid && isValidGUID(atcGuid)) {
           const atcCodeResponse = await Axios.get(
-            `/api/atccodes/v1.0/codes/${atcGuid}`
+            `http://localhost:3000/api/atccodes/v1.0/codes/${atcGuid}`
           );
           console.log("ATC Code Response:", atcCodeResponse.data);
           const atcCodesGuid = atcCodeResponse.data.guid;
@@ -281,68 +280,6 @@ export const DrugProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Calculate and update PriceUSD and PriceLBP in formData
-  //     const PriceUSD = convertToUSD();
-  //     const PriceLBP = convertToLBP();
-  //     setFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       PriceUSD,
-  //       PriceLBP,
-  //     }));
-
-  //     // Submit form data
-  //     const response = await axios.post(
-  //       "http://localhost:3500/drugs/",
-  //       formData
-  //     );
-
-  //     console.log(response.data); // Handle success response
-  //     setFormData(generateInitialFormData()); // Reset form after successful submission
-  //     setCurrentStep(0); // Reset to the first step after submission
-  //   } catch (error) {
-  //     console.error("Error:", error); // Log any errors
-  //     setError(error.response?.data?.error || "An error occurred"); // Handle error response
-  //   }
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   if (e) {
-  //     e.preventDefault();
-  //   }
-
-  //   try {
-  //     // Calculate and update PriceUSD and PriceLBP in formData
-  //     const PriceUSD = convertToUSD();
-  //     const PriceLBP = convertToLBP();
-  //     setFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       PriceUSD,
-  //       PriceLBP,
-  //     }));
-
-  //     // If it's the last step, submit form data
-  //     if (currentStep === steps.length - 1) {
-  //       const response = await axios.post(
-  //         "http://localhost:3500/drugs/",
-  //         formData
-  //       );
-
-  //       console.log(response.data); // Handle success response
-  //       setFormData(generateInitialFormData()); // Reset form after successful submission
-  //       setCurrentStep(0); // Reset to the first step after submission
-  //     } else {
-  //       // If it's not the last step, proceed to the next step
-  //       handleNext();
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error); // Log any errors
-  //     setError(error.response?.data?.error || "An error occurred"); // Handle error response
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     if (e) {
       e.preventDefault();
@@ -361,7 +298,7 @@ export const DrugProvider = ({ children }) => {
       // If it's the last step, submit form data
       if (currentStep === steps.length - 1) {
         const response = await axios.post(
-          "http://localhost:3500/drugs/",
+          "http://localhost:3000/drugs/add",
           formData
         );
 
@@ -393,10 +330,10 @@ export const DrugProvider = ({ children }) => {
 
     try {
       setLoading(true);
-      const atcResponse = await Axios.get(`/api/atc/v1.0`);
+      const atcResponse = await Axios.get(`http://localhost:3000/api/atc/v1.0`);
       const atcItems = Array.isArray(atcResponse.data) ? atcResponse.data : [];
       const atcCodeResponse = await Axios.get(
-        `/api/atccodes/v1.0/codes/${ATCGuid}`
+        `http://localhost:3000/api/atccodes/v1.0/codes/${ATCGuid}`
       );
 
       const atcCodeData = atcCodeResponse.data;
@@ -437,7 +374,6 @@ export const DrugProvider = ({ children }) => {
     selectDrug,
     selectATC,
     clearselectedDrugGuid,
-    
   };
 
   return (

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // const baseURL = "http://192.168.10.88:3010";
-const baseURL = "http://85.112.70.8:3010";
-// const baseURL = "http://192.168.10.88:3010";
+// const baseURL = "http://85.112.70.8:3010";
+const baseURL = "http://192.168.10.88:3010";
 // const baseURL = "http://localhost:3000";
 
 // Create Axios Instance

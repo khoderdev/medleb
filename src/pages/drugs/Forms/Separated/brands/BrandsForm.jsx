@@ -193,7 +193,7 @@ import {
   updateFormData,
   updateCountries,
   resetFormData,
-} from "../../../../../App/slices/BrandsFormSlice";
+} from "../../../../../app/slices/BrandsFormSlice";
 
 const BrandsForm = () => {
   const dispatch = useDispatch();

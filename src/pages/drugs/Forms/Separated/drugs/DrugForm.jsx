@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./DrugForm.css";
 import { DrugProvider, useDrugContext } from "./DrugContext";
-import DrugRegistryFormTest from "./DrugRegistryFormTest";
+import AddDrugForm from "./AddDrugForm";
 import DrugRegistryFormAddons from "./DrugRegistryFormAddons";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -36,7 +36,7 @@ const DrugForm = () => {
       {/* Render current step */}
       {/* {renderStep(currentStep)} */}
       <div className="relative">
-        <DrugRegistryFormTest
+        <AddDrugForm
           formData={formData}
           handleInputChange={handleInputChange}
           currencySymbols={currencySymbols}

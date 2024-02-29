@@ -5,8 +5,8 @@ import {
   addGovernorate,
   addDistrict,
   addCity,
-} from "../../App/slices/geoSlice";
-import Axios from "../../App/slices/geoSlice";
+} from "../../app/slices/geoSlice";
+import Axios from "../../app/slices/geoSlice";
 
 const GeoCountryModal = ({ show, type, onClose, countryId }) => {
   const dispatch = useDispatch();

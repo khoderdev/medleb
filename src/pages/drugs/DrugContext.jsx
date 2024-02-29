@@ -1,8 +1,397 @@
+// import React, { useState, useEffect, createContext, useContext } from "react";
+// import axios from "axios";
+// // import Axios from "../../../../../api/axios";
+// import { v4 as uuidv4 } from "uuid";
+// import { Step, Stepper, StepLabel } from "@mui/material";
+// import Paper from "@mui/material/Paper";
+// import { makeStyles } from "@mui/styles";
+
+// // Create the context
+// const DrugContext = createContext();
+
+// // Function to generate GUID
+// const generateGUID = () => uuidv4();
+
+// // Function to generate initial form data
+// const generateInitialFormData = () => {
+//   return {
+//     Guid: generateGUID(),
+//     ATCGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+//     // ATCGuid: null,
+//     // ATCCodes: null,
+//     DosageGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+//     // DosageGuid: generateGUID(),
+//     PresentationGuid: "91C44FF9-D234-4306-BF87-AE8894D0CF0C",
+//     // PresentationGuid: generateGUID(),
+//     FormGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+//     // FormGuid: generateGUID(),
+//     RouteGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA7",
+//     // RouteGuid: generateGUID(),
+//     StratumGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA7",
+//     // StratumGuid: generateGUID(),
+//     StratumTypeGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+//     // StratumTypeGuid: generateGUID(),
+//     // AgentGuid: generateGUID(),
+//     AgentGuid: "91647149-F532-488F-ACDF-C1FBC9A0945C",
+//     BrandGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA7",
+//     // BrandGuid: generateGUID(),
+//     ManufacturerGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA8",
+//     // ManufacturerGuid: generateGUID(),
+//     CountryGuid: "5920751D-3EDB-44B9-AA13-BD6B30AB8B65",
+//     // CountryGuid: generateGUID(),
+//     ResponsiblePartyGuid: "5920751D-3EDB-44B9-AA13-BD6B30AB8B66",
+//     // ResponsiblePartyGuid: generateGUID(),
+//     DrugLabelGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA2",
+//     // DrugLabelGuid: generateGUID(),
+//     LASTCurrencyGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA1",
+//     // LASTCurrencyGuid: generateGUID(),
+//     ATCName: "",
+//     DosageName: "",
+//     PresentationName: "",
+//     FormName: "",
+//     RouteName: "",
+//     StratumName: "",
+//     StratumTypeName: "",
+//     AgentName: "",
+//     BrandName: "",
+//     ManufacturerName: "",
+//     CountryName: "",
+//     ResponsiblePartyName: "",
+//     DrugLabelName: "",
+//     Code: "1234",
+//     RegistrationNumber: "1234",
+//     CIF_FOB: "CIF",
+//     B_G: "Brand",
+//     Seq: "seq1",
+//     NM: true,
+//     REP_date: "2024-02-01",
+//     SubsidyPercentage: "10",
+//     LJ_FOB_ValueUSD: "1",
+//     LASTPublicABP: "1",
+//     LASTEffective_Date: "2024-02-01",
+//     WEBCIF_FOB: "FOB",
+//     WEBPublicABP: "1",
+//     WEBCurrency: "dollar",
+//     Date_dc: "2024-02-01",
+//     GTIN: "1234567891111",
+//     Notes: "Note for test",
+//     Description: "desc1",
+//     ActiveInactiveIngredient: "Para",
+//     Indication: "Ind1",
+//     Posology: "Pos1",
+//     WJ_Leb_PubPriceHos: "1",
+//     HospPricing: true,
+//     MethodOfAdministration: "meth1",
+//     Contraindications: "cont",
+//     PrecautionForUse: "precau",
+//     EffectOnFGN: "effe",
+//     SideEffect: "sideeffe",
+//     Toxicity: "Tox1",
+//     StorageCondition: "good",
+//     ShelfLife: "36",
+//     IngredientLabel: "Ingedient Label 1",
+//     IsDouanes: true,
+//     IsBiological: true,
+//     IsNarcotis: true,
+//     IsOTC: true,
+//     IsNSSF: true,
+//     PriceFOREIGN: "",
+//     currencyForeign: "",
+//     PriceUSD: "2",
+//     PriceLBP: "180000",
+//     ImagesPath: "",
+//     ImageDefault: "",
+//     InteractionIngredientName: "int drug 1",
+//     UpdatedDate: "2024-02-01",
+//   };
+// };
+
+// const useStyles = makeStyles((theme) => ({
+//   stepperPaper: {
+//     boxShadow: "none",
+//     backgroundColor: "transparent",
+//   },
+// }));
+
+// function FormStepper({ currentStep, steps }) {
+//   const classes = useStyles();
+
+//   return (
+//     <Stepper
+//       activeStep={currentStep}
+//       alternativeLabel
+//       style={{ background: "transparent", boxShadow: "none" }}
+//     >
+//       {steps.map((label, index) => (
+//         <Step key={label}>
+//           <StepLabel
+//             className={`dot  ${currentStep === index ? "active" : ""}`}
+//           />
+//         </Step>
+//       ))}
+//     </Stepper>
+//   );
+// }
+
+// // Create a context provider
+// export const DrugProvider = ({ children }) => {
+//   const [formData, setFormData] = useState(generateInitialFormData());
+//   const [currentStep, setCurrentStep] = useState(0);
+//   const isLastStep = currentStep === 6;
+//   const [error, setError] = useState(null);
+//   const [priceUSD, setPriceUSD] = useState("");
+//   const [priceLBP, setPriceLBP] = useState("");
+//   const [selectedDrugGuid, setSelectedDrugGuid] = useState(null);
+//   const [atcCodes, setAtcCodes] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   const exchangeRates = {
+//     USD: 1,
+//     CAD: 0.72,
+//     EUR: 1.08,
+//     CHF: 1.11,
+//     DKK: 0.72,
+//     GBP: 1.21,
+//     SAR: 0.27,
+//     JOD: 1.41,
+//     LBP: 90000,
+//   };
+
+//   const steps = [
+//     "Drug Registry",
+//     "Drug Registry Addons",
+//     "Drug Images",
+//     "Pricing Approval",
+//     "Marketing Approval",
+//     "Substance Information",
+//     "Unified Drug Information",
+//   ];
+
+//   const handleNext = () => {
+//     console.log("handleNext called");
+//     setCurrentStep((prevStep) => prevStep + 1);
+//     console.log("Current step:", currentStep); // Add this line to check the updated currentStep
+//   };
+
+//   const handleBack = () => {
+//     console.log("handleBack called");
+//     setCurrentStep((prevStep) => prevStep - 1);
+//     console.log("Current step:", currentStep); // Add this line to check the updated currentStep
+//   };
+
+//   // const handleNext = () => {
+//   //   console.log("handleNext called");
+//   //   if (currentStep === 2) {
+//   //     // Additional logic for a specific step if needed
+//   //   }
+//   //   setCurrentStep(currentStep + 1);
+//   // };
+
+//   // const handleBack = () => {
+//   //   console.log("handleBack called");
+//   //   setCurrentStep(currentStep - 1);
+//   // };
+
+//   const convertToUSD = () => {
+//     if (formData.PriceFOREIGN && formData.currencyForeign) {
+//       const priceForeign = parseFloat(formData.PriceFOREIGN);
+//       const exchangeRate = parseFloat(exchangeRates[formData.currencyForeign]);
+//       if (!isNaN(priceForeign) && !isNaN(exchangeRate) && exchangeRate !== 0) {
+//         const convertedPrice = priceForeign / exchangeRate;
+//         // console.log("Converted Price USD:", convertedPrice);
+//         return convertedPrice.toFixed(2);
+//       }
+//     }
+//     return "";
+//   };
+
+//   const convertToLBP = () => {
+//     if (formData.PriceFOREIGN && formData.currencyForeign) {
+//       const priceInUSD = convertToUSD();
+//       const convertedPrice = priceInUSD * exchangeRates.LBP;
+//       // console.log("Converted Price LBP:", convertedPrice);
+//       return convertedPrice.toFixed(0);
+//     }
+//     return "";
+//   };
+
+//   useEffect(() => {
+//     // Calculate and set priceUSD whenever formData changes
+//     const newPriceUSD = convertToUSD();
+//     setPriceUSD(newPriceUSD);
+//   }, [formData]);
+
+//   useEffect(() => {
+//     // Calculate and set priceLBP whenever formData changes
+//     const newPriceLBP = convertToLBP();
+//     setPriceLBP(newPriceLBP);
+//   }, [formData]);
+
+//   const handleInputChange = (e) => {
+//     const { name, value, type, checked } = e.target;
+
+//     // If value is not empty and is a valid decimal, update the state
+//     if (value === "" || /^\d*\.?\d*$/.test(value)) {
+//       setFormData({ ...formData, [name]: value });
+//     }
+
+//     const fieldValue = type === "checkbox" ? checked : value;
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [name]: fieldValue,
+//     }));
+//   };
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         setLoading(true);
+//         const atcResponse = await Axios.get("/api/atc/v1.0");
+//         console.log("ATC Response:", atcResponse.data);
+//         const atcItems = Array.isArray(atcResponse.data)
+//           ? atcResponse.data
+//           : [];
+
+//         // Extract the first ATC item's GUID
+//         const atcGuid = atcItems.length > 0 ? atcItems[0].guid : null;
+
+//         if (atcGuid && isValidGUID(atcGuid)) {
+//           const atcCodeResponse = await Axios.get(
+//             `/api/atccodes/v1.0/codes/${atcGuid}`
+//           );
+//           console.log("ATC Code Response:", atcCodeResponse.data);
+//           const atcCodesGuid = atcCodeResponse.data.guid;
+
+//           setFormData((prevFormData) => ({
+//             ...prevFormData,
+//             ATCGuid: atcGuid,
+//             ATCCodes: atcCodesGuid,
+//           }));
+//         } else {
+//           console.error("Invalid ATCGuid format or empty ATC items array.");
+//           // Handle the case where ATCGuid is not valid or empty
+//         }
+//       } catch (error) {
+//         console.error("Error fetching data:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   const handleSubmit = async (e) => {
+//     if (e) {
+//       e.preventDefault();
+//     }
+
+//     try {
+//       // Calculate and update PriceUSD and PriceLBP in formData
+//       const PriceUSD = convertToUSD();
+//       const PriceLBP = convertToLBP();
+//       setFormData((prevFormData) => ({
+//         ...prevFormData,
+//         PriceUSD,
+//         PriceLBP,
+//       }));
+
+//       // If it's the last step, submit form data
+//       if (currentStep === steps.length - 1) {
+//         const response = await axios.post(
+//           "http://localhost:3000/drugs/",
+//           formData
+//         );
+
+//         console.log(response.data); // Handle success response
+//         setFormData(generateInitialFormData()); // Reset form after successful submission
+//         setCurrentStep(0); // Reset to the first step after submission
+//       } else {
+//         // If it's not the last step, proceed to the next step
+//         handleNext();
+//       }
+//     } catch (error) {
+//       console.error("Error:", error); // Log any errors
+//       setError(error.response?.data?.error || "An error occurred"); // Handle error response
+//     }
+//   };
+
+//   const handlePrevious = () => {
+//     setCurrentStep((prevStep) => prevStep - 1);
+//   };
+
+//   // Function to set selected drug
+//   const selectDrug = (drugData) => {
+//     setSelectedDrugGuid(drugData);
+//   };
+
+//   // Function to select ATC
+//   const selectATC = async (atcData) => {
+//     const { ATCGuid } = atcData; // Destructure ATCGuid from atcData
+
+//     try {
+//       setLoading(true);
+//       const atcResponse = await Axios.get(`/api/atc/v1.0`);
+//       const atcItems = Array.isArray(atcResponse.data) ? atcResponse.data : [];
+//       const atcCodeResponse = await Axios.get(
+//         `/api/atccodes/v1.0/codes/${ATCGuid}`
+//       );
+
+//       const atcCodeData = atcCodeResponse.data;
+
+//       // Handle ATC data as needed
+//       console.log("ATC Data:", atcCodeData);
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // Function to clear selected drug
+//   const clearselectedDrugGuid = () => {
+//     setSelectedDrugGuid(null);
+//   };
+
+//   // Context values
+//   const contextValues = {
+//     formData,
+//     setFormData,
+//     handleInputChange,
+//     handleSubmit,
+//     handlePrevious,
+//     handleNext,
+//     handleBack,
+//     isLastStep,
+//     FormStepper,
+//     steps,
+//     error,
+//     exchangeRates,
+//     convertToUSD,
+//     convertToLBP,
+//     priceUSD,
+//     priceLBP,
+//     selectedDrugGuid,
+//     selectDrug,
+//     selectATC,
+//     clearselectedDrugGuid,
+//   };
+
+//   return (
+//     <DrugContext.Provider value={contextValues}>
+//       {children}
+//     </DrugContext.Provider>
+//   );
+// };
+
+// export const useDrugContext = () => useContext(DrugContext);
 import React, { useState, useEffect, createContext, useContext } from "react";
-import axios from "axios";
-import { useDispatch } from "react-redux";
+import Axios from "../../api/axios";
+
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate, useParams } from "react-router-dom";
+import { Step, Stepper, StepLabel } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import { makeStyles } from "@mui/styles";
 
 // Create the context
 const DrugContext = createContext();
@@ -14,19 +403,35 @@ const generateGUID = () => uuidv4();
 const generateInitialFormData = () => {
   return {
     Guid: generateGUID(),
-    ATCGuid: generateGUID(),
-    DosageGuid: generateGUID(),
-    PresentationGuid: generateGUID(),
-    FormGuid: generateGUID(),
-    RouteGuid: generateGUID(),
-    StratumGuid: generateGUID(),
-    StratumTypeGuid: generateGUID(),
-    AgentGuid: generateGUID(),
-    BrandGuid: generateGUID(),
-    ManufacturerGuid: generateGUID(),
-    CountryGuid: generateGUID(),
-    ResponsiblePartyGuid: generateGUID(),
-    DrugLabelGuid: generateGUID(),
+    ATCGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+    // ATCGuid: null,
+    // ATCCodes: null,
+    DosageGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+    // DosageGuid: generateGUID(),
+    PresentationGuid: "91C44FF9-D234-4306-BF87-AE8894D0CF0C",
+    // PresentationGuid: generateGUID(),
+    FormGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+    // FormGuid: generateGUID(),
+    RouteGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA7",
+    // RouteGuid: generateGUID(),
+    StratumGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA7",
+    // StratumGuid: generateGUID(),
+    StratumTypeGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+    // StratumTypeGuid: generateGUID(),
+    // AgentGuid: generateGUID(),
+    AgentGuid: "91647149-F532-488F-ACDF-C1FBC9A0945C",
+    BrandGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA7",
+    // BrandGuid: generateGUID(),
+    ManufacturerGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA8",
+    // ManufacturerGuid: generateGUID(),
+    CountryGuid: "5920751D-3EDB-44B9-AA13-BD6B30AB8B65",
+    // CountryGuid: generateGUID(),
+    ResponsiblePartyGuid: "5920751D-3EDB-44B9-AA13-BD6B30AB8B66",
+    // ResponsiblePartyGuid: generateGUID(),
+    DrugLabelGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA2",
+    // DrugLabelGuid: generateGUID(),
+    LASTCurrencyGuid: "3FA85F64-5717-4562-B3FC-2C963F66AFA1",
+    // LASTCurrencyGuid: generateGUID(),
     ATCName: "",
     DosageName: "",
     PresentationName: "",
@@ -40,71 +445,104 @@ const generateInitialFormData = () => {
     CountryName: "",
     ResponsiblePartyName: "",
     DrugLabelName: "",
-    Code: "",
-    RegistrationNumber: "",
-    CIF_FOB: "",
-    B_G: "",
-    NM: false,
-    GTIN: "",
-    Notes: "",
-    Description: "",
-    ActiveInactiveIngredient: "",
-    Indication: "",
-    Posology: "",
-    MethodOfAdministration: "",
-    Contraindications: "",
-    PrecautionForUse: "",
-    EffectOnFGN: "",
-    SideEffect: "",
-    Toxicity: "",
-    StorageCondition: "",
-    ShelfLife: "",
-    IngredientLabel: "",
-    IsBiological: false,
-    IsNarcotis: false,
-    IsOTC: false,
-    IsNSSF: false,
+    Code: "1234",
+    RegistrationNumber: "1234",
+    CIF_FOB: "CIF",
+    B_G: "Brand",
+    Seq: "seq1",
+    NM: true,
+    REP_date: "2024-02-01",
+    SubsidyPercentage: "10",
+    LJ_FOB_ValueUSD: "1",
+    LASTPublicABP: "1",
+    LASTEffective_Date: "2024-02-01",
+    WEBCIF_FOB: "FOB",
+    WEBPublicABP: "1",
+    WEBCurrency: "dollar",
+    Date_dc: "2024-02-01",
+    GTIN: "1234567891111",
+    Notes: "Note for test",
+    Description: "desc1",
+    ActiveInactiveIngredient: "Para",
+    Indication: "Ind1",
+    Posology: "Pos1",
+    WJ_Leb_PubPriceHos: "1",
+    HospPricing: true,
+    MethodOfAdministration: "meth1",
+    Contraindications: "cont",
+    PrecautionForUse: "precau",
+    EffectOnFGN: "effe",
+    SideEffect: "sideeffe",
+    Toxicity: "Tox1",
+    StorageCondition: "good",
+    ShelfLife: "36",
+    IngredientLabel: "Ingedient Label 1",
+    IsDouanes: true,
+    IsBiological: true,
+    IsNarcotis: true,
+    IsOTC: true,
+    IsNSSF: true,
     PriceFOREIGN: "",
     currencyForeign: "",
-    PriceUSD: "",
-    PriceLBP: "",
+    PriceUSD: "2",
+    PriceLBP: "180000",
     ImagesPath: "",
     ImageDefault: "",
-    InteractionIngredientName: "",
+    InteractionIngredientName: "int drug 1",
+    UpdatedDate: "2024-02-01",
   };
 };
 
+const useStyles = makeStyles((theme) => ({
+  stepperPaper: {
+    boxShadow: "none",
+    backgroundColor: "transparent",
+  },
+}));
+
+function FormStepper({ currentStep, steps }) {
+  const classes = useStyles();
+
+  return (
+    <Stepper
+      activeStep={currentStep}
+      alternativeLabel
+      style={{ background: "transparent", boxShadow: "none" }}
+    >
+      {steps.map((label, index) => (
+        <Step key={label}>
+          <StepLabel
+            className={`dot  ${currentStep === index ? "active" : ""}`}
+          />
+        </Step>
+      ))}
+    </Stepper>
+  );
+}
+
 // Create a context provider
 export const DrugProvider = ({ children }) => {
-  const [formData, setFormData] = useState({
-    formDataStep1: { ...generateInitialFormData() },
-    formDataStep2: { ...generateInitialFormData() },
-    formDataStep11: { ...generateInitialFormData() },
-    formDataStep12: { ...generateInitialFormData() },
-    formDataStep3: { ...generateInitialFormData() },
-    formDataStep4: { ...generateInitialFormData() },
-    formDataStep5: { ...generateInitialFormData() },
-  });
-
+  const [formData, setFormData] = useState(generateInitialFormData());
   const [currentStep, setCurrentStep] = useState(0);
-  const [error, setError] = useState(null);
-  const [priceUSD, setPriceUSD] = useState(0);
-  const [priceLBP, setPriceLBP] = useState(0);
-  const [selectedDrugGuid, setSelectedDrugGuid] = useState(null);
-  const [drugImagesList, setImagesList] = useState(
-    Array.from({ length: 6 }, () => [])
-  );
-  const [drugDocumentsList, setDrugDocumentsList] = useState(
-    Array.from({ length: 15 }, () => [])
-  );
-  const navigate = useNavigate();
   const isLastStep = currentStep === 6;
-  const { drugId } = useParams();
-  const [isEditMode, setIsEditMode] = useState(false);
-  // const [selectedInput, setSelectedInput] = useState("");
-  // const [isAddModalOpen, setAddModalOpen] = useState(false);
-  // const [isEditModalOpen, setEditModalOpen] = useState(false);
-  // const [editInputValue, setEditInputValue] = useState("");
+  const [error, setError] = useState(null);
+  const [priceUSD, setPriceUSD] = useState("");
+  const [priceLBP, setPriceLBP] = useState("");
+  const [selectedDrugGuid, setSelectedDrugGuid] = useState(null);
+  const [atcCodes, setAtcCodes] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const exchangeRates = {
+    USD: 1,
+    CAD: 0.72,
+    EUR: 1.08,
+    CHF: 1.11,
+    DKK: 0.72,
+    GBP: 1.21,
+    SAR: 0.27,
+    JOD: 1.41,
+    LBP: 90000,
+  };
 
   const steps = [
     "Drug Registry",
@@ -116,245 +554,125 @@ export const DrugProvider = ({ children }) => {
     "Unified Drug Information",
   ];
 
-  const exchangeRates = {
-    USD: 1,
-    CAD: 0.72,
-    EUR: 1.06,
-    CHF: 1.11,
-    DKK: 0.72,
-    GBP: 1.21,
-    SAR: 0.27,
-    JOD: 1.41,
-    LBP: 90000,
+  const handleNext = () => {
+    console.log("handleNext called");
+    setCurrentStep((prevStep) => prevStep + 1);
+    console.log("Current step:", currentStep); // Add this line to check the updated currentStep
   };
 
-  const currencySymbols = {
-    USD: "$",
-    CAD: "C$",
-    EUR: "€",
-    CHF: "CHF",
-    DKK: "kr",
-    GBP: "£",
-    SAR: "SAR",
-    JOD: "JD",
-    LBP: "LBP",
+  const handleBack = () => {
+    console.log("handleBack called");
+    setCurrentStep((prevStep) => prevStep - 1);
+    console.log("Current step:", currentStep); // Add this line to check the updated currentStep
   };
 
-  const [formDataStep1, setFormDataStep1] = useState({
-    drugImages: "",
-    drugName: "Panadol",
-    type: "Brand",
-    responsibleParty: "",
-    responsiblePartyCountry: "",
-    manufacturer: "",
-    manufacturingCountry: "",
-    cargoShippingTerms: "",
-    priceForeign: "13",
-    currencyForeign: "CAD",
-    convertToUSD: "",
-    convertToLBP: "",
-    registrationNumber: "",
-    registrationDate: "",
-    reviewDate: "",
-    mohCode: "",
-  });
+  // const handleNext = () => {
+  //   console.log("handleNext called");
+  //   if (currentStep === 2) {
+  //     // Additional logic for a specific step if needed
+  //   }
+  //   setCurrentStep(currentStep + 1);
+  // };
 
-  const [formDataStep11, setFormDataStep11] = useState({
-    productDesc: "",
-    activeInactiveIngredients: "",
-    indications: "",
-    posology: "",
-    methodOfAdministration: "",
-    contraindications: "",
-    precautionsForUse: "",
-    effectsOnFGN: "",
-    sideEffects: "",
-    toxicity: "",
-    storageConditions: "",
-    shelfLife: "",
-  });
-  const [formDataStep12, setFormDataStep12] = useState({
-    drugImages: "",
-  });
+  // const handleBack = () => {
+  //   console.log("handleBack called");
+  //   setCurrentStep(currentStep - 1);
+  // };
 
-  const [formDataStep2, setFormDataStep2] = useState({
-    ingredientsAndstrength: "Paracetamol",
-    form: "Tablet",
-    primaryContainerPackage: "Sachet",
-    manufacturer: "",
-    manufacturingCountry: "",
-    agent: "Omnipharma",
-    atcCode: "AB001",
-    atcRelatedIngredients: "Caffeine",
-  });
-
-  const [formDataStep3, setFormDataStep3] = useState({
-    atcRelatedIngredients: "Caffeine",
-    registrationNumber: "1234/A01",
-    registrationDate: "",
-    dosageValueN: "500",
-    dosageUnitN: "mg/g",
-    dosageUnit: "",
-    doseForm: "concentrated",
-    route: "Rectal",
-    presentationContentQty: "24",
-    contentUnitType: "mg",
-    presentationContainerQty: "100",
-    containerUnitType: "Box",
-    prescriptionAndDispensingCondition: "",
-    drugName: "Panadol",
-    mohCode: "",
-    type: "Brand",
-    atcCode: "AB001",
-  });
-
-  const [formDataStep4, setFormDataStep4] = useState({
-    priceForeign: "13",
-    currencyForeign: "CAD",
-    convertToUSD: "",
-    convertToLBP: "",
-    stratum: "E1",
-    cargoShipping: "8%",
-    douanes: "",
-    subsidizationLabel: "",
-    agentProfitMargin: "8",
-    pharmacistProfitMargin: "8.5",
-    hospitalPriceLBP: "900,000",
-  });
-
-  const [formDataStep5, setFormDataStep5] = useState({
-    responsibleParty: "",
-    responsiblePartyCountry: "",
-    responsiblePartyID: "123321",
-    manufacturer: "",
-    manufacturerID: "321123",
-    manufacturingCountry: "",
-    agent: "Omnipharma",
-  });
-
-  function convertToUSD() {
-    if (
-      formDataStep1 &&
-      formDataStep1.priceForeign &&
-      formDataStep1.currencyForeign
-    ) {
-      const convertedPrice =
-        formDataStep1.priceForeign /
-        exchangeRates[formDataStep1.currencyForeign];
-      return convertedPrice.toFixed(2); // Display with 2 decimal places
+  const convertToUSD = () => {
+    if (formData.PriceFOREIGN && formData.currencyForeign) {
+      const priceForeign = parseFloat(formData.PriceFOREIGN);
+      const exchangeRate = parseFloat(exchangeRates[formData.currencyForeign]);
+      if (!isNaN(priceForeign) && !isNaN(exchangeRate) && exchangeRate !== 0) {
+        const convertedPrice = priceForeign / exchangeRate;
+        // console.log("Converted Price USD:", convertedPrice);
+        return convertedPrice.toFixed(2);
+      }
     }
     return "";
-  }
+  };
 
-  function convertToLBP() {
-    if (
-      formDataStep1 &&
-      formDataStep1.priceForeign &&
-      formDataStep1.currencyForeign
-    ) {
+  const convertToLBP = () => {
+    if (formData.PriceFOREIGN && formData.currencyForeign) {
       const priceInUSD = convertToUSD();
       const convertedPrice = priceInUSD * exchangeRates.LBP;
-      return convertedPrice.toFixed(2); // Display with 2 decimal places
+      // console.log("Converted Price LBP:", convertedPrice);
+      return convertedPrice.toFixed(0);
     }
     return "";
-  }
-
-  const dispatch = useDispatch();
-
-  const handleInputChangeStep1 = (name, value) => {
-    setFormDataStep1((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-
-    // Dispatch the action to update Redux store
-    dispatch(updateFormStep1({ [name]: value }));
-
-    // Handle other state updates
-    if (name === "priceForeign" || name === "currencyForeign") {
-      // Handle the currency conversion logic here and update convertToUSD and convertToLBP
-      const convertedUSD = convertToUSD(value, formDataStep1.currencyForeign);
-      const convertedLBP = convertToLBP(value, formDataStep1.currencyForeign);
-
-      setFormDataStep1((prevFormData) => ({
-        ...prevFormData,
-        convertToUSD: convertedUSD,
-        convertToLBP: convertedLBP,
-      }));
-    }
   };
 
-  const handleInputChangeStep12 = (name, value) => {
-    setFormDataStep12((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+  useEffect(() => {
+    // Calculate and set priceUSD whenever formData changes
+    const newPriceUSD = convertToUSD();
+    setPriceUSD(newPriceUSD);
+  }, [formData]);
 
-    // Dispatch the action to update Redux store
-    dispatch(updateFormStep1({ [name]: value }));
-  };
+  useEffect(() => {
+    // Calculate and set priceLBP whenever formData changes
+    const newPriceLBP = convertToLBP();
+    setPriceLBP(newPriceLBP);
+  }, [formData]);
 
   const handleInputChange = (e) => {
-    const { name, type, checked, value } = e.target;
+    const { name, value, type, checked } = e.target;
 
-    if (
-      name === "priceForeign" ||
-      name === "convertToLBP" ||
-      name === "convertToUSD"
-    ) {
-      // Parse the value as a number or handle empty strings appropriately
-      const numericValue = parseFloat(value) || 0;
-
-      setFormDataStep1((prevDrug) => ({
-        ...prevDrug,
-        [name]: numericValue,
-      }));
-    } else if (type === "checkbox") {
-      // Update checkbox state based on the current value of checked
-      setFormDataStep1((prevDrug) => ({
-        ...prevDrug,
-        [name]: type === "checkbox" ? checked : value,
-      }));
-    } else {
-      setFormDataStep1((prevDrug) => ({
-        ...prevDrug,
-        [name]: value,
-      }));
+    // If value is not empty and is a valid decimal, update the state
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setFormData({ ...formData, [name]: value });
     }
 
-    setFormDataStep11((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-
-    setFormDataStep12((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-
-    setFormDataStep2((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-
-    setFormDataStep3((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-
-    setFormDataStep4((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-
-    setFormDataStep5((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
+    const fieldValue = type === "checkbox" ? checked : value;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: fieldValue,
     }));
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const atcResponse = await Axios.get("http://localhost:3000/api/atc/v1.0");
+        console.log("ATC Response:", atcResponse.data);
+        const atcItems = Array.isArray(atcResponse.data)
+          ? atcResponse.data
+          : [];
+
+        // Extract the first ATC item's GUID
+        const atcGuid = atcItems.length > 0 ? atcItems[0].guid : null;
+
+        if (atcGuid && isValidGUID(atcGuid)) {
+          const atcCodeResponse = await Axios.get(
+            `http://localhost:3000/api/atccodes/v1.0/codes/${atcGuid}`
+          );
+          console.log("ATC Code Response:", atcCodeResponse.data);
+          const atcCodesGuid = atcCodeResponse.data.guid;
+
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            ATCGuid: atcGuid,
+            ATCCodes: atcCodesGuid,
+          }));
+        } else {
+          console.error("Invalid ATCGuid format or empty ATC items array.");
+          // Handle the case where ATCGuid is not valid or empty
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
+
     try {
       // Calculate and update PriceUSD and PriceLBP in formData
       const PriceUSD = convertToUSD();
@@ -365,146 +683,85 @@ export const DrugProvider = ({ children }) => {
         PriceLBP,
       }));
 
-      // Submit form data
-      const response = await axios.post(
-        "http://localhost:3000/drugs/add",
-        formData
-      );
-      console.log(response.data); // Handle success response
-      setFormData(generateInitialFormData()); // Reset form after successful submission
-      setCurrentStep(0); // Reset to the first step after submission
+      // If it's the last step, submit form data
+      if (currentStep === steps.length - 1) {
+        const response = await Axios.post(
+          "http://localhost:3000/drugs/",
+          formData
+        );
+
+        console.log(response.data); // Handle success response
+        setFormData(generateInitialFormData()); // Reset form after successful submission
+        setCurrentStep(0); // Reset to the first step after submission
+      } else {
+        // If it's not the last step, proceed to the next step
+        handleNext();
+      }
     } catch (error) {
       console.error("Error:", error); // Log any errors
       setError(error.response?.data?.error || "An error occurred"); // Handle error response
     }
   };
 
-  useEffect(() => {
-    if (drugId) {
-      // Fetch the existing drug data using the drugId
-      axios
-        .get(`http://1.1.1.250:3500/drugs/${drugId}`)
-        .then((res) => {
-          // Initialize the form data with existing drug data
-          setFormDataStep1(res.data); // You might need to adjust this based on the actual structure of your data
-          setIsEditMode(true); // Set edit mode to true
-        })
-        .catch((error) => {
-          console.error("Error fetching drug data:", error);
-          // Handle the error, such as redirecting to an error page
-        });
-    }
-  }, [drugId]);
-
-  const FetchData = async (finalFormData) => {
-    try {
-      if (isEditMode) {
-        // If in edit mode, update the existing drug
-        console.log("Updating an existing drug");
-        await axios.put(`http://1.1.1.250:3500/drugs/${drugId}`, finalFormData);
-      } else {
-        // If not in edit mode, create a new drug
-        console.log("Creating a new drug");
-        await axios.post("http://1.1.1.250:3500/drugs", finalFormData);
-      }
-      // You might want to add a success message or further handling here
-      navigate("/search"); // Navigate to the list page after successful update/creation
-    } catch (error) {
-      console.error("Error updating/creating drug:", error);
-      // Handle the error, such as showing an error message to the user
-    }
-  };
-
-  const logFormData = () => {
-    const finalFormData = {
-      ...formDataStep1,
-      ...formDataStep2,
-      ...formDataStep3,
-      ...formDataStep4,
-      ...formDataStep5,
-    };
-
-    console.log("Final Form Data:", finalFormData);
-
-    // Perform submission or redirection here
-    navigate("/search");
-    FetchData(finalFormData);
-  };
-
-  const handleNext = () => {
-    if (currentStep === 2) {
-    }
-
-    setCurrentStep(currentStep + 1);
-  };
-
   const handlePrevious = () => {
-    setCurrentStep(currentStep - 1);
+    setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  const handleArrowButtonClick = () => {
-    if (isLastStep) {
-      logFormData();
-    } else {
-      handleNext();
+  // Function to set selected drug
+  const selectDrug = (drugData) => {
+    setSelectedDrugGuid(drugData);
+  };
+
+  // Function to select ATC
+  const selectATC = async (atcData) => {
+    const { ATCGuid } = atcData; // Destructure ATCGuid from atcData
+
+    try {
+      setLoading(true);
+      const atcResponse = await Axios.get(`/api/atc/v1.0`);
+      const atcItems = Array.isArray(atcResponse.data) ? atcResponse.data : [];
+      const atcCodeResponse = await Axios.get(
+        `/api/atccodes/v1.0/codes/${ATCGuid}`
+      );
+
+      const atcCodeData = atcCodeResponse.data;
+
+      // Handle ATC data as needed
+      console.log("ATC Data:", atcCodeData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const [newUploadedImages, setNewUploadedImages] = useState([]);
-  const [newUploadedDocuments, setNewUploadedDocuments] = useState([]);
-  const [uploadedImages, setUploadedImages] = useState([]);
-  const [uploadedDocuments, setUploadedDocuments] = useState([]);
-
-  const updateImageState = (index, newImageState) => {};
-  const updateDocumentState = (index, newDocumentState) => {};
-
-  const handleImageUpload = (newUploadedImages) => {
-    setUploadedImages(newUploadedImages);
-
-    // Assuming formDataStep2 is the form data object for step 2
-    setFormDataStep12((prevFormDataStep12) => ({
-      ...prevFormDataStep12,
-      drugImages: newUploadedImages.map((image) => ({
-        imageUrl: image.imageUrl,
-      })),
-    }));
-  };
-  const handleDocumentUpload = (newUploadedDocuments) => {
-    setUploadedDocuments(newUploadedDocuments);
-
-    // Assuming formDataStep2 is the form data object for step 2
-    setFormDataStep12((prevFormDataStep12) => ({
-      ...prevFormDataStep12,
-      drugDocuments: newUploadedDocuments.map((image) => ({
-        documentUrl: image.imageUrl,
-      })),
-    }));
+  // Function to clear selected drug
+  const clearselectedDrugGuid = () => {
+    setSelectedDrugGuid(null);
   };
 
   // Context values
   const contextValues = {
     formData,
-    drugDocumentsList,
     setFormData,
-    handleImageUpload,
-    handleDocumentUpload,
     handleInputChange,
     handleSubmit,
-    FetchData,
-    handleNext,
     handlePrevious,
-    error,
-    currentStep,
+    handleNext,
+    handleBack,
+    isLastStep,
+    FormStepper,
     steps,
+    error,
     exchangeRates,
+    convertToUSD,
+    convertToLBP,
     priceUSD,
     priceLBP,
     selectedDrugGuid,
-    handleArrowButtonClick,
-    exchangeRates,
-    currencySymbols,
-    convertToUSD,
-    convertToLBP,
+    selectDrug,
+    selectATC,
+    clearselectedDrugGuid,
   };
 
   return (

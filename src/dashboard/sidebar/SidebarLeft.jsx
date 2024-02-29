@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import MedLebLogoOffCanvas from "./MedLebLogoOffCanvas";
+import MedLebLogoOffCanvas from "./MedLebLogoOffCanvas.jsx";
 import MedLebLogo from "./MedLebLogo";
 import HomeGrayIcon from "./icons/HomeGrayIcon.jsx";
 import SearchGrayIcon from "./icons/SearchGrayIcon.jsx";

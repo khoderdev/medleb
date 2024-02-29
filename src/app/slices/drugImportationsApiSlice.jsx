@@ -1,7 +1,7 @@
 // drugImportationsApiSlice.js
 
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
-import { apiSlice } from "./apiSlice";
+import  apiSlice from "./apiSlice";
 
 const importationsAdapter = createEntityAdapter({
   sortComparer: (a, b) =>

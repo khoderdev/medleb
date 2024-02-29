@@ -45,7 +45,7 @@
 //     if (isLastStep) {
 //       // Trigger submit request here
 //       console.log("Submitting form data");
-//       fetch("http://localhost:3500/drugs", {
+//       fetch("http://localhost:3000/drugs", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
