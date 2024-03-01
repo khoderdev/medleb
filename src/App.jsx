@@ -19,7 +19,7 @@ import Tracking from "./pages/drugs/Tracking/";
 import Substitute from "./pages/drugs/Substitutes/";
 import LoginForm from "./pages/drugs/Forms/Separated/LoginForm";
 import SingleDrug from "./pages/drugs/list/View";
-import DrugForm from "./pages/drugs/Forms/Separated/drugs/DrugForm";
+// import DrugForm from "./pages/drugs/Forms/Separated/drugs/DrugForm";
 import Currencies from "./pages/drugs/Forms/Separated/currencies/CurrenciesTable";
 import ATCCodesForm from "./pages/drugs/Forms/Separated/ATCCodesForm";
 import StaticDataPage from "./pages/drugs/Forms/Separated/StaticDataPage";

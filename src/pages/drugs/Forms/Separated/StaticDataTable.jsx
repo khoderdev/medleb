@@ -16,6 +16,7 @@ const StaticDataTable = ({
   tableClasses,
   headerClasses,
   rowClasses,
+  
 }) => {
   const [sortedData, setSortedData] = useState([]);
   const [sortConfig, setSortConfig] = useState(initialSortConfig);
@@ -33,27 +34,27 @@ const StaticDataTable = ({
     setSortConfig({ key, direction });
   };
 
-  const sortedDataMemoized = useMemo(() => {
-    if (sortConfig.key !== null) {
-      return [...data].sort((a, b) => {
-        const valueA = a[sortConfig.key];
-        const valueB = b[sortConfig.key];
-        if (typeof valueA === "string" && typeof valueB === "string") {
-          return valueA.toLowerCase() < valueB.toLowerCase()
-            ? sortConfig.direction === "asc"
-              ? -1
-              : 1
-            : valueA.toLowerCase() > valueB.toLowerCase()
-            ? sortConfig.direction === "asc"
-              ? 1
-              : -1
-            : 0;
-        }
-        return 0;
-      });
-    }
-    return data;
-  }, [data, sortConfig]);
+  // const sortedDataMemoized = useMemo(() => {
+  //   if (sortConfig.key !== null) {
+  //     return [...data].sort((a, b) => {
+  //       const valueA = a[sortConfig.key];
+  //       const valueB = b[sortConfig.key];
+  //       if (typeof valueA === "string" && typeof valueB === "string") {
+  //         return valueA.toLowerCase() < valueB.toLowerCase()
+  //           ? sortConfig.direction === "asc"
+  //             ? -1
+  //             : 1
+  //           : valueA.toLowerCase() > valueB.toLowerCase()
+  //           ? sortConfig.direction === "asc"
+  //             ? 1
+  //             : -1
+  //           : 0;
+  //       }
+  //       return 0;
+  //     });
+  //   }
+  //   return data;
+  // }, [data, sortConfig]);
 
   const filteredData = useMemo(() => {
     return sortedData.filter((item) => {
@@ -65,7 +66,7 @@ const StaticDataTable = ({
         return false;
       });
     });
-  }, [sortedData, columns, searchTerm]);
+  }, [data, columns, searchTerm]);
 
   return (
     <div className="px-2 lg:px-10 text-black-text dark:text-white-text">

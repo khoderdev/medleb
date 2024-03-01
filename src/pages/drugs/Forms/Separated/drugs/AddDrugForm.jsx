@@ -89,99 +89,12 @@ const AddDrugForm = () => {
     IsNSSF: true,
     CreatedBy: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
     UpdatedBy: "3FA85F64-5717-4562-B3FC-2C963F66AFA6",
-    // Guid: "",
-    // ATCGuid: generateGUID(),
-    // // ATCGuid: null,
-    // DosageGuid: generateGUID(),
-    // // DosageGuid: generateGUID(),
-    // PresentationGuid: generateGUID(),
-    // // PresentationGuid: generateGUID(),
-    // FormGuid: generateGUID(),
-    // // FormGuid: generateGUID(),
-    // RouteGuid: generateGUID(),
-    // // RouteGuid: generateGUID(),
-    // StratumGuid: generateGUID(),
-    // // StratumGuid: generateGUID(),
-    // StratumTypeGuid: generateGUID(),
-    // // StratumTypeGuid: generateGUID(),
-    // // AgentGuid: generateGUID(),
-    // AgentGuid: generateGUID(),
-    // BrandGuid: generateGUID(),
-    // // BrandGuid: generateGUID(),
-    // ManufacturerGuid: generateGUID(),
-    // // ManufacturerGuid: generateGUID(),
-    // CountryGuid: generateGUID(),
-    // // CountryGuid: generateGUID(),
-    // ResponsiblePartyGuid: generateGUID(),
-    // // ResponsiblePartyGuid: generateGUID(),
-    // DrugLabelGuid: generateGUID(),
-    // // DrugLabelGuid: generateGUID(),
-    // LASTCurrencyGuid: generateGUID(),
-    // // LASTCurrencyGuid: generateGUID(),
-    // ATCName: "atc1",
-    // DosageName: "mg",
-    // PresentationName: "34",
-    // FormName: "Tablet",
-    // RouteName: "oral",
-    // StratumName: "Strat1",
-    // StratumTypeName: "StartType1",
-    // AgentName: "Mersaco",
-    // BrandName: "Nexium",
-    // ManufacturerName: "Bayer",
-    // CountryName: "germany",
-    // ResponsiblePartyName: "",
-    // DrugLabelName: "",
-    // Code: "",
-    // RegistrationNumber: "1234",
-    // CIF_FOB: "CIF",
-    // B_G: "Brand",
-    // Seq: "seq1",
-    // NM: true,
-    // REP_date: "2024-02-01",
-    // SubsidyPercentage: "10",
-    // LJ_FOB_ValueUSD: "1",
-    // LASTPublicABP: "1",
-    // LASTEffective_Date: "2024-02-01",
-    // WEBCIF_FOB: "FOB",
-    // WEBPublicABP: "1",
-    // WEBCurrency: "dollar",
-    // Date_dc: "2024-02-01",
-    // GTIN: "1234567891111",
-    // Notes: "Note for test",
-    // Description: "desc1",
-    // ActiveInactiveIngredient: "Para",
-    // Indication: "Ind1",
-    // Posology: "Pos1",
-    // WJ_Leb_PubPriceHos: "1",
-    // HospPricing: true,
-    // MethodOfAdministration: "meth1",
-    // Contraindications: "cont",
-    // PrecautionForUse: "precau",
-    // EffectOnFGN: "effe",
-    // SideEffect: "sideeffe",
-    // Toxicity: "Tox1",
-    // StorageCondition: "good",
-    // ShelfLife: "36",
-    // IngredientLabel: "Ingedient Label 1",
-    // IsDouanes: true,
-    // IsBiological: true,
-    // IsNarcotis: true,
-    // IsOTC: true,
-    // IsNSSF: true,
-    // PriceFOREIGN: "7",
-    // currencyForeign: "",
-    // PriceUSD: "2",
-    // PriceLBP: "180000",
-    // ImagesPath: "",
-    // ImageDefault: "",
-    // InteractionIngredientName: "int drug 1",
-    // UpdatedDate: "2024-02-01",
   });
 
   const [addDrug] = useAddDrugMutation(); // Use the generated hook for adding drug
   const [addPharmacyDrug] = useAddPharmacyDrugMutation(); // Use the generated hook for adding pharmacy drug
-  const [atcCodes, setAtcCodes] = useState();
-  const [selectedATC, setSelectedATC] = useState();
+
+  
 
   const handleInputChange = (e) => {
     setFormData({
@@ -207,9 +120,7 @@ const AddDrugForm = () => {
           pharmacyDrugResult.error
         );
       }
-    } catch (error) {
-      // Handle errors if necessary
-    }
+    } catch (error) {}
   };
 
   return (
@@ -222,19 +133,6 @@ const AddDrugForm = () => {
           <h2>Add Drug</h2>
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 md:gap-10 pt-6">
-              {/* <label htmlFor="atc" className="labels text-md block text-left">
-                ATC
-              </label>
-              <select value={selectedATC} onChange={handleInputChange}>
-                <option value="">Select ATC Code</option>
-                {atcCodes &&
-                  atcCodes.map((atcCode, index) => (
-                    <option key={index} value={atcCode.code}>
-                      {atcCode.code}
-                    </option>
-                  ))}
-              </select> */}
-
               <div className="input-container relative">
                 <label
                   htmlFor="BrandName"
@@ -376,22 +274,6 @@ const AddDrugForm = () => {
                 onChange={handleInputChange}
                 // required
               />
-
-              {/* <label
-                className="font-medium block"
-                htmlFor="ResponsiblePartyName"
-              >
-                Responsible Party
-              </label>
-              <input
-                className="w-full mb-4 px-3 py-2 border rounded bg-white-bg dark:bg-black-input"
-                type="text"
-                id="ResponsiblePartyName"
-                name="ResponsiblePartyName"
-                value={formData.ResponsiblePartyGuid}
-                onChange={handleInputChange}
-                // required
-              /> */}
             </div>
             <div className="col-2">
               <label className="font-medium block" htmlFor="Date_dc">
