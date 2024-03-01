@@ -39,7 +39,7 @@ import geoReducer from "./slices/geoSlice.jsx";
 import { drugImportationsApiSlice } from "./slices/drugImportationsApiSlice";
 import drugTable from "./slices/drugTable";
 import AddDrugAndImportReducer from "./reducers/AddDrugAndImportReducer";
-// import drugRegistrationFormReducer from "./reducers/drugRegistrationFormReducer";
+import drugRegistrationFormReducer from "./reducers/drugRegistrationFormReducer";
 import companiesFormReducer from "../app/slices/CompaniesFormSlice";
 
 const store = configureStore({
@@ -47,7 +47,7 @@ const store = configureStore({
     [api.reducerPath]: api.reducer,
     [drugImportationsApiSlice.reducerPath]: drugImportationsApiSlice.reducer,
     AddDrugImport: AddDrugAndImportReducer,
-    // drugReg: drugRegistrationFormReducer,
+    drugReg: drugRegistrationFormReducer,
     // drugTable,
     brandsForm: formSlice.reducer,
     geo: geoReducer,

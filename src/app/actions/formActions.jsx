@@ -18,7 +18,7 @@
 //     };
 //   };
   // actions.js
-import { SET_CURRENT_STEP, SET_FORM_DATA, RESET_FORM_DATA } from './actionTypes';
+import { SET_CURRENT_STEP, SET_FORM_DATA, RESET_FORM_DATA } from './DrugRegActionTypes';
 
 export const setCurrentStep = (step) => ({
   type: SET_CURRENT_STEP,

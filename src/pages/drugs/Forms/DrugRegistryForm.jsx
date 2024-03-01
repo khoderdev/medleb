@@ -28,11 +28,7 @@ const currencySymbols = {
   LBP: "LBP",
 };
 
-const DrugRegistryForm = ({
-  handleInputChange,
-  formDataStep1,
-  handleChildArrowButtonClick,
-}) => {
+const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
   const [selectedInput, setSelectedInput] = useState("");
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
@@ -41,11 +37,11 @@ const DrugRegistryForm = ({
   function convertToUSD() {
     if (
       formDataStep1 &&
-      formDataStep1.priceForeign &&
+      formDataStep1.PriceFOREIGN &&
       formDataStep1.currencyForeign
     ) {
       const convertedPrice =
-        formDataStep1.priceForeign /
+        formDataStep1.PriceFOREIGN /
         exchangeRates[formDataStep1.currencyForeign];
       return convertedPrice.toFixed(2); // Display with 2 decimal places
     }
@@ -55,7 +51,7 @@ const DrugRegistryForm = ({
   function convertToLBP() {
     if (
       formDataStep1 &&
-      formDataStep1.priceForeign &&
+      formDataStep1.PriceFOREIGN &&
       formDataStep1.currencyForeign
     ) {
       const priceInUSD = convertToUSD();
@@ -205,14 +201,14 @@ const DrugRegistryForm = ({
 
           <div className="input-container relative">
             <label
-              htmlFor="drugName"
+              htmlFor="BrandName"
               className="labels text-md block text-left"
             >
               Drug Name
             </label>
             <input
-              name="drugName"
-              value={formDataStep1.drugName}
+              name="BrandName"
+              value={formDataStep1.BrandName}
               onChange={(e) => handleInputChange(e)}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               type="text"
@@ -223,7 +219,7 @@ const DrugRegistryForm = ({
 
           <div className="input-container relative">
             <label
-              htmlFor="priceForeign"
+              htmlFor="PriceFOREIGN"
               className="labels text-md mb-2 block text-left"
             >
               Foreign Price
@@ -235,13 +231,14 @@ const DrugRegistryForm = ({
                 </span>
               </div>
               <input
-                name="priceForeign"
+                name="PriceFOREIGN"
                 type="number"
                 id="price"
                 className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-12 py-2 font-semibold shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
                 placeholder="0.00"
                 autoComplete="off"
-                value={formDataStep1?.priceForeign}
+                value={formDataStep1.PriceFOREIGN || ""} 
+                // value={formDataStep1?.PriceFOREIGN}
                 onChange={(e) => handleInputChange(e)}
               />
               <div className="absolute inset-y-0 right-0 flex items-center">
@@ -253,7 +250,8 @@ const DrugRegistryForm = ({
                   name="currencyForeign"
                   className="w-20 cursor-pointer appearance-none rounded-r-full border border-[#00a65100] dark:border-black-border bg-white-fg dark:bg-black-fg  py-2 font-normal shadow outline-none focus:border-green-pri focus:outline-none focus:ring-1 focus:ring-green-pri dark:focus:ring-1 dark:focus:ring-green-pri sm:w-20"
                   onChange={(e) => handleInputChange(e)}
-                  value={formDataStep1.currencyForeign}
+                  value={formDataStep1.currencyForeign || ""} 
+                  // value={formDataStep1.currencyForeign}
                 >
                   {Object.keys(exchangeRates).map((currencyForeign) => (
                     <option key={currencyForeign} value={currencyForeign}>
@@ -271,7 +269,7 @@ const DrugRegistryForm = ({
             </label>
             <input
               name="convertToUSD"
-              disabled
+              readOnly
               className="converted-price-usd mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-semibold shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               value={" " + convertToUSD()}
             />
@@ -282,7 +280,7 @@ const DrugRegistryForm = ({
             </label>
             <input
               name="convertToLBP"
-              disabled
+              readOnly
               className="converted-price-usd mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-semibold shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               value={
                 " " +
@@ -309,14 +307,14 @@ const DrugRegistryForm = ({
 
           <div className="input-container relative">
             <label
-              htmlFor="registrationNumber"
+              htmlFor="RegistrationNumber"
               className="labels text-md block text-left"
             >
               Registration Number
             </label>
             <input
-              name="registrationNumber"
-              value={formDataStep1.registrationNumber}
+              name="RegistrationNumber"
+              value={formDataStep1.RegistrationNumber}
               onChange={(e) => handleInputChange(e)}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               type="text"
@@ -327,12 +325,12 @@ const DrugRegistryForm = ({
 
           {/* Text Input 2 */}
           <div className="input-container relative">
-            <label htmlFor="mohCode" className="labels text-md block text-left">
+            <label htmlFor="Code" className="labels text-md block text-left">
               MOH Code
             </label>
             <input
-              name="mohCode"
-              value={formDataStep1.mohCode}
+              name="Code"
+              value={formDataStep1.Code}
               onChange={(e) => handleInputChange(e)}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               type="text"
@@ -344,17 +342,17 @@ const DrugRegistryForm = ({
           {/* Date Input 1 */}
           <div className="input-container relative">
             <label
-              htmlFor="registrationDate"
+              htmlFor="REP_date"
               className="labels text-md block text-left"
             >
               Registration Date
               <div className="relative mt-1">
                 <input
-                  name="registrationDate"
-                  value={formDataStep1.registrationDate}
+                  name="REP_date"
+                  value={formDataStep1.REP_date}
                   onChange={(e) => handleInputChange(e)}
                   type="date"
-                  id="registrationDate"
+                  id="REP_date"
                   className="dateInput mt-1 w-full cursor-pointer rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
                 />
               </div>
@@ -364,40 +362,23 @@ const DrugRegistryForm = ({
           {/* Date Input 2 */}
           <div className="input-container relative">
             <label
-              htmlFor="reviewDate"
+              htmlFor="LASTEffective_Date"
               className="labels text-md block text-left"
             >
               Review Date
             </label>
             <div className="relative mt-1">
               <input
-                value={formDataStep1.reviewDate}
+                value={formDataStep1.LASTEffective_Date}
                 onChange={(e) => handleInputChange(e)}
                 type="date"
-                id="reviewDate"
-                name="reviewDate"
+                id="LASTEffective_Date"
+                name="LASTEffective_Date"
                 className="dateInput mt-1 w-full cursor-pointer rounded-full border border-[#00a65100] dark:border-black-border bg-white-bg dark:bg-black-input px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               />
             </div>
           </div>
 
-          {/* <div className="input-container h-16 relative flex flex-col justify-between items-center col-span-full lg:col-span-1">
-            <label
-              htmlFor="continue"
-              className="labels text-md block text-left"
-            >
-              Continue to upload the images
-            </label>
-            <div className="relative">
-              <div className="flex items-center">
-                <FaArrowRightLong
-                  className="text-green-pri cursor-pointer hover:text-green-pri transition-transform transform-gpu animate-slide-right-left"
-                  style={{ fontSize: "30px" }}
-                  onClick={handleChildArrowButtonClick}
-                />
-              </div>
-            </div>
-          </div> */}
           {isAddModalOpen && (
             <AddModal
               closeModal={() => setAddModalOpen(false)}

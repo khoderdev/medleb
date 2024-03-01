@@ -11,11 +11,15 @@ import store from "./app/store";
 import { Provider } from "react-redux";
 // import { QueryClientProvider, queryClient } from "react-query";
 // import { queryClient } from "./app/react-query/queryClient";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ReactQueryDevtools } from 'react-query/devtools';
+
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+// import { QueryClient, QueryClientProvider } from "./app/react-query/api";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const queryClient = new QueryClient();
 
 configureLocalForage();
@@ -37,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </DashboardLayout>
             </BrowserRouter>
           </DarkModeProvider>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
           <ToastContainer position="top-right" autoClose={2000} />
         </QueryClientProvider>
       </Provider>

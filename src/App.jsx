@@ -63,6 +63,7 @@ import { MantineProvider } from "@mantine/core";
 import StepperExample from "./Stepper/StepperExample.jsx";
 import { StepperProvider } from "./Stepper/StepperContext";
 import DrugSearch from "./pages/drugs/Forms/Separated/drugs/DrugSearch";
+import DrugSelections from "./pages/drugs/Forms/Separated/drugs/DrugsSelectionInputs.jsx";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -123,6 +124,7 @@ const App = () => {
                       <Route path="/newuser" element={<CreateUserForm />} />
                       <Route path="/dynaform" element={<UserFormContainer />} />
                       <Route path="/add" element={<AddDrug />} />
+                      <Route path="/drugs-selections" element={<DrugSelections />} />
                       <Route path="/loginform" element={<LoginForm />} />
                       <Route path="/substitute/" element={<Substitute />} />
                       <Route path="/dashboard/" element={<Dashboards />} />

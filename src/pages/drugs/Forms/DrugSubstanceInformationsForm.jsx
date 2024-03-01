@@ -67,19 +67,19 @@ function DrugSubstanceInformationsForm({ formDataStep2, handleInputChange }) {
 
           <div className="input-container">
             <label
-              htmlFor="manufacturer"
+              htmlFor="ManufacturerGuid"
               className="labels text-md mt-4 block text-left"
             >
-              Manufacturer
+              ManufacturerGuid
             </label>
             <input
-              name="manufacturer"
+              name="ManufacturerGuid"
               disabled
-              value={formDataStep2.manufacturer}
+              value={formDataStep2.ManufacturerGuid}
               onChange={(e) => handleInputChange(e)}
               className="mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
               type="text"
-              placeholder="manufacturer"
+              placeholder=""
             />
           </div>
 

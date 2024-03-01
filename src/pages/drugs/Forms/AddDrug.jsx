@@ -1,7 +1,7 @@
 // // //////////////////////////////////////////////////////////////////////
 
 import React, { useState, useEffect } from "react";
-import { DrugProvider } from "../DrugContext";
+// import { DrugProvider } from "../DrugContext";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaArrowLeftLong } from "react-icons/fa6";
@@ -20,9 +20,16 @@ import Paper from "@mui/material/Paper";
 import CloseIcon from "@mui/icons-material/Close";
 import "./styles.css";
 import { makeStyles } from "@mui/styles";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import useCustomNavigation from "../../useCustomNavigation";
 import GlobalPagesLayouts from "../../GlobalPagesLayouts";
+import {
+  useFetchBrandsQuery,
+  useAddDrugMutation,
+  useUpdateDrugMutation,
+  useDeleteDrugMutation,
+  useAddPharmacyDrugMutation,
+} from "../../../app/slices/apiSlice"; // Update the path as per your project structure
 
 const useStyles = makeStyles((theme) => ({
   stepperPaper: {
@@ -75,17 +82,20 @@ function AddDrug(props) {
     "Unified Drug Information",
   ];
 
-  // const exchangeRates = {
-  //   USD: 1,
-  //   CAD: 0.72,
-  //   EUR: 1.06,
-  //   CHF: 1.11,
-  //   DKK: 0.72,
-  //   GBP: 1.21,
-  //   SAR: 0.27,
-  //   JOD: 1.41,
-  //   LBP: 900,
-  // };
+  // const { data: brands, isLoading, isError } = useFetchBrandsQuery();
+
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+  
+  // if (isError) {
+  //   return <div>Error fetching brands</div>;
+  // }
+
+  const [addDrugMutation] = useAddDrugMutation();
+  const [updateDrugMutation] = useUpdateDrugMutation();
+  const [deleteDrugMutation] = useDeleteDrugMutation();
+  const [addPharmacyDrugMutation] = useAddPharmacyDrugMutation();
 
   const currencySymbols = {
     USD: "$",
@@ -219,7 +229,7 @@ function AddDrug(props) {
     return "";
   }
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleInputChangeStep1 = (name, value) => {
     setFormDataStep1((prevFormData) => ({
@@ -254,41 +264,41 @@ function AddDrug(props) {
     dispatch(updateFormStep1({ [name]: value }));
   };
 
-  useEffect(() => {
-    if (drugId) {
-      // Fetch the existing drug data using the drugId
-      axios
-        .get(`http://localhost:3000/drugs/${drugId}`)
-        .then((res) => {
-          // Initialize the form data with existing drug data
-          setFormDataStep1(res.data); // You might need to adjust this based on the actual structure of your data
-          setIsEditMode(true); // Set edit mode to true
-        })
-        .catch((error) => {
-          console.error("Error fetching drug data:", error);
-          // Handle the error, such as redirecting to an error page
-        });
-    }
-  }, [drugId]);
+  // useEffect(() => {
+  //   if (drugId) {
+  //     // Fetch the existing drug data using the drugId
+  //     axios
+  //       .get(`http://localhost:3000/drugs/${drugId}`)
+  //       .then((res) => {
+  //         // Initialize the form data with existing drug data
+  //         setFormDataStep1(res.data); // You might need to adjust this based on the actual structure of your data
+  //         setIsEditMode(true); // Set edit mode to true
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching drug data:", error);
+  //         // Handle the error, such as redirecting to an error page
+  //       });
+  //   }
+  // }, [drugId]);
 
-  const FetchData = async (finalFormData) => {
-    try {
-      if (isEditMode) {
-        // If in edit mode, update the existing drug
-        console.log("Updating an existing drug");
-        await axios.put(`http://localhost:3000/drugs/${drugId}`, finalFormData);
-      } else {
-        // If not in edit mode, create a new drug
-        console.log("Creating a new drug");
-        await axios.post("http://localhost:3000/drugs/add", finalFormData);
-      }
-      // You might want to add a success message or further handling here
-      navigate("/search"); // Navigate to the list page after successful update/creation
-    } catch (error) {
-      console.error("Error updating/creating drug:", error);
-      // Handle the error, such as showing an error message to the user
-    }
-  };
+  // const FetchData = async (finalFormData) => {
+  //   try {
+  //     if (isEditMode) {
+  //       // If in edit mode, update the existing drug
+  //       console.log("Updating an existing drug");
+  //       await axios.put(`http://localhost:3000/drugs/${drugId}`, finalFormData);
+  //     } else {
+  //       // If not in edit mode, create a new drug
+  //       console.log("Creating a new drug");
+  //       await axios.post("http://localhost:3000/drugs/add", finalFormData);
+  //     }
+  //     // You might want to add a success message or further handling here
+  //     navigate("/search"); // Navigate to the list page after successful update/creation
+  //   } catch (error) {
+  //     console.error("Error updating/creating drug:", error);
+  //     // Handle the error, such as showing an error message to the user
+  //   }
+  // };
 
   const handleInputChange = (e) => {
     const { name, type, checked, value } = e.target;
@@ -349,7 +359,23 @@ function AddDrug(props) {
     }));
   };
 
-  const logFormData = () => {
+  // const logFormData = () => {
+  //   const finalFormData = {
+  //     ...formDataStep1,
+  //     ...formDataStep2,
+  //     ...formDataStep3,
+  //     ...formDataStep4,
+  //     ...formDataStep5,
+  //   };
+
+  //   console.log("Final Form Data:", finalFormData);
+
+  //   // Perform submission or redirection here
+  //   navigate("/search");
+  //   FetchData(finalFormData);
+  // };
+
+  const logFormData = async () => {
     const finalFormData = {
       ...formDataStep1,
       ...formDataStep2,
@@ -360,9 +386,19 @@ function AddDrug(props) {
 
     console.log("Final Form Data:", finalFormData);
 
-    // Perform submission or redirection here
-    navigate("/search");
-    FetchData(finalFormData);
+    try {
+      // Call the mutation hook to add a drug
+      const response = await addDrugMutation(finalFormData);
+
+      // Handle response if needed
+      console.log("Add Drug Mutation Response:", response);
+
+      // Redirect or navigate to another page
+      navigate("/search");
+    } catch (error) {
+      console.error("Error adding drug:", error);
+      // Handle error
+    }
   };
 
   const handleNext = () => {
@@ -418,10 +454,12 @@ function AddDrug(props) {
       })),
     }));
   };
+  // console.log("Brands state:", brands);
 
   const forms = [
     <div className="flex justify-center ">
       <DrugRegistryForm
+        // brands={brands}
         handleInputChange={handleInputChange}
         formDataStep1={formDataStep1}
         handleChildArrowButtonClick={handleChildArrowButtonClick}
@@ -493,88 +531,98 @@ function AddDrug(props) {
 
   return (
     /* Page Title Header Container (Outside the Box) Start */
-    <DrugProvider>
-      <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-2 px-2 sm:px-6 dark:text-white-500">
-        <div className="title py-4 pb-0 lg:mb-[-1rem] 2xl:mb-0 pl-0 flex w-full justify-center items-center">
-          <h1 className="text-3xl font-semibold text-center text-[#00a651]">
-            Registration
-          </h1>
-        </div>
-
-        <div className="flex w-full justify-end pr-2">
-          <Link to={`/search`} className="text-md  text-[#00a651]">
-            Close
-            <CloseIcon fontSize="small" />
-          </Link>
-        </div>
-
-        {/* Content Container Start */}
-        <div className="content w-full sm:h-full overflow-auto rounded-t-3xl py-6 pb-0 text-center bg-white-contents dark:bg-black-contents">
-          <Paper elevation={3} className={classes.stepperPaper}>
-            <FormStepper currentStep={currentStep} steps={steps} />
-          </Paper>
-          <form className="flex w-full flex-col">{forms[currentStep]}</form>
-        </div>
-
-        {/* Content Container End */}
-
-        {/* Footer Container Start */}
-        <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-black-contents sm:pb-0">
-          <div className="flex items-center justify-center space-x-20 pt-0">
-            {currentStep > 0 ? (
-              <Button
-                style={{
-                  textTransform: "none",
-                  fontSize: "21px",
-                  fontFamily: "Roboto Condensed",
-                  color: "#00a651",
-                  backgroundColor: "transparent",
-                  borderRadius: "13px",
-                  cursor: "pointer",
-                }}
-                onClick={handleBack}
-                type="button"
-              >
-                <FaArrowLeftLong
-                  style={{
-                    fontSize: "20px",
-                    color: "#00a651",
-                  }}
-                  className="mr-2 text-[20px] text-[#00a651]"
-                />
-                Previous
-              </Button>
-            ) : (
-              <div style={{ width: "104px" }}></div> // Placeholder with the width of the button
-            )}
-          </div>
-          <Button
-            style={{
-              textTransform: "none",
-              fontSize: "21px",
-              fontFamily: "Roboto Condensed",
-              color: isLastStep ? "#fff" : "#00a651",
-              backgroundColor: isLastStep ? "#00a651" : "transparent",
-              borderRadius: isLastStep ? "13px" : "13px",
-            }}
-            onClick={handleArrowButtonClick}
-            type="button"
-          >
-            {isLastStep ? "Submit" : "Next"}
-            <FaArrowRightLong
-              style={{
-                fontSize: "20px",
-                color: isLastStep ? "text-white" : "text-[#00a651]",
-              }}
-              className={`ml-2 text-[20px] ${
-                isLastStep ? "hidden" : "text-[#00a651]"
-              }`}
-            />
-          </Button>
-        </div>
-        {/* Footer Container End */}
+    // <DrugProvider>
+    <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-2 px-2 sm:px-6 dark:text-white-500">
+      <div className="title py-4 pb-0 lg:mb-[-1rem] 2xl:mb-0 pl-0 flex w-full justify-center items-center">
+        <h1 className="text-3xl font-semibold text-center text-[#00a651]">
+          Registration
+        </h1>
       </div>
-    </DrugProvider>
+
+      <div className="flex w-full justify-end pr-2">
+        <Link to={`/search`} className="text-md  text-[#00a651]">
+          Close
+          <CloseIcon fontSize="small" />
+        </Link>
+      </div>
+
+      {/* Content Container Start */}
+      <div className="content w-full sm:h-full overflow-auto rounded-t-3xl py-6 pb-0 text-center bg-white-contents dark:bg-black-contents">
+        <Paper elevation={3} className={classes.stepperPaper}>
+          <FormStepper
+            currentStep={currentStep}
+            steps={steps}
+            // brands={brands}
+          />
+          {/* Pass brands as prop */}
+        </Paper>
+        <form className="flex w-full flex-col">{forms[currentStep]}</form>
+      </div>
+      {/* <div className="content w-full sm:h-full overflow-auto rounded-t-3xl py-6 pb-0 text-center bg-white-contents dark:bg-black-contents">
+        <Paper elevation={3} className={classes.stepperPaper}>
+          <FormStepper currentStep={currentStep} steps={steps} />
+        </Paper>
+        <form className="flex w-full flex-col">{forms[currentStep]}</form>
+      </div> */}
+
+      {/* Content Container End */}
+
+      {/* Footer Container Start */}
+      <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-black-contents sm:pb-0">
+        <div className="flex items-center justify-center space-x-20 pt-0">
+          {currentStep > 0 ? (
+            <Button
+              style={{
+                textTransform: "none",
+                fontSize: "21px",
+                fontFamily: "Roboto Condensed",
+                color: "#00a651",
+                backgroundColor: "transparent",
+                borderRadius: "13px",
+                cursor: "pointer",
+              }}
+              onClick={handleBack}
+              type="button"
+            >
+              <FaArrowLeftLong
+                style={{
+                  fontSize: "20px",
+                  color: "#00a651",
+                }}
+                className="mr-2 text-[20px] text-[#00a651]"
+              />
+              Previous
+            </Button>
+          ) : (
+            <div style={{ width: "104px" }}></div> // Placeholder with the width of the button
+          )}
+        </div>
+        <Button
+          style={{
+            textTransform: "none",
+            fontSize: "21px",
+            fontFamily: "Roboto Condensed",
+            color: isLastStep ? "#fff" : "#00a651",
+            backgroundColor: isLastStep ? "#00a651" : "transparent",
+            borderRadius: isLastStep ? "13px" : "13px",
+          }}
+          onClick={handleArrowButtonClick}
+          type="button"
+        >
+          {isLastStep ? "Submit" : "Next"}
+          <FaArrowRightLong
+            style={{
+              fontSize: "20px",
+              color: isLastStep ? "text-white" : "text-[#00a651]",
+            }}
+            className={`ml-2 text-[20px] ${
+              isLastStep ? "hidden" : "text-[#00a651]"
+            }`}
+          />
+        </Button>
+      </div>
+      {/* Footer Container End */}
+    </div>
   );
 }
 
