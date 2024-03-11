@@ -9,10 +9,8 @@ import { DarkModeProvider } from "./DarkModeContext";
 import configureLocalForage from "./localforageConfig";
 import store from "./app/store";
 import { Provider } from "react-redux";
-// import { QueryClientProvider, queryClient } from "react-query";
-// import { queryClient } from "./app/react-query/queryClient";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { AuthProvider } from './auth/AuthProvider';
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 // import { QueryClient, QueryClientProvider } from "./app/react-query/api";
@@ -34,11 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <QueryClientProvider client={queryClient}>
           <DarkModeProvider>
             <BrowserRouter>
-              <DashboardLayout>
-                <Routes>
-                  <Route path="/*" element={<App />} />
-                </Routes>
-              </DashboardLayout>
+              <AuthProvider>
+                <DashboardLayout>
+                  <Routes>
+                    <Route path="/*" element={<App />} />
+                  </Routes>
+                </DashboardLayout>
+              </AuthProvider>
             </BrowserRouter>
           </DarkModeProvider>
           <ReactQueryDevtools initialIsOpen={false} />
