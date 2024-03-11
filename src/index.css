@@ -83,6 +83,24 @@ section {
   box-shadow: 7px 5px 5px rgba(1, 14, 9, 0.63);
 }
 
+.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input {
+  outline: 0;
+  border: none;
+}
+.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input:focus {
+  outline: none; /* Remove the focus outline */
+  border: none; /* Remove the border */
+}
+
+.css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root.Base-root-MuiOutlinedInput-root {
+  outline: transparent; /* Remove the focus outline */
+  border: transparent; /* Remove the border */
+}
+.Base-root-MuiOutlinedInput-root {
+  outline: transparent; /* Remove the focus outline */
+  border: transparent; /* Remove the border */
+}
+
 .MuiButtonBase-root
   MuiButton-root
   MuiButton-text
