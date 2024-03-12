@@ -1,9 +1,11 @@
 import React from "react";
-import BarStacked from "./BarStacked";
-import BarHorizontalStacked from "./BarHorizontalStacked";
-import Bubble from "./Bubble";
+
 import Line from "./Line";
+import Bubble from "./Bubble";
+import BarStacked from "./BarStacked";
 import useLagRadar from "./useLagRadar";
+import BarHorizontalStacked from "./BarHorizontalStacked";
+
 const components = [
   ["Line", Line],
   // ["Bar", Bar],
@@ -17,16 +19,14 @@ export default function Dashboards({ className }) {
   useLagRadar();
   return (
     <div className="overflow-hidden mr-10 sm:m-0">
-      {components.map(([label, Comp]) => {
-        return (
-          <div  key={label + ""}>
+      {components.map(([label, Comp]) => (
+          <div  key={`${label  }`}>
             <h1>{label}</h1>
             <div>{ className }
               <Comp />
             </div>
           </div>
-        );
-      })}
+        ))}
       {/* <div style={{ height: "50rem" }} /> */}
     </div>
   );

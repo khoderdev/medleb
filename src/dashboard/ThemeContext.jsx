@@ -1,10 +1,10 @@
 // ThemeContext.js
-import React, { createContext, useState } from "react";
+import React, { useState, createContext } from 'react';
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState("light");
+  const [currentTheme, setCurrentTheme] = useState('light');
 
   const changeCurrentTheme = (newTheme) => {
     setCurrentTheme(newTheme);

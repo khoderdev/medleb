@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import ThemeToggle from "./ThemeToggle";
-import React from "react";
-import { RiUserLine } from "react-icons/ri";
-import { FaRegBell } from "react-icons/fa";
-import FullscreenButton from "../../components/FullscreenButton";
-import { FiLogIn } from "react-icons/fi";
-import { RiUserAddLine } from "react-icons/ri";
-import { AiOutlineDatabase } from "react-icons/ai";
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import ThemeToggle from './ThemeToggle';
+import React from 'react';
+import { RiUserLine } from 'react-icons/ri';
+import { FaRegBell } from 'react-icons/fa';
+import FullscreenButton from '../../components/FullscreenButton';
+import { FiLogIn } from 'react-icons/fi';
+import { RiUserAddLine } from 'react-icons/ri';
+import { AiOutlineDatabase } from 'react-icons/ai';
 
 const SidebarRight = () => {
   const [isActive, setIsActive] = useState(false);
@@ -30,10 +30,10 @@ const SidebarRight = () => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [sidebarRef]);
 
@@ -42,25 +42,27 @@ const SidebarRight = () => {
   };
 
   const framerSidebarPanel = {
-    initial: { x: "100%", zIndex: 1000 },
+    initial: { x: '100%', zIndex: 1000 },
     animate: { x: 0 },
-    exit: { x: "-100%" },
+    exit: { x: '-100%' },
     transition: { duration: 0.1 },
   };
 
   return (
-    <AnimatePresence
-    // mode="wait"
-    // initial={false}
-    >
-      {isCollapsed && <div className="" onClick={toggleCollapse}></div>}
+    <AnimatePresence>
+      {isCollapsed && (
+        <div
+          className="fixed inset-0 z-0 backdrop-blur-sm dark:backdrop-blur-sm"
+          onClick={toggleCollapse}
+        ></div>
+      )}
       <div ref={sidebarRef} className="">
         <motion.div
           {...framerSidebarPanel}
           className={`z-50  h-[100svh] bg-white-contents flex flex-col justify-between dark:bg-black-contents ${
-            isCollapsed ? "w-50" : "w-250"
+            isCollapsed ? 'w-50' : 'w-250'
           }px text-lightgray font-averta-regular h-[100svh] shrink-0 overflow-hidden text-left text-xl transition-all duration-300 ease-in-out`}
-          style={{ right: isCollapsed ? 0 : "auto" }}
+          style={{ right: isCollapsed ? 0 : 'auto' }}
         >
           {isCollapsed ? (
             // Show icons with text stacked when expanded
@@ -73,15 +75,11 @@ const SidebarRight = () => {
                 >
                   <RiUserLine
                     className={`text-[33px] ${
-                      activeIcon === "user"
-                        ? "text-[#00a651]"
-                        : "text-[#9CA5BF]"
+                      activeIcon === 'user' ? 'text-[#00a651]' : 'text-[#9CA5BF]'
                     } hover:text-[#00a651]`}
-                    onClick={() => handleIconsClick("user")}
+                    onClick={() => handleIconsClick('user')}
                   />
-                  <span className="text-md ml-4 text-gray-900 dark:text-gray-100">
-                    Profile
-                  </span>
+                  <span className="text-md ml-4 text-gray-900 dark:text-gray-100">Profile</span>
                 </Link>
 
                 <Link
@@ -91,15 +89,11 @@ const SidebarRight = () => {
                 >
                   <FiLogIn
                     className={`text-[33px] ${
-                      activeIcon === "login"
-                        ? "text-[#00a651]"
-                        : "text-[#9CA5BF]"
+                      activeIcon === 'login' ? 'text-[#00a651]' : 'text-[#9CA5BF]'
                     } hover:text-[#00a651]`}
-                    onClick={() => handleIconsClick("login")}
+                    onClick={() => handleIconsClick('login')}
                   />
-                  <span className="text-md ml-4 text-gray-900 dark:text-gray-100">
-                    Login
-                  </span>
+                  <span className="text-md ml-4 text-gray-900 dark:text-gray-100">Login</span>
                 </Link>
 
                 <Link
@@ -109,11 +103,9 @@ const SidebarRight = () => {
                 >
                   <FaRegBell
                     className={`text-[33px] ${
-                      activeIcon === "bell"
-                        ? "text-[#00a651]"
-                        : "text-[#9CA5BF]"
+                      activeIcon === 'bell' ? 'text-[#00a651]' : 'text-[#9CA5BF]'
                     } hover:text-[#00a651]`}
-                    onClick={() => handleIconsClick("bell")}
+                    onClick={() => handleIconsClick('bell')}
                   />
                   <span className="text-md ml-4 text-gray-900 dark:text-gray-100">
                     Notifications
@@ -127,15 +119,11 @@ const SidebarRight = () => {
                 >
                   <AiOutlineDatabase
                     className={`text-[33px] ${
-                      activeIcon === "bell"
-                        ? "text-[#00a651]"
-                        : "text-[#9CA5BF]"
+                      activeIcon === 'bell' ? 'text-[#00a651]' : 'text-[#9CA5BF]'
                     } hover:text-[#00a651]`}
-                    onClick={() => handleIconsClick("data")}
+                    onClick={() => handleIconsClick('data')}
                   />
-                  <span className="text-md ml-4 text-gray-900 dark:text-gray-100">
-                    Static Data
-                  </span>
+                  <span className="text-md ml-4 text-gray-900 dark:text-gray-100">Static Data</span>
                 </Link>
               </div>
             </div>
@@ -145,36 +133,36 @@ const SidebarRight = () => {
               <Link to="/profile" onClick={() => handleIconClick()}>
                 <RiUserLine
                   className={`text-[33px] ${
-                    activeIcon === "user" ? "text-[#00a651]" : "text-[#9CA5BF]"
+                    activeIcon === 'user' ? 'text-[#00a651]' : 'text-[#9CA5BF]'
                   } hover:text-[#00a651]`}
-                  onClick={() => handleIconsClick("user")}
+                  onClick={() => handleIconsClick('user')}
                 />
               </Link>
 
               <Link to="/auth" onClick={() => handleIconClick()}>
                 <FiLogIn
                   className={`text-[33px] ${
-                    activeIcon === "login" ? "text-[#00a651]" : "text-[#9CA5BF]"
+                    activeIcon === 'login' ? 'text-[#00a651]' : 'text-[#9CA5BF]'
                   } hover:text-[#00a651]`}
-                  onClick={() => handleIconsClick("login")}
+                  onClick={() => handleIconsClick('login')}
                 />
               </Link>
 
               <Link to="/notifications" onClick={() => handleIconClick()}>
                 <FaRegBell
                   className={`text-[33px] ${
-                    activeIcon === "bell" ? "text-[#00a651]" : "text-[#9CA5BF]"
+                    activeIcon === 'bell' ? 'text-[#00a651]' : 'text-[#9CA5BF]'
                   } hover:text-[#00a651]`}
-                  onClick={() => handleIconsClick("bell")}
+                  onClick={() => handleIconsClick('bell')}
                 />
               </Link>
 
               <Link to="/static" onClick={() => handleIconClick()}>
                 <AiOutlineDatabase
                   className={`text-[33px] ${
-                    activeIcon === "bell" ? "text-[#00a651]" : "text-[#9CA5BF]"
+                    activeIcon === 'bell' ? 'text-[#00a651]' : 'text-[#9CA5BF]'
                   } hover:text-[#00a651]`}
-                  onClick={() => handleIconsClick("data")}
+                  onClick={() => handleIconsClick('data')}
                 />
               </Link>
             </div>
@@ -242,5 +230,5 @@ const SidebarRight = () => {
 
 export default SidebarRight;
 function setIsActive(arg0: boolean) {
-  throw new Error("Function not implemented.");
+  throw new Error('Function not implemented.');
 }

@@ -1,6 +1,7 @@
-import React from "react";
-import GlobalPagesLayouts from "../GlobalPagesLayouts";
-import Profile from "./Profile";
+import React from 'react';
+
+import Profile from './Profile';
+import GlobalPagesLayouts from '../GlobalPagesLayouts';
 
 function ProfilePage() {
   return (

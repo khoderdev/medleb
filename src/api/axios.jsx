@@ -19,23 +19,21 @@ Axios.interceptors.request.use(
 
     // Add the access token to the Authorization header if it exists
     if (accessToken) {
-      config.headers["Authorization"] = `Bearer ${accessToken}`;
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
     // Set default Content-Type header
     config.headers["Content-Type"] = "application/json";
-    config.headers["Accept"] = "text/plain";
+    config.headers.Accept = "text/plain";
 
     // Add cache control headers to prevent caching
     config.headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
-    config.headers["Pragma"] = "no-cache";
-    config.headers["Expires"] = "0";
+    config.headers.Pragma = "no-cache";
+    config.headers.Expires = "0";
 
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Axios.interceptors.request.use(
@@ -62,10 +60,10 @@ Axios.interceptors.request.use(
 
 // // Response Interceptor
 Axios.interceptors.response.use(
-  (response) => {
+  (response) => 
     // Handle response data
-    return response.data;
-  },
+     response.data
+  ,
   (error) => {
     // Handle errors
     if (error.response) {

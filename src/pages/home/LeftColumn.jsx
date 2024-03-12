@@ -1,137 +1,43 @@
-// import React from "react";
-// const containerStyle = {
-//   backgroundImage: `url('/src/images/EB-Quote.png')`,
-// };
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import React, { useState, useEffect } from 'react';
 
-// const LeftColumn = () => {
-//   return (
-//     <div
-//       className="bg-img h-screen flex justify-center items-center bg-left bg-fixed bg-no-repeat bg-contain"
-//       style={containerStyle}
-//     >
-//       {/* <style>
-//         {`
-//           @media (min-width: 768px) {
-//             .bg-img {
-//               background-position: left;
-//             }
-//           }
+import './LeftColumn.css';
 
-//           @media (min-width: 640px) {
-//             .bg-img {
-//               background-position: 20%;
-//             }
-//           }
-//           @media (min-width: 1024px) {
-//             .bg-img {
-//               background-position: 10%;
-//             }
-//           }
-//         `}
-//       </style> */}
-//     </div>
-//   );
-// };
-
-// export default LeftColumn;
-
-// // import React from "react";
-
-// // const LeftColumn = () => {
-// //   const containerStyle = {
-// //     backgroundImage: `url('/src/images/EB-Quote.png')`,
-// //     //   // backgroundSize: "contain",
-// //     backgroundPosition: "50% 35%",
-// //     //   // backgroundAttachment: "fixed",
-// //     //   // backgroundRepeat: "no-repeat",
-// //     //   // height:"100vh",
-// //   };
-
-// // // Media query for screens larger than or equal to 768px
-// // containerStyle["@media (min-width: 768px)"] = {
-// //   backgroundPosition: "left 20px",
-// // };
-
-// // // Media query for screens larger than or equal to 1024px
-// // containerStyle["@media (min-width: 1024px)"] = {
-// //   backgroundPosition: "left 0px",
-// // };
-
-// //   // Add more media queries and adjust values as needed for different screen sizes
-
-// //   return (
-// //     <div
-// //       className="flex justify-center items-center w-full h-screen bg-center md:bg-left bg-fixed bg-no-repeat bg-contain"
-// //       style={containerStyle}
-// //     ></div>
-// //   );
-// // };
-
-// //
-import React from "react";
-
-const containerStyle = {
-  // backgroundImage: { EBQuote },
-  backgroundImage: `url('/assets/EB-Quote.png')`,
-  // backgroundSize: "50% 70%",
-  // backgroundSize: "contain",
-  // backgroundPosition: "center",
-};
 const LeftColumn = () => {
+  const [isSmallerScreen, setIsSmallerScreen] = useState(false);
+
+  useEffect(() => {
+    // Function to handle window resize and update state accordingly
+    const handleResize = () => {
+      setIsSmallerScreen(window.innerWidth <= 768);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Call handleResize once to initialize state
+    handleResize();
+
+    // Remove event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div
-      className="bg-img w-full flex justify-center items-center  h-screen  bg-left bg-fixed bg-no-repeat bg-contain"
-      style={containerStyle}
-    >
-      <style>
-        {`
-
-          @media (min-width: 366px) {
-            .bg-img {
-              background-position: 25%;
-               background-size: 480px
-            }
-          }
-          @media (min-width: 640px) {
-            .bg-img {
-              background-position: 20%;
-              background-size: 550px
-              
-            }
-          }
-
-          @media (min-width: 768px) {
-            .bg-img {
-              background-position: 40%;
-              background-size: 500px
-            }
-          }
-          
-          @media (min-width: 1024px) {
-            .bg-img {
-              background-position: 5%;
-              background-size: 400px
-              
-            }
-
-          @media (min-width: 1321px) {
-            .bg-img {
-              background-position: 10%;
-              background-size: 370px
-              
-            }
-
-          @media (min-width: 1536px) {
-            .bg-img {
-              background-position: 8%;
-              background-size: 520px
-              
-            }
-          }
-        `}
-      </style>
+    <div className="relative flex justify-between md:w-[50%] h-screen overflow-x-hidden">
+      <div
+        className={`absolute inset-0 overflow-x-hidden ${
+          isSmallerScreen ? 'h-screen overflow-x-hidden' : 'h-screen 2xl:pl-16 overflow-x-hidden'
+        }`}
+      >
+        <img
+          src="/assets/EB-Quote.png"
+          alt="Background Image"
+          className={`w-3/4 lg:w-96 h-full ml-6 object-cover ${isSmallerScreen ? '' : '2xl:w-[80%] 2xl:ml-[-2rem]'}`}
+          // style={{ position: 'fixed' }}
+        />
+      </div>
     </div>
   );
 };
+
 export default LeftColumn;
-// background-size: 20px 20px

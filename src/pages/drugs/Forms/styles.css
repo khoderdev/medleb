@@ -1,7 +1,17 @@
 /* styles.css */
 
+.css-d4sob-MuiPaper-root {
+  background-color: transparent;
+}
 
-
+.MuiPaper-root
+  MuiPaper-elevation
+  .MuiPaper-rounded
+  .MuiPaper-elevation3
+  .makeStyles-stepperPaper-1
+  .css-d4sob-MuiPaper-root {
+  background-color: red;
+}
 
 .css-vuzb25 {
   background-color: transparent;
@@ -169,19 +179,19 @@ border-radius: ;
 }
 
 /* Add this CSS in your stylesheet */
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
   appearance: none;
 }
 
 /* Optionally, you can add styles to indicate that it's a number input */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
   appearance: none;
   margin: 5px;

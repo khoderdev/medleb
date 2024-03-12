@@ -2,13 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* scrollbar */
+@import 'simplebar-react/dist/simplebar.min.css';
+
 @font-face {
-  font-family: "Roboto Condensed";
-  src: url("./fonts/RobotoCondensed-Regular.ttf") format("truetype");
+  font-family: 'Roboto Condensed';
+  src: url('./fonts/RobotoCondensed-Regular.ttf') format('truetype');
 }
 
 * {
-  font-family: "Roboto", sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   font-weight: 500;
   h1 {
     font-size: 2rem;
@@ -27,24 +30,34 @@
   } */
 }
 
-.MuiSvgIcon-root
-  .MuiSvgIcon-fontSizeMedium
-  .MuiStepIcon-root
-  .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root {
-  background-color: red;
-  width: 2em;
-  height: 2em;
-}
-
-.span.MuiTypography-root,
-.MuiTypography-body1,
-.MuiFormControlLabel-label,
-.css-ahj2mt-MuiTypography-root {
-  font-family: "Roboto", sans-serif !important; /* Apply Roboto font */
-}
-
-.css-117w1su-MuiStepIcon-text {
-  background-color: red;
+[type='text']:focus,
+input:where(:not([type])):focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  outline-offset: 0;
+  --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: #00a651; /* Change focus color to green */
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width)
+    var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0 + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  border-color: transparent; /* Change border color to green */
 }
 
 .scroll-break {
@@ -56,13 +69,13 @@
 
 html,
 body {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   touch-action: manipulation;
   user-scalable: no;
 }
 
 body {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   min-height: 100dvh;
   /* background-color: #00000000; */
   height: 100dvh;
@@ -74,7 +87,7 @@ body {
 }
 
 .App {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -113,7 +126,7 @@ section {
   MuiButton-sizeMedium
   MuiButton-textSizeMedium
   css-1e6y48t-MuiButtonBase-root-MuiButton-root-root {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
@@ -174,7 +187,7 @@ section {
 }
 
 body {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   -webkit-tap-highlight-color: none;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -182,7 +195,7 @@ body {
 }
 
 .roboto-font {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .NavBottom {
@@ -398,6 +411,72 @@ body {
 .med-btn-sec-sm:active {
   box-shadow: none;
   transform: translateY(4px);
+}
+
+/* med-tbn-3rd light mode */
+.med-btn-3rd {
+  background-color: #00a651;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.med-btn-3rd:not(:disabled):hover,
+.med-btn-3rd:not(:disabled):focus {
+  outline: 0;
+  background: #00a651;
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, 0.2),
+    0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.med-btn-3rd:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+/* med-tbn-3rd dark mode */
+.med-btn-3rd-dark {
+  background-color: #00a651;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.med-btn-3rd-dark:not(:disabled):hover,
+.med-btn-3rd-dark:not(:disabled):focus {
+  outline: 0;
+  background: #00ff7b;
+  box-shadow:
+    0 0 0 2px rgba(226, 226, 226, 0.24),
+    0 3px 8px 0 rgba(82, 82, 82, 0.15);
+}
+
+.med-btn-3rd-dark:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
 }
 
 @media (max-width: 366px) {
