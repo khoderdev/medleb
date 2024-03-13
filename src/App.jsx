@@ -68,6 +68,7 @@ import PresentationForm from './pages/drugs/Forms/Separated/presentation/Present
 import PresentationList from './pages/drugs/Forms/Separated/presentation/PresentationList';
 import { ModalFormProvider } from './pages/drugs/Forms/Separated/country/GeoModalProvider';
 import { CurrenciesProvider } from './pages/drugs/Forms/Separated/currencies/CurrenciesContext';
+import AddName from './AddName.jsx';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -108,6 +109,8 @@ const App = () => {
                       <StepperProvider>
                         <Routes>
                           {/* //////////IMPORTATION FORMS/////////////// */}
+
+                          <Route path="/khara" element={<AddName />} />
                           <Route path="/rfi" element={<RFIForm />} />
                           <Route path="/pi" element={<PIForm />} />
                           <Route path="/order" element={<OrderForm />} />
