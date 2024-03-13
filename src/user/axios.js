@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://medleb.onrender.com";
+axios.defaults.baseURL = "https://medleb-api.onrender.com";
 
 axios
   .get("/api/users")
