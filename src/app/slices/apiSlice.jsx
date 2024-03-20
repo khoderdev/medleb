@@ -66,9 +66,10 @@
 
 // export default api;
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
 import axiosInstances from "../../api/axios";
 
-const apiUrl = "http://localhost:3000";
+const apiUrl = "http://localhost:9000";
 
 const api = createApi({
   reducerPath: "api",

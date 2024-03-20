@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createRoot } from 'react-dom/client';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-// import { QueryClient, QueryClientProvider } from "./app/react-query/api";
+// import { ReactQueryDevtools } from 'react-query-devtools';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
@@ -13,14 +13,12 @@ import store from './app/store';
 import RootLayout from './dashboard/Layout.tsx';
 import { AuthProvider } from './auth/AuthProvider';
 import { DarkModeProvider } from './DarkModeContext';
-// import Modal from "react-modal";
 import configureLocalForage from './localforageConfig';
 
 const queryClient = new QueryClient();
 
 configureLocalForage();
 
-// Modal.setAppElement("#root");
 document.addEventListener('DOMContentLoaded', () => {
   const root = createRoot(document.getElementById('root'));
 
