@@ -118,7 +118,7 @@ export default function AnalyticsTasks({ title, subheader, list, ...other }) {
             type="text"
             value={newTaskInput}
             onChange={(e) => setNewTaskInput(e.target.value)}
-            className="w-full dark:bg-black-input rounded-md px-2 py-1"
+            className="w-full dark:bg-black-input rounded-md px-2 py-1 text-black-text dark:text-white-text"
             placeholder="New Task"
           />
           <button

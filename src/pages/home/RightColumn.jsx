@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import Notifications from './Notifications';
 
 const RightColumn = () => (
-  <div className="flex md:pl-2 md:pr-4 justify-between md:w-[65%] bg-white-bg dark:bg-black-bg h-screen md:min-h-[55%] z-50 overflow-x-hidden">
+  <div className="flex md:pl-2 md:pr-4 justify-between w-full bg-white-bg dark:bg-black-bg text-black-text dark:text-white-text h-screen md:min-h-[55%] z-50 overflow-x-hidden">
     {/* Right Column */}
     <div className="w-full h-screen flex flex-col px-2 pt-12 pb-[4.5rem] md:py-2 gap-2  overflow-x-hidden">
       {/* First Block */}

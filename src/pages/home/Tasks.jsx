@@ -2,7 +2,7 @@ import AppTasks from './app-tasks';
 
 export default function TaskView() {
   return (
-    <div className="col-span-1">
+    <div className="col-span-1 text-black-text dark:text-white-text">
       <AppTasks
         title="Tasks"
         list={[

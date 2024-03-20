@@ -1,0 +1,33 @@
+.full-page-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.full-page-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-page-content {
+  width: 80%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.section1 {
+  background-image: url('EB-Quote.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .section1 {
+    background-size: contain;
+  }
+}
