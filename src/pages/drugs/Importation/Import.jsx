@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
-import { Step, Stepper, StepLabel } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+
 import Paper from "@mui/material/Paper";
+import { makeStyles } from "@mui/styles";
+import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import { Step, Stepper, StepLabel } from "@mui/material";
+
 import "./styles.css";
 import RFImporationForm from "./test/RFIForm";
 import ImportationProcessForm from "./Forms/ImportationProcessForm";
-import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   stepperPaper: {
@@ -44,7 +46,7 @@ const validateCurrentForm = (
   if (currentStep === 0) {
     // Validate the first form (RFI form)
     return rfiFormData.RequestedDrug !== "" && true;
-  } else if (currentStep === 1) {
+  } if (currentStep === 1) {
     // Validate the second form (Importation Process form)
     return (
       importProcessPFIData.PFInumber !== "" &&
@@ -204,7 +206,7 @@ function ImportDrug(props) {
       </div>
 
       <div className="flex w-full justify-end pr-2">
-        <Link to={`/list`} className="text-md  text-[#00a651]">
+        <Link to="/list" className="text-md  text-[#00a651]">
           Close
           <CloseIcon fontSize="small" />
         </Link>

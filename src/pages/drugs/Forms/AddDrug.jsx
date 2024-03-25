@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -18,6 +19,7 @@ import './styles.css';
 import DrugImages from './DrugImages';
 import DrugDocuments from './DrugDocuments';
 import DrugRegistryForm from './DrugRegistryForm';
+import PricesComparison from './PricesComparison';
 import PricingInformations from './PricingInformations';
 // import { useDispatch } from "react-redux";
 import useCustomNavigation from '../../useCustomNavigation';
@@ -63,29 +65,20 @@ function AddDrug(props) {
   const [drugDocumentsList, setDrugDocumentsList] = useState(Array.from({ length: 15 }, () => []));
   const [currentStep, setCurrentStep] = useState(0);
   const navigate = useNavigate();
-  const isLastStep = currentStep === 6;
+  const isLastStep = currentStep === 7;
   const { drugId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
   const { goBack } = useCustomNavigation();
   const steps = [
     'Drug Registry',
+    'Prices Comparison',
     'Drug Registry Addons',
-    'Drug Images',
+    'Drug Images & Docs',
     'Pricing Approval',
     'Marketing Approval',
     'Substance Information',
     'Unified Drug Information',
   ];
-
-  // const { data: brands, isLoading, isError } = useFetchBrandsQuery();
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (isError) {
-  //   return <div>Error fetching brands</div>;
-  // }
 
   const [addDrugMutation] = useAddDrugMutation();
   const [updateDrugMutation] = useUpdateDrugMutation();
@@ -304,22 +297,6 @@ function AddDrug(props) {
     }));
   };
 
-  // const logFormData = () => {
-  //   const finalFormData = {
-  //     ...formDataStep1,
-  //     ...formDataStep2,
-  //     ...formDataStep3,
-  //     ...formDataStep4,
-  //     ...formDataStep5,
-  //   };
-
-  //   console.log("Final Form Data:", finalFormData);
-
-  //   // Perform submission or redirection here
-  //   navigate("/search");
-  //   FetchData(finalFormData);
-  // };
-
   const logFormData = async () => {
     const finalFormData = {
       ...formDataStep1,
@@ -348,6 +325,7 @@ function AddDrug(props) {
 
   const handleNext = () => {
     if (currentStep === 2) {
+      /* empty */
     }
 
     setCurrentStep(currentStep + 1);
@@ -412,6 +390,10 @@ function AddDrug(props) {
     </div>,
 
     <div className="flex justify-center ">
+      <PricesComparison handleInputChange={handleInputChange} formDataStep11={formDataStep11} />
+    </div>,
+
+    <div className="flex justify-center ">
       <DrugRegistryFormAddons
         handleInputChange={handleInputChange}
         formDataStep11={formDataStep11}
@@ -419,30 +401,28 @@ function AddDrug(props) {
     </div>,
 
     <div className="flex flex-col justify-center h-full pb-16 gap-3">
-      {currentStep === 2 && (
-        <>
-          <DrugDocuments
-            drugDocumentsList={drugDocumentsList}
-            setDrugDocumentsList={setDrugDocumentsList}
-            formDataStep12={formDataStep12}
-            handleInputChangeStep1={handleInputChangeStep1}
-            updateDocumentState={updateDocumentState}
-            uploadedDocuments={uploadedDocuments}
-            newUploadedDocuments={newUploadedDocuments}
-            handleDocumentUpload={handleDocumentUpload}
-          />
-          <DrugImages
-            drugImagesList={drugImagesList}
-            setImagesList={setImagesList}
-            formDataStep12={formDataStep12}
-            handleInputChangeStep1={handleInputChangeStep1}
-            updateImageState={updateImageState}
-            uploadedImages={uploadedImages}
-            newUploadedImages={newUploadedImages}
-            handleImageUpload={handleImageUpload}
-          />
-        </>
-      )}
+      {/* {currentStep === 2 && ( */}
+      <DrugDocuments
+        drugDocumentsList={drugDocumentsList}
+        setDrugDocumentsList={setDrugDocumentsList}
+        formDataStep12={formDataStep12}
+        handleInputChangeStep1={handleInputChangeStep1}
+        updateDocumentState={updateDocumentState}
+        uploadedDocuments={uploadedDocuments}
+        newUploadedDocuments={newUploadedDocuments}
+        handleDocumentUpload={handleDocumentUpload}
+      />
+      <DrugImages
+        drugImagesList={drugImagesList}
+        setImagesList={setImagesList}
+        formDataStep12={formDataStep12}
+        handleInputChangeStep1={handleInputChangeStep1}
+        updateImageState={updateImageState}
+        uploadedImages={uploadedImages}
+        newUploadedImages={newUploadedImages}
+        handleImageUpload={handleImageUpload}
+      />
+      {/* )} */}
     </div>,
 
     <div className="flex justify-center">

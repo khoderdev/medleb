@@ -133,6 +133,7 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "the-platform": "^0.10.1",
+    "use-react-countries": "^2.0.0",
     "uuid": "^9.0.1",
     "vite-plugin-css": "^1.0.4",
     "yup": "^1.3.3"

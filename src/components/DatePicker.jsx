@@ -1,31 +1,31 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import flatpickr from 'flatpickr';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import React, { useRef, useEffect } from 'react';
 
-function DatePicker({ title, options }) {
+function DatePicker({ title, options, value, onChange, className }) {
   const datePickerRef = useRef(null);
 
   useEffect(() => {
     if (datePickerRef.current) {
       const updatedOptions = {
         ...options,
-        // Remove date restrictions
         minDate: null,
         maxDate: null,
-        // Reverse the selected values
-        defaultDate: options && options.defaultDate ? options.defaultDate.reverse() : null,
-        // Set date format to "dd-MM-yyyy"
-        dateFormat: 'd-m-Y',
+        defaultDate: value || null,
+        dateFormat: 'Y-m-d', // Use ISO date format
+        onChange: (selectedDates) => {
+          onChange({ target: { name: datePickerRef.current.name, value: selectedDates[0] || '' } });
+        },
       };
 
-      flatpickr(datePickerRef.current, updatedOptions || {});
+      flatpickr(datePickerRef.current, updatedOptions);
     }
-  }, [options]);
+  }, [options, value, onChange]);
 
   return (
-    <div className="text-left">
+    <div className={`text-left ${className}`}>
       <label className="font-medium">{title}</label> <br />
       <input
         ref={datePickerRef}
@@ -40,6 +40,9 @@ function DatePicker({ title, options }) {
 DatePicker.propTypes = {
   title: PropTypes.string.isRequired,
   options: PropTypes.object,
+  value: PropTypes.string, // Ensure value is a string
+  onChange: PropTypes.func.isRequired, // onChange should be required
+  className: PropTypes.string,
 };
 
 export default DatePicker;

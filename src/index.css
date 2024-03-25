@@ -31,7 +31,7 @@
 }
 
 [type='text']:focus,
-input:where(:not([type])):focus,
+/* input:where(:not([type])):focus, */
 [type='email']:focus,
 [type='url']:focus,
 [type='password']:focus,
@@ -422,7 +422,6 @@ body {
   padding: 10px 15px;
   text-align: center;
   transition: 200ms;
-  width: 100%;
   box-sizing: border-box;
   border: 0;
   font-size: 16px;
