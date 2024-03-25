@@ -59,7 +59,7 @@ const SidebarRight = () => {
       <div ref={sidebarRef} className="">
         <motion.div
           {...framerSidebarPanel}
-          className={`z-50  h-[100svh] bg-white-contents flex flex-col justify-between dark:bg-black-contents ${
+          className={`z-40  h-[100svh] bg-white-contents flex flex-col justify-between dark:bg-black-contents ${
             isCollapsed ? 'w-50' : 'w-250'
           }px text-lightgray font-averta-regular h-[100svh] shrink-0 overflow-hidden text-left text-xl transition-all duration-300 ease-in-out`}
           style={{ right: isCollapsed ? 0 : 'auto' }}

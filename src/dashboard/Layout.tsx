@@ -22,11 +22,11 @@ const style = {
 
   NavBottomContainer: 'flex sm:hidden z-40',
 
-  OffCanvasSidebar: 'flex md:hidden overflow-hidden h-[100dvh] z-50',
+  OffCanvasSidebar: 'flex md:hidden overflow-hidden h-[100dvh] z-40',
 
-  sidebarContainerLeft: 'hidden absolute h-[100dvh] md:block z-50 w-auto',
+  sidebarContainerLeft: 'hidden absolute h-[100dvh] md:block z-40 w-auto',
 
-  sidebarContainerRight: 'hidden absolute h-[100dvh] sm:block z-50 w-auto right-0',
+  sidebarContainerRight: 'hidden absolute h-[100dvh] sm:block z-40 w-auto right-0',
 };
 
 export function DashboardLayout(props: LayoutProps) {
