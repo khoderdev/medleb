@@ -1,46 +1,13 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import  apiSlice  from "./slices/apiSlice";
-// import { setupListeners } from "@reduxjs/toolkit/query";
-// import formSlice from "../app/slices/BrandsFormSlice";
-// import geoReducer from "./slices/geoSlice.jsx";
-// import { drugImportationsApiSlice } from "./slices/drugImportationsApiSlice";
-// import drugTable from "./slices/drugTable";
-// import AddDrugAndImportReducer from "./reducers/AddDrugAndImportReducer";
-// // import drugRegistrationFormReducer from "./reducers/drugRegistrationFormReducer";
-// import companiesFormReducer from "../app/slices/CompaniesFormSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
-// const store = configureStore({
-//   reducer: {
-//     [apiSlice.reducerPath]: apiSlice.reducer,
-//     [drugImportationsApiSlice.reducerPath]: drugImportationsApiSlice.reducer,
-//     AddDrugImport: AddDrugAndImportReducer,
-//     // drugReg: drugRegistrationFormReducer,
-//     // drugTable,
-//     brandsForm: formSlice.reducer,
-//     geo: geoReducer,
-//     companiesForm: companiesFormReducer,
-//   },
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware().concat(apiSlice.middleware),
-//   devTools: process.env.NODE_ENV !== "production", // Enable Redux DevTools only in development
-// });
-
-// setupListeners(store.dispatch);
-
-// export default store;
-
-
-
-import { configureStore } from "@reduxjs/toolkit";
-import  api  from "./slices/apiSlice";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import formSlice from "../app/slices/BrandsFormSlice";
-import geoReducer from "./slices/geoSlice.jsx";
-import { drugImportationsApiSlice } from "./slices/drugImportationsApiSlice";
-import drugTable from "./slices/drugTable";
-import AddDrugAndImportReducer from "./reducers/AddDrugAndImportReducer";
-import drugRegistrationFormReducer from "./reducers/drugRegistrationFormReducer";
-import companiesFormReducer from "../app/slices/CompaniesFormSlice";
+import api from './slices/apiSlice';
+import geoReducer from './slices/geoSlice';
+import formSlice from './slices/BrandsFormSlice';
+import companiesFormReducer from './slices/CompaniesFormSlice';
+import AddDrugAndImportReducer from './reducers/AddDrugAndImportReducer';
+import { drugImportationsApiSlice } from './slices/drugImportationsApiSlice';
+import drugRegistrationFormReducer from './reducers/drugRegistrationFormReducer';
 
 const store = configureStore({
   reducer: {
@@ -48,14 +15,13 @@ const store = configureStore({
     [drugImportationsApiSlice.reducerPath]: drugImportationsApiSlice.reducer,
     AddDrugImport: AddDrugAndImportReducer,
     drugReg: drugRegistrationFormReducer,
-    // drugTable,
+
     brandsForm: formSlice.reducer,
     geo: geoReducer,
     companiesForm: companiesFormReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
-  devTools: process.env.NODE_ENV !== "production", // Enable Redux DevTools only in development
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 setupListeners(store.dispatch);

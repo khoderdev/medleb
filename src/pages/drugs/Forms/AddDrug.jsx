@@ -116,6 +116,21 @@ function AddDrug(props) {
     mohCode: '',
   });
 
+  const [formDataPriceCompare, setFormDataPriceCompare] = useState({
+    productDesc: '',
+    activeInactiveIngredients: '',
+    indications: '',
+    posology: '',
+    methodOfAdministration: '',
+    contraindications: '',
+    precautionsForUse: '',
+    effectsOnFGN: '',
+    sideEffects: '',
+    toxicity: '',
+    storageConditions: '',
+    shelfLife: '',
+  });
+
   const [formDataStep11, setFormDataStep11] = useState({
     productDesc: '',
     activeInactiveIngredients: '',
@@ -266,6 +281,15 @@ function AddDrug(props) {
       }));
     }
 
+    setFormDataPriceCompare((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+
+    setFormDataStep11((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
     setFormDataStep11((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -390,7 +414,10 @@ function AddDrug(props) {
     </div>,
 
     <div className="flex justify-center ">
-      <PricesComparison handleInputChange={handleInputChange} formDataStep11={formDataStep11} />
+      <PricesComparison
+        handleInputChange={handleInputChange}
+        formDataPriceCompare={formDataPriceCompare}
+      />
     </div>,
 
     <div className="flex justify-center ">
