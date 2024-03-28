@@ -83,8 +83,9 @@
 
 
 import React, { useState, useEffect } from "react";
-import Axios from "../../../../api/axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
+
+import Axios from "../../../../api/axios";
 
 const StaticData = () => {
   const { guid } = useParams();

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import React from "react";
 import "react-toastify/dist/ReactToastify.css";
+
 import { useDrugContext } from "../../pages/drugs/Forms/Separated/drugs/DrugContext";
 
 const Modal = ({ isOpen, onClose, onSubmit }) => {
@@ -15,7 +14,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
   return (
     <div style={{ width: "100%", height: "80%" }} className={`modal ${isOpen ? "is-active" : ""}`}>
-      <div className="modal-background" onClick={onClose}></div>
+      <div className="modal-background" onClick={onClose} />
       <div className="modal-card" style={{ width: "700px", height: "400px" }}>
         {/* <header className="modal-card-head"> */}
           <p className="modal-card-title">{modalTitle}</p>
@@ -23,7 +22,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
             className="delete"
             aria-label="close"
             onClick={onClose}
-          ></button>
+           />
         {/* </header> */}
         <section className="modal-card-body">
           <form className="" onSubmit={handleSubmit}>

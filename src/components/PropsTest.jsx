@@ -1,9 +1,10 @@
 
 import React from "react";
+
 import DrugCard from "./DrugCard";
-import Panadol from "../images/panadol.png";
 import Nexium from "../images/nexium.png";
 import Zoloft from "../images/zoloft.png";
+import Panadol from "../images/panadol.png";
 import Risperdal from "../images/risperdal.png";
 
 function CardRender() {

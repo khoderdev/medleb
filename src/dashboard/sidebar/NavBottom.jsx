@@ -108,13 +108,11 @@
 // export default NavBottom;
 
 import * as React from "react";
+import { Link } from "react-router-dom";
+import { GoHome , GoSearch , GoPerson , GoListUnordered } from "react-icons/go";
+
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import { Link } from "react-router-dom";
-import { GoHome } from "react-icons/go";
-import { GoSearch } from "react-icons/go";
-import { GoListUnordered } from "react-icons/go";
-import { GoPerson } from "react-icons/go";
 
 export default function NavBottom() {
   const [value, setValue] = React.useState("recents");

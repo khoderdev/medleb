@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useCurrenciesContext } from "./CurrenciesContext";
+
 import CurrencyForm from "./CurrencyForm";
+import { useCurrenciesContext } from "./CurrenciesContext";
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
@@ -23,7 +24,7 @@ const Modal = ({ isOpen, onClose, children }) => {
               strokeLinejoin="round"
               strokeWidth="2"
               d="M6 18L18 6M6 6l12 12"
-            ></path>
+             />
           </svg>
         </div>
         {children}

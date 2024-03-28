@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { FaSortUp, FaSortDown } from "react-icons/fa";
+import React, { useMemo, useState, useEffect } from "react";
+
+import { AddIcon } from "../AddIcon";
 // import axios from "axios";
 import Axios from "../../../../../api/axios";
-import { FaSortDown, FaSortUp } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { AddIcon } from "../AddIcon";
 
 
 const ATCsList = (onCreateBtnClick) => {
@@ -64,9 +65,7 @@ const ATCsList = (onCreateBtnClick) => {
     return atcCodes;
   }, [atcCodes, sortConfig]);
 
-  const filteredData = useMemo(() => {
-    return sortedData.filter((atcCodeItem) => {
-      return (
+  const filteredData = useMemo(() => sortedData.filter((atcCodeItem) => (
         atcCodeItem[0]?.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
         atcCodeItem[0]?.levelName
           .toLowerCase()
@@ -86,9 +85,7 @@ const ATCsList = (onCreateBtnClick) => {
         atcCodeItem[0]?.interactionIngredientName
           .toLowerCase()
           .includes(searchTerm.toLowerCase())
-      );
-    });
-  }, [sortedData, searchTerm]);
+      )), [sortedData, searchTerm]);
 
   return (
     <div className="container mx-auto h-screen p-4 text-black-text dark:text-white-text">
@@ -103,7 +100,7 @@ const ATCsList = (onCreateBtnClick) => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="rounded-md py-1 px-3 dark:border-white-text text-black-text dark:text-white-text bg-white-bg dark:bg-black-bg dark:focus:border-transparent outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
         />
- <Link to={'/atc/new'} className="icon-hovered button-with-icon">
+ <Link to="/atc/new" className="icon-hovered button-with-icon">
             <AddIcon />
            
           </Link>

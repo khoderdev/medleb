@@ -1,10 +1,10 @@
+import { AddIcon } from "./icons/AddIcon";
 import { HomeIcon } from "./icons/HomeIcon";
 import { SearchIcon } from "./icons/SearchIcon";
-import { DashboardIcon } from "./icons/DashboardIcon";
-import { AddIcon } from "./icons/AddIcon";
 import { ImportIcon } from "./icons/ImportIcon";
-import { DistributeIcon } from "./icons/DistributeIcon";
 import { InspectIcon } from "./icons/InspectIcon";
+import { DashboardIcon } from "./icons/DashboardIcon";
+import { DistributeIcon } from "./icons/DistributeIcon";
 import { TrackRecordsIcon } from "./icons/TrackRecordsIcon";
 
 export const SideBarItems = [

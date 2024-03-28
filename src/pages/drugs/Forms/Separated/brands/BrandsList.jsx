@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import Axios from "../../../../../api/axios";
-import StaticDataTable from "../StaticDataTable";
+import React from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "react-query"; // Import useQuery hook
+
+import Axios from "../../../../../api/axios";
+import StaticDataTable from "../StaticDataTable"; // Import useQuery hook
 
 const BrandsList = () => {
   const navigate = useNavigate();

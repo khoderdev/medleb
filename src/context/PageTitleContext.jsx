@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useContext, createContext, useMemo } from 'react';
+import React, { useMemo, useState, useContext, createContext } from 'react';
 
 const PageTitleContext = createContext();
 

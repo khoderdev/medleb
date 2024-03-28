@@ -1,15 +1,15 @@
 // //////////////////////////////////////////////////////////////////////////
 
 import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { HiPencilAlt, HiTrash } from "react-icons/hi";
-import lebflag from "../../../images/lebflag.png";
-import subs2 from "../../../images/subs2.png";
-import drugPlaceholder from "../../../images/drugPlaceholder.png";
+import { HiTrash, HiPencilAlt } from "react-icons/hi";
+import React, { useRef, useState, useEffect } from "react";
+
 import "../../../index.css";
+import subs2 from "../../../images/subs2.png";
+import lebflag from "../../../images/lebflag.png";
 import useCustomNavigation from "../../useCustomNavigation";
-import { AiOutlineClose } from "react-icons/ai";
+import drugPlaceholder from "../../../images/drugPlaceholder.png";
 
 function List({ className }) {
   const [drugs, setDrugs] = useState([]);
@@ -43,12 +43,12 @@ function List({ className }) {
   const parseResponseData = (data) => {
     if (Array.isArray(data)) {
       return data.reverse();
-    } else if (typeof data === "object" && data !== null) {
+    } if (typeof data === "object" && data !== null) {
       return [data];
-    } else {
+    } 
       console.error("Invalid response format: expected an array");
       return [];
-    }
+    
   };
 
   useEffect(() => {
@@ -129,8 +129,7 @@ function List({ className }) {
         </p>
       ) : (
         <div className="grid grid-cols-1 gap-14 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 py-10 px-2">
-          {filteredDrugs.map((data, index) => {
-            return (
+          {filteredDrugs.map((data, index) => (
               <div
                 key={index}
                 className="card w-full overflow-hidden bg-white-fg dark:bg-black-input rounded-3xl border-2 border-[#00a651] outline-none hover:border-green-pri hover:outline-none hover:ring-2 hover:ring-green-pri dark:hover:ring-2 dark:hover:ring-green-pri p- shadow-xl transition duration-300 hover:scale-105 hover:shadow-2xl dark:text-white-text dark:shadow-lg dark:shadow-[#24382ab0]"
@@ -251,17 +250,16 @@ function List({ className }) {
                         src={subs2}
                         className="w-[120px] cursor-pointer"
                         alt=""
-                      ></img>
+                       />
                     </Link>
                   </div>
                   <div className="flex flex-col-reverse sm:flex-row w-fit items-center justify-center gap-1">
                     <p className=" text-xs text-black-text">Made in Lebanon</p>
-                    <img className="w-[50px]" src={lebflag} alt=""></img>
+                    <img className="w-[50px]" src={lebflag} alt="" />
                   </div>
                 </div>
               </div>
-            );
-          })}
+            ))}
         </div>
       )}
     </div>

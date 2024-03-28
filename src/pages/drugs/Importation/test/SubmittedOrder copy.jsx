@@ -1,7 +1,8 @@
-import React, { useState } from "react";
 import Axios from "axios";
-import { useImportation } from "../ImportationContext";
 import { v4 as uuidv4 } from "uuid";
+import React, { useState } from "react";
+
+import { useImportation } from "../ImportationContext";
 
 const SubmittedOrderForm = () => {
   const { saveRFI } = useImportation();
@@ -32,7 +33,7 @@ const SubmittedOrderForm = () => {
       await saveRFI(); // Assuming this function saves RFI data to the server
     } catch (error) {
       // Handle error
-      setError("Error submitting order: " + error.message);
+      setError(`Error submitting order: ${  error.message}`);
     } finally {
       setLoading(false);
     }

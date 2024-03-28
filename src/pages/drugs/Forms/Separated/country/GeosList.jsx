@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Axios from "../../../../../api/axios";
 import localforage from "localforage";
-import { useTable, useSortBy, useFilters } from "react-table";
-import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useTable, useSortBy } from "react-table";
+import React, { useState, useEffect } from "react";
+import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
+
+import Axios from "../../../../../api/axios";
 
 const STORAGE_KEY = "countriesData";
 
@@ -17,7 +18,7 @@ const GeosList = () => {
       try {
         setLoading(true);
 
-        let cachedData = localStorage.getItem(STORAGE_KEY);
+        const cachedData = localStorage.getItem(STORAGE_KEY);
         if (cachedData) {
           setCountriesData(JSON.parse(cachedData));
           setLoading(false);
@@ -33,7 +34,7 @@ const GeosList = () => {
                 `/api/Governorates/v1.0/Governorates/${country.guid}`
               );
               const governoratesData = governoratesResponse.data;
-              const staticCountryGuid = country.staticCountryGuid;
+              const {staticCountryGuid} = country;
 
               const updatedGovernorates = await Promise.all(
                 governoratesData.map(async (governorate) => {
@@ -175,12 +176,12 @@ const GeosList = () => {
     const lowercaseSearchTerm = searchTerm
       ? searchTerm.toLowerCase().trim()
       : "";
-    return countriesData.filter((country) => {
+    return countriesData.filter((country) => 
       // Check if any field contains the search term
-      return Object.values(country).some((value) =>
+       Object.values(country).some((value) =>
         String(value).toLowerCase().includes(lowercaseSearchTerm)
-      );
-    });
+      )
+    );
   }, [countriesData, searchTerm]);
 
   const {
@@ -213,7 +214,7 @@ const GeosList = () => {
 
       {loading ? (
         <div className="flex justify-center items-center">
-          <div className="loader ease-linear rounded-full border-8 border-t-8 border-green-pri absolute top-80 right-50 h-20 w-20"></div>
+          <div className="loader ease-linear rounded-full border-8 border-t-8 border-green-pri absolute top-80 right-50 h-20 w-20" />
         </div>
       ) : (
         <div className="overflow-x-auto">
@@ -254,16 +255,14 @@ const GeosList = () => {
                     {...row.getRowProps()}
                     className="border text-center border-gray-300 p-2 dark:border-black-contents dark:hover:bg-black-contents"
                   >
-                    {row.cells.map((cell) => {
-                      return (
+                    {row.cells.map((cell) => (
                         <td
                           {...cell.getCellProps()}
                           className="border-b border-gray-300 p-2 dark:border-black-contents"
                         >
                           {cell.render("Cell")}
                         </td>
-                      );
-                    })}
+                      ))}
                   </tr>
                 );
               })}

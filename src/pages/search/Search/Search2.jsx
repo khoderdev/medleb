@@ -1,6 +1,7 @@
 import React from "react";
-import GlobalPagesLayouts from "../../GlobalPagesLayouts";
+
 import Search from "./Search";
+import GlobalPagesLayouts from "../../GlobalPagesLayouts";
 
 function SearchPage() {
   return (

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import Axios from "../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
+import Axios from "../../../../api/axios";
 
 const ATCForm = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const ATCForm = () => {
 
     try {
       const response = await Axios.post("/api/atc/v1.0", formData);
-      console.log(response.data);
+      // console.log(response.data);
 
       // Reset the form after successful submission
       setFormData({

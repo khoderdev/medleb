@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 
-const Lounge = () => {
-    return (
+const Lounge = () => (
         <section>
             <h1>The Lounge</h1>
             <br />
@@ -11,6 +10,5 @@ const Lounge = () => {
             </div>
         </section>
     )
-}
 
 export default Lounge

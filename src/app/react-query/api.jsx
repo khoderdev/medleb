@@ -1,5 +1,5 @@
-import { useMutation, useQuery, QueryClient } from "react-query";
-import { atom, useAtom } from "jotai";
+import { atom } from "jotai";
+import { useQuery, useMutation } from "react-query";
 
 const apiUrl = "http://localhost:3000";
 
@@ -87,12 +87,12 @@ const useSearchDrugByBrandNameQuery = (query) =>
   );
 
 export {
-  useAddPharmacyDrugMutation,
+  apiBaseUrlAtom,
   useAddDrugMutation,
   useUpdateDrugMutation,
   useDeleteDrugMutation,
+  useAddPharmacyDrugMutation,
   useSearchDrugByATCNameQuery,
   useSearchDrugByBrandNameQuery,
-  apiBaseUrlAtom,
 //   queryClient,
 };

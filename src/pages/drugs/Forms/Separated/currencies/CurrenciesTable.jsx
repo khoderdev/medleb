@@ -163,9 +163,9 @@
 // ///////////////////
 // ///////////////////
 
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaSortDown, FaSortUp } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaSortUp, FaSortDown } from "react-icons/fa";
 
 const CurrenciesTable = () => {
   const [currencies, setCurrencies] = useState([]);
@@ -244,7 +244,7 @@ const CurrenciesTable = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Link to={"/currency/new"} className="icon-hovered button-with-icon">
+        <Link to="/currency/new" className="icon-hovered button-with-icon">
           <AddIcon />
         </Link>
       </div>

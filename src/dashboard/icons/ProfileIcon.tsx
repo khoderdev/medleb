@@ -59,7 +59,7 @@ const handleClick = () => {
     >
       <path
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
         strokeWidth="2"
         d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 7a3 3 0 100 6 3 3 0 000-6z"
         stroke={

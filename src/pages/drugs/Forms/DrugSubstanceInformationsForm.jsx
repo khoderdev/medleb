@@ -2,8 +2,7 @@ import React from "react";
 
 function DrugSubstanceInformationsForm({ formDataStep2, handleInputChange }) {
   return (
-    <>
-      <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
+    <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
       <h1 className="pb-2 pt-2 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
           4- Drug substance & finished product quality informations
         </h1>
@@ -158,7 +157,6 @@ function DrugSubstanceInformationsForm({ formDataStep2, handleInputChange }) {
           </div>
         </form>
       </div>
-    </>
   );
 }
 

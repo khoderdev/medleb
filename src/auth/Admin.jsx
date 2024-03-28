@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 
-const Admin = () => {
-    return (
+const Admin = () => (
         <section>
             <h1>Admins Page</h1>
             <br />
@@ -11,6 +10,5 @@ const Admin = () => {
             </div>
         </section>
     )
-}
 
 export default Admin

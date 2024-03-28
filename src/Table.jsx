@@ -1,23 +1,25 @@
-import { useMemo, useState } from "react";
-import axios from "axios"; // Import axios for making HTTP requests
+import { useMemo, useState } from "react"; // Import axios for making HTTP requests
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   MaterialReactTable,
   useMaterialReactTable,
 } from "material-react-table";
+
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Box,
   Button,
-  CircularProgress,
-  IconButton,
   Tooltip,
+  IconButton,
   Typography,
+  CircularProgress,
 } from "@mui/material";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { orderStatus } from "./makeData"; // Assuming this file contains the orderStatus array
-import DeleteIcon from "@mui/icons-material/Delete";
+
 import {
-  useCreateOrder,
   useGetOrders,
+  useCreateOrder,
   useUpdateOrder,
   useDeleteOrder,
 } from "./useCrudTable";
@@ -212,7 +214,7 @@ const CrudTable = () => {
 const queryClient = new QueryClient();
 
 const Table = () => (
-  //Put this with your other react-query providers near root of your app
+  // Put this with your other react-query providers near root of your app
   <QueryClientProvider client={queryClient}>
     <div className="p-10">
       <CrudTable />

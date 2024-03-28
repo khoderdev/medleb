@@ -1,7 +1,7 @@
 import {
-  SET_CURRENT_STEP,
   SET_FORM_DATA,
   RESET_FORM_DATA,
+  SET_CURRENT_STEP,
 } from "../actions/DrugRegActionTypes";
 
 const initialState = {

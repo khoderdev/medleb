@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
+import React, { useState } from "react";
+
 import "./AddModalStyles.css";
 
 const AddModal = ({ closeModal, title, onAdd, onCancel, initialValue }) => {

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const BatchComponent = ({ label, inputs, onAddSerials }) => {
-  return (
+const BatchComponent = ({ label, inputs, onAddSerials }) => (
     <div className="flex flex-col">
       <label
         htmlFor={inputs[0].id}
@@ -41,7 +40,6 @@ const BatchComponent = ({ label, inputs, onAddSerials }) => {
       </div>
     </div>
   );
-};
 
 // ////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////

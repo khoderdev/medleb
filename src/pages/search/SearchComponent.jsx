@@ -1,13 +1,11 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useState,
-  useRef,
-  useImperativeHandle,
-} from "react";
 import axios from "axios";
+import React, {
+  useState,
+  useEffect,
+} from "react";
+
 import singleDrugRef from "../drugs/list/SingleDrug";
-import { useDrugContext } from "../../pages/drugs/Forms/Separated/drugs/DrugContext";
+import { useDrugContext } from "../drugs/Forms/Separated/drugs/DrugContext";
 
 const SearchComponent = () => {
   const {
@@ -289,7 +287,7 @@ const SearchComponent = () => {
               }`}
             >
               <div className="flex">
-                <div className="flex w-2/5 flex-col"></div>
+                <div className="flex w-2/5 flex-col" />
 
                 <div className="w-3/5 p-4 text-left">
                   <h2 className="mb-2 text-2xl font-semibold">

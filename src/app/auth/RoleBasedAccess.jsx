@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RoleBasedAccess = ({ allowedRoles, userRoles, children }) => {
-  const hasPermission = () => {
+  const hasPermission = () => 
     // Check if userRoles is defined before using "includes"
-    return userRoles && userRoles.some(role => allowedRoles.includes(role));
-  };
+     userRoles && userRoles.some(role => allowedRoles.includes(role))
+  ;
 
   return hasPermission() ? <>{children}</> : null;
 };

@@ -1,7 +1,8 @@
+import React from "react";
+import { Chart } from "react-charts";
+
 import ResizableBox from "./ResizableBox";
 import useDemoConfig from "./useChartConfig";
-import React from "react";
-import { AxisOptions, Chart } from "react-charts";
 
 export default function BarHorizontalStacked({ className }) {
   const { data, randomizeData } = useDemoConfig({

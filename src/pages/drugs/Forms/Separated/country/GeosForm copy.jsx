@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setFormData,
-  setCountryList,
-  setError,
-  resetFormData,
-} from "../../../../../app/slices/BrandsFormSlice";
+import React, { useState } from "react";
+
+import Axios from "../../../../../api/axios";
+
+
 
 const GeosForm = () => {
   const [formData, setFormData] = useState({
@@ -76,7 +72,7 @@ const GeosForm = () => {
       await Axios.post("/api/governorates/v1.0", {
         guid: governorateGuid,
         code: formData.staticCountryGuid,
-        staticCountryGuid: staticCountryGuid,
+        staticCountryGuid,
         name: formData.govName,
         nameAr: formData.govNameAr,
         enabled: formData.enabled,
@@ -88,7 +84,7 @@ const GeosForm = () => {
       await Axios.post("/api/district/v1.0", {
         guid: districtGuid,
         code: formData.distCode, // Assuming there's a field for District code in the form
-        governorateGuid: governorateGuid,
+        governorateGuid,
         name: formData.distName,
         nameAr: formData.distNameAr,
         enabled: formData.enabled,
@@ -98,7 +94,7 @@ const GeosForm = () => {
       await Axios.post("/api/city/v1.0", {
         guid: uuidv4(),
         code: formData.cityCode, // Assuming there's a field for City code in the form
-        districtGuid: districtGuid,
+        districtGuid,
         name: formData.cityName,
         nameAr: formData.cityNameAr,
         enabled: formData.enabled,

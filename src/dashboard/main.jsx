@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import { Box } from '@mui/material';
 
-import { NAV, HEADER } from './config-layout';
+import { HEADER } from './config-layout';
 import { useResponsive } from '../hooks/use-responsive';
 
 // ----------------------------------------------------------------------

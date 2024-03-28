@@ -180,9 +180,10 @@
 // //////////
 // //////////
 
-import React, { useState } from "react";
-import { useImportation, useRFI } from "../ImportationContext";
+import React from "react";
+
 import "../styles.css";
+import { useImportation } from "../ImportationContext";
 
 const RFImportationForm = () => {
   const {
@@ -205,8 +206,7 @@ const RFImportationForm = () => {
   };
 
   return (
-    <>
-      <div className="col-span-1 flex w-full sm:w-[70em] flex-col sm:col-span-1 text-black-text dark:text-white-text">
+    <div className="col-span-1 flex w-full sm:w-[70em] flex-col sm:col-span-1 text-black-text dark:text-white-text">
         <div className="flex flex-col justify-items-center">
           <h1 className="pt-6 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
             1 - Request For importation
@@ -374,7 +374,6 @@ const RFImportationForm = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

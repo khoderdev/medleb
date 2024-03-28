@@ -1,12 +1,10 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
-import ArrowBack from "@mui/icons-material/ArrowBack";
+import React, { useState, useEffect } from "react";
+import { Link , useParams, useNavigate } from "react-router-dom";
+
 // import EditSuccessPopup from "./EditSuccessPopup"; // Import the EditSuccessPopup component
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 
 const dosageOptions = {
@@ -131,7 +129,7 @@ function EditDrug() {
   return (
     <div className="flex h-auto w-full flex-col items-center justify-center dark:text-white-text pb-20">
       <Link
-        to={`/list`}
+        to="/list"
         className="mb-4 inline-block self-start p-3 text-lg text-green-pri"
       >
         <ArrowBackIosIcon fontSize="medium" className="inline align-middle" />
@@ -160,7 +158,7 @@ function EditDrug() {
               placeholder="brand name"
             />
           </div>
-          <div className="input-container relative"></div>
+          <div className="input-container relative" />
           <label
             htmlFor="ingredientsAndstrength"
             className="labels mt-4 text-left text-lg font-bold"
@@ -175,7 +173,7 @@ function EditDrug() {
             type="text"
             placeholder="drug ingredients"
           />
-          <div className="input-container relative"></div>
+          <div className="input-container relative" />
           <label
             htmlFor="convertToLBP"
             className="labels mt-4 text-left text-lg font-bold"
@@ -190,7 +188,7 @@ function EditDrug() {
             type="number"
             placeholder="drug priceLB"
           />
-          <div className="input-container relative"></div>
+          <div className="input-container relative" />
           <label
             htmlFor="dosageValueN"
             className="labels mt-4 text-left text-lg font-bold"
@@ -227,7 +225,7 @@ function EditDrug() {
             </div>
           </div>
 
-          <div className="input-container relative"></div>
+          <div className="input-container relative" />
 
           <label
             htmlFor="ingredients"
@@ -243,7 +241,7 @@ function EditDrug() {
             type="text"
             placeholder="drug presentation"
           />
-          <div className="input-container relative"></div>
+          <div className="input-container relative" />
           <label
             htmlFor="ingredients"
             className="labels mt-4 text-left text-lg font-bold"

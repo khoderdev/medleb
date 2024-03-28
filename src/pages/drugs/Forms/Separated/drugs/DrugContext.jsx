@@ -1,9 +1,15 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-constructed-context-values */
 import axios from "axios";
-import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
-import { Step, Stepper, StepLabel } from "@mui/material";
+import React, { useState, useEffect, useContext, createContext } from "react";
+
 import { makeStyles } from "@mui/styles";
+import { Step, Stepper, StepLabel } from "@mui/material";
+
+import Axios from "../../../../../api/axios";
 
 // Create the context
 const DrugContext = createContext();
@@ -12,8 +18,7 @@ const DrugContext = createContext();
 const generateGUID = () => uuidv4();
 
 // Function to generate initial form data
-const generateInitialFormData = () => {
-  return {
+const generateInitialFormData = () => ({
     Guid: generateGUID(),
     ATCGuid: "3fa85f64-5717-4562-b3fc-2c963f66afa7",
     // ATCGuid: null,
@@ -102,8 +107,7 @@ const generateInitialFormData = () => {
     ImageDefault: "",
     InteractionIngredientName: "int drug 1",
     UpdatedDate: "2024-02-01",
-  };
-};
+  });
 
 const useStyles = makeStyles((theme) => ({
   stepperPaper: {

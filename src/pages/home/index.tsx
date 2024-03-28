@@ -14,6 +14,7 @@
 // }
 
 import React, { useRef } from 'react';
+
 import './styles.css';
 import RightColumn from './RightColumn';
 
@@ -23,7 +24,7 @@ const FullPageScroll = () => {
 
   return (
     <div className="full-page-container">
-      <div className="full-page-section section1" ref={section1Ref}></div>
+      <div className="full-page-section section1" ref={section1Ref} />
       <div className="full-page-section" ref={section2Ref}>
         <RightColumn />
       </div>

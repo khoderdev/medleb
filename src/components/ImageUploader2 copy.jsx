@@ -125,8 +125,8 @@
 
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
+
 import Modal from "./Modal"; // Update the path to your Modal component
-import ReactModal from "react-modal";
 
 export default function ImageUploader2(props) {
   const { formDataStep1, handleInputChange } = props;
@@ -210,7 +210,7 @@ export default function ImageUploader2(props) {
                   onClick={() => openImageModal(index)}
                 >
                   <img
-                    src={image["data_url"]}
+                    src={image.data_url}
                     alt=""
                     className="h-28 w-28 border-2 object-contain"
                   />

@@ -1,12 +1,13 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
-import DirectoryTable from "./DirectoryTable";
+
+import Modal from "./Modal";
+import "../../../../../../table.css";
+import Pagination from "./Pagination";
 import AddUserForm from "./AddUserForm";
 import EditUserForm from "./EditUserForm";
-import Pagination from "./Pagination";
-import Modal from "./Modal";
 import useModal from "../../hooks/useModal";
-import axios from "axios";
-import "/table.css";
+import DirectoryTable from "./DirectoryTable";
 
 const Table = () => {
   const [users, setUsers] = useState([]);

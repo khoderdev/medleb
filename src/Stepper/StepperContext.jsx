@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import React, { useState, useEffect, useContext, createContext } from "react";
 
 // Create a new context for the stepper
 const StepperContext = createContext();
@@ -12,8 +11,7 @@ export const useStepperContext = () => useContext(StepperContext);
 const generateGUID = () => uuidv4();
 
 // Function to generate initial form data
-const generateInitialFormData = () => {
-  return {
+const generateInitialFormData = () => ({
     Guid: generateGUID(),
     ATCName: "",
     DosageName: "",
@@ -73,8 +71,7 @@ const generateInitialFormData = () => {
     ImageDefault: "",
     InteractionIngredientName: "",
     UpdatedDate: "2024-02-01",
-  };
-};
+  });
 
 // Stepper provider component
 export const StepperProvider = ({ children }) => {

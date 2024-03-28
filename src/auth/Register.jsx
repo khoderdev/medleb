@@ -229,16 +229,16 @@
 
 // export default Register;
 
+import { Link } from "react-router-dom";
 import React, { useRef, useState, useEffect } from "react";
-import {
-  faCheck,
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faCheck ,
   faTimes,
+  faEyeSlash,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 import axios from "./axios";
-import { Link } from "react-router-dom";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -316,9 +316,9 @@ const Register = () => {
       );
       // TODO: remove console.logs before deployment
       console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response))
+      // console.log(JSON.stringify(response))
       setSuccess(true);
-      //clear state and controlled inputs
+      // clear state and controlled inputs
       setUser("");
       setPwd("");
       setMatchPwd("");

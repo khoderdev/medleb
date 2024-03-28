@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import React, { useState } from "react";
+import { toast , ToastContainer } from "react-toastify";
+
 import Axios from "../../../../api/axios";
-import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
 
 const ATCForm = () => {
   const [formData, setFormData] = useState({
@@ -58,7 +58,7 @@ const ATCForm = () => {
 const ATCCodesForm = ({ atcGuid }) => {
   const [formData, setFormData] = useState({
     guid: uuidv4(),
-    atcGuid: atcGuid,
+    atcGuid,
     code: "",
     levelName: "",
     levelNameAr: "",
@@ -86,7 +86,7 @@ const ATCCodesForm = ({ atcGuid }) => {
         "/api/atccodes/v1.0",
         formDataWithValidLevelNumber
       );
-      console.log(response.data);
+      // console.log(response.data);
 
       toast.success("Form submitted successfully!", {
         position: "top-right",

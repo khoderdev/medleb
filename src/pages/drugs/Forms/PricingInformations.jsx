@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React from "react";
+
 import "./styles.css";
 
 const exchangeRates = {
@@ -92,8 +93,7 @@ function PricingInformations(props) {
   }
 
   return (
-    <>
-      <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
+    <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
       <h1 className="pb-4 pt-2 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
           6 - Pricing Informations
         </h1>
@@ -149,7 +149,7 @@ function PricingInformations(props) {
                 name="convertToUSD"
                 disabled
                 className="converted-price-usd mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
-                value={" " + convertToUSD()}
+                value={` ${  convertToUSD()}`}
               />
             </div>
             <div className="input-container relative">
@@ -161,10 +161,10 @@ function PricingInformations(props) {
                 disabled
                 className="converted-price-usd mt-1 w-full rounded-full border border-[#00a65100] dark:border-black-border bg-white-input dark:bg-black-shadow px-4 py-2 font-normal shadow-md dark:shadow-black-shadow outline-none focus:border-green-pri focus:outline-none focus:ring-2 focus:ring-green-pri dark:focus:ring-2 dark:focus:ring-green-pri"
                 value={
-                  " " +
+                  ` ${ 
                   parseFloat(convertToLBP().replace(".", "")).toLocaleString(
                     "en-LB"
-                  ) /* Add thousands separator */
+                  )}` /* Add thousands separator */
                 }
               />
             </div>
@@ -371,7 +371,6 @@ function PricingInformations(props) {
           </form>
         </div>
       </div>
-    </>
   );
 }
 

@@ -1,16 +1,18 @@
-import React, { useState, useMemo } from "react";
-import SearchBox from "./SearchBox";
+import React, { useMemo, useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
+
 // import DeleteIcon from "@material-ui/icons/Delete";
 // import FaPencilAlt  from "@material-ui/icons/Edit";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 
+import SearchBox from "./SearchBox";
+
 const useSortableData = (users, config = null) => {
   const [sortConfig, setSortConfig] = useState(config);
 
   const sortedUsers = useMemo(() => {
-    let sortableUsers = [...users];
+    const sortableUsers = [...users];
     if (sortConfig !== null) {
       sortableUsers.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -55,18 +57,15 @@ const DirectoryTable = (props) => {
     setSearchValue(value);
   };
 
-  let updateUsers = users.filter((user) => {
-    return Object.keys(user).some((key) =>
+  const updateUsers = users.filter((user) => Object.keys(user).some((key) =>
       user[key]
         .toString()
         .toLowerCase()
         .includes(searchValue.toString().toLowerCase())
-    );
-  });
+    ));
 
   return (
-    <>
-      <div className="container">
+    <div className="container">
         <SearchBox searchHandler={searchHandler} />
         <table>
           <thead>
@@ -108,7 +107,7 @@ const DirectoryTable = (props) => {
                   Email
                 </button>
               </th>
-              <th></th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -118,7 +117,7 @@ const DirectoryTable = (props) => {
                   <td>
                     <img
                       src={user.image}
-                      alt={user.first_name + " " + user.last_name}
+                      alt={`${user.first_name  } ${  user.last_name}`}
                     />
                   </td>
                   <td>{user.first_name}</td>
@@ -151,7 +150,6 @@ const DirectoryTable = (props) => {
           </tbody>
         </table>
       </div>
-    </>
   );
 };
 

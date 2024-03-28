@@ -1,6 +1,6 @@
 import React from "react";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowLeftLong , FaArrowRightLong } from "react-icons/fa6";
+
 import Button from "@mui/material/Button";
 
 const GlobalFooterLayouts = ({
@@ -8,8 +8,7 @@ const GlobalFooterLayouts = ({
   isLastStep,
   handleBack,
   handleArrowButtonClick,
-}) => {
-  return (
+}) => (
     <div className="footer w-full flex justify-center space-x-20 rounded-b-3xl py-0 text-center text-2xl bg-white-contents dark:bg-[#292929] sm:pb-0">
       <div className="flex items-center justify-center space-x-20 pt-0">
         {currentStep > 0 ? (
@@ -36,7 +35,7 @@ const GlobalFooterLayouts = ({
             Previous
           </Button>
         ) : (
-          <div style={{ width: "104px" }}></div>
+          <div style={{ width: "104px" }} />
         )}
       </div>
       <Button
@@ -64,6 +63,5 @@ const GlobalFooterLayouts = ({
       </Button>
     </div>
   );
-};
 
 export default GlobalFooterLayouts;

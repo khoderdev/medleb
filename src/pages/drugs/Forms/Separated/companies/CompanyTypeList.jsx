@@ -1,8 +1,6 @@
 // CompanyTypeList.js
 import React, { useState, useEffect } from 'react';
-import Axios from "../../../../../api/axios";
-import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
+
 
 function CompanyTypeList() {
   const [companyTypes, setCompanyTypes] = useState([]);

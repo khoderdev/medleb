@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 export function SearchGrayIcon() {
   const [isHovered, setIsHovered] = useState(false);

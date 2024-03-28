@@ -40,7 +40,7 @@ const MyChart = ({ chartId }) => {
 
     const myChart = new window.Chart(ctx, {
       type: "scatter",
-      data: data,
+      data,
       options: {
         scales: {
           x: {
@@ -57,7 +57,7 @@ const MyChart = ({ chartId }) => {
     };
   }, [chartId]);
 
-  return <canvas id={chartId} width="400" height="200"></canvas>;
+  return <canvas id={chartId} width="400" height="200" />;
 };
 
 export default MyChart;

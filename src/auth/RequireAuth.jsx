@@ -15,7 +15,8 @@
 // }
 
 // export default RequireAuth;
-import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
+
 import useAuth from "./useAuth";
 
 const RequireAuth = ({ allowedRoles }) => {

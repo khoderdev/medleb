@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import dummyResultData from "./dummyResultData";
 import { FaSearch } from "react-icons/fa";
+
+import dummyResultData from "./dummyResultData";
 
 const Bar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -81,8 +82,7 @@ const Bar = () => {
     setShowAlphabetFilters(false);
   };
 
-  const dummySearchFunction = (query, classFilter) => {
-    return dummyResultData.filter((result) => {
+  const dummySearchFunction = (query, classFilter) => dummyResultData.filter((result) => {
       const lowercaseName = result.name.toLowerCase();
       const lowercaseQuery = query.toLowerCase();
       const matchesQuery =
@@ -91,7 +91,6 @@ const Bar = () => {
 
       return matchesQuery;
     });
-  };
 
   const clearFilters = () => {
     setSearchQuery("");

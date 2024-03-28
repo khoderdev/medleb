@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo } from "react";
-import Axios from "../../../../../api/axios";
-import { Link, useParams } from "react-router-dom";
 import { useTable, useSortBy } from "react-table";
-import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
+
+import Axios from "../../../../../api/axios";
 
 const ATCsList = () => {
   const { guid } = useParams();
@@ -58,12 +59,12 @@ const ATCsList = () => {
     const lowercaseSearchTerm = searchTerm
       ? searchTerm.toLowerCase().trim()
       : "";
-    return data.filter((atc) => {
+    return data.filter((atc) => 
       // Check if any field contains the search term
-      return Object.values(atc).some((value) =>
+       Object.values(atc).some((value) =>
         String(value).toLowerCase().includes(lowercaseSearchTerm)
-      );
-    });
+      )
+    );
   }, [data, searchTerm]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =

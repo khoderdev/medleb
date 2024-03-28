@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 export default function DistributionIcon() {
   const [activeState, setActiveState] = useState("default");
@@ -118,7 +118,7 @@ export default function DistributionIcon() {
         strokeWidth="0.5"
         strokeLinecap="round"
       />
-      {/* left pill SART*/}
+      {/* left pill SART */}
       <path
         d="M26.0723 14.2474C24.4204 13.5585 22.5228 14.3391 21.8339 15.991L20.3369 19.5803L26.319 22.0752L27.8159 18.4859C28.5049 16.834 27.7242 14.9364 26.0723 14.2474Z"
         fill={
@@ -162,9 +162,9 @@ export default function DistributionIcon() {
         strokeWidth="0.5"
         strokeLinecap="round"
       />
-      {/* left pill END*/}
+      {/* left pill END */}
 
-      {/* Right pill SART*/}
+      {/* Right pill SART */}
       <path
         d="M34.4472 17.7404C36.0991 18.4293 36.8797 20.3269 36.1908 21.9788L34.6939 25.5681L28.7118 23.0732L30.2087 19.484C30.8977 17.8321 32.7953 17.0514 34.4472 17.7404Z"
         stroke={
@@ -214,9 +214,9 @@ export default function DistributionIcon() {
         strokeWidth="0.5"
         strokeLinecap="round"
       />
-      {/* Right pill END*/}
+      {/* Right pill END */}
 
-      {/* Carriage body START*/}
+      {/* Carriage body START */}
       <path
         d="M35.0195 38.6017H18.9596C18.9172 38.6017 18.8795 38.575 18.8653 38.535L15.047 27.7165C15.0241 27.6514 15.0723 27.5832 15.1413 27.5832H38.4954L37.3611 31.4721L35.1148 38.5321C35.1016 38.5736 35.063 38.6017 35.0195 38.6017Z"
         fill={
@@ -239,7 +239,7 @@ export default function DistributionIcon() {
         strokeWidth="3"
         strokeLinecap="round"
       />
-      {/* Carriage body END*/}
+      {/* Carriage body END */}
       <path
         d="M44.4907 23.3704H49.6759"
         stroke={

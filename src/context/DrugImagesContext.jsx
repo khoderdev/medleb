@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-constructed-context-values */
-import axios from 'axios';
 import React, { useState, useContext, createContext } from 'react';
 
 // Create Context
@@ -16,7 +15,7 @@ export const DrugImageProvider = ({ children, handleImageUpload }) => {
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const [imageToRemoveIndex, setImageToRemoveIndex] = useState(null);
 
-  const maxNumber = 1; // Define maxNumber
+  const maxNumber = 1;
 
   const onChange = (drugImageList, index) => {
     if (drugImageList.length > maxNumber) {

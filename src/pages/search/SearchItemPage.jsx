@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import dummyResultData from './dummyResultData';
 
 const SearchBar = ({ onSelect }) => {
@@ -98,8 +99,7 @@ const SearchBar = ({ onSelect }) => {
   );
 };
 
-const SearchItemPage = ({ selectedItem }) => {
-  return (
+const SearchItemPage = ({ selectedItem }) => (
     <div className="mx-auto p-4 max-w-md">
       {selectedItem ? (
         <div>
@@ -114,7 +114,6 @@ const SearchItemPage = ({ selectedItem }) => {
       )}
     </div>
   );
-};
 
 const App = () => {
   const [selectedItem, setSelectedItem] = useState(null);

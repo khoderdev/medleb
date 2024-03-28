@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import "./ImageSlider.css";
 
 const ImageSlider = ({ images }) => {
@@ -130,10 +131,10 @@ const ImageSlider = ({ images }) => {
   return (
     <div className="image-slider-container flex flex-col w-full justify-center">
       <Carousel
-        showArrows={true}
+        showArrows
         showStatus={false}
-        showThumbs={true}
-        infiniteLoop={true}
+        showThumbs
+        infiniteLoop
         width="100%"
         autoPlay={false}
         onClickItem={(index) => openModal(index)}

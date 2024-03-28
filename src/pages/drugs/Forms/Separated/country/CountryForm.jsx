@@ -8,8 +8,7 @@ const CountryForm = ({
   countryArabicName,
   setCountryArabicName,
   handleCountrySubmit,
-}) => {
-  return (
+}) => (
     <form className="country-form" onSubmit={handleCountrySubmit}>
       <div>
         <label htmlFor="code">Country Code:</label>
@@ -41,6 +40,5 @@ const CountryForm = ({
       <button type="submit">Submit</button>
     </form>
   );
-};
 
 export default CountryForm;

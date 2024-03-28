@@ -285,12 +285,13 @@
 // ///////////////////////////////
 // ///////////////////////////////
 
-import React, { useState } from "react";
-import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import Axios from "../../../../../api/axios";
 
 function CompanyTypeForm() {
   const [formData, setFormData] = useState({

@@ -450,10 +450,11 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { HiPencilAlt, HiTrash } from "react-icons/hi";
-import lebflag from "../../../images/lebflag.png";
-import subs2 from "../../../images/subs2.png";
+import { HiTrash, HiPencilAlt } from "react-icons/hi";
+
 import "../../../index.css";
+import subs2 from "../../../images/subs2.png";
+import lebflag from "../../../images/lebflag.png";
 
 function SearchData({ filteredData }) {
   return (
@@ -591,12 +592,12 @@ function SearchData({ filteredData }) {
                       src={subs2}
                       className="w-[120px] cursor-pointer"
                       alt=""
-                    ></img>
+                     />
                   </Link>
                 </div>
                 <div className="flex flex-col-reverse sm:flex-row w-fit items-center justify-center gap-1">
                   <p className=" text-xs text-black-text">Made in Lebanon</p>
-                  <img className="w-[50px]" src={lebflag} alt=""></img>
+                  <img className="w-[50px]" src={lebflag} alt="" />
                 </div>
               </div>
             </div>

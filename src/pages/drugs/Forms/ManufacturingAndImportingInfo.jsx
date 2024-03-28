@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import AddModal from "../../../components/Modals/AddModal";
 
 function ManufacturingAndImportingInfo(props) {
@@ -28,8 +29,7 @@ function ManufacturingAndImportingInfo(props) {
   };
 
   return (
-    <>
-      <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
+    <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
       <h1 className="pb-4 pt-2 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
           7 - Manufacturing & Importing Informations
         </h1>
@@ -272,7 +272,6 @@ function ManufacturingAndImportingInfo(props) {
           />
         )}
       </div>
-    </>
   );
 }
 

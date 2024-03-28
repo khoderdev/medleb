@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
+
+import Axios from "../../../../../api/axios";
 
 const ATCForm = () => {
   const [formData, setFormData] = useState({
@@ -53,7 +54,7 @@ const ATCForm = () => {
       await Axios.post("/api/atccodes/v1.0", {
         guid: uuidv4(),
         code: formData.atcCode,
-        atcGuid: atcGuid,
+        atcGuid,
         levelName: formData.levelName,
         levelNameAr: formData.levelNameAr,
         levelNumber: formData.levelNumber,

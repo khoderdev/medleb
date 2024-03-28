@@ -146,9 +146,10 @@
 // //////////////////
 // //////////////////
 
-import React, { useState } from "react";
-import { StepperProvider, useStepperContext } from "./StepperContext";
+import React from "react";
+
 import DrugRegistryForm from "../pages/drugs/Forms/DrugRegistryForm";
+import { StepperProvider, useStepperContext } from "./StepperContext";
 import DrugRegistryFormAddons from "../pages/drugs/Forms/DrugRegistryFormAddons";
 
 // Define your forms array
@@ -168,7 +169,7 @@ const CurrentFormDisplay = () => {
   const { currentStep, handleInputChange, formData } = useStepperContext();
 
   return React.cloneElement(forms[currentStep], {
-    handleInputChange: handleInputChange,
+    handleInputChange,
     formData,
   });
 };
@@ -219,8 +220,7 @@ const StepperControls = () => {
 };
 
 // Main component to render the stepper and controls
-const StepperExample = () => {
-  return (
+const StepperExample = () => (
     <StepperProvider>
       <div className="main-page items-center w-full h-[100svh] bg-white-bg dark:bg-black-bg flex flex-col pb-[4.5em] sm:pb-2 px-2 sm:px-6 dark:text-white-500">
         <div className="title py-4 pb-0 lg:mb-[-1rem] 2xl:mb-0 pl-0 flex w-full justify-center items-center">
@@ -245,6 +245,5 @@ const StepperExample = () => {
       </div>
     </StepperProvider>
   );
-};
 
 export default StepperExample;

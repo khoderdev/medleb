@@ -1,7 +1,5 @@
-import { useMemo } from "react";
 import axios from "axios";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { orderStatus } from "./makeData";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 // Function to generate unique 4-digit serial numbers
 const generateSerialNumber = (() => {

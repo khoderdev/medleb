@@ -25,7 +25,7 @@ const CurrenciesTableCreateModal = ({
       <div
         className="modal-overlay absolute w-full h-full bg-gray-900 opacity750"
         onClick={onClose}
-      ></div>
+       />
 
       <div className="modal-container bg-white-contents dark:bg-black-input w-full mx-auto p-4 rounded shadow text-black-text dark:text-white-text">
         <div className="modal-content fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white-bg dark:bg-black-contents w-full md:w-[50%] py-4 text-left px-6 rounded-2xl">

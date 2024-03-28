@@ -121,8 +121,9 @@ const DrugImages = (props) => {
       </div>
       <div className="flex justify-center mt-12">
         <button
-          className="med-btn-pri"
-          onClick={(event) => uploadImages(event)}
+          className="med-btn-3rd"
+          // onClick={(event) => uploadImages(event)}
+          onClick={uploadImages}
           disabled={loading || uploadSuccess}
         >
           {loading ? 'Uploading...' : uploadSuccess ? 'Done ✔' : 'Upload Medicine images'}

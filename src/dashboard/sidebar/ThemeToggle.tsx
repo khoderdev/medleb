@@ -1,5 +1,6 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import React from "react";
+
 import { useDarkMode } from "../../DarkModeContext";
 
 export default function ThemeToggle() {

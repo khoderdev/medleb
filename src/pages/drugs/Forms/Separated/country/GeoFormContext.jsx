@@ -1,5 +1,6 @@
-import React, { createContext, useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
+import React, { useState, useContext, createContext } from "react";
+
 import Axios from "../../../../../api/axios";
 // Create a context to manage form data and modal visibility
 const GeoFormContext = createContext();
@@ -84,7 +85,7 @@ export const GeoFormProvider = ({ children }) => {
                 nameAr: district.nameAr,
                 enabled: true,
                 createdDate: new Date().toISOString(),
-                governorateGuid: governorateGuid,
+                governorateGuid,
               });
               console.log("District data posted successfully");
 
@@ -97,7 +98,7 @@ export const GeoFormProvider = ({ children }) => {
                     nameAr: city.nameAr,
                     enabled: true,
                     createdDate: new Date().toISOString(),
-                    districtGuid: districtGuid,
+                    districtGuid,
                   });
                   console.log("City data posted successfully");
                 })

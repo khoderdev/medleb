@@ -38,8 +38,7 @@
 // export default ShipmentSummary;
 import React from "react";
 
-const ShipmentSummary = ({ formData, batchesQty, batchComponents }) => {
-  return (
+const ShipmentSummary = ({ formData, batchesQty, batchComponents }) => (
     <div className="shipment-summary px-4 py-8 sm:px-8 sm:py-12 md:px-12 md:py-16 lg:px-16 lg:py-20 xl:px-20 xl:py-24">
       <h2 className="text-2xl font-semibold mb-6 text-center">Summary</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
@@ -94,6 +93,5 @@ const ShipmentSummary = ({ formData, batchesQty, batchComponents }) => {
       </div>
     </div>
   );
-};
 
 export default ShipmentSummary;

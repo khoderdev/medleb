@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { FaSortDown, FaSortUp } from "react-icons/fa";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { AddIcon } from "./AddIcon";
+import { FaSortUp, FaSortDown } from "react-icons/fa";
+import React, { useMemo, useState, useEffect } from "react";
+
 import "../../../../index.css";
+import { AddIcon } from "./AddIcon";
 
 const StaticDataTable = ({
   title,
@@ -56,17 +57,13 @@ const StaticDataTable = ({
   //   return data;
   // }, [data, sortConfig]);
 
-  const filteredData = useMemo(() => {
-    return sortedData.filter((item) => {
-      return columns.some((column) => {
+  const filteredData = useMemo(() => sortedData.filter((item) => columns.some((column) => {
         const value = item[column.key];
         if (typeof value === "string") {
           return value.toLowerCase().includes(searchTerm.toLowerCase());
         }
         return false;
-      });
-    });
-  }, [data, columns, searchTerm]);
+      })), [data, columns, searchTerm]);
 
   return (
     <div className="px-2 lg:px-10 text-black-text dark:text-white-text">

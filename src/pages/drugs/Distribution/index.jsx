@@ -1,6 +1,7 @@
 import React from "react";
-import GlobalPagesLayouts from "../../GlobalPagesLayouts";
+
 import Distribution from "./Distribution";
+import GlobalPagesLayouts from "../../GlobalPagesLayouts";
 
 const DistributionPage = () => {
   // Sample data

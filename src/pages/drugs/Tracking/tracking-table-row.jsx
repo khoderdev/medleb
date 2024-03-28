@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-import Label from '../../../components/label';
 import Iconify from '../../../components/iconify';
 
 export default function OrderTableRow({

@@ -40,6 +40,7 @@
 // ////////////////////////
 
 import React, { useState, useEffect } from "react";
+
 import Axios from "../../../../../api/axios";
 
 const CompanyList = () => {
@@ -92,14 +93,14 @@ const CompanyList = () => {
       const currentKey = prefix ? `${prefix}.${key}` : key;
       if (typeof value === "object" && value !== null) {
         return renderTableRows(value, currentKey);
-      } else {
+      } 
         return (
           <tr key={currentKey}>
             <td>{currentKey}</td>
             <td>{value}</td>
           </tr>
         );
-      }
+      
     });
   };
 

@@ -1,8 +1,8 @@
 // Import action types
 import {
-  SET_CURRENT_STEP,
   SET_FORM_DATA,
   RESET_FORM_DATA,
+  SET_CURRENT_STEP,
 } from "./DrugRegActionTypes";
 
 // Action creators

@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { forwardRef, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import Modal from "react-modal";
+import { Link } from "react-router-dom";
+import React, { useState, useEffect, forwardRef } from "react";
+
 import "./ViewModalStyles.css";
 import ImageSlider from "./ImageSlider";
-import CloseIcon from "@mui/icons-material/Close";
 import { useDrugContext } from "../Forms/Separated/drugs/DrugContext";
 
 Modal.setAppElement("#root");

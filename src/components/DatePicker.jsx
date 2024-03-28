@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import flatpickr from 'flatpickr';
+import PropTypes from 'prop-types';
 import 'flatpickr/dist/flatpickr.min.css';
+import React, { useRef, useEffect } from 'react';
 
 function DatePicker({ title, options, value, onChange, className }) {
   const datePickerRef = useRef(null);

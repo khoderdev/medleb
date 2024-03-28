@@ -359,19 +359,18 @@
 // //////////////////////////////////
 // //////////////////////////////////
 // //////////////////////////////////
-import React, { useState, useEffect } from "react";
-import Axios from "../../../../../api/axios";
-import { v4 as uuid4 } from "uuid";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import Axios from "../../../../../api/axios";
 import {
-  setCompanyData,
-  setCompanyTypes,
-  setCountryList,
-  setGovernorateList,
-  setDistrictList,
-  setCityList,
-  setError,
   resetForm,
+  setCityList,
+  setCompanyData,
+  setCountryList,
+  setCompanyTypes,
+  setDistrictList,
+  setGovernorateList,
 } from "../../../../../app/slices/CompaniesFormSlice"; // Import actions from CompaniesFormSlice
 
 const CompanyForm = () => {

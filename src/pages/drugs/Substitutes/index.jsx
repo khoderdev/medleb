@@ -1,6 +1,7 @@
 import React from "react";
-import GlobalPagesLayouts from "../../GlobalPagesLayouts";
+
 import Substitute from "./Substitute";
+import GlobalPagesLayouts from "../../GlobalPagesLayouts";
 
 function DrugSubstitutePage() {
   return (

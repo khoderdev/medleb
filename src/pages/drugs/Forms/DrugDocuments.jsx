@@ -133,7 +133,7 @@ const DrugDocuments = (props) => {
       </div>
       <div className="flex justify-center mt-12">
         <button
-          className="med-btn-pri border-2 border-green-pri hover:bg-green-pri text-white font-bold py-2 px-4 rounded-xl"
+          className="med-btn-3rd border-2 border-green-pri hover:bg-green-pri text-white font-bold py-2 px-4 rounded-xl"
           onClick={uploadImages}
           disabled={loading || uploadSuccess}
         >

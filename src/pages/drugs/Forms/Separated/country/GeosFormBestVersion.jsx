@@ -539,10 +539,11 @@
 // ///////////////////////////////////
 // ///////////////////////////////////
 
-import React, { useState } from "react";
-import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import React, { useState } from "react";
+
 import "./GeoForm.css";
+import Axios from "../../../../../api/axios";
 
 const GeoForm = () => {
   const [code, setCode] = useState("");
@@ -556,7 +557,7 @@ const GeoForm = () => {
     const countryGuid = uuidv4();
     const countryData = {
       guid: countryGuid,
-      code: code,
+      code,
       name: englishName,
       nameAr: arabicName,
       enabled: true,
@@ -593,7 +594,7 @@ const GeoForm = () => {
                 nameAr: district.nameAr,
                 enabled: true,
                 createdDate: new Date().toISOString(),
-                governorateGuid: governorateGuid,
+                governorateGuid,
               });
               console.log("District data posted successfully");
 
@@ -606,7 +607,7 @@ const GeoForm = () => {
                     nameAr: city.nameAr,
                     enabled: true,
                     createdDate: new Date().toISOString(),
-                    districtGuid: districtGuid,
+                    districtGuid,
                   });
                   console.log("City data posted successfully");
                 })

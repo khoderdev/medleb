@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
-import { useGeoModalProvider } from "./GeoModalProvider"; // Import useContext hook
+import React, { useState } from "react";
+
+import Axios from "../../../../../api/axios";
+// Import useContext hook
 
 
 
@@ -55,7 +56,7 @@ const ParentComponent = ({ countryGuid }) => {
                 nameAr: district.nameAr,
                 enabled: true,
                 createdDate: new Date().toISOString(),
-                governorateGuid: governorateGuid,
+                governorateGuid,
               });
               console.log("District data posted successfully:", district);
 
@@ -68,7 +69,7 @@ const ParentComponent = ({ countryGuid }) => {
                     nameAr: city.nameAr,
                     enabled: true,
                     createdDate: new Date().toISOString(),
-                    districtGuid: districtGuid,
+                    districtGuid,
                   });
                   console.log("City data posted successfully:", city);
                 })

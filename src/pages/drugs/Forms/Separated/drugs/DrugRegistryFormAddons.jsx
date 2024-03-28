@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
+
 import "./DrugRegistryFormAddons.css";
 
-const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
-  return (
-    <>
-      <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
+const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => (
+    <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
       <h1 className="pb-2 pt-2 text-center text-[1.375rem] xs:text-xl sm:py-10 font-medium">
           2 - Drug Registry Additional Info
         </h1>
@@ -226,8 +225,6 @@ const DrugRegistryFormAddons = ({ handleInputChange, formDataStep11 }) => {
           </div>
         </div>
       </div>
-    </>
   );
-};
 
 export default DrugRegistryFormAddons;

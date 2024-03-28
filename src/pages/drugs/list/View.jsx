@@ -14,11 +14,13 @@
 
 // export default ViewDrugPage;
 import React from "react";
-import GlobalPagesLayouts from "../../GlobalPagesLayouts";
-import SingleDrug from "./SingleDrug";
 import { Link } from "react-router-dom";
-import useCustomNavigation from "../../useCustomNavigation";
+
 import CloseIcon from "@mui/icons-material/Close";
+
+import SingleDrug from "./SingleDrug";
+import GlobalPagesLayouts from "../../GlobalPagesLayouts";
+import useCustomNavigation from "../../useCustomNavigation";
 
 function ViewDrugPage() {
   const { goToListPage } = useCustomNavigation(false);
@@ -27,7 +29,7 @@ function ViewDrugPage() {
     <div>
       <GlobalPagesLayouts titleStyles="pb-4 lg:p-0" title="Medicine Details">
         <div className="absolute top-[3.3em] right-5 lg:top-9 lg:right-20">
-          <Link to={`/list`} className="text-sm text-[#00a651]">
+          <Link to="/list" className="text-sm text-[#00a651]">
             Close
             <CloseIcon fontSize="small" />
           </Link>

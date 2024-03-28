@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 export default function ImportIcon() {
   const [activeState, setActiveState] = useState("default");

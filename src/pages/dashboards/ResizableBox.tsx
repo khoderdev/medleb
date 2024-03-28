@@ -1,6 +1,6 @@
 import React from "react";
-import { ResizableBox as ReactResizableBox } from "react-resizable";
 import "react-resizable/css/styles.css";
+import { ResizableBox as ReactResizableBox } from "react-resizable";
 
 export default function ResizableBox({
   children,

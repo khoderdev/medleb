@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { searchicon } from "../../../images";
-import FilterButtons from "./FilterButtons";
-import AlphabetButtons from "./AlphabetButtons";
-import ATCContainer from "./ATCContainer";
+
 import SearchData from "./SearchData";
+import ATCContainer from "./ATCContainer";
+import FilterButtons from "./FilterButtons";
+import { searchicon } from "../../../images";
+import AlphabetButtons from "./AlphabetButtons";
 // import './search.css'
 
 function Search(props) {
@@ -110,13 +111,13 @@ function Search(props) {
 
   return (
     <div className="container mx-auto p-4">
-      <h3 className="text-2xl mb-4">{"SearchM"}</h3>
+      <h3 className="text-2xl mb-4">SearchM</h3>
       <div className="flex items-center mb-4">
         <input
           type="text"
           className="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           id="searchInput"
-          placeholder={"Search"}
+          placeholder="Search"
           onChange={handleSearchInputChange}
         />
         <span className="ml-2">

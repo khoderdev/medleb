@@ -1,6 +1,7 @@
 import React from "react";
-import GlobalPagesLayouts from "../GlobalPagesLayouts";
+
 import Notifications from "./Notifications";
+import GlobalPagesLayouts from "../GlobalPagesLayouts";
 
 function NotificationsPage() {
   return (

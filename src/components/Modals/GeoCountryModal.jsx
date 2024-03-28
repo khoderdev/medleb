@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
+
 import {
-  addGovernorate,
-  addDistrict,
   addCity,
+  addDistrict,
+  addGovernorate,
 } from "../../app/slices/geoSlice";
-import Axios from "../../app/slices/geoSlice";
 
 const GeoCountryModal = ({ show, type, onClose, countryId }) => {
   const dispatch = useDispatch();

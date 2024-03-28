@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Searchbar from '../dashboard/common/searchbar';
 import useCustomNavigation from './useCustomNavigation';
 
 const GlobalPagesLayouts = ({ title, children, titleStyles }) => {

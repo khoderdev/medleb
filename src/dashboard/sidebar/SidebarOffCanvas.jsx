@@ -1,22 +1,22 @@
 /* eslint-disable tailwindcss/no-custom-classname */
-import { useRef, useState } from "react";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import { useClickAway } from "react-use";
-import MedLebLogoMobileDrawer from "./MedLebLogoMobileDrawer";
+import React from "react";
 import { Link } from "react-router-dom";
-import "../sidebar/SideBar.css";
-import FullscreenButton from "../../components/FullscreenButton.jsx";
-import HomeGrayIcon from "./icons/HomeGrayIcon.jsx";
-import SearchGrayIcon from "./icons/SearchGrayIcon.jsx";
-import DashboardGrayIcon from "./icons/DashboardGrayIcon.jsx";
+import { useRef, useState } from "react";
+import { useClickAway } from "react-use";
+import { Pivot as Hamburger } from "hamburger-react";
+import { motion, useAnimation, AnimatePresence } from "framer-motion";
+
+import "./SideBar.css";
+import ThemeToggle from "./ThemeToggle";
 import AddIcon from "./icons/AddIcon.jsx";
 import ImportIcon from "./icons/ImportIcon.jsx";
-import DistributionIcon from "./icons/DistributionIcon.jsx";
+import HomeGrayIcon from "./icons/HomeGrayIcon.jsx";
+import SearchGrayIcon from "./icons/SearchGrayIcon.jsx";
 import InspectionIcon from "./icons/InspectionIcon.jsx";
+import DistributionIcon from "./icons/DistributionIcon.jsx";
 import TrackRecordsIcon from "./icons/TrackRecordsIcon.jsx";
-import React from "react";
-import { Pivot as Hamburger } from "hamburger-react";
-import ThemeToggle from "./ThemeToggle";
+import MedLebLogoMobileDrawer from "./MedLebLogoMobileDrawer";
+import DashboardGrayIcon from "./icons/DashboardGrayIcon.jsx";
 
 export const SidebarOffCanvas = () => {
   // const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ export const SidebarOffCanvas = () => {
         <Hamburger
           toggled={open}
           size={30}
-          color={"#00a651"}
+          color="#00a651"
           toggle={setOpen}
         />
       </div>
@@ -44,7 +44,7 @@ export const SidebarOffCanvas = () => {
               {...framerSidebarBackground}
               aria-hidden="true"
               className="fixed inset-0 z-50 backdrop-blur-sm dark:backdrop-blur-sm"
-            ></motion.div>
+             />
             <motion.div
               {...framerSidebarPanel}
               // eslint-disable-next-line tailwindcss/no-custom-classname
@@ -95,7 +95,7 @@ export const SidebarOffCanvas = () => {
                           </Link>
                           {/* Conditionally render a divider after "Dashboard" icon */}
                           {item.title === "Dashboard" && (
-                            <div className="divider my-6 ml-[-2px] h-px w-[80%] self-center bg-gray-500 dark:bg-[#ffffffaf]"></div>
+                            <div className="divider my-6 ml-[-2px] h-px w-[80%] self-center bg-gray-500 dark:bg-[#ffffffaf]" />
                           )}
                         </li>
                       ))}
@@ -152,15 +152,13 @@ const framerSidebarPanel = {
   transition: { duration: 0.3 },
 };
 
-const framerText = (delay) => {
-  return {
+const framerText = (delay) => ({
     initial: { opacity: 0, x: -50 },
     animate: { opacity: 1, x: 0 },
     transition: {
       delay: 0.2 + delay / 10,
     },
-  };
-};
+  });
 
 const framerIcon = {
   initial: { scale: 0 },

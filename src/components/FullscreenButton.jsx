@@ -18,8 +18,7 @@ const FullscreenButton = () => {
       } else if (element.msRequestFullscreen) {
         element.msRequestFullscreen();
       }
-    } else {
-      if (document.exitFullscreen) {
+    } else if (document.exitFullscreen) {
         document.exitFullscreen();
       } else if (document.mozCancelFullScreen) {
         document.mozCancelFullScreen();
@@ -28,7 +27,6 @@ const FullscreenButton = () => {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
-    }
 
     setIsFullscreen(!isFullscreen);
   };

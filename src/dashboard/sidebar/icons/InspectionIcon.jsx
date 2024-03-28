@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+
 export default function InspectionIcon() {
   const [activeState, setActiveState] = useState("default");
   const [isHovered, setIsHovered] = useState(false);

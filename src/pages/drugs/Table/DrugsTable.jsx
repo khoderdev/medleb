@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BsTrash, BsPencil } from "react-icons/bs";
+
 // import Axios from "../../../api/axios";
-import Modal from "../../../components/Modals/TableCreateModal";
-import { BsPencil, BsTrash } from "react-icons/bs";
-import { useNavigate, Link } from "react-router-dom";
 // // Update API_URL
 // const API_URL = "http://1.1.1.250:3500/drugs";
 

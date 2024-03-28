@@ -206,22 +206,16 @@
 // };
 
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
-import Stack from '@mui/material/Stack';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import { usePageTitle } from '../context/PageTitleContext';
-import IconButton from '@mui/material/IconButton';
-import CssBaseline from '@mui/material/CssBaseline';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { HEADER } from './config-layout';
-import Searchbar from './common/searchbar';
-import Iconify from '../components/iconify';
-import AccountPopover from './common/account-popover';
-import { useResponsive } from '../hooks/use-responsive';
-import LanguagePopover from './common/language-popover';
-import NotificationsPopover from './common/notifications-popover';
+
 import Slide from '@mui/material/Slide';
+import AppBar from '@mui/material/AppBar';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+
+import Searchbar from './common/searchbar';
+import AccountPopover from './common/account-popover';
+import LanguagePopover from './common/language-popover';
+import { usePageTitle } from '../context/PageTitleContext';
+import NotificationsPopover from './common/notifications-popover';
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -242,8 +236,7 @@ export default function Header(props) {
   const { children, window } = props;
 
   const renderContent = (
-    <>
-      <div className="flex border border-red-500 items-center">
+    <div className="flex border border-red-500 items-center">
         <Searchbar />
         <div className="flex-grow" />
         <div className="flex flex-row items-center space-x-1">
@@ -252,7 +245,6 @@ export default function Header(props) {
           <AccountPopover />
         </div>
       </div>
-    </>
   );
 
   return (

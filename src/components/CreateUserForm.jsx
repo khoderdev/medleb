@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { signUp } from "../context/authService";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getAccessToken as getAuthAccessToken } from "../context/authService";
+import { toast, ToastContainer } from "react-toastify";
+
+import { signUp , getAccessToken as getAuthAccessToken } from "../context/authService";
 
 const CreateUserForm = () => {
   const [FirstName, setFirstName] = useState("");

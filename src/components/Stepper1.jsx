@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import { Stepper } from "react-form-stepper";
 import {
+  useForm,
   FormProvider,
   useFieldArray,
-  useForm,
   useFormContext
 } from "react-hook-form";
-import Headers from "./Header";
+
 import "./styles.css";
-import { Stepper } from "react-form-stepper";
+import Headers from "./Header";
 
 let renderCount = 0;
 
@@ -29,8 +30,7 @@ const Step2 = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {fields.map((field, index) => {
-        return (
+      {fields.map((field, index) => (
           <React.Fragment key={field.id}>
             <input
               {...register(`test.${index}.name`)}
@@ -40,8 +40,7 @@ const Step2 = ({ onSubmit }) => {
               Remove
             </button>
           </React.Fragment>
-        );
-      })}
+        ))}
       <button type="button" onClick={() => Stepper1end({ test: "data" })}>
         Stepper1end
       </button>

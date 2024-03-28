@@ -16,11 +16,9 @@ export default function TrackRecordsIcon() {
   };
 
   // Reset active state when the component unmounts
-  useEffect(() => {
-    return () => {
+  useEffect(() => () => {
       setActiveState("default");
-    };
-  }, []);
+    }, []);
 
   return (
     <svg

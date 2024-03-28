@@ -1,89 +1,32 @@
 /* eslint-disable no-restricted-globals */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
-
 import './styles.css';
 import DatePicker from '../../../components/DatePicker';
 import AddModal from '../../../components/Modals/AddModal';
 import EditModal from '../../../components/Modals/EditModal';
+// ----------------------------------------------------------------
+import { useDrugRegistry } from '../../../context/DrugRegistryContext';
 
-const exchangeRates = {
-  USD: 1,
-  CAD: 0.72,
-  EUR: 1.06,
-  CHF: 1.11,
-  DKK: 0.72,
-  GBP: 1.21,
-  SAR: 0.27,
-  JOD: 1.41,
-  LBP: 900,
-};
-
-const currencySymbols = {
-  USD: '$',
-  CAD: 'C$',
-  EUR: '€',
-  CHF: 'CHF',
-  DKK: 'kr',
-  GBP: '£',
-  SAR: 'SAR',
-  JOD: 'JD',
-  LBP: 'LBP',
-};
-
-const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
-  const [selectedInput, setSelectedInput] = useState('');
-  const [isAddModalOpen, setAddModalOpen] = useState(false);
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [editInputValue, setEditInputValue] = useState('');
-
-  function convertToUSD() {
-    if (formDataStep1 && formDataStep1.PriceFOREIGN && formDataStep1.currencyForeign) {
-      const convertedPrice =
-        formDataStep1.PriceFOREIGN / exchangeRates[formDataStep1.currencyForeign];
-      return convertedPrice.toFixed(2); // Display with 2 decimal places
-    }
-    return '';
-  }
-
-  function convertToLBP() {
-    if (formDataStep1 && formDataStep1.PriceFOREIGN && formDataStep1.currencyForeign) {
-      const priceInUSD = convertToUSD();
-      const convertedPrice = (priceInUSD / exchangeRates.USD) * exchangeRates.LBP;
-      return convertedPrice.toFixed(2);
-    }
-    return '';
-  }
-
-  const openAddModal = (inputName) => {
-    setSelectedInput(inputName);
-    setAddModalOpen(true);
-  };
-
-  const openEditModal = (inputName, initialValue) => {
-    setSelectedInput(inputName);
-    setEditInputValue(initialValue);
-    setEditModalOpen(true);
-  };
-
-  const handleAdd = (value) => {
-    console.log(`Added new ${selectedInput}:`, value);
-    setAddModalOpen(false);
-  };
-
-  const handleEdit = (value) => {
-    console.log(`Edited ${selectedInput}:`, value);
-    setEditModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    console.log('Modal cancelled');
-    setAddModalOpen(false);
-    setEditModalOpen(false);
-  };
+const DrugRegistryForm = () => {
+  const {
+    selectedInput,
+    isAddModalOpen,
+    isEditModalOpen,
+    setEditModalOpen,
+    setAddModalOpen,
+    editInputValue,
+    formDataStep1,
+    handleInputChange,
+    openAddModal,
+    openEditModal,
+    handleAdd,
+    handleEdit,
+    handleCancel,
+    exchangeRates,
+    currencySymbols,
+    convertToUSD,
+    convertToLBP,
+  } = useDrugRegistry();
 
   const datePickerOptions = {
     dateFormat: 'Y-m-d',
@@ -131,7 +74,7 @@ const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
     return spacedName.charAt(0).toUpperCase() + spacedName.slice(1);
   }
 
-  const inputName = 'responsiblePartyCountry';
+  // const inputName = 'responsiblePartyCountry';
 
   return (
     <div className="col-span-1 flex flex-col w-full sm:w-[80em] h-full sm:col-span-1 text-black-text dark:text-white-text justify-center p-6">
@@ -306,33 +249,33 @@ const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
 
         {/* Date Input 1 */}
         {/* <div className="input-container relative"> */}
-          {/* <label htmlFor="REP_date" className="labels text-md block text-left"> */}
+        {/* <label htmlFor="REP_date" className="labels text-md block text-left"> */}
 
-          <div className="relative">
-            <DatePicker
-              title="Rep Date"
-              id="REP_date"
-              name="REP_date"
-              value={formDataStep1.REP_date}
-              onChange={handleInputChange}
-              options={datePickerOptions}
-            />
-          </div>
-          {/* </label> */}
+        <div className="relative">
+          <DatePicker
+            title="Rep Date"
+            id="REP_date"
+            name="REP_date"
+            value={formDataStep1.REP_date}
+            onChange={handleInputChange}
+            options={datePickerOptions}
+          />
+        </div>
+        {/* </label> */}
         {/* </div> */}
 
         {/* Date Input 2 */}
         {/* <div className="input-container relative text-left"> */}
-          <div className="relative">
-            <DatePicker
-              title="Review date"
-              id="LASTEffective_Date"
-              name="LASTEffective_Date"
-              value={formDataStep1.LASTEffective_Date}
-              onChange={handleInputChange}
-              options={datePickerOptions}
-            />
-          </div>
+        <div className="relative">
+          <DatePicker
+            title="Review date"
+            id="LASTEffective_Date"
+            name="LASTEffective_Date"
+            value={formDataStep1.LASTEffective_Date}
+            onChange={handleInputChange}
+            options={datePickerOptions}
+          />
+        </div>
         {/* </div> */}
 
         {isAddModalOpen && (
@@ -359,7 +302,3 @@ const DrugRegistryForm = ({ handleInputChange, formDataStep1 }) => {
 };
 
 export default DrugRegistryForm;
-
-// // //////////////////////////////////////////////////
-// // //////////////////////////////////////////////////
-// // //////////////////////////////////////////////////

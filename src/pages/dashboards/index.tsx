@@ -1,12 +1,13 @@
 import React from "react";
-import GlobalPagesLayouts from "../GlobalPagesLayouts";
+
 import Dashboards from "./Dashboard";
+import GlobalPagesLayouts from "../GlobalPagesLayouts";
 
 function DashboardPage() {
   return (
     <div>
       <GlobalPagesLayouts title="Dashboard">
-        <Dashboards className={`bg-red-500`} />
+        <Dashboards className="bg-red-500" />
       </GlobalPagesLayouts>
     </div>
   );

@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 // import "./styles.css";
 // import { useDrugContext } from "./DrugContext";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   addDrugRequest,
   updateDrugRequest,
-  deleteDrugRequest,
 } from "../../../../../app/actions/AddDrugAndImportActions";
 
 const DrugRegistryFormTest = () => {

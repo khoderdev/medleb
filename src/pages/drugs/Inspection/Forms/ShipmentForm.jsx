@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import BatchSerials from "../../../../components/Modals/BatchSerials";
 
 const BatchComponent = ({ label, inputs, onAddSerials, onInputChange }) => {
@@ -109,8 +110,7 @@ const ShipmentForm = ({
     onFormChange({ batchSerials: serialValues });
   };
 
-  const renderBatches = () => {
-    return Array.from({ length: localBatchesQty }, (_, index) => (
+  const renderBatches = () => Array.from({ length: localBatchesQty }, (_, index) => (
       <div key={index}>
         <BatchComponent
           label={`Batch ${index + 1}`}
@@ -142,7 +142,6 @@ const ShipmentForm = ({
         />
       </div>
     ));
-  };
 
   return (
     <div className="grid grid-cols-1 w-full lg:w-3/4 gap-10 text-black-text dark:text-white-text">

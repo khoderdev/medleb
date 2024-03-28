@@ -1,20 +1,18 @@
-import { useState, useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import ViewListIcon from "@mui/icons-material/ViewList";
+import React, { useState, useEffect } from "react";
+import TextField from "@material-ui/core/TextField";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import React from "react";
+
 import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import InputBase from "@mui/material/InputBase";
 import { useTheme } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+
 import "../../index.css";
 import { useDarkMode } from "../../DarkModeContext";
 
@@ -254,9 +252,9 @@ const SearchComponent = (props) => {
       setActiveGroups((prevActiveGroups) => {
         if (prevActiveGroups.includes(action)) {
           return prevActiveGroups.filter((group) => group !== action);
-        } else {
+        } 
           return [...prevActiveGroups, action];
-        }
+        
       });
     } else {
       // Handle other group buttons for filtering
@@ -266,10 +264,10 @@ const SearchComponent = (props) => {
         if (prevActiveGroups.includes(action)) {
           // If already active, remove it
           return prevActiveGroups.filter((group) => group !== action);
-        } else {
+        } 
           // If not active, add it
           return [...prevActiveGroups, action];
-        }
+        
       });
     }
   };

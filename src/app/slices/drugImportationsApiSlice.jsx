@@ -1,6 +1,7 @@
 // drugImportationsApiSlice.js
 
-import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
+import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
+
 import  apiSlice from "./apiSlice";
 
 const importationsAdapter = createEntityAdapter({
@@ -15,9 +16,7 @@ export const drugImportationsApiSlice = apiSlice.injectEndpoints({
     getDrugImportations: builder.query({
       query: () => ({
         url: "/importations",
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
-        },
+        validateStatus: (response, result) => response.status === 200 && !result.isError,
       }),
       transformResponse: (responseData) => {
         const loadedImportations = responseData.map((importation) => {
@@ -32,7 +31,7 @@ export const drugImportationsApiSlice = apiSlice.injectEndpoints({
             { type: "importations", id: "LIST" },
             ...result.ids.map((id) => ({ type: "DrugImportations", id })),
           ];
-        } else return [{ type: "DrugImportations", id: "LIST" }];
+        } return [{ type: "DrugImportations", id: "LIST" }];
       },
     }),
 

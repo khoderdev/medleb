@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 
 import { Box } from '@mui/material';
 
-import Nav from './nav';
 import Main from './main';
 import Header from './header';
-import Layout from './Layout.tsx';
-
-import SidebarRight from './sidebar/SidebarRight';
 import SidebarLeft from './sidebar/SidebarLeft';
+import SidebarRight from './sidebar/SidebarRight';
 
 // ----------------------------------------------------------------------
 

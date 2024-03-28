@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./styles.css";
-import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+
+import CloseIcon from "@mui/icons-material/Close";
+
+import "./styles.css";
 
 const ProfileSettingsTab = (props) => {
   // Destructure props
@@ -100,7 +102,7 @@ const ProfileSettingsTab = (props) => {
               onChange={handleImageUpload}
             />
             <a
-              className={`text-[#00a651] w-[5em] text-center dark:bg-black bg-white text-sm cursor-pointer mt-[-0.5em]`}
+              className="text-[#00a651] w-[5em] text-center dark:bg-black bg-white text-sm cursor-pointer mt-[-0.5em]"
               onClick={() => document.getElementById("avatarInput").click()}
             >
               Upload

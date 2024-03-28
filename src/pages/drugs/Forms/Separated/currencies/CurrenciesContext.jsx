@@ -126,15 +126,15 @@
 // //////////////
 // //////////////
 
-import React, {
-  useState,
-  useContext,
-  createContext,
-  useEffect,
-  useMemo,
-} from "react";
 // import Axios from "../../../../../api/axios";
 import axios from "axios";
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+} from "react";
 
 const CurrenciesContext = createContext();
 
@@ -221,7 +221,7 @@ export const CurrenciesProvider = ({ children }) => {
         }
 
         // Fetch currencies after adding a new currency
-        fetchCurrencies(); //call fetchCurrencies here
+        fetchCurrencies(); // call fetchCurrencies here
       } else {
         throw new Error("Failed to add currency.");
       }
@@ -323,6 +323,4 @@ export const CurrenciesProvider = ({ children }) => {
   );
 };
 
-export const useCurrenciesContext = () => {
-  return useContext(CurrenciesContext);
-};
+export const useCurrenciesContext = () => useContext(CurrenciesContext);

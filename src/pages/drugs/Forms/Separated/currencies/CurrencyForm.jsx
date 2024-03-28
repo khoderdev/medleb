@@ -361,10 +361,11 @@
 //   );
 // };
 
+import { v4 as uuidv4 } from "uuid";
 // export default CurrencyForm;
 import React, { useState } from "react";
+
 import { useCurrenciesContext } from "./CurrenciesContext";
-import { v4 as uuidv4 } from "uuid";
 
 const CurrencyForm = ({ onClose }) => {
   const { addCurrency, addCurrencyRate, currencies } = useCurrenciesContext();

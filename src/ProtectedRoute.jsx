@@ -23,7 +23,8 @@
 // export default ProtectedRoute;
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Navigate, Outlet } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
+
 import { selectUserRole } from './app/auth/authSlice';
 
 const ProtectedRoute = ({ roleRequired, ...rest }) => {
@@ -31,9 +32,9 @@ const ProtectedRoute = ({ roleRequired, ...rest }) => {
 
   if (userRole === roleRequired) {
     return <Route {...rest} />;
-  } else {
+  } 
     return <Navigate to="/unauthorized" />;
-  }
+  
 };
 
 export default ProtectedRoute;

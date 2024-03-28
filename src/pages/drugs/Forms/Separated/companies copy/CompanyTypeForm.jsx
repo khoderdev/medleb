@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import Axios from "../../../../../api/axios";
 import { v4 as uuidv4 } from "uuid";
+import React, { useState } from "react";
+
+import Axios from "../../../../../api/axios";
 
 const CompanyTypeForm = () => {
   const [formData, setFormData] = useState({

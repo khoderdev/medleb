@@ -96,11 +96,11 @@ export const deleteDrugFailure = (error) => ({
 export const addDrug = (drugData) => async (dispatch) => {
   dispatch(addDrugRequest());
   try {
-    console.log("Sending request to add drug:", drugData); // Log the data being sent to the API
+    // console.log("Sending request to add drug:", drugData); // Log the data being sent to the API
 
     const response = await api.post("/drugs/add", drugData); // Use api.post instead of Axios.post
 
-    console.log("Response after adding drug:", response.data); // Log the response data
+    // console.log("Response after adding drug:", response.data); // Log the response data
 
     if (!response.data) {
       throw new Error("Failed to add drug. Response data is missing.");

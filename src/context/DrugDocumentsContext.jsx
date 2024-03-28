@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState, useContext, createContext } from 'react';
-import axios from 'axios';
 // Create context
 const DrugDocumentsContext = createContext();
 

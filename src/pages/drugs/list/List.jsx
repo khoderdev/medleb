@@ -1,5 +1,5 @@
 import React from "react";
-import GlobalPagesLayouts from "../../GlobalPagesLayouts";
+
 import List from "../Table/DrugsTable";
 
 function DrugListPage() {

@@ -12,7 +12,7 @@ function StaticDataPage() {
         </div>
 
         <h1 className="text-2xl font-bold mb-8 text-center text-green-pri">Static Data</h1>
-        <div></div>
+        <div />
       </div>
       <div className="bg-white-contents dark:bg-black-contents w-2/3 lg:w-1/2 p-10 rounded-3xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
